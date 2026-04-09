@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MA Learn — مشغّل الدورة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ──────────────────────────────────── */
+    :root {
+      --bg:       #080808;
+      --surface:  #111111;
+      --surface2: #181818;
+      --border:   rgba(201,168,76,0.12);
+      --gold:     #C9A84C;
+      --gold-lt:  #E8D08A;
+      --ivory:    #F5F0E8;
+      --silver:   #BBBBBB;
+      --grey:     #777777;
+      --green:    #4CAF82;
+      --nav-h:    56px;
+      --sidebar-w:290px;
+    }
+
+    /* ─── RESET ───────────────────────────────────── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;overflow:hidden;}
+    body{
+      font-family:'Cairo',sans-serif;
+      background:var(--bg);
+      color:var(--ivory);
+      direction:rtl;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    .nav{
+      position:fixed;top:0;left:0;right:0;
+      height:var(--nav-h);
+      background:rgba(8,8,8,0.96);
+      border-bottom:1px solid var(--border);
+      backdrop-filter:blur(12px);
+      display:flex;align-items:center;
+      padding:0 20px;
+      gap:16px;
+      z-index:100;
+    }
+    .nav-logo{height:26px;width:auto;flex-shrink:0;}
+    .nav-divider{width:1px;height:20px;background:var(--border);flex-shrink:0;}
+    .nav-course{font-size:0.82rem;color:var(--silver);font-weight:400;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .nav-links{display:flex;gap:14px;align-items:center;flex-shrink:0;}
+    .nav-links a{color:var(--grey);text-decoration:none;font-size:0.78rem;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--gold);}
+    .nav-progress{font-size:0.72rem;color:var(--grey);flex-shrink:0;}
+    .nav-menu-btn{
+      display:none;background:none;border:none;color:var(--silver);
+      cursor:pointer;padding:6px;font-size:1.2rem;
+    }
+
+    /* ─── LAYOUT ──────────────────────────────────── */
+    .layout{
+      display:flex;
+      height:100vh;
+      padding-top:var(--nav-h);
+    }
+
+    /* ─── SIDEBAR ─────────────────────────────────── */
+    .sidebar{
+      width:var(--sidebar-w);
+      min-width:var(--sidebar-w);
+      background:var(--surface);
+      border-left:1px solid var(--border);
+      overflow-y:auto;
+      display:flex;
+      flex-direction:column;
+      flex-shrink:0;
+    }
+    .sidebar::-webkit-scrollbar{width:4px;}
+    .sidebar::-webkit-scrollbar-track{background:transparent;}
+    .sidebar::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.2);border-radius:2px;}
+
+    .sidebar-header{
+      padding:16px 18px 12px;
+      font-size:0.68rem;
+      color:var(--gold);
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      border-bottom:1px solid var(--border);
+      flex-shrink:0;
+    }
+
+    .module-group{border-bottom:1px solid var(--border);}
+    .module-title{
+      padding:12px 18px;
+      font-size:0.82rem;
+      font-weight:600;
+      color:var(--ivory);
+      display:flex;align-items:center;justify-content:space-between;
+      cursor:pointer;
+      user-select:none;
+      transition:background 0.2s;
+    }
+    .module-title:hover{background:rgba(255,255,255,0.02);}
+    .module-title .count{font-size:0.68rem;color:var(--grey);font-weight:400;}
+    .module-title .chevron{font-size:0.65rem;color:var(--grey);transition:transform 0.25s;}
+    .module-title.open .chevron{transform:rotate(180deg);}
+
+    .lesson-list{display:none;}
+    .lesson-list.open{display:block;}
+
+    .lesson-item{
+      padding:9px 18px 9px 24px;
+      font-size:0.78rem;
+      color:var(--silver);
+      font-weight:400;
+      cursor:pointer;
+      display:flex;align-items:center;gap:10px;
+      transition:background 0.15s,color 0.15s;
+      border-right:3px solid transparent;
+      line-height:1.4;
+    }
+    .lesson-item:hover{background:rgba(201,168,76,0.04);color:var(--ivory);}
+    .lesson-item.active{
+      background:rgba(201,168,76,0.07);
+      color:var(--gold);
+      border-right-color:var(--gold);
+    }
+    .lesson-item.watched:not(.active) .dot{background:rgba(201,168,76,0.45);}
+    .lesson-item.coming-soon{opacity:0.4;cursor:default;}
+    .lesson-item.coming-soon:hover{background:transparent;color:var(--silver);}
+
+    .dot{
+      width:6px;height:6px;border-radius:50%;
+      background:rgba(255,255,255,0.15);
+      flex-shrink:0;
+    }
+    .lesson-item.active .dot{background:var(--gold);}
+    .soon-badge{
+      font-size:0.6rem;color:var(--grey);
+      margin-right:auto;padding-right:4px;
+      white-space:nowrap;
+    }
+
+    /* ─── MAIN ────────────────────────────────────── */
+    .main{
+      flex:1;
+      overflow-y:auto;
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+    .main::-webkit-scrollbar{width:4px;}
+    .main::-webkit-scrollbar-track{background:transparent;}
+    .main::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px;}
+
+    /* ─── VIDEO ───────────────────────────────────── */
+    .video-area{
+      background:#000;
+      position:relative;
+      flex-shrink:0;
+    }
+    .video-ratio{
+      width:100%;
+      aspect-ratio:16/9;
+      position:relative;
+    }
+    .video-ratio iframe{
+      position:absolute;inset:0;
+      width:100%;height:100%;
+      border:none;
+    }
+    .video-placeholder{
+      position:absolute;inset:0;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      background:var(--surface2);
+      color:var(--grey);
+      gap:14px;
+    }
+    .video-placeholder svg{opacity:0.25;}
+    .video-placeholder p{font-size:0.85rem;font-weight:400;}
+
+    /* ─── LESSON INFO ─────────────────────────────── */
+    .lesson-info{
+      padding:28px 36px 20px;
+      flex:1;
+    }
+    .lesson-module-tag{
+      font-size:0.68rem;
+      color:var(--gold);
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .lesson-title{
+      font-size:1.35rem;
+      font-weight:700;
+      line-height:1.4;
+      margin-bottom:10px;
+    }
+    .lesson-desc{
+      font-size:0.85rem;
+      color:var(--silver);
+      font-weight:400;
+      line-height:1.9;
+      max-width:680px;
+    }
+
+    .pdf-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(201,168,76,0.08);
+      border:1px solid rgba(201,168,76,0.28);
+      color:var(--gold);
+      padding:8px 18px;
+      border-radius:6px;
+      text-decoration:none;
+      font-size:0.8rem;font-weight:600;
+      transition:all 0.2s;
+      margin-top:14px;
+    }
+    .pdf-btn:hover{background:rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.5);}
+
+    .lesson-nav{
+      display:flex;gap:10px;
+      margin-top:24px;
+      padding-top:20px;
+      border-top:1px solid var(--border);
+    }
+    .nav-btn{
+      padding:9px 22px;
+      font-size:0.82rem;
+      font-family:'Cairo',sans-serif;
+      border:1px solid var(--border);
+      background:transparent;
+      color:var(--silver);
+      cursor:pointer;
+      border-radius:6px;
+      transition:all 0.2s;
+    }
+    .nav-btn:hover{border-color:rgba(201,168,76,0.35);color:var(--ivory);}
+    .nav-btn.primary{
+      background:var(--gold);color:#000;
+      border-color:var(--gold);font-weight:700;
+    }
+    .nav-btn.primary:hover{background:var(--gold-lt);}
+    .nav-btn:disabled{opacity:0.3;cursor:not-allowed;}
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    .footer{
+      padding:20px 36px;
+      border-top:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:12px;
+      flex-shrink:0;
+    }
+    .footer-links{display:flex;gap:14px;flex-wrap:wrap;}
+    .footer-links a{color:var(--grey);text-decoration:none;font-size:0.75rem;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--gold);}
+    .footer-copy{font-size:0.72rem;color:#444;}
+    .footer-fl{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#fff;border-radius:6px;padding:5px 10px;
+    }
+    .footer-fl img{height:28px;width:auto;}
+    .footer-fl-text{border-right:1px solid #ddd;padding-right:8px;text-align:right;}
+    .footer-fl-text p:first-child{font-size:0.48rem;color:#888;margin:0 0 1px;font-family:Arial,sans-serif;}
+    .footer-fl-text p:last-child{font-size:0.65rem;font-weight:700;color:#222;margin:0;font-family:Arial,sans-serif;letter-spacing:0.3px;}
+
+    /* ─── OVERLAYS ────────────────────────────────── */
+    .overlay{
+      position:fixed;inset:0;
+      background:var(--bg);
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      z-index:200;
+      text-align:center;
+      padding:32px;
+    }
+    .overlay.hidden{display:none;}
+
+    .spinner{
+      width:36px;height:36px;
+      border:2px solid rgba(201,168,76,0.18);
+      border-top-color:var(--gold);
+      border-radius:50%;
+      animation:spin 0.75s linear infinite;
+      margin-bottom:20px;
+    }
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    .overlay-icon{font-size:2.8rem;margin-bottom:18px;}
+    .overlay h2{font-size:1.5rem;font-weight:700;margin-bottom:10px;}
+    .overlay p{font-size:0.88rem;color:var(--silver);line-height:1.8;max-width:380px;margin-bottom:28px;}
+    .overlay a{
+      background:var(--gold);color:#000;
+      font-weight:700;padding:12px 32px;
+      text-decoration:none;border-radius:6px;
+      font-family:'Cairo',sans-serif;
+    }
+
+    /* ─── SIDEBAR OVERLAY (mobile) ────────────────── */
+    .sidebar-overlay{
+      display:none;
+      position:fixed;inset:0;
+      background:rgba(0,0,0,0.7);
+      z-index:90;
+    }
+
+    /* ─── MOBILE ──────────────────────────────────── */
+    @media(max-width:768px){
+      .sidebar{
+        position:fixed;
+        top:var(--nav-h);left:0;bottom:0;
+        z-index:95;
+        transform:translateX(100%);
+        transition:transform 0.3s ease;
+        width:min(var(--sidebar-w), 85vw);
+      }
+      .sidebar.open{transform:translateX(0);}
+      .sidebar-overlay.open{display:block;}
+      .nav-menu-btn{display:flex;align-items:center;justify-content:center;}
+      .nav-links{display:none;}
+      .lesson-info{padding:20px 18px 16px;}
+      .lesson-title{font-size:1.1rem;}
+      .footer{padding:16px 18px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     OVERLAYS
+═══════════════════════════════════════════ -->
+<div id="ov-loading" class="overlay">
+  <div class="spinner"></div>
+  <p style="font-size:0.82rem;color:var(--grey);">جاري التحقق...</p>
+</div>
+
+<div id="ov-denied" class="overlay hidden">
+  <div class="overlay-icon">🔒</div>
+  <h2>رابط الوصول غير صحيح</h2>
+  <p>هذا الرابط غير صالح أو منتهي الصلاحية.<br>تحقق من الإيميل اللي وصلك عند الشراء.</p>
+  <a href="https://malearnsa.com">العودة للرئيسية</a>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav class="nav">
+  <button class="nav-menu-btn" onclick="toggleSidebar()" aria-label="قائمة الدروس">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+  <img class="nav-logo"
+    src="https://malearnsa.com/brand_assets/logo-malearn-white.png"
+    alt="MA Learn"
+    onerror="this.style.display='none'">
+  <div class="nav-divider"></div>
+  <span class="nav-course" id="nav-course-name">—</span>
+  <div class="nav-links">
+    <a href="https://malearnsa.com">الرئيسية</a>
+    <a href="https://malearnsa.com/#courses">الدورات</a>
+    <a href="https://malearnsa.com/refund-policy.html">الاسترجاع</a>
+    <a href="https://malearnsa.com/privacy-policy.html">الخصوصية</a>
+  </div>
+  <span class="nav-progress" id="nav-progress"></span>
+</nav>
+
+<!-- Mobile sidebar overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- ═══════════════════════════════════════════
+     LAYOUT
+═══════════════════════════════════════════ -->
+<div class="layout" id="main-layout" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">محتوى الدورة</div>
+    <div id="curriculum-list"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- VIDEO -->
+    <div class="video-area">
+      <div class="video-ratio">
+        <div class="video-placeholder" id="video-placeholder">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1">
+            <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
+          </svg>
+          <p>اختر درساً للبدء</p>
+        </div>
+        <div id="video-container" style="display:none;position:absolute;inset:0;">
+          <iframe id="video-iframe"
+            allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+            allowfullscreen="true"
+            loading="lazy"
+            style="border:none;width:100%;height:100%;">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON INFO -->
+    <div class="lesson-info">
+      <p class="lesson-module-tag" id="lesson-module">—</p>
+      <h2 class="lesson-title" id="lesson-title">اختر درساً من القائمة</h2>
+      <p class="lesson-desc" id="lesson-desc">اختر أي درس من القائمة لتبدأ المشاهدة.</p>
+
+      <div id="pdf-area" style="display:none;">
+        <a id="pdf-btn" href="#" target="_blank" class="pdf-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
+          </svg>
+          تحميل ملف PDF
+        </a>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="nav-btn" id="btn-prev" onclick="nav(-1)" disabled>→ السابق</button>
+        <button class="nav-btn primary" id="btn-next" onclick="nav(1)" disabled>التالي ←</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div>
+        <div class="footer-links">
+          <a href="https://malearnsa.com">الرئيسية</a>
+          <a href="https://malearnsa.com/#courses">الدورات</a>
+          <a href="https://malearnsa.com/refund-policy.html">سياسة الاسترجاع</a>
+          <a href="https://malearnsa.com/privacy-policy.html">الخصوصية</a>
+          <a href="mailto:support@malearnsa.com">الدعم</a>
+          <a href="https://instagram.com/majidangawi" target="_blank">Instagram</a>
+        </div>
+        <p class="footer-copy" style="margin-top:8px;">© MA Learn 2026 — جميع الحقوق محفوظة</p>
+      </div>
+      <div class="footer-fl">
+        <img src="https://malearnsa.com/brand_assets/freelance-doc.jpg" alt="وثيقة العمل الحر"
+          onerror="this.parentElement.style.display='none'">
+        <div class="footer-fl-text">
+          <p>رقم الوثيقة</p>
+          <p>FL-163949047</p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+</div><!-- /layout -->
+
+<!-- ═══════════════════════════════════════════
+     SCRIPT
+═══════════════════════════════════════════ -->
+<script>
+'use strict';
+
+// ─── CONFIG ───────────────────────────────────────
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzXC4Ef5WxNX0aPov7Q1Kdn2DiXuODd74w3iOCtovrw86o9grwVREqNsRdhlyQkoBnQ/exec';
+
+const BUNNY_LIBRARIES = {
+  'beyond-lighting':     '634652',
+  'intro-to-creative-ai': '' // set when T2 Bunny library is created
+};
+
+const COURSE_NAMES = {
+  'beyond-lighting':     'أبعد من إمكانيات الإضاءة',
+  'intro-to-creative-ai':'مدخل إلى الذكاء الاصطناعي الإبداعي'
+};
+
+// Hardcoded BL curriculum — used while API loads or as fallback
+const BL_CURRICULUM = [
+  { module:'المقدمة', module_order:1, lessons:[
+    {id:'bl-01',lesson_order:1,title:'المقدمة',desc:'مقدمة الدورة وما ستتعلمه من أساسيات الإضاءة الاحترافية',video_id:'cfafbf15-8553-4e4f-9902-8428dac0bf58',pdf_url:'',active:true},
+    {id:'bl-02',lesson_order:2,title:'مفاهيم عن الإضاءة',desc:'نظرة عامة على المفاهيم الأساسية اللي تحتاجها قبل ما تبدأ',video_id:'',pdf_url:'',active:true}
+  ]},
+  { module:'مفاهيم أساسية عن الإضاءة', module_order:2, lessons:[
+    {id:'bl-03',lesson_order:1,title:'الوقفات',desc:'كيف تتحكم في وقفة الضوء ومصدره لتحسين نتيجة الصورة',video_id:'46ca58dc-d133-42d7-874d-dd07466c6c46',pdf_url:'',active:true},
+    {id:'bl-04',lesson_order:2,title:'جودة الضوء',desc:'الفرق بين الضوء الناعم والقاسي وكيف تتحكم فيهم',video_id:'544c8561-f036-4e97-b155-6788ecf4be35',pdf_url:'',active:true},
+    {id:'bl-05',lesson_order:3,title:'كثافة الضوء',desc:'فهم كثافة الضوء وتأثيره على الصورة النهائية',video_id:'86ec0239-d658-48cc-99c0-5df09b3cd7cb',pdf_url:'',active:true},
+    {id:'bl-06',lesson_order:4,title:'تحسين الضوء',desc:'كيف تستخدم المعدلات (Modifiers) لتشكيل الضوء بشكل احترافي',video_id:'981bc556-75d5-4d06-bad2-ba1fce232f7f',pdf_url:'',active:true},
+    {id:'bl-07',lesson_order:5,title:'المسافة بين مصدر الضوء و الهدف',desc:'تأثير المسافة على طبيعة الضوء وجودته — قانون التربيع العكسي',video_id:'d479b82d-f49d-4ce7-8dd2-0e65824f3d7d',pdf_url:'',active:true},
+    {id:'bl-08',lesson_order:6,title:'إتجاه الإضاءة',desc:'كيف يغير اتجاه الضوء شكل الوجه والظلال في الصورة',video_id:'734fb133-bb2e-4d77-9ea3-91901fb57d10',pdf_url:'',active:true}
+  ]},
+  { module:'نقاط مهمة عن الإضاءة', module_order:3, lessons:[
+    {id:'bl-09',lesson_order:1,title:'نقاط مهمة عن الإضاءة',desc:'Feathering · Flags · تأثير الخلفيات · نقاط الضوء',video_id:'5ac37155-c91b-4184-bc6a-4ab0a048b468',pdf_url:'',active:true},
+    {id:'bl-10',lesson_order:2,title:'التجهيز لجلسة التصوير',desc:'كيف تجهّز إعداد الإضاءة الكاملة قبل ما تبدأ جلسة التصوير',video_id:'55628e67-ce68-4bf9-b4d3-ce0e1d4cd02b',pdf_url:'',active:true}
+  ]},
+  { module:'جلسات التصوير', module_order:4, lessons:[
+    {id:'bl-11',lesson_order:1, title:'٣ توزيعات مشهورة',desc:'Paramount · Rembrandt · Split — شرح كل توزيع وكيف تطبقه',video_id:'8e111df3-eaf1-4270-b23e-7e7be9668b60',pdf_url:'',active:true},
+    {id:'bl-12',lesson_order:2, title:'صورة ١ — إضاءة حادة تحاكي الشمس',desc:'استخدام الضوء القاسي لمحاكاة ضوء الشمس المباشر في الاستوديو',video_id:'f8e17399-9ec2-48eb-a019-87baf90dddf3',pdf_url:'',active:true},
+    {id:'bl-13',lesson_order:3, title:'صورة ٢ — Short Light',desc:'Short Lighting — لصورة درامية وسينمائية',video_id:'3740fdb0-4516-4114-9a4a-01c925120d5c',pdf_url:'',active:true},
+    {id:'bl-14',lesson_order:4, title:'صورة ٣ — Broad Light',desc:'Broad Lighting — تقنية تعطي وجهاً أوسع وإضاءة ناعمة',video_id:'ce08b2ca-0735-4c93-bcdc-da8fed86adcf',pdf_url:'',active:true},
+    {id:'bl-15',lesson_order:5, title:'صورة ٤ — Top Light',desc:'Overhead Light — ضوء من فوق لتأثير سينمائي مميز',video_id:'f7168341-c87f-4c7e-89e2-cd43d0548fc9',pdf_url:'',active:true},
+    {id:'bl-16',lesson_order:6, title:'صورة ٥ — Spill Light',desc:'Spill Light — التقنية المفضلة لبساطتها وجمال نتائجها',video_id:'931a06e2-ceb7-45f2-adf0-8952b5c7cfb0',pdf_url:'',active:true},
+    {id:'bl-17',lesson_order:7, title:'صورة ٦ — إضاءة و عاكس ١',desc:'استخدام مصدر إضاءة واحد مع عاكس لتنعيم الظلال',video_id:'d6246d4b-5eba-4722-adaf-89513a010f11',pdf_url:'',active:true},
+    {id:'bl-18',lesson_order:8, title:'صورة ٧ — إضاءة و عاكس ٢',desc:'تطوير إعداد العاكس مع مصادر متعددة',video_id:'93779c4c-58dc-4fcc-86bf-3f09152961d1',pdf_url:'',active:true},
+    {id:'bl-19',lesson_order:9, title:'صورة ٨ — إضاءة و عازل',desc:'استخدام الـ Flag للتحكم في اتجاه الضوء ومنع التسرب',video_id:'5b2316e6-bdaf-4aa1-a59c-8980c5221518',pdf_url:'',active:true},
+    {id:'bl-20',lesson_order:10,title:'صورة ٩ — نقطتين ضوء',desc:'إعداد نقطتين للضوء لصورة متوازنة ومحكومة',video_id:'1bd21cf5-108a-4c59-9868-3743541bc469',pdf_url:'',active:true},
+    {id:'bl-21',lesson_order:11,title:'صورة ١٠ — خلفية ملونة',desc:'استخدام الضوء الملون على الخلفية لخلق أثر درامي',video_id:'007a77e2-411b-410c-83b2-cc2f1c63fe3e',pdf_url:'',active:true},
+    {id:'bl-22',lesson_order:12,title:'صورة ١١ — صور للموقع الإلكتروني',desc:'جلسة تصوير كاملة لصور الموقع والهوية الاحترافية',video_id:'a6e2505a-7831-438d-89d1-d8446f0b3813',pdf_url:'',active:true}
+  ]}
+];
+
+// ─── STATE ────────────────────────────────────────
+let curriculum    = [];
+let allLessons    = [];
+let currentIndex  = -1;
+let token         = '';
+let courseId      = '';
+let bunnyLibId    = '';
+
+// ─── UTILS ────────────────────────────────────────
+function flatten(curr) {
+  const flat = [];
+  curr.forEach(m => m.lessons.forEach(l => flat.push({ ...l, moduleName: m.module })));
+  return flat;
+}
+
+function saveProgress(id) {
+  try {
+    const key     = `watched_${courseId}`;
+    const watched = JSON.parse(localStorage.getItem(key) || '[]');
+    if (!watched.includes(id)) { watched.push(id); localStorage.setItem(key, JSON.stringify(watched)); }
+  } catch(e) {}
+}
+
+function getWatched() {
+  try { return JSON.parse(localStorage.getItem(`watched_${courseId}`) || '[]'); } catch(e) { return []; }
+}
+
+// ─── SIDEBAR ──────────────────────────────────────
+function buildSidebar() {
+  const container = document.getElementById('curriculum-list');
+  const watched   = getWatched();
+  container.innerHTML = '';
+
+  curriculum.forEach((mod, mi) => {
+    const group  = document.createElement('div');
+    group.className = 'module-group';
+
+    const header = document.createElement('div');
+    header.className = 'module-title' + (mi === 0 ? ' open' : '');
+    header.innerHTML = `<span>${mod.module}</span><span style="display:flex;align-items:center;gap:6px;"><span class="count">${mod.lessons.length}</span><span class="chevron">▼</span></span>`;
+    header.onclick   = () => { header.classList.toggle('open'); list.classList.toggle('open'); };
+
+    const list = document.createElement('div');
+    list.className = 'lesson-list' + (mi === 0 ? ' open' : '');
+
+    mod.lessons.forEach(lesson => {
+      const gIdx    = allLessons.findIndex(l => l.id === lesson.id);
+      const hasVideo= !!lesson.video_id;
+      const isWatched = watched.includes(lesson.id);
+      const item    = document.createElement('div');
+      item.className= 'lesson-item' + (!hasVideo ? ' coming-soon' : '') + (isWatched ? ' watched' : '');
+      item.id       = `li-${lesson.id}`;
+      item.innerHTML= `<span class="dot"></span>${lesson.title}${!hasVideo ? '<span class="soon-badge">قريباً</span>' : ''}`;
+      if (hasVideo && gIdx >= 0) item.onclick = () => { loadLesson(gIdx); closeSidebarMobile(); };
+      list.appendChild(item);
+    });
+
+    group.appendChild(header);
+    group.appendChild(list);
+    container.appendChild(group);
+  });
+}
+
+// ─── PLAYER ───────────────────────────────────────
+function loadLesson(index) {
+  if (index < 0 || index >= allLessons.length) return;
+
+  document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
+
+  const lesson = allLessons[index];
+  currentIndex  = index;
+
+  const item = document.getElementById(`li-${lesson.id}`);
+  if (item) { item.classList.add('active'); item.classList.add('watched'); }
+  saveProgress(lesson.id);
+
+  // Video
+  if (lesson.video_id && bunnyLibId) {
+    const embedUrl = `https://iframe.mediadelivery.net/embed/${bunnyLibId}/${lesson.video_id}?autoplay=true&loop=false&muted=false&preload=false&responsive=true`;
+    document.getElementById('video-placeholder').style.display = 'none';
+    document.getElementById('video-container').style.display   = 'block';
+    document.getElementById('video-iframe').src = embedUrl;
+  } else {
+    document.getElementById('video-container').style.display   = 'none';
+    document.getElementById('video-placeholder').style.display = 'flex';
+    document.getElementById('video-placeholder').innerHTML =
+      `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><p>الفيديو قادم قريباً</p>`;
+  }
+
+  // Info
+  document.getElementById('lesson-module').textContent = lesson.moduleName || '';
+  document.getElementById('lesson-title').textContent  = lesson.title;
+  document.getElementById('lesson-desc').textContent   = lesson.desc || '';
+
+  // Progress
+  document.getElementById('nav-progress').textContent =
+    `${index + 1} / ${allLessons.length}`;
+
+  // PDF
+  if (lesson.pdf_url) {
+    document.getElementById('pdf-area').style.display = 'block';
+    document.getElementById('pdf-btn').href = lesson.pdf_url;
+  } else {
+    document.getElementById('pdf-area').style.display = 'none';
+  }
+
+  // Prev / Next
+  const prevIdx = allLessons.slice(0, index).map((l,i)=>({l,i})).filter(x=>x.l.video_id).pop();
+  const nextRel = allLessons.slice(index + 1).findIndex(l => l.video_id);
+  const nextIdx = nextRel >= 0 ? index + 1 + nextRel : -1;
+
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  btnPrev.disabled = !prevIdx;
+  btnNext.disabled = nextIdx < 0;
+  btnNext.textContent = nextIdx < 0 ? 'آخر درس ✓' : 'التالي ←';
+  btnPrev._target = prevIdx ? prevIdx.i : -1;
+  btnNext._target = nextIdx;
+
+  // Ensure active lesson is visible in sidebar
+  if (item) item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function nav(dir) {
+  const btn    = dir < 0 ? document.getElementById('btn-prev') : document.getElementById('btn-next');
+  const target = btn._target;
+  if (typeof target === 'number' && target >= 0) loadLesson(target);
+}
+
+// ─── SIDEBAR MOBILE ───────────────────────────────
+function toggleSidebar() {
+  const s = document.getElementById('sidebar');
+  const o = document.getElementById('sidebar-overlay');
+  s.classList.toggle('open');
+  o.classList.toggle('open');
+}
+function closeSidebarMobile() {
+  if (window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  }
+}
+
+// ─── API ──────────────────────────────────────────
+async function validateToken(tok, course) {
+  try {
+    const res  = await fetch(`${APPS_SCRIPT_URL}?action=validate_token&token=${encodeURIComponent(tok)}&course=${encodeURIComponent(course)}`);
+    const data = await res.json();
+    return data.valid === true;
+  } catch(e) {
+    console.warn('Token validation error — failing open:', e);
+    return true; // never block a paying student
+  }
+}
+
+async function fetchCurriculum(tok, course) {
+  try {
+    const res  = await fetch(`${APPS_SCRIPT_URL}?action=get_course_lessons&course=${encodeURIComponent(course)}&token=${encodeURIComponent(tok)}`);
+    const data = await res.json();
+    if (!data.lessons || data.lessons.length === 0) return null;
+
+    const mods = {}, order = [];
+    data.lessons.forEach(l => {
+      const key = l.module_order + '::' + l.module;
+      if (!mods[key]) { mods[key] = { module: l.module, module_order: l.module_order, lessons: [] }; order.push(key); }
+      if (l.active !== false) mods[key].lessons.push(l);
+    });
+    const result = order.map(k => mods[k]).filter(m => m.lessons.length > 0);
+    return result.length > 0 ? result : null;
+  } catch(e) {
+    return null;
+  }
+}
+
+// ─── INIT ─────────────────────────────────────────
+async function init() {
+  const params = new URLSearchParams(window.location.search);
+  token    = params.get('token') || '';
+  courseId = params.get('course') || 'beyond-lighting';
+
+  if (!token) {
+    document.getElementById('ov-loading').classList.add('hidden');
+    document.getElementById('ov-denied').classList.remove('hidden');
+    return;
+  }
+
+  const valid = await validateToken(token, courseId);
+  if (!valid) {
+    document.getElementById('ov-loading').classList.add('hidden');
+    document.getElementById('ov-denied').classList.remove('hidden');
+    return;
+  }
+
+  // Set course name
+  document.title = (COURSE_NAMES[courseId] || courseId) + ' | MA Learn';
+  document.getElementById('nav-course-name').textContent = COURSE_NAMES[courseId] || courseId;
+
+  // Get Bunny library
+  bunnyLibId = BUNNY_LIBRARIES[courseId] || '';
+
+  // Load curriculum (API first, hardcoded fallback for BL)
+  const dynamic = await fetchCurriculum(token, courseId);
+  if (dynamic) {
+    curriculum = dynamic;
+  } else if (courseId === 'beyond-lighting') {
+    curriculum = BL_CURRICULUM;
+  } else {
+    curriculum = [];
+  }
+
+  allLessons = flatten(curriculum);
+
+  // Show player
+  document.getElementById('ov-loading').classList.add('hidden');
+  document.getElementById('main-layout').style.display = 'flex';
+
+  buildSidebar();
+
+  // Auto-load first lesson with video
+  const first = allLessons.findIndex(l => l.video_id);
+  loadLesson(first >= 0 ? first : 0);
+}
+
+init();
+</script>
+</body>
+</html>
