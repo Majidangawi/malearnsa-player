@@ -197,7 +197,7 @@
       <input type="password" id="token-input" placeholder="MAL-ADMIN-****"
         onkeydown="if(event.key==='Enter')doAuth()">
     </div>
-    <button class="btn btn-primary" onclick="doAuth()" style="width:100%;">دخول</button>
+    <button id="auth-btn" class="btn btn-primary" onclick="doAuth()" style="width:100%;">دخول</button>
     <p id="auth-err" style="color:var(--red);font-size:0.78rem;margin-top:10px;display:none;">رمز غير صحيح</p>
   </div>
 </div>
@@ -289,13 +289,42 @@ let courseId    = 'beyond-lighting';
 let allLessons  = [];
 
 // ─── AUTH ─────────────────────────────────────────
-function doAuth() {
+async function doAuth() {
   const tok = document.getElementById('token-input').value.trim();
   if (!tok) return;
-  adminToken = tok;
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('main-view').style.display   = 'block';
-  loadCourse();
+
+  const btn    = document.getElementById('auth-btn');
+  const errEl  = document.getElementById('auth-err');
+  btn.disabled = true;
+  btn.textContent = '...';
+  errEl.style.display = 'none';
+
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=admin_get_lessons&course=beyond-lighting&admin_token=${encodeURIComponent(tok)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (data.error === 'unauthorized') {
+      errEl.textContent    = 'رمز المسؤول غير صحيح';
+      errEl.style.display  = 'block';
+      btn.disabled         = false;
+      btn.textContent      = 'دخول';
+      return;
+    }
+
+    // Token valid — proceed
+    adminToken = tok;
+    allLessons = data.lessons || [];
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('main-view').style.display   = 'block';
+    renderLessons();
+    renderStats();
+  } catch(e) {
+    errEl.textContent   = 'خطأ في الاتصال — حاول مرة أخرى';
+    errEl.style.display = 'block';
+    btn.disabled        = false;
+    btn.textContent     = 'دخول';
+  }
 }
 
 // ─── LOAD COURSE ──────────────────────────────────
