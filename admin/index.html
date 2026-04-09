@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MA Learn — لوحة التحكم</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#080808;--surface:#111;--surface2:#181818;--surface3:#1e1e1e;
+      --border:rgba(201,168,76,0.12);--gold:#C9A84C;--gold-lt:#E8D08A;
+      --ivory:#F5F0E8;--silver:#BBBBBB;--grey:#666;
+      --green:#4CAF82;--red:#e74c3c;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--ivory);min-height:100vh;direction:rtl;}
+
+    /* NAV */
+    .nav{
+      height:56px;background:rgba(8,8,8,0.96);border-bottom:1px solid var(--border);
+      display:flex;align-items:center;padding:0 24px;gap:16px;position:sticky;top:0;z-index:50;
+    }
+    .nav img{height:24px;width:auto;}
+    .nav-title{font-size:0.82rem;color:var(--silver);font-weight:400;}
+    .nav-tag{
+      background:rgba(201,168,76,0.12);color:var(--gold);
+      font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
+      padding:3px 10px;border-radius:4px;
+    }
+
+    /* AUTH */
+    .auth-screen{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      min-height:80vh;gap:16px;padding:32px;
+    }
+    .auth-card{
+      background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--gold);
+      padding:36px 32px;width:100%;max-width:380px;
+    }
+    .auth-card h2{font-size:1.1rem;font-weight:700;margin-bottom:6px;}
+    .auth-card p{font-size:0.8rem;color:var(--grey);margin-bottom:24px;}
+
+    /* INPUTS */
+    input,select,textarea{
+      width:100%;background:var(--surface2);border:1px solid rgba(201,168,76,0.2);
+      color:var(--ivory);padding:10px 13px;font-family:'Cairo',sans-serif;
+      font-size:0.88rem;border-radius:6px;outline:none;
+      transition:border-color 0.2s;
+    }
+    input:focus,select:focus,textarea:focus{border-color:rgba(201,168,76,0.55);}
+    textarea{resize:vertical;min-height:72px;}
+    select option{background:#181818;}
+    label{display:block;font-size:0.75rem;color:var(--grey);margin-bottom:5px;}
+
+    /* BUTTONS */
+    .btn{
+      padding:9px 20px;font-family:'Cairo',sans-serif;font-size:0.85rem;
+      font-weight:600;cursor:pointer;border-radius:6px;border:none;transition:all 0.2s;
+    }
+    .btn-primary{background:var(--gold);color:#000;}
+    .btn-primary:hover{background:var(--gold-lt);}
+    .btn-sm{padding:5px 12px;font-size:0.75rem;}
+    .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--silver);}
+    .btn-ghost:hover{border-color:rgba(201,168,76,0.4);color:var(--ivory);}
+    .btn-danger{background:transparent;border:1px solid rgba(231,76,60,0.35);color:var(--red);}
+    .btn-danger:hover{background:rgba(231,76,60,0.08);}
+    .btn-success{background:rgba(76,175,130,0.15);border:1px solid rgba(76,175,130,0.35);color:var(--green);}
+
+    /* MAIN */
+    .main{max-width:1100px;margin:0 auto;padding:32px 24px 80px;}
+
+    /* TOOLBAR */
+    .toolbar{
+      display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:28px;
+    }
+    .toolbar select{width:auto;min-width:220px;}
+    .toolbar-right{margin-right:auto;display:flex;gap:10px;}
+
+    /* STATS */
+    .stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
+    .stat{
+      background:var(--surface);border:1px solid var(--border);
+      padding:14px 20px;border-radius:8px;min-width:120px;
+    }
+    .stat-val{font-size:1.4rem;font-weight:700;color:var(--gold);}
+    .stat-label{font-size:0.72rem;color:var(--grey);margin-top:2px;}
+
+    /* MODULE SECTION */
+    .module-section{margin-bottom:28px;}
+    .module-header{
+      display:flex;align-items:center;gap:12px;
+      padding:12px 16px;background:var(--surface);
+      border:1px solid var(--border);border-radius:8px 8px 0 0;
+      border-bottom:none;
+    }
+    .module-badge{
+      background:rgba(201,168,76,0.1);color:var(--gold);
+      font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
+      padding:3px 10px;border-radius:4px;white-space:nowrap;
+    }
+    .module-name{font-size:0.9rem;font-weight:600;}
+    .module-count{font-size:0.75rem;color:var(--grey);margin-right:auto;}
+
+    /* LESSON TABLE */
+    .lesson-table{
+      border:1px solid var(--border);border-radius:0 0 8px 8px;
+      overflow:hidden;
+    }
+    .lesson-row{
+      display:grid;
+      grid-template-columns:28px 1fr 220px 90px 80px;
+      align-items:center;gap:12px;
+      padding:12px 16px;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      background:var(--surface2);
+      transition:background 0.15s;
+    }
+    .lesson-row:last-child{border-bottom:none;}
+    .lesson-row:hover{background:var(--surface3);}
+    .lesson-row.editing{background:rgba(201,168,76,0.04);border-right:2px solid var(--gold);}
+
+    .lesson-num{font-size:0.7rem;color:var(--grey);text-align:center;}
+    .lesson-title-cell{font-size:0.85rem;font-weight:500;cursor:pointer;}
+    .lesson-title-cell .desc{font-size:0.72rem;color:var(--grey);font-weight:300;margin-top:2px;}
+    .lesson-video-cell input{font-size:0.75rem;font-family:monospace;padding:6px 10px;}
+    .lesson-actions{display:flex;gap:6px;justify-content:flex-end;}
+    .active-toggle{
+      display:flex;align-items:center;gap:6px;
+      font-size:0.75rem;color:var(--grey);cursor:pointer;
+      user-select:none;
+    }
+    .toggle{
+      width:32px;height:18px;background:#333;border-radius:9px;
+      position:relative;cursor:pointer;transition:background 0.2s;flex-shrink:0;
+    }
+    .toggle.on{background:var(--green);}
+    .toggle::after{
+      content:'';position:absolute;top:2px;right:2px;
+      width:14px;height:14px;background:#fff;border-radius:50%;
+      transition:right 0.2s;
+    }
+    .toggle.on::after{right:calc(100% - 16px);}
+
+    /* ADD LESSON FORM */
+    .add-form{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:8px;padding:20px;margin-top:20px;display:none;
+    }
+    .add-form.open{display:block;}
+    .add-form h3{font-size:0.88rem;font-weight:600;margin-bottom:16px;color:var(--gold);}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .form-full{grid-column:1/-1;}
+
+    /* TOAST */
+    .toast{
+      position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+      background:var(--surface);border:1px solid var(--border);
+      padding:10px 20px;border-radius:8px;font-size:0.82rem;
+      z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;
+    }
+    .toast.show{opacity:1;}
+    .toast.ok{border-color:rgba(76,175,130,0.4);color:var(--green);}
+    .toast.err{border-color:rgba(231,76,60,0.4);color:var(--red);}
+
+    /* LOADING */
+    .spinner{
+      width:20px;height:20px;border:2px solid rgba(201,168,76,0.2);
+      border-top-color:var(--gold);border-radius:50%;
+      animation:spin 0.7s linear infinite;display:inline-block;
+    }
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    @media(max-width:700px){
+      .lesson-row{grid-template-columns:24px 1fr;gap:8px;flex-wrap:wrap;}
+      .lesson-video-cell,.lesson-actions,.active-toggle{grid-column:1/-1;}
+      .form-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <img src="https://malearnsa.com/brand_assets/logo-malearn-white.png" alt="MA Learn"
+    onerror="this.style.display='none'">
+  <span class="nav-title">لوحة التحكم</span>
+  <span class="nav-tag">ADMIN</span>
+</nav>
+
+<!-- AUTH -->
+<div id="auth-screen" class="auth-screen">
+  <div class="auth-card">
+    <h2>تسجيل الدخول</h2>
+    <p>أدخل رمز المسؤول للوصول للوحة التحكم</p>
+    <div style="margin-bottom:14px;">
+      <label>رمز المسؤول</label>
+      <input type="password" id="token-input" placeholder="MAL-ADMIN-****"
+        onkeydown="if(event.key==='Enter')doAuth()">
+    </div>
+    <button class="btn btn-primary" onclick="doAuth()" style="width:100%;">دخول</button>
+    <p id="auth-err" style="color:var(--red);font-size:0.78rem;margin-top:10px;display:none;">رمز غير صحيح</p>
+  </div>
+</div>
+
+<!-- MAIN (shown after auth) -->
+<div id="main-view" class="main" style="display:none;">
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div>
+      <label style="margin-bottom:4px;">الدورة</label>
+      <select id="course-select" onchange="loadCourse()">
+        <option value="beyond-lighting">أبعد من إمكانيات الإضاءة (T2-BL)</option>
+        <option value="intro-to-creative-ai">مدخل إلى الذكاء الاصطناعي (T2-ITAI)</option>
+      </select>
+    </div>
+    <div class="toolbar-right">
+      <button class="btn btn-ghost btn-sm" onclick="loadCourse()">
+        ↻ تحديث
+      </button>
+      <button class="btn btn-primary btn-sm" onclick="toggleAddForm()">
+        + إضافة درس
+      </button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats" id="stats-bar"></div>
+
+  <!-- LESSON LIST -->
+  <div id="lesson-list"></div>
+
+  <!-- ADD FORM -->
+  <div class="add-form" id="add-form">
+    <h3>+ إضافة درس جديد</h3>
+    <div class="form-grid">
+      <div>
+        <label>اسم الوحدة (Module)</label>
+        <input id="new-module" type="text" placeholder="جلسات التصوير">
+      </div>
+      <div>
+        <label>ترتيب الوحدة</label>
+        <input id="new-module-order" type="number" value="1" min="1">
+      </div>
+      <div>
+        <label>عنوان الدرس</label>
+        <input id="new-title" type="text" placeholder="صورة ١٢ — ...">
+      </div>
+      <div>
+        <label>ترتيب الدرس داخل الوحدة</label>
+        <input id="new-lesson-order" type="number" value="1" min="1">
+      </div>
+      <div class="form-full">
+        <label>وصف الدرس</label>
+        <textarea id="new-desc" placeholder="ما الذي سيتعلمه الطالب..."></textarea>
+      </div>
+      <div class="form-full">
+        <label>Bunny Video GUID</label>
+        <input id="new-video-id" type="text" dir="ltr"
+          placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+      </div>
+      <div class="form-full">
+        <label>رابط PDF (اختياري)</label>
+        <input id="new-pdf-url" type="url" dir="ltr" placeholder="https://...">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="btn btn-primary" onclick="addLesson()">حفظ الدرس</button>
+      <button class="btn btn-ghost" onclick="toggleAddForm()">إلغاء</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzXC4Ef5WxNX0aPov7Q1Kdn2DiXuODd74w3iOCtovrw86o9grwVREqNsRdhlyQkoBnQ/exec';
+const BUNNY_LIBRARIES = {
+  'beyond-lighting':     '634652',
+  'intro-to-creative-ai':''
+};
+
+let adminToken  = '';
+let courseId    = 'beyond-lighting';
+let allLessons  = [];
+
+// ─── AUTH ─────────────────────────────────────────
+function doAuth() {
+  const tok = document.getElementById('token-input').value.trim();
+  if (!tok) return;
+  adminToken = tok;
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('main-view').style.display   = 'block';
+  loadCourse();
+}
+
+// ─── LOAD COURSE ──────────────────────────────────
+async function loadCourse() {
+  courseId = document.getElementById('course-select').value;
+  document.getElementById('lesson-list').innerHTML = '<div style="text-align:center;padding:40px;color:var(--grey);"><div class="spinner"></div></div>';
+  document.getElementById('stats-bar').innerHTML = '';
+
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=admin_get_lessons&course=${encodeURIComponent(courseId)}&admin_token=${encodeURIComponent(adminToken)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (data.error === 'unauthorized') {
+      toast('رمز المسؤول غير صحيح', 'err');
+      document.getElementById('lesson-list').innerHTML = '';
+      return;
+    }
+
+    allLessons = data.lessons || [];
+    renderLessons();
+    renderStats();
+  } catch(e) {
+    document.getElementById('lesson-list').innerHTML =
+      '<p style="text-align:center;color:var(--red);padding:32px;">خطأ في الاتصال بالخادم</p>';
+  }
+}
+
+// ─── RENDER ───────────────────────────────────────
+function renderStats() {
+  const total   = allLessons.length;
+  const withVid = allLessons.filter(l => l.video_id).length;
+  const active  = allLessons.filter(l => l.active).length;
+  const libId   = BUNNY_LIBRARIES[courseId] || '—';
+
+  document.getElementById('stats-bar').innerHTML = `
+    <div class="stat"><div class="stat-val">${total}</div><div class="stat-label">إجمالي الدروس</div></div>
+    <div class="stat"><div class="stat-val">${withVid}</div><div class="stat-label">دروس بفيديو</div></div>
+    <div class="stat"><div class="stat-val">${active}</div><div class="stat-label">دروس مفعّلة</div></div>
+    <div class="stat"><div class="stat-val" style="font-size:0.95rem;">${libId}</div><div class="stat-label">Bunny Library ID</div></div>
+  `;
+}
+
+function renderLessons() {
+  // Group by module
+  const modules = {};
+  const order   = [];
+  allLessons.forEach(l => {
+    const key = l.module_order + '::' + l.module;
+    if (!modules[key]) { modules[key] = { name: l.module, order: l.module_order, lessons: [] }; order.push(key); }
+    modules[key].lessons.push(l);
+  });
+
+  let html = '';
+  order.forEach(key => {
+    const mod  = modules[key];
+    const rows = mod.lessons.map((l, idx) => lessonRow(l, idx + 1)).join('');
+    html += `
+      <div class="module-section">
+        <div class="module-header">
+          <span class="module-badge">الوحدة ${mod.order}</span>
+          <span class="module-name">${mod.name}</span>
+          <span class="module-count">${mod.lessons.length} دروس</span>
+        </div>
+        <div class="lesson-table">${rows}</div>
+      </div>`;
+  });
+
+  document.getElementById('lesson-list').innerHTML = html || '<p style="text-align:center;color:var(--grey);padding:32px;">لا توجد دروس — أضف درساً للبدء</p>';
+}
+
+function lessonRow(l, num) {
+  const hasVid = !!l.video_id;
+  return `
+    <div class="lesson-row" id="row-${l.id}">
+      <span class="lesson-num">${num}</span>
+      <div class="lesson-title-cell">
+        <div>${l.title}</div>
+        ${l.desc ? `<div class="desc">${l.desc.substring(0,80)}${l.desc.length>80?'…':''}</div>` : ''}
+      </div>
+      <div class="lesson-video-cell">
+        <input type="text" dir="ltr"
+          id="vid-${l.id}"
+          value="${l.video_id || ''}"
+          placeholder="Bunny GUID"
+          onchange="markDirty('${l.id}')">
+      </div>
+      <div class="active-toggle" onclick="toggleActive('${l.id}', ${!l.active})">
+        <span class="toggle ${l.active ? 'on' : ''}" id="tog-${l.id}"></span>
+        <span id="tog-label-${l.id}" style="font-size:0.7rem;">${l.active ? 'مفعّل' : 'مخفي'}</span>
+      </div>
+      <div class="lesson-actions">
+        <button class="btn btn-sm btn-success" id="save-${l.id}"
+          onclick="saveLesson('${l.id}')" style="display:none;">
+          حفظ
+        </button>
+        <button class="btn btn-sm btn-danger" onclick="deleteLesson('${l.id}', '${l.title}')">
+          حذف
+        </button>
+      </div>
+    </div>`;
+}
+
+// ─── ACTIONS ──────────────────────────────────────
+function markDirty(id) {
+  document.getElementById(`save-${id}`).style.display = 'inline-block';
+  document.getElementById(`row-${id}`).classList.add('editing');
+}
+
+async function saveLesson(id) {
+  const videoId = document.getElementById(`vid-${id}`).value.trim();
+  const btn     = document.getElementById(`save-${id}`);
+  btn.textContent = '...';
+  btn.disabled    = true;
+
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=save_lesson_media&lesson_id=${encodeURIComponent(id)}&video_id=${encodeURIComponent(videoId)}&admin_token=${encodeURIComponent(adminToken)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    if (data.success) {
+      toast('تم الحفظ ✓', 'ok');
+      btn.style.display = 'none';
+      document.getElementById(`row-${id}`).classList.remove('editing');
+      const lesson = allLessons.find(l => l.id === id);
+      if (lesson) lesson.video_id = videoId;
+      renderStats();
+    } else {
+      toast('خطأ في الحفظ', 'err');
+    }
+  } catch(e) {
+    toast('خطأ في الاتصال', 'err');
+  }
+  btn.textContent = 'حفظ';
+  btn.disabled    = false;
+}
+
+async function toggleActive(id, newState) {
+  const tog   = document.getElementById(`tog-${id}`);
+  const label = document.getElementById(`tog-label-${id}`);
+  tog.classList.toggle('on', newState);
+  label.textContent = newState ? 'مفعّل' : 'مخفي';
+
+  const lesson = allLessons.find(l => l.id === id);
+  if (lesson) lesson.active = newState;
+
+  try {
+    const url = `${APPS_SCRIPT_URL}?action=save_lesson_media&lesson_id=${encodeURIComponent(id)}&active=${newState}&admin_token=${encodeURIComponent(adminToken)}`;
+    await fetch(url);
+    toast(newState ? 'الدرس مفعّل ✓' : 'الدرس مخفي', 'ok');
+    renderStats();
+  } catch(e) {
+    toast('خطأ في الحفظ', 'err');
+  }
+}
+
+async function deleteLesson(id, title) {
+  if (!confirm(`حذف الدرس: "${title}"؟\nهذا الإجراء لا يمكن التراجع عنه.`)) return;
+
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=delete_lesson&lesson_id=${encodeURIComponent(id)}&admin_token=${encodeURIComponent(adminToken)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    if (data.success) {
+      toast('تم الحذف ✓', 'ok');
+      allLessons = allLessons.filter(l => l.id !== id);
+      renderLessons();
+      renderStats();
+    } else {
+      toast('خطأ في الحذف', 'err');
+    }
+  } catch(e) {
+    toast('خطأ في الاتصال', 'err');
+  }
+}
+
+// ─── ADD LESSON ───────────────────────────────────
+function toggleAddForm() {
+  document.getElementById('add-form').classList.toggle('open');
+}
+
+async function addLesson() {
+  const module      = document.getElementById('new-module').value.trim();
+  const moduleOrder = document.getElementById('new-module-order').value;
+  const title       = document.getElementById('new-title').value.trim();
+  const lessonOrder = document.getElementById('new-lesson-order').value;
+  const desc        = document.getElementById('new-desc').value.trim();
+  const videoId     = document.getElementById('new-video-id').value.trim();
+  const pdfUrl      = document.getElementById('new-pdf-url').value.trim();
+
+  if (!title || !module) { toast('العنوان والوحدة مطلوبان', 'err'); return; }
+
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=add_lesson` +
+      `&admin_token=${encodeURIComponent(adminToken)}` +
+      `&course=${encodeURIComponent(courseId)}` +
+      `&module=${encodeURIComponent(module)}` +
+      `&module_order=${encodeURIComponent(moduleOrder)}` +
+      `&title=${encodeURIComponent(title)}` +
+      `&lesson_order=${encodeURIComponent(lessonOrder)}` +
+      `&desc=${encodeURIComponent(desc)}` +
+      `&video_id=${encodeURIComponent(videoId)}` +
+      `&pdf_url=${encodeURIComponent(pdfUrl)}`;
+
+    const res  = await fetch(url);
+    const data = await res.json();
+    if (data.success) {
+      toast('تمت الإضافة ✓', 'ok');
+      toggleAddForm();
+      loadCourse();
+    } else {
+      toast('خطأ في الإضافة', 'err');
+    }
+  } catch(e) {
+    toast('خطأ في الاتصال', 'err');
+  }
+}
+
+// ─── TOAST ────────────────────────────────────────
+let toastTimer;
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className   = `toast show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = 'toast'; }, 2800);
+}
+</script>
+</body>
+</html>
