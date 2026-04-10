@@ -621,18 +621,17 @@ async function saveContent(id) {
     return;
   }
 
-  // Warn if content is too large for the URL
-  if (encodeURIComponent(content).length > 6000) {
-    toast('المحتوى كبير جداً — قصّره أو قسّمه بين دروس متعددة', 'err');
-    return;
-  }
-
   btn.textContent = '...';
   btn.disabled    = true;
 
   try {
-    const url  = `${APPS_SCRIPT_URL}?action=save_content&lesson_id=${encodeURIComponent(id)}&admin_token=${encodeURIComponent(adminToken)}&content=${encodeURIComponent(content)}`;
-    const res  = await fetch(url);
+    // POST — avoids URL length limits for large HTML content
+    const body = new URLSearchParams();
+    body.append('action',      'save_content');
+    body.append('lesson_id',   id);
+    body.append('admin_token', adminToken);
+    body.append('content',     content);
+    const res  = await fetch(APPS_SCRIPT_URL, { method: 'POST', body });
     const data = await res.json();
     if (data.success) {
       toast('تم حفظ المحتوى ✓', 'ok');
