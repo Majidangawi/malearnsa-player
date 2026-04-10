@@ -484,7 +484,8 @@ function lessonRow(l, num) {
           id="editor-${l.id}"
           contenteditable="true"
           data-ph="اكتب محتوى الدرس هنا — ملاحظات، شرح إضافي، روابط، صور..."
-          oninput="markContentDirty('${l.id}')">
+          oninput="markContentDirty('${l.id}')"
+          onpaste="handleEditorPaste(event, '${l.id}')">
         </div>
         <div class="editor-footer">
           <span class="editor-status" id="cstatus-${l.id}"></span>
@@ -614,6 +615,18 @@ async function saveContent(id) {
   const status  = document.getElementById(`cstatus-${id}`);
   const content = editor.innerHTML;
 
+  // Reject base64 images — they must be external URLs
+  if (content.includes('data:image')) {
+    toast('احذف الصور المُلصقة مباشرة واستخدم رابط خارجي بدلاً منها', 'err');
+    return;
+  }
+
+  // Warn if content is too large for the URL
+  if (encodeURIComponent(content).length > 6000) {
+    toast('المحتوى كبير جداً — قصّره أو قسّمه بين دروس متعددة', 'err');
+    return;
+  }
+
   btn.textContent = '...';
   btn.disabled    = true;
 
@@ -650,6 +663,19 @@ function insertImageUrl(id) {
   document.getElementById(`editor-${id}`).focus();
   document.execCommand('insertHTML', false, `<img src="${url}" alt="">`);
   markContentDirty(id);
+}
+
+function handleEditorPaste(event, id) {
+  const items = event.clipboardData && event.clipboardData.items;
+  if (!items) return;
+  for (const item of items) {
+    if (item.type.startsWith('image/')) {
+      event.preventDefault();
+      toast('الصور تُضاف عبر رابط فقط — استخدم زر "↑ صورة"', 'err');
+      return;
+    }
+  }
+  // Allow text paste to proceed normally
 }
 
 function insertLink(id) {
