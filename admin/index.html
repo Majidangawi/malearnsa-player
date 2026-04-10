@@ -479,6 +479,13 @@ function lessonRow(l, num) {
           <button onmousedown="event.preventDefault();insertImageUrl('${l.id}')" title="صورة">↑ صورة</button>
           <button onmousedown="event.preventDefault();insertLink('${l.id}')" title="رابط">🔗 رابط</button>
           <button onmousedown="event.preventDefault();document.execCommand('removeFormat')" title="إزالة التنسيق">× تنسيق</button>
+          <span style="width:1px;background:rgba(201,168,76,0.2);margin:0 2px;align-self:stretch;display:inline-block;"></span>
+          <button onmousedown="event.preventDefault();document.execCommand('justifyRight')" title="محاذاة لليمين">⬜ يمين</button>
+          <button onmousedown="event.preventDefault();document.execCommand('justifyCenter')" title="توسيط">⬜ وسط</button>
+          <button onmousedown="event.preventDefault();document.execCommand('justifyLeft')" title="محاذاة لليسار">⬜ يسار</button>
+          <span style="width:1px;background:rgba(201,168,76,0.2);margin:0 2px;align-self:stretch;display:inline-block;"></span>
+          <button onmousedown="event.preventDefault();setBlockDir('${l.id}','rtl')" title="اتجاه من اليمين لليسار">RTL →</button>
+          <button onmousedown="event.preventDefault();setBlockDir('${l.id}','ltr')" title="اتجاه من اليسار لليمين">← LTR</button>
         </div>
         <div class="editor-area"
           id="editor-${l.id}"
@@ -661,6 +668,29 @@ function insertImageUrl(id) {
   if (!url) return;
   document.getElementById(`editor-${id}`).focus();
   document.execCommand('insertHTML', false, `<img src="${url}" alt="">`);
+  markContentDirty(id);
+}
+
+function setBlockDir(id, dir) {
+  const editor = document.getElementById(`editor-${id}`);
+  editor.focus();
+  const sel = window.getSelection();
+  if (!sel || !sel.rangeCount) return;
+  // Walk up from selection to find a block-level element inside the editor
+  let node = sel.getRangeAt(0).commonAncestorContainer;
+  while (node && node !== editor) {
+    if (node.nodeType === 1 && /^(P|DIV|H2|H3|H4|LI|BLOCKQUOTE)$/.test(node.nodeName)) {
+      node.setAttribute('dir', dir);
+      node.style.textAlign = dir === 'ltr' ? 'left' : 'right';
+      markContentDirty(id);
+      return;
+    }
+    node = node.parentNode;
+  }
+  // No block found — wrap selection in a div with the requested direction
+  const align = dir === 'ltr' ? 'left' : 'right';
+  document.execCommand('insertHTML', false,
+    `<div dir="${dir}" style="text-align:${align}">${sel.toString() || '​'}</div>`);
   markContentDirty(id);
 }
 
