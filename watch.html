@@ -205,6 +205,26 @@
       max-width:680px;
     }
 
+    .lesson-content{
+      margin:20px 0 8px;
+      color:rgba(245,240,232,0.85);
+      font-size:0.92rem;
+      line-height:1.75;
+    }
+    .lesson-content:empty{display:none;}
+    .lesson-content h2,.lesson-content h3{
+      color:var(--gold);font-weight:700;margin:18px 0 8px;font-size:1rem;
+    }
+    .lesson-content p{margin-bottom:12px;}
+    .lesson-content ul,.lesson-content ol{padding-right:22px;margin-bottom:12px;}
+    .lesson-content li{margin-bottom:5px;}
+    .lesson-content img{max-width:100%;border-radius:10px;margin:14px 0;display:block;}
+    .lesson-content a{color:var(--gold);text-decoration:underline;}
+    .lesson-content strong{color:var(--ivory);}
+    .lesson-content blockquote{
+      border-right:3px solid var(--gold);padding:8px 14px;
+      margin:12px 0;color:var(--muted);font-style:italic;
+    }
     .pdf-btn{
       display:inline-flex;align-items:center;gap:8px;
       background:rgba(201,168,76,0.08);
@@ -412,6 +432,8 @@
       <h2 class="lesson-title" id="lesson-title">اختر درساً من القائمة</h2>
       <p class="lesson-desc" id="lesson-desc">اختر أي درس من القائمة لتبدأ المشاهدة.</p>
 
+      <div id="lesson-content" class="lesson-content"></div>
+
       <div id="pdf-area" style="display:none;">
         <a id="pdf-btn" href="#" target="_blank" class="pdf-btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -606,6 +628,15 @@ function loadLesson(index) {
   document.getElementById('nav-progress').textContent =
     `${index + 1} / ${allLessons.length}`;
 
+  // Rich content (fetch from API, show cached if available)
+  const contentEl = document.getElementById('lesson-content');
+  contentEl.innerHTML = '';
+  if (lesson._content !== undefined) {
+    contentEl.innerHTML = lesson._content;
+  } else {
+    fetchLessonContent(lesson, contentEl);
+  }
+
   // PDF
   if (lesson.pdf_url) {
     document.getElementById('pdf-area').style.display = 'block';
@@ -679,6 +710,19 @@ async function fetchCurriculum(tok, course) {
     return result.length > 0 ? result : null;
   } catch(e) {
     return null;
+  }
+}
+
+async function fetchLessonContent(lesson, el) {
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=get_content&lesson_id=${encodeURIComponent(lesson.id)}&token=${encodeURIComponent(token)}&course=${encodeURIComponent(courseId)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    const html = data.content || '';
+    lesson._content = html;
+    el.innerHTML    = html;
+  } catch(e) {
+    lesson._content = '';
   }
 }
 

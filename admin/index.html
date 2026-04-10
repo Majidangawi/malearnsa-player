@@ -116,6 +116,7 @@
       transition:background 0.15s;
     }
     .lesson-row:last-child{border-bottom:none;}
+    .lesson-table .lesson-item:last-child .lesson-row{border-bottom:none;}
     .lesson-row:hover{background:var(--surface3);}
     .lesson-row.editing{background:rgba(201,168,76,0.04);border-right:2px solid var(--gold);}
 
@@ -140,6 +141,46 @@
       transition:right 0.2s;
     }
     .toggle.on::after{right:calc(100% - 16px);}
+
+    /* CONTENT EDITOR */
+    .lesson-item{border-bottom:1px solid rgba(255,255,255,0.04);}
+    .lesson-item:last-child{border-bottom:none;}
+    .lesson-item .lesson-row{border-bottom:none;}
+    .btn-content{
+      background:transparent;border:1px solid rgba(201,168,76,0.25);
+      color:var(--gold);font-size:0.7rem;padding:4px 10px;
+      border-radius:4px;cursor:pointer;font-family:'Cairo',sans-serif;
+      transition:all 0.15s;white-space:nowrap;
+    }
+    .btn-content:hover{background:rgba(201,168,76,0.08);}
+    .btn-content.active{background:rgba(201,168,76,0.12);border-color:var(--gold);}
+    .content-panel{
+      display:none;padding:14px 16px 16px;
+      background:rgba(201,168,76,0.03);
+      border-top:1px solid rgba(201,168,76,0.1);
+    }
+    .content-panel.open{display:block;}
+    .editor-toolbar{
+      display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;
+      padding:6px 8px;background:var(--surface2);border-radius:6px;
+    }
+    .editor-toolbar button{
+      background:transparent;border:1px solid var(--border);color:var(--silver);
+      padding:4px 10px;cursor:pointer;font-family:'Cairo',sans-serif;
+      font-size:0.75rem;border-radius:4px;transition:all 0.15s;
+    }
+    .editor-toolbar button:hover{border-color:rgba(201,168,76,0.4);color:var(--gold);}
+    .editor-area{
+      min-height:120px;max-height:400px;overflow-y:auto;
+      background:var(--surface2);border:1px solid rgba(201,168,76,0.2);
+      border-radius:6px;padding:12px 14px;font-size:0.85rem;line-height:1.75;
+      outline:none;direction:rtl;text-align:right;
+    }
+    .editor-area:focus{border-color:rgba(201,168,76,0.5);}
+    .editor-area:empty::before{content:attr(data-ph);color:var(--grey);pointer-events:none;}
+    .editor-area img{max-width:100%;border-radius:6px;margin:8px 0;display:block;}
+    .editor-footer{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:10px;}
+    .editor-status{font-size:0.72rem;color:var(--grey);margin-left:auto;}
 
     /* ADD LESSON FORM */
     .add-form{
@@ -397,33 +438,59 @@ function renderLessons() {
 }
 
 function lessonRow(l, num) {
-  const hasVid = !!l.video_id;
   return `
-    <div class="lesson-row" id="row-${l.id}">
-      <span class="lesson-num">${num}</span>
-      <div class="lesson-title-cell">
-        <div>${l.title}</div>
-        ${l.desc ? `<div class="desc">${l.desc.substring(0,80)}${l.desc.length>80?'…':''}</div>` : ''}
+    <div class="lesson-item" id="item-${l.id}">
+      <div class="lesson-row" id="row-${l.id}">
+        <span class="lesson-num">${num}</span>
+        <div class="lesson-title-cell">
+          <div>${l.title}</div>
+          ${l.desc ? `<div class="desc">${l.desc.substring(0,80)}${l.desc.length>80?'…':''}</div>` : ''}
+        </div>
+        <div class="lesson-video-cell">
+          <input type="text" dir="ltr"
+            id="vid-${l.id}"
+            value="${l.video_id || ''}"
+            placeholder="Bunny GUID"
+            onchange="markDirty('${l.id}')">
+        </div>
+        <div class="active-toggle" onclick="toggleActive('${l.id}', ${!l.active})">
+          <span class="toggle ${l.active ? 'on' : ''}" id="tog-${l.id}"></span>
+          <span id="tog-label-${l.id}" style="font-size:0.7rem;">${l.active ? 'مفعّل' : 'مخفي'}</span>
+        </div>
+        <div class="lesson-actions">
+          <button class="btn btn-sm btn-success" id="save-${l.id}"
+            onclick="saveLesson('${l.id}')" style="display:none;">
+            حفظ
+          </button>
+          <button class="btn-content" id="cbtn-${l.id}" onclick="toggleContent('${l.id}')">
+            محتوى
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="deleteLesson('${l.id}', '${l.title}')">
+            حذف
+          </button>
+        </div>
       </div>
-      <div class="lesson-video-cell">
-        <input type="text" dir="ltr"
-          id="vid-${l.id}"
-          value="${l.video_id || ''}"
-          placeholder="Bunny GUID"
-          onchange="markDirty('${l.id}')">
-      </div>
-      <div class="active-toggle" onclick="toggleActive('${l.id}', ${!l.active})">
-        <span class="toggle ${l.active ? 'on' : ''}" id="tog-${l.id}"></span>
-        <span id="tog-label-${l.id}" style="font-size:0.7rem;">${l.active ? 'مفعّل' : 'مخفي'}</span>
-      </div>
-      <div class="lesson-actions">
-        <button class="btn btn-sm btn-success" id="save-${l.id}"
-          onclick="saveLesson('${l.id}')" style="display:none;">
-          حفظ
-        </button>
-        <button class="btn btn-sm btn-danger" onclick="deleteLesson('${l.id}', '${l.title}')">
-          حذف
-        </button>
+      <div class="content-panel" id="cpanel-${l.id}">
+        <div class="editor-toolbar">
+          <button onmousedown="event.preventDefault();document.execCommand('bold')" title="عريض"><b>ع</b></button>
+          <button onmousedown="event.preventDefault();document.execCommand('italic')" title="مائل"><i>م</i></button>
+          <button onmousedown="event.preventDefault();document.execCommand('formatBlock',false,'h3')" title="عنوان">H3</button>
+          <button onmousedown="event.preventDefault();document.execCommand('insertUnorderedList')" title="قائمة">• قائمة</button>
+          <button onmousedown="event.preventDefault();insertImageUrl('${l.id}')" title="صورة">↑ صورة</button>
+          <button onmousedown="event.preventDefault();insertLink('${l.id}')" title="رابط">🔗 رابط</button>
+          <button onmousedown="event.preventDefault();document.execCommand('removeFormat')" title="إزالة التنسيق">× تنسيق</button>
+        </div>
+        <div class="editor-area"
+          id="editor-${l.id}"
+          contenteditable="true"
+          data-ph="اكتب محتوى الدرس هنا — ملاحظات، شرح إضافي، روابط، صور..."
+          oninput="markContentDirty('${l.id}')">
+        </div>
+        <div class="editor-footer">
+          <span class="editor-status" id="cstatus-${l.id}"></span>
+          <button class="btn btn-sm btn-ghost" onclick="clearContent('${l.id}')">مسح</button>
+          <button class="btn btn-sm btn-primary" id="csave-${l.id}" onclick="saveContent('${l.id}')">حفظ المحتوى</button>
+        </div>
       </div>
     </div>`;
 }
@@ -498,6 +565,100 @@ async function deleteLesson(id, title) {
   } catch(e) {
     toast('خطأ في الاتصال', 'err');
   }
+}
+
+// ─── LESSON CONTENT ───────────────────────────────
+const _contentLoaded = {};
+
+async function toggleContent(id) {
+  const panel = document.getElementById(`cpanel-${id}`);
+  const btn   = document.getElementById(`cbtn-${id}`);
+  const isOpen = panel.classList.contains('open');
+
+  if (isOpen) {
+    panel.classList.remove('open');
+    btn.classList.remove('active');
+    return;
+  }
+
+  panel.classList.add('open');
+  btn.classList.add('active');
+
+  if (_contentLoaded[id]) return; // already fetched
+  _contentLoaded[id] = true;
+
+  const status = document.getElementById(`cstatus-${id}`);
+  status.textContent = 'جارٍ التحميل...';
+
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=get_content&lesson_id=${encodeURIComponent(id)}&admin_token=${encodeURIComponent(adminToken)}&course=${encodeURIComponent(courseId)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    const editor = document.getElementById(`editor-${id}`);
+    editor.innerHTML = data.content || '';
+    status.textContent = '';
+  } catch(e) {
+    status.textContent = 'خطأ في التحميل';
+  }
+}
+
+function markContentDirty(id) {
+  const status = document.getElementById(`cstatus-${id}`);
+  status.textContent = 'لم يُحفظ بعد';
+  status.style.color = 'var(--gold)';
+}
+
+async function saveContent(id) {
+  const editor  = document.getElementById(`editor-${id}`);
+  const btn     = document.getElementById(`csave-${id}`);
+  const status  = document.getElementById(`cstatus-${id}`);
+  const content = editor.innerHTML;
+
+  btn.textContent = '...';
+  btn.disabled    = true;
+
+  try {
+    const url  = `${APPS_SCRIPT_URL}?action=save_content&lesson_id=${encodeURIComponent(id)}&admin_token=${encodeURIComponent(adminToken)}&content=${encodeURIComponent(content)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    if (data.success) {
+      toast('تم حفظ المحتوى ✓', 'ok');
+      status.textContent = 'تم الحفظ ✓';
+      status.style.color = 'var(--green)';
+      setTimeout(() => { status.textContent = ''; }, 3000);
+    } else {
+      toast('خطأ في الحفظ', 'err');
+      status.textContent = 'خطأ';
+      status.style.color = 'var(--red)';
+    }
+  } catch(e) {
+    toast('خطأ في الاتصال', 'err');
+  }
+  btn.textContent = 'حفظ المحتوى';
+  btn.disabled    = false;
+}
+
+function clearContent(id) {
+  if (!confirm('مسح كل المحتوى؟')) return;
+  document.getElementById(`editor-${id}`).innerHTML = '';
+  markContentDirty(id);
+}
+
+function insertImageUrl(id) {
+  const url = prompt('رابط الصورة (URL):');
+  if (!url) return;
+  document.getElementById(`editor-${id}`).focus();
+  document.execCommand('insertHTML', false, `<img src="${url}" alt="">`);
+  markContentDirty(id);
+}
+
+function insertLink(id) {
+  const url  = prompt('رابط (URL):');
+  if (!url) return;
+  const text = prompt('نص الرابط:') || url;
+  document.getElementById(`editor-${id}`).focus();
+  document.execCommand('insertHTML', false, `<a href="${url}" target="_blank">${text}</a>`);
+  markContentDirty(id);
 }
 
 // ─── ADD LESSON ───────────────────────────────────
