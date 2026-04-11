@@ -749,10 +749,13 @@ function fixContentImages(el) {
     let src = img.getAttribute('src') || '';
     // Dropbox: swap to dl.dropboxusercontent.com for direct image serving
     if (src.includes('dropbox.com')) {
-      src = src.replace('www.dropbox.com', 'dl.dropboxusercontent.com')
-               .replace(/[?&]dl=[01]/, '')   // remove dl param
-               .replace(/[?&]st=[^&]*/, ''); // remove st param (not needed)
-      img.src = src;
+      try {
+        const u = new URL(src);
+        u.hostname = 'dl.dropboxusercontent.com';
+        u.searchParams.delete('dl');
+        u.searchParams.delete('st');
+        img.src = u.toString();
+      } catch(e) { /* leave src as-is */ }
     }
     // Google Drive share links
     const m = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
