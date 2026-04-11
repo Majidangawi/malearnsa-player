@@ -663,10 +663,7 @@ function loadLesson(index) {
   contentEl.innerHTML = '';
   if (lesson._content !== undefined) {
     contentEl.innerHTML = lesson._content;
-    contentEl.querySelectorAll('img').forEach(img => {
-      img.onerror = function() { this.style.display = 'none'; };
-      if (!img.complete || img.naturalWidth === 0) img.onerror();
-    });
+    fixContentImages(contentEl);
   } else {
     fetchLessonContent(lesson, contentEl);
   }
@@ -747,6 +744,21 @@ async function fetchCurriculum(tok, course) {
   }
 }
 
+function fixContentImages(el) {
+  el.querySelectorAll('img').forEach(img => {
+    // Convert Google Drive share links to direct image URLs
+    const src = img.getAttribute('src') || '';
+    const m = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (m) img.src = `https://drive.google.com/uc?export=view&id=${m[1]}`;
+    const m2 = src.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (m2 && src.includes('drive.google.com') && !src.includes('uc?export')) {
+      img.src = `https://drive.google.com/uc?export=view&id=${m2[1]}`;
+    }
+    // Hide if still broken after conversion
+    img.onerror = function() { this.style.display = 'none'; };
+  });
+}
+
 async function fetchLessonContent(lesson, el) {
   try {
     const url  = `${APPS_SCRIPT_URL}?action=get_content&lesson_id=${encodeURIComponent(lesson.id)}&token=${encodeURIComponent(token)}&course=${encodeURIComponent(courseId)}`;
@@ -755,12 +767,7 @@ async function fetchLessonContent(lesson, el) {
     const html = data.content || '';
     lesson._content = html;
     el.innerHTML    = html;
-    // Fix broken images: hide if they fail to load
-    el.querySelectorAll('img').forEach(img => {
-      img.onerror = function() { this.style.display = 'none'; };
-      // Re-trigger if already errored (cached broken state)
-      if (!img.complete || img.naturalWidth === 0) img.onerror();
-    });
+    fixContentImages(el);
   } catch(e) {
     lesson._content = '';
   }
