@@ -60,6 +60,7 @@
     .layout{
       display:flex;
       height:100vh;
+      height:100svh; /* iOS Safari: uses small viewport (excludes dynamic browser chrome) */
       padding-top:var(--nav-h);
     }
 
@@ -267,6 +268,7 @@
     /* ─── FOOTER ──────────────────────────────────── */
     .footer{
       padding:20px 36px;
+      padding-bottom:calc(20px + env(safe-area-inset-bottom, 0px));
       border-top:1px solid var(--border);
       display:flex;
       align-items:center;
@@ -334,7 +336,7 @@
         position:fixed;
         top:var(--nav-h);left:0;bottom:0;
         z-index:95;
-        transform:translateX(100%);
+        transform:translateX(-100%);
         transition:transform 0.3s ease;
         width:min(var(--sidebar-w), 85vw);
       }
@@ -344,7 +346,25 @@
       .nav-links{display:none;}
       .lesson-info{padding:20px 18px 16px;}
       .lesson-title{font-size:1.1rem;}
-      .footer{padding:16px 18px;}
+      .footer{
+        padding:16px 18px;
+        padding-bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      /* Badge row wraps and centers on mobile */
+      .footer > div:last-child{
+        width:100%;
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+        justify-content:flex-start;
+      }
+    }
+
+    @media(max-width:480px){
+      /* Larger tap targets for prev/next buttons on small phones */
+      .nav-btn{padding:12px 16px;font-size:0.85rem;}
     }
   </style>
 </head>
@@ -464,13 +484,21 @@
         </div>
         <p class="footer-copy" style="margin-top:8px;">© MA Learn 2026 — جميع الحقوق محفوظة</p>
       </div>
-      <div class="footer-fl">
-        <img src="https://malearnsa.com/brand_assets/freelance-doc.jpg" alt="وثيقة العمل الحر"
-          onerror="this.parentElement.style.display='none'">
-        <div class="footer-fl-text">
-          <p>رقم الوثيقة</p>
-          <p>FL-163949047</p>
-        </div>
+      <div class="footer-fl" style="display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a href="https://malearnsa.com/brand_assets/Freelance-certificate-2026.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;background:#ffffff;border-radius:10px;padding:10px 16px;direction:rtl;text-decoration:none;">
+          <img src="https://malearnsa.com/brand_assets/Freelance.jpg" alt="وثيقة العمل الحر" style="height:44px;width:auto;display:block;">
+          <div class="footer-fl-text">
+            <p>رقم الوثيقة</p>
+            <p>FL-163949047</p>
+          </div>
+        </a>
+        <a href="https://malearnsa.com/brand_assets/SCBC-Certificate-2026.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;background:#ffffff;border-radius:10px;padding:10px 16px;direction:rtl;text-decoration:none;">
+          <img src="https://malearnsa.com/brand_assets/SCBC.png" alt="SCBC" style="height:44px;width:auto;display:block;">
+          <div class="footer-fl-text">
+            <p>رقم الترخيص</p>
+            <p>0000276647</p>
+          </div>
+        </a>
       </div>
     </footer>
 
@@ -730,7 +758,7 @@ async function fetchLessonContent(lesson, el) {
 async function init() {
   const params = new URLSearchParams(window.location.search);
   token    = params.get('token') || '';
-  courseId = params.get('course') || 'beyond-lighting';
+  courseId = params.get('course') || 'intro-to-creative-ai';
 
   if (!token) {
     document.getElementById('ov-loading').classList.add('hidden');
