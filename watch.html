@@ -663,6 +663,10 @@ function loadLesson(index) {
   contentEl.innerHTML = '';
   if (lesson._content !== undefined) {
     contentEl.innerHTML = lesson._content;
+    contentEl.querySelectorAll('img').forEach(img => {
+      img.onerror = function() { this.style.display = 'none'; };
+      if (!img.complete || img.naturalWidth === 0) img.onerror();
+    });
   } else {
     fetchLessonContent(lesson, contentEl);
   }
@@ -751,6 +755,12 @@ async function fetchLessonContent(lesson, el) {
     const html = data.content || '';
     lesson._content = html;
     el.innerHTML    = html;
+    // Fix broken images: hide if they fail to load
+    el.querySelectorAll('img').forEach(img => {
+      img.onerror = function() { this.style.display = 'none'; };
+      // Re-trigger if already errored (cached broken state)
+      if (!img.complete || img.naturalWidth === 0) img.onerror();
+    });
   } catch(e) {
     lesson._content = '';
   }
