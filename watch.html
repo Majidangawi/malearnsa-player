@@ -663,7 +663,6 @@ function loadLesson(index) {
   contentEl.innerHTML = '';
   if (lesson._content !== undefined) {
     contentEl.innerHTML = lesson._content;
-    fixContentImages(contentEl);
   } else {
     fetchLessonContent(lesson, contentEl);
   }
@@ -744,24 +743,26 @@ async function fetchCurriculum(tok, course) {
   }
 }
 
-function fixContentImages(el) {
-  el.querySelectorAll('img').forEach(img => {
-    let src = img.getAttribute('src') || '';
-    // Dropbox: swap to dl.dropboxusercontent.com for direct image serving
-    if (src.includes('dropbox.com')) {
-      try {
-        const u = new URL(src);
-        u.hostname = 'dl.dropboxusercontent.com';
-        u.searchParams.delete('dl');
-        u.searchParams.delete('st');
-        img.src = u.toString();
-      } catch(e) { /* leave src as-is */ }
-    }
-    // Google Drive share links
-    const m = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (m) img.src = `https://drive.google.com/uc?export=view&id=${m[1]}`;
-    // Hide if still broken
-    img.onerror = function() { this.style.display = 'none'; };
+function fixImageUrl(src) {
+  if (src.includes('dropbox.com')) {
+    try {
+      const u = new URL(src);
+      u.hostname = 'dl.dropboxusercontent.com';
+      u.searchParams.delete('dl');
+      u.searchParams.delete('st');
+      return u.toString();
+    } catch(e) {}
+  }
+  const m = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (m) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+  return src;
+}
+
+// Fix image URLs in HTML string BEFORE injecting into DOM
+// so the browser never loads broken URLs (critical for iOS Safari)
+function fixContentHtml(html) {
+  return html.replace(/(<img[^>]+src=")([^"]+)(")/gi, (_, pre, src, post) => {
+    return pre + fixImageUrl(src) + post;
   });
 }
 
@@ -770,10 +771,9 @@ async function fetchLessonContent(lesson, el) {
     const url  = `${APPS_SCRIPT_URL}?action=get_content&lesson_id=${encodeURIComponent(lesson.id)}&token=${encodeURIComponent(token)}&course=${encodeURIComponent(courseId)}`;
     const res  = await fetch(url);
     const data = await res.json();
-    const html = data.content || '';
+    const html = fixContentHtml(data.content || '');
     lesson._content = html;
     el.innerHTML    = html;
-    fixContentImages(el);
   } catch(e) {
     lesson._content = '';
   }
