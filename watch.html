@@ -746,15 +746,17 @@ async function fetchCurriculum(tok, course) {
 
 function fixContentImages(el) {
   el.querySelectorAll('img').forEach(img => {
-    // Convert Google Drive share links to direct image URLs
-    const src = img.getAttribute('src') || '';
+    let src = img.getAttribute('src') || '';
+    // Dropbox: ?dl=0 → ?raw=1
+    if (src.includes('dropbox.com')) {
+      src = src.replace(/([?&])dl=[01]/, '$1raw=1');
+      if (!src.includes('raw=1')) src += (src.includes('?') ? '&' : '?') + 'raw=1';
+      img.src = src;
+    }
+    // Google Drive share links
     const m = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
     if (m) img.src = `https://drive.google.com/uc?export=view&id=${m[1]}`;
-    const m2 = src.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-    if (m2 && src.includes('drive.google.com') && !src.includes('uc?export')) {
-      img.src = `https://drive.google.com/uc?export=view&id=${m2[1]}`;
-    }
-    // Hide if still broken after conversion
+    // Hide if still broken
     img.onerror = function() { this.style.display = 'none'; };
   });
 }
