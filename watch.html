@@ -747,10 +747,11 @@ async function fetchCurriculum(tok, course) {
 function fixContentImages(el) {
   el.querySelectorAll('img').forEach(img => {
     let src = img.getAttribute('src') || '';
-    // Dropbox: ?dl=0 → ?raw=1
+    // Dropbox: swap to dl.dropboxusercontent.com for direct image serving
     if (src.includes('dropbox.com')) {
-      src = src.replace(/([?&])dl=[01]/, '$1raw=1');
-      if (!src.includes('raw=1')) src += (src.includes('?') ? '&' : '?') + 'raw=1';
+      src = src.replace('www.dropbox.com', 'dl.dropboxusercontent.com')
+               .replace(/[?&]dl=[01]/, '')   // remove dl param
+               .replace(/[?&]st=[^&]*/, ''); // remove st param (not needed)
       img.src = src;
     }
     // Google Drive share links
