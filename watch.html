@@ -243,7 +243,6 @@
       border-right:3px solid var(--gold);padding:8px 14px;
       margin:12px 0;color:var(--muted);font-style:italic;
     }
-    #pdf-area{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
     .pdf-btn{
       display:inline-flex;align-items:center;gap:8px;
       background:rgba(201,168,76,0.08);
@@ -254,6 +253,7 @@
       text-decoration:none;
       font-size:0.8rem;font-weight:600;
       transition:all 0.2s;
+      margin-top:14px;
     }
     .pdf-btn:hover{background:rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.5);}
 
@@ -473,7 +473,16 @@
 
       <div id="lesson-content" class="lesson-content"></div>
 
-      <div id="pdf-area" style="display:none;"></div>
+      <div id="pdf-area" style="display:none;">
+        <a id="pdf-btn" href="#" target="_blank" class="pdf-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
+          </svg>
+          تحميل ملف PDF
+        </a>
+      </div>
 
       <div class="lesson-nav">
         <button class="nav-btn" id="btn-prev" onclick="nav(-1)" disabled>→ السابق</button>
@@ -522,7 +531,7 @@
 'use strict';
 
 // ─── CONFIG ───────────────────────────────────────
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzXC4Ef5WxNX0aPov7Q1Kdn2DiXuODd74w3iOCtovrw86o9grwVREqNsRdhlyQkoBnQ/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzt5pyO7CpSVFRgH-CaCT-N5G6m-NBXiU6RA_0xXU5vl3IRSP_i3zFNdc0p3saXCwpcIg/exec';
 
 const BUNNY_LIBRARIES = {
   'beyond-lighting':     '634652',
@@ -593,19 +602,6 @@ function saveProgress(id) {
 
 function getWatched() {
   try { return JSON.parse(localStorage.getItem(`watched_${courseId}`) || '[]'); } catch(e) { return []; }
-}
-
-// Parse pdf_url cell: supports a plain URL or a JSON array [{label,url},...]
-function parsePdfs(raw) {
-  const v = (raw || '').trim();
-  if (!v) return [];
-  if (v[0] === '[') {
-    try {
-      const arr = JSON.parse(v);
-      return arr.filter(p => p && p.url).map(p => ({ label: p.label || 'تحميل ملف PDF', url: p.url }));
-    } catch(e) { return []; }
-  }
-  return [{ label: 'تحميل ملف PDF', url: v }];
 }
 
 // ─── SIDEBAR ──────────────────────────────────────
@@ -688,21 +684,12 @@ function loadLesson(index) {
     fetchLessonContent(lesson, contentEl);
   }
 
-  // PDF — supports single URL string OR JSON array [{label,url},...]
-  const pdfArea = document.getElementById('pdf-area');
-  pdfArea.innerHTML = '';
-  const pdfs = parsePdfs(lesson.pdf_url);
-  if (pdfs.length) {
-    pdfArea.style.display = 'flex';
-    pdfs.forEach(p => {
-      const a = document.createElement('a');
-      a.href = p.url; a.target = '_blank'; a.rel = 'noopener';
-      a.className = 'pdf-btn';
-      a.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>${p.label}`;
-      pdfArea.appendChild(a);
-    });
+  // PDF
+  if (lesson.pdf_url) {
+    document.getElementById('pdf-area').style.display = 'block';
+    document.getElementById('pdf-btn').href = lesson.pdf_url;
   } else {
-    pdfArea.style.display = 'none';
+    document.getElementById('pdf-area').style.display = 'none';
   }
 
   // Prev / Next
