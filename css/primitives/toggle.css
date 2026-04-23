@@ -1,0 +1,36 @@
+/* Liquid toggle — vanilla CSS port of 21st.dev/r/deepaksslibra/liquid-toggle.
+   Thumb animates on ease-out-quint with a mid-transition squash so the motion
+   reads "liquid" without JS physics. */
+
+[data-ui="toggle"] {
+  --t-w: 44px; --t-h: 24px; --t-thumb: 18px; --t-gap: 3px;
+  position: relative; display: inline-block;
+  width: var(--t-w); height: var(--t-h);
+  cursor: pointer; vertical-align: middle;
+}
+[data-ui="toggle"] input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+[data-ui="toggle"] .track {
+  position: absolute; inset: 0; border-radius: var(--r-pill);
+  background: var(--c-ink-4);
+  transition: background-color var(--dur-med) var(--ease-out);
+}
+[data-ui="toggle"] .thumb {
+  position: absolute; top: var(--t-gap); left: var(--t-gap);
+  width: var(--t-thumb); height: var(--t-thumb);
+  border-radius: 50%; background: var(--c-fg);
+  transition:
+    transform var(--dur-med) cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale var(--dur-fast) var(--ease-out),
+    background-color var(--dur-med) var(--ease-out);
+}
+[data-ui="toggle"] input:checked ~ .track { background: var(--c-gold); }
+[data-ui="toggle"] input:checked ~ .thumb {
+  transform: translateX(calc(var(--t-w) - var(--t-thumb) - var(--t-gap) * 2));
+  background: var(--c-ink-0);
+}
+[data-ui="toggle"] input:active ~ .thumb,
+[data-ui="toggle"]:has(input:active) .thumb { scale: 1.08 0.85; } /* liquid squash mid-transition */
+
+[data-ui="toggle"] input:focus-visible ~ .track { box-shadow: var(--e-focus); }
+[data-ui="toggle"][data-size="sm"] { --t-w: 36px; --t-h: 20px; --t-thumb: 14px; --t-gap: 3px; }
