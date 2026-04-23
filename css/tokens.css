@@ -4,6 +4,23 @@
    Never redeclared at page scope.
    ========================================================================== */
 
+/* ── Brand display font (Gumela Arabic) — for loaders, brand marks ── */
+@font-face {
+  font-family: 'Gumela Arabic';
+  src: url('../fonts/gumela-arabic-light.otf') format('opentype');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Gumela Arabic';
+  src: url('../fonts/gumela-arabic-regular.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Gumela Arabic';
+  src: url('../fonts/gumela-arabic-bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
 :root {
   /* Brand — gold as editorial ink */
   --c-gold:          oklch(0.74 0.12 82);
@@ -53,8 +70,9 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in:  cubic-bezier(0.64, 0, 0.78, 0);
 
-  /* Typography — Cairo used editorially */
+  /* Typography — Cairo used editorially, Gumela Arabic for brand marks/loaders */
   --font-sans: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Gumela Arabic', 'Cairo', -apple-system, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
   --fs-display-xl: clamp(48px, 6vw, 72px);

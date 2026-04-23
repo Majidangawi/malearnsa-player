@@ -1,5 +1,6 @@
 @import url('primitives/toggle.css');
 @import url('primitives/toast.css');
+@import url('primitives/loader.css');
 
 /* ==========================================================================
    Primitives — rendered via [data-ui] attributes.
