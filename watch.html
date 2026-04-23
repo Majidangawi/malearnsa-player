@@ -115,43 +115,62 @@
     .sidebar::-webkit-scrollbar-track { background: transparent; }
     .sidebar::-webkit-scrollbar-thumb { background: var(--c-gold-faint); border-radius: 2px; }
 
+    /* Course name: bold, highlighted with a gold bar at the start */
     .sidebar-header {
-      padding: var(--s-4) var(--s-5) var(--s-3);
-      font-size: var(--fs-label);
-      font-weight: 500;
-      color: var(--c-gold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-bottom: 0.5px solid var(--c-gold-dim);
+      padding: var(--s-5) var(--s-5) var(--s-4);
+      border-bottom: 1px solid var(--c-gold);
       flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 6px;
+      background: linear-gradient(180deg, var(--c-gold-faint), transparent);
     }
-
-    .module-group { border-bottom: 0.5px solid var(--c-ink-4); }
-    .module-title {
-      padding: var(--s-3) var(--s-5);
+    .sidebar-header .course-name {
+      font-size: var(--fs-h2);
+      font-weight: 700;
+      color: var(--c-gold-bright);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+    .sidebar-header .course-sub {
       font-size: var(--fs-label);
       font-weight: 500;
       color: var(--c-fg-3);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+    }
+
+    /* Modules: bolder, brighter, tonally heavier than lessons */
+    .module-group { border-bottom: 0.5px solid var(--c-ink-4); }
+    .module-title {
+      padding: var(--s-4) var(--s-5);
+      font-size: var(--fs-body);
+      font-weight: 700;
+      color: var(--c-fg);
+      letter-spacing: 0;
+      text-transform: none;
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer; user-select: none;
       transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
-      border-bottom: 0.5px solid var(--c-gold-dim);
+      background: var(--c-ink-2);
     }
-    .module-title:hover { background: var(--c-ink-2); color: var(--c-fg-2); }
-    .module-title .count { font-size: 10px; color: var(--c-fg-4); font-weight: 400; letter-spacing: 0.04em; }
-    .module-title .chevron { font-size: 0.65rem; color: var(--c-fg-4); transition: transform var(--dur-med) var(--ease-out); }
+    .module-title:hover { background: var(--c-ink-3); }
+    .module-title .count {
+      font-size: 11px; color: var(--c-fg-3); font-weight: 500;
+      letter-spacing: 0.04em;
+      background: var(--c-ink-0); padding: 2px 8px; border-radius: var(--r-pill);
+    }
+    .module-title .chevron { font-size: 0.75rem; color: var(--c-fg-3); transition: transform var(--dur-med) var(--ease-out); margin-inline-start: var(--s-2); }
     .module-title.open .chevron { transform: rotate(180deg); }
+    .module-title.open { background: var(--c-ink-3); }
 
     .lesson-list { display: none; }
     .lesson-list.open { display: block; }
 
+    /* Lessons: lighter, indented under their module, smaller */
     .lesson-item {
-      padding: var(--s-3) var(--s-5) var(--s-3) var(--s-5);
+      padding: var(--s-3) var(--s-5) var(--s-3) calc(var(--s-5) + var(--s-4));
       font-size: var(--fs-body-sm);
       color: var(--c-fg-2);
-      font-weight: 300;
+      font-weight: 400;
       cursor: pointer;
       display: flex; align-items: center; gap: var(--s-3);
       transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
@@ -525,7 +544,10 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">محتوى الدورة</div>
+    <div class="sidebar-header">
+      <div class="course-name" id="sidebar-course-name">—</div>
+      <div class="course-sub">محتوى الدورة</div>
+    </div>
     <div id="curriculum-list"></div>
   </aside>
 
@@ -918,8 +940,11 @@ async function init() {
   }
 
   // Set course name
-  document.title = (COURSE_NAMES[courseId] || courseId) + ' | MA Learn';
-  document.getElementById('nav-course-name').textContent = COURSE_NAMES[courseId] || courseId;
+  const resolvedCourseName = COURSE_NAMES[courseId] || courseId;
+  document.title = resolvedCourseName + ' | MA Learn';
+  document.getElementById('nav-course-name').textContent = resolvedCourseName;
+  const sidebarName = document.getElementById('sidebar-course-name');
+  if (sidebarName) sidebarName.textContent = resolvedCourseName;
 
   // Get Bunny library
   bunnyLibId = BUNNY_LIBRARIES[courseId] || '';
