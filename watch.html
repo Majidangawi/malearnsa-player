@@ -509,6 +509,9 @@
     <a href="https://malearnsa.com/refund-policy.html">الاسترجاع</a>
     <a href="https://malearnsa.com/privacy-policy.html">الخصوصية</a>
   </div>
+  <button type="button" id="bookmark-btn" hidden aria-label="Bookmark">
+    <!-- V2 will add the icon SVG + wire the click handler -->
+  </button>
   <span class="nav-progress" id="nav-progress"></span>
 </nav>
 
@@ -572,6 +575,9 @@
         <button class="nav-btn" id="btn-prev" onclick="nav(-1)" disabled>→ السابق</button>
         <button class="nav-btn primary" id="btn-next" onclick="nav(1)" disabled>التالي ←</button>
       </div>
+
+      <!-- V2: note-taking UI. Stays hidden in V1 via [hidden]. -->
+      <aside class="player-notes" hidden></aside>
     </div>
 
     <!-- FOOTER -->
@@ -613,6 +619,16 @@
 ═══════════════════════════════════════════ -->
 <script>
 'use strict';
+
+// V2 hook: record resume-from if present. V2 will use it to auto-jump on next load.
+(() => {
+  const params = new URLSearchParams(location.search);
+  const resume = params.get('resume-from');
+  if (resume) {
+    const key = params.get('token') || params.get('course') || 'default';
+    try { localStorage.setItem('player.resumeFrom.' + key, resume); } catch {}
+  }
+})();
 
 // ─── CONFIG ───────────────────────────────────────
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzt5pyO7CpSVFRgH-CaCT-N5G6m-NBXiU6RA_0xXU5vl3IRSP_i3zFNdc0p3saXCwpcIg/exec';
@@ -713,6 +729,8 @@ function buildSidebar() {
       const item    = document.createElement('div');
       item.className= 'lesson-item' + (!hasVideo ? ' coming-soon' : '') + (isWatched ? ' watched' : '');
       item.id       = `li-${lesson.id}`;
+      // V2 hook: render as data-progress="" on each row; V2 populates the value.
+      item.setAttribute('data-progress', '');
       item.innerHTML= `<span class="dot"></span>${lesson.title}${!hasVideo ? '<span class="soon-badge">قريباً</span>' : ''}`;
       if (hasVideo && gIdx >= 0) item.onclick = () => { loadLesson(gIdx); closeSidebarMobile(); };
       list.appendChild(item);
