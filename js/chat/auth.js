@@ -68,8 +68,42 @@ export async function signInStudent(token, course) {
 
   window.__chatProfile = profile;
   window.__sbUser = data?.user || null;
+
+  // Anti-piracy telemetry hook: capture ip_hash + session_events.
+  // Non-blocking (fires and ignores errors) so a network hiccup here
+  // never prevents sign-in. Data feeds a future detection workstream.
+  void captureTelemetry(profile);
+
   window.dispatchEvent(new CustomEvent('chat:ready', { detail: profile }));
   return profile;
+}
+
+async function captureTelemetry(profile) {
+  try {
+    // ipify is CORS-open; response is { ip: "1.2.3.4" }
+    const ipRes = await fetch('https://api.ipify.org?format=json');
+    const { ip } = await ipRes.json();
+    // Client-side salt makes the hash slightly more opaque. Not a security
+    // boundary — just prevents trivial rainbow lookups. Real hashing would
+    // happen server-side if we ever get strict about this.
+    const enc = new TextEncoder().encode('ma-learn-chat:' + ip);
+    const hashBuf = await crypto.subtle.digest('SHA-256', enc);
+    const ipHash = Array.from(new Uint8Array(hashBuf))
+      .map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 16);
+    window.__ipHash = ipHash;
+
+    // Log the sign-in session event. RLS session_insert policy allows this
+    // (uid must match the JWT sub — covered by profile.uid).
+    await supabase.from('session_events').insert({
+      uid: profile.uid,
+      event: 'sign_in',
+      ip_hash: ipHash,
+      user_agent: navigator.userAgent.slice(0, 200)
+    });
+  } catch (err) {
+    // Swallow — telemetry is best-effort. Don't block the chat over it.
+    console.debug('telemetry skipped:', err.message);
+  }
 }
 
 /**

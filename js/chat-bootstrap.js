@@ -5,8 +5,18 @@
 
 const CHAT_FLAG = 'beta';
 
+// Courses where chat is LIVE for all students (no flag needed).
+// BL ships first per Majid's instruction (2026-04-24). ITCAI stays flag-gated
+// until he reviews it manually. Add 'intro-to-creative-ai' to this list when
+// ITCAI is greenlit (memory: feedback_chat_bl_only_launch.md).
+const CHAT_LIVE_COURSES = ['beyond-lighting'];
+
 function chatEnabled() {
-  return new URLSearchParams(window.location.search).get('chat') === CHAT_FLAG;
+  const params = new URLSearchParams(window.location.search);
+  const course = params.get('course');
+  const flag = params.get('chat');
+  // Live for BL by default; flag=beta overrides for any course (ITCAI preview)
+  return (course && CHAT_LIVE_COURSES.includes(course)) || flag === CHAT_FLAG;
 }
 
 if (chatEnabled()) {
