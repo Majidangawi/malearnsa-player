@@ -157,6 +157,7 @@ function injectModals() {
     <button role="menuitem" data-action="hard-delete" data-tone="danger">حذف نهائي</button>
     <hr>
     <button role="menuitem" data-action="ban" data-tone="danger">حظر المستخدم</button>
+    <button role="menuitem" data-action="clear-room" data-tone="danger">مسح الغرفة كاملة</button>
   `;
   document.body.appendChild(modMenu);
 
