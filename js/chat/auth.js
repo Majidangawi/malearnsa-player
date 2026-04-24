@@ -67,8 +67,11 @@ export async function signInStudent(token, course) {
     isMajid: payload.isMajid
   };
 
-  // Ensure users/{uid} row exists. RLS users_self_insert allows this when
-  // the JWT sub matches uid and app_metadata.isMajid matches is_majid.
+  // Ensure users/{uid} row exists. ignoreDuplicates:true means existing
+  // rows are NOT overwritten — this preserves the display_name the student
+  // already set. Apps Script sends display_name=null on every mint (it
+  // doesn't know their chosen chat name), so without ignoreDuplicates we'd
+  // wipe their name on every reload.
   const { error: upsertErr } = await supabase
     .from('users')
     .upsert({
@@ -77,11 +80,21 @@ export async function signInStudent(token, course) {
       display_name: profile.displayName,
       is_majid: profile.isMajid,
       last_seen: {}
-    }, { onConflict: 'uid', ignoreDuplicates: false });
+    }, { onConflict: 'uid', ignoreDuplicates: true });
   if (upsertErr) {
-    // Non-fatal — row may already exist with a set display_name we don't
-    // want to overwrite with null on return visits.
     console.warn('users upsert (non-fatal):', upsertErr.message);
+  }
+
+  // Re-fetch the row to pick up the stored display_name (which may have
+  // been set in a prior session). Supabase is now the source of truth for
+  // display_name; Apps Script is only source of truth for uid/email/isMajid.
+  const { data: userRow, error: fetchErr } = await supabase
+    .from('users')
+    .select('display_name')
+    .eq('uid', profile.uid)
+    .single();
+  if (!fetchErr && userRow && userRow.display_name) {
+    profile.displayName = userRow.display_name;
   }
 
   window.__chatProfile = profile;

@@ -4,6 +4,14 @@
   gap: var(--s-3);
   height: 60vh; max-height: 640px;
 }
+
+/* Author CSS `display: flex` below would otherwise override the HTML
+   `hidden` attribute. These rules restore the intended behavior. */
+.chat-empty[hidden],
+.chat-list[hidden],
+.chat-list .chat-empty[hidden] {
+  display: none !important;
+}
 .chat-empty {
   display: flex; align-items: center; justify-content: center;
   flex: 1; color: var(--c-fg-3); font-size: var(--fs-body-sm);
