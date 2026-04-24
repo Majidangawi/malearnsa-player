@@ -81,4 +81,10 @@ if (!panel) {
   window.addEventListener('chat:ready', () => {
     if (window.__currentLessonId) openPins(window.__currentLessonId);
   });
+
+  // Catch-up if lesson:changed or chat:ready already fired before this
+  // module's listeners were attached (race with watch.html init()).
+  if (window.__currentLessonId) {
+    openPins(window.__currentLessonId);
+  }
 }

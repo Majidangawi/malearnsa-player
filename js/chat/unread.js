@@ -52,6 +52,11 @@ function applyRoomRow(r) {
 
 window.addEventListener('chat:ready', (e) => { bootstrap(e.detail); });
 
+// Catch-up if chat:ready already fired before this module's listener mounted
+if (window.__chatProfile) {
+  bootstrap(window.__chatProfile);
+}
+
 // On lesson open, after 2s dwell, mark it seen (write last_seen[lessonId] = count)
 let dwellTimer = null;
 window.addEventListener('lesson:changed', (e) => {

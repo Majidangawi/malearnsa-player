@@ -16,11 +16,9 @@ if (!input || !ac || !chatList) {
   let triggerStart = -1;
   const roomUsers = new Map();  // uid -> { uid, name, isMajid }
 
-  window.addEventListener('lesson:changed', async (e) => {
+  async function refreshRoomUsers(lessonId) {
     roomUsers.clear();
-    const lessonId = e.detail.lessonId;
     const cutoff = new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString();
-
     const { data, error } = await supabase
       .from('messages')
       .select('author_uid, author_display_name, is_majid, created_at')
@@ -29,7 +27,6 @@ if (!input || !ac || !chatList) {
       .order('created_at', { ascending: false })
       .limit(200);
     if (error) { console.warn('mentions authors:', error.message); return; }
-
     data.forEach(m => {
       if (m.author_display_name) {
         roomUsers.set(m.author_uid, {
@@ -39,7 +36,13 @@ if (!input || !ac || !chatList) {
         });
       }
     });
-  });
+  }
+
+  window.addEventListener('lesson:changed', (e) => refreshRoomUsers(e.detail.lessonId));
+  // Catch-up if lesson:changed already fired before listener mounted
+  if (window.__currentLessonId) {
+    refreshRoomUsers(window.__currentLessonId);
+  }
 
   input.addEventListener('input', () => {
     const pos = input.selectionStart;

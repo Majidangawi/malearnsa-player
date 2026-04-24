@@ -12,6 +12,11 @@ const input = document.getElementById('composer-input');
 const sendBtn = document.getElementById('composer-send');
 const charCount = document.getElementById('char-count');
 
+function refreshSendButton() {
+  if (!input || !sendBtn) return;
+  sendBtn.disabled = !input.value.trim() || !currentLessonId || !window.__chatProfile;
+}
+
 export async function openRoom(lessonId, courseId) {
   if (!chatList || !input || !sendBtn) return;  // flag off or bootstrap not run
   if (currentChannel) {
@@ -19,6 +24,7 @@ export async function openRoom(lessonId, courseId) {
     currentChannel = null;
   }
   currentLessonId = lessonId;
+  refreshSendButton();
   chatList.innerHTML = '';
   chatEmpty.hidden = false;
   chatList.hidden = true;
@@ -211,7 +217,20 @@ window.addEventListener('lesson:changed', (e) => {
   openRoom(e.detail.lessonId, e.detail.courseId);
 });
 window.addEventListener('chat:ready', () => {
+  refreshSendButton();
   if (window.__currentLessonId) {
     openRoom(window.__currentLessonId, window.__currentCourseId);
   }
 });
+
+// If watch.html's init() already fired lesson:changed BEFORE this module
+// mounted its listener (common race — init() is async, completes AFTER
+// DOMContentLoaded), pick up the current lesson from the globals right now.
+if (window.__currentLessonId) {
+  openRoom(window.__currentLessonId, window.__currentCourseId);
+}
+// Same for auth — if chat:ready already fired before we mounted, profile
+// is set globally so refresh the button state immediately.
+if (window.__chatProfile) {
+  refreshSendButton();
+}
