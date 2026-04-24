@@ -46,6 +46,28 @@ async function bootstrapChat() {
   } catch (err) {
     console.error('chat-bootstrap: module load failed', err);
   }
+
+  wireMobileComposer();
+}
+
+// Mobile: shrink the video to a mini-player + stick the composer above the
+// keyboard when the user focuses the textarea. Restores on blur.
+function wireMobileComposer() {
+  const composerEl = document.getElementById('chat-composer');
+  const composerInput = document.getElementById('composer-input');
+  const videoArea = document.querySelector('.video-area');
+  if (!composerEl || !composerInput || !videoArea) return;
+
+  composerInput.addEventListener('focus', () => {
+    if (window.innerWidth <= 760) {
+      composerEl.classList.add('keyboard-active');
+      videoArea.classList.add('mini');
+    }
+  });
+  composerInput.addEventListener('blur', () => {
+    composerEl.classList.remove('keyboard-active');
+    videoArea.classList.remove('mini');
+  });
 }
 
 function injectTabs(lessonInfo) {

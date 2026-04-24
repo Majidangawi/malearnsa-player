@@ -83,3 +83,28 @@ window.addEventListener('lesson:changed', (e) => {
     if (el) delete el.dataset.unread;
   }, 2000);
 });
+
+// ── Hamburger unread aggregate dot ──────────────────────────────────
+// When any non-current lesson has [data-unread], stamp a small red dot
+// on the nav menu button so mobile users know before opening the sidebar.
+const navMenuBtn = document.querySelector('.nav-menu-btn') || document.getElementById('hamburger');
+
+function refreshHamburgerDot() {
+  if (!navMenuBtn) return;
+  const anyUnread = !!document.querySelector('.lesson-item[data-unread]');
+  if (anyUnread) {
+    if (!navMenuBtn.querySelector('.hamburger-dot')) {
+      const dot = document.createElement('span');
+      dot.className = 'hamburger-dot';
+      dot.style.cssText = 'position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:var(--c-danger);';
+      navMenuBtn.style.position = 'relative';
+      navMenuBtn.appendChild(dot);
+    }
+  } else {
+    navMenuBtn.querySelector('.hamburger-dot')?.remove();
+  }
+}
+new MutationObserver(refreshHamburgerDot).observe(
+  document.body,
+  { attributes: true, subtree: true, attributeFilter: ['data-unread'] }
+);
