@@ -1,0 +1,30 @@
+/* ── Dropdown / menu primitive ───────────────────────────────────── */
+[data-ui="menu"] {
+  position: absolute; z-index: 900;
+  background: var(--c-ink-2);
+  border: 0.5px solid var(--c-ink-4);
+  border-radius: var(--r-md);
+  box-shadow: var(--e-raised);
+  padding: var(--s-2);
+  min-width: 180px; max-height: 280px;
+  overflow-y: auto;
+  display: none;
+}
+[data-ui="menu"][data-state="open"] { display: block; }
+[data-ui="menu"] > [role="menuitem"] {
+  display: flex; align-items: center; gap: var(--s-2);
+  height: 32px; padding: 0 var(--s-2);
+  border: 0; background: transparent; width: 100%;
+  text-align: start; cursor: pointer;
+  color: var(--c-fg); font-size: var(--fs-body-sm);
+  border-radius: var(--r-sm);
+}
+[data-ui="menu"] > [role="menuitem"]:hover,
+[data-ui="menu"] > [role="menuitem"][data-active="true"] {
+  background: var(--c-ink-3);
+}
+[data-ui="menu"] > [role="menuitem"][data-tone="danger"] { color: var(--c-danger); }
+[data-ui="menu"] > hr {
+  border: 0; border-top: 0.5px solid var(--c-ink-4);
+  margin: var(--s-1) 0;
+}

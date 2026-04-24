@@ -1,0 +1,36 @@
+/* ── Modal primitive ─────────────────────────────────────────────── */
+[data-ui="modal"] {
+  position: fixed; inset: 0; z-index: 1000;
+  display: none; align-items: center; justify-content: center;
+  padding: var(--s-4);
+}
+[data-ui="modal"][data-state="open"] { display: flex; }
+[data-ui="modal"] > .backdrop {
+  position: absolute; inset: 0;
+  background: oklch(0.04 0.003 82 / 0.72);
+  backdrop-filter: blur(4px);
+}
+[data-ui="modal"] > .panel {
+  position: relative;
+  background: var(--c-ink-1);
+  border: 0.5px solid var(--c-ink-4);
+  border-radius: var(--r-lg);
+  box-shadow: var(--e-modal);
+  padding: var(--s-6);
+  width: min(440px, 100%);
+  animation: modalIn var(--dur-med) var(--ease-out);
+}
+[data-ui="modal"] > .panel > h2 {
+  font-size: var(--fs-h2); margin-bottom: var(--s-3);
+}
+[data-ui="modal"] > .panel > p {
+  color: var(--c-fg-2); margin-bottom: var(--s-5);
+  font-size: var(--fs-body-sm); line-height: 1.6;
+}
+[data-ui="modal"] > .panel > .actions {
+  display: flex; gap: var(--s-3); justify-content: flex-end;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
