@@ -24,6 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/primitives.css">
+  <link rel="stylesheet" href="css/chat.css">
   <style>
     /* ─── PAGE-LEVEL SCOPE ─────────────────────────────
        All page-specific styling. Tokens come from tokens.css.
@@ -763,7 +764,9 @@ function buildSidebar() {
       item.id       = `li-${lesson.id}`;
       // V2 hook: render as data-progress="" on each row; V2 populates the value.
       item.setAttribute('data-progress', '');
-      item.innerHTML= `<span class="dot"></span>${lesson.title}${!hasVideo ? '<span class="soon-badge">قريباً</span>' : ''}`;
+      // V2 hook: lesson id as data attribute for chat unread-badge lookups
+      item.setAttribute('data-lesson-id', lesson.id);
+      item.innerHTML= `<span class="dot"></span>${lesson.title}<span class="unread-dot"></span><span class="mention-mark">@</span>${!hasVideo ? '<span class="soon-badge">قريباً</span>' : ''}`;
       if (hasVideo && gIdx >= 0) item.onclick = () => { loadLesson(gIdx); closeSidebarMobile(); };
       list.appendChild(item);
     });
@@ -841,6 +844,13 @@ function loadLesson(index) {
 
   // Ensure active lesson is visible in sidebar
   if (item) item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+  // Chat hook: expose lesson id + dispatch event for chat modules (no-op when flag off).
+  window.__currentLessonId = lesson.id;
+  window.__currentCourseId = typeof courseId !== 'undefined' ? courseId : null;
+  window.dispatchEvent(new CustomEvent('lesson:changed', {
+    detail: { lessonId: lesson.id, courseId: window.__currentCourseId, lessonTitle: lesson.title }
+  }));
 }
 
 function nav(dir) {
@@ -984,5 +994,9 @@ async function init() {
 
 init();
 </script>
+
+<!-- Chat feature (flag-gated): no-op unless ?chat=beta is in the URL.
+     Task 33 removes the flag check; until then live students see no change. -->
+<script type="module" src="js/chat-bootstrap.js"></script>
 </body>
 </html>
