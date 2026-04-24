@@ -1,0 +1,165 @@
+/* ── Chat panel — inside Discussion tab ──────────────────────────── */
+.chat-panel {
+  display: flex; flex-direction: column; min-height: 0;
+  gap: var(--s-3);
+  height: 60vh; max-height: 640px;
+}
+.chat-empty {
+  display: flex; align-items: center; justify-content: center;
+  flex: 1; color: var(--c-fg-3); font-size: var(--fs-body-sm);
+  text-align: center; padding: var(--s-6);
+}
+.chat-list {
+  flex: 1; overflow-y: auto;
+  padding: var(--s-3) var(--s-2);
+  display: flex; flex-direction: column; gap: var(--s-3);
+}
+.chat-list::-webkit-scrollbar { width: 3px; }
+.chat-list::-webkit-scrollbar-thumb { background: var(--c-gold-faint); border-radius: 2px; }
+
+.chat-message {
+  display: grid; grid-template-columns: 28px 1fr auto;
+  gap: var(--s-3); align-items: start;
+  padding: var(--s-2) var(--s-2);
+  border-radius: var(--r-sm);
+  position: relative;
+}
+.chat-message:hover { background: var(--c-ink-2); }
+.chat-message[data-is-majid="true"] {
+  background: var(--c-gold-faint);
+  border-inline-start: 2px solid var(--c-gold);
+  padding-inline-start: var(--s-3);
+}
+.chat-message[data-deleted="true"] .chat-body {
+  color: var(--c-fg-4); font-style: italic;
+}
+.chat-message[data-mentioned-self="true"] {
+  border-inline-start: 2px solid var(--c-gold-bright);
+}
+.chat-author {
+  grid-column: 2; display: flex; align-items: center; gap: var(--s-2);
+  font-size: var(--fs-label); letter-spacing: 0.05em;
+  color: var(--c-fg-2); font-weight: 600;
+}
+.chat-author[data-is-majid="true"] {
+  color: var(--c-gold-bright);
+}
+.chat-author .verified {
+  font-size: 10px; color: var(--c-gold);
+}
+.chat-body {
+  grid-column: 2; font-size: var(--fs-body-sm);
+  line-height: 1.6; color: var(--c-fg); word-wrap: break-word;
+}
+.chat-body a { color: var(--c-gold-bright); text-decoration: underline; text-underline-offset: 3px; }
+.chat-body .mention {
+  background: var(--c-gold-faint);
+  color: var(--c-gold-bright);
+  padding: 1px 4px; border-radius: var(--r-xs);
+  font-weight: 500;
+}
+.chat-time {
+  grid-column: 3; font-size: 10px;
+  color: var(--c-fg-3); font-variant-numeric: tabular-nums;
+  align-self: start;
+}
+.chat-actions-trigger {
+  position: absolute; top: var(--s-1); inset-inline-end: var(--s-1);
+  display: none;
+  background: transparent; border: 0; cursor: pointer;
+  color: var(--c-fg-3); padding: 2px 6px; border-radius: var(--r-xs);
+}
+.chat-message:hover .chat-actions-trigger { display: inline-block; }
+
+/* ── Composer ────────────────────────────────────────────────────── */
+.chat-composer {
+  display: flex; gap: var(--s-2); align-items: flex-end;
+  padding: var(--s-2);
+  border-top: 0.5px solid var(--c-ink-4);
+  position: relative;
+}
+.chat-composer textarea {
+  flex: 1; resize: none;
+  min-height: 40px; max-height: 120px;
+  line-height: 1.5;
+}
+.chat-composer .char-count {
+  position: absolute; top: var(--s-1); inset-inline-end: 56px;
+  font-size: 10px; color: var(--c-fg-3);
+}
+.chat-composer .char-count[data-state="warn"] { color: var(--c-warning); }
+.chat-composer .char-count[data-state="error"] { color: var(--c-danger); }
+
+/* ── Pinned panel ────────────────────────────────────────────────── */
+.pinned-panel {
+  display: flex; flex-direction: column; gap: var(--s-3);
+  max-height: 60vh; overflow-y: auto;
+}
+.pinned-empty {
+  color: var(--c-fg-3); font-size: var(--fs-body-sm);
+  text-align: center; padding: var(--s-6);
+}
+.pinned-item {
+  background: var(--c-gold-faint);
+  border-inline-start: 2px solid var(--c-gold);
+  padding: var(--s-3);
+  border-radius: var(--r-sm);
+}
+.pinned-item .pinned-meta {
+  font-size: var(--fs-label); color: var(--c-gold-bright);
+  letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600;
+  margin-bottom: var(--s-2);
+}
+.pinned-item .pinned-expiry {
+  margin-inline-start: var(--s-2);
+  color: var(--c-fg-3); text-transform: none; letter-spacing: 0;
+}
+
+/* ── @mention autocomplete ───────────────────────────────────────── */
+.mention-autocomplete {
+  position: absolute; bottom: 100%; inset-inline-start: 0;
+  margin-bottom: var(--s-2);
+  min-width: 220px; max-height: 220px; overflow-y: auto;
+  background: var(--c-ink-2); border: 0.5px solid var(--c-ink-4);
+  border-radius: var(--r-md); box-shadow: var(--e-raised);
+  padding: var(--s-2);
+  display: none;
+}
+.mention-autocomplete[data-state="open"] { display: block; }
+.mention-autocomplete .mention-item {
+  display: flex; align-items: center; gap: var(--s-2);
+  height: 32px; padding: 0 var(--s-2);
+  border-radius: var(--r-sm); cursor: pointer;
+}
+.mention-autocomplete .mention-item[data-active="true"],
+.mention-autocomplete .mention-item:hover { background: var(--c-ink-3); }
+.mention-autocomplete .mention-item[data-is-majid="true"] {
+  color: var(--c-gold-bright); font-weight: 600;
+}
+
+/* ── Unread badge on lessons sidebar ─────────────────────────────── */
+.lesson-item .unread-dot {
+  display: none;
+  margin-inline-start: auto;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--c-danger);
+  flex-shrink: 0;
+}
+.lesson-item[data-unread] .unread-dot { display: inline-block; }
+.lesson-item[data-mentioned] .mention-mark {
+  display: inline-block;
+  color: var(--c-gold); font-weight: 700; margin-inline-start: var(--s-1);
+}
+.lesson-item .mention-mark { display: none; }
+
+/* ── Mobile — composer pins to bottom, video becomes mini ─────────── */
+@media (max-width: 760px) {
+  .chat-panel { height: calc(100dvh - 56vh); }
+  .chat-composer.keyboard-active { position: fixed; bottom: 0; left: 0; right: 0; z-index: 400; background: var(--c-ink-1); }
+  .video-area.mini {
+    position: fixed; bottom: 72px; inset-inline-end: var(--s-3);
+    width: 140px; aspect-ratio: 16/9;
+    z-index: 450; border-radius: var(--r-md);
+    box-shadow: var(--e-modal); overflow: hidden;
+  }
+}
