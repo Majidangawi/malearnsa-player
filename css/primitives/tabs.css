@@ -1,0 +1,32 @@
+/* ── Tabs primitive — editorial underline ────────────────────────── */
+[data-ui="tabs"] {
+  display: flex; flex-direction: column; min-height: 0;
+}
+[data-ui="tabs"] > [data-role="tablist"] {
+  display: flex; gap: var(--s-5);
+  border-bottom: 0.5px solid var(--c-ink-4);
+  padding: 0 var(--s-2);
+  position: relative;
+}
+[data-ui="tabs"] > [data-role="tablist"] > [role="tab"] {
+  background: transparent; border: 0; cursor: pointer;
+  padding: var(--s-3) 0; margin: 0;
+  font-size: var(--fs-label); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--c-fg-2); font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-med) var(--ease-out);
+}
+[data-ui="tabs"] > [data-role="tablist"] > [role="tab"]:hover { color: var(--c-fg); }
+[data-ui="tabs"] > [data-role="tablist"] > [role="tab"][aria-selected="true"] {
+  color: var(--c-fg); border-bottom-color: var(--c-gold);
+}
+[data-ui="tabs"] > [data-role="tablist"] > [role="tab"] .tab-count {
+  margin-inline-start: var(--s-1);
+  color: var(--c-gold); font-variant-numeric: tabular-nums;
+}
+[data-ui="tabs"] > [data-role="tabpanel"] {
+  display: none; flex: 1; min-height: 0;
+  padding-top: var(--s-4);
+}
+[data-ui="tabs"] > [data-role="tabpanel"][data-state="active"] { display: flex; flex-direction: column; }
