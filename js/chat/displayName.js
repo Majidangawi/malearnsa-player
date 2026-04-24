@@ -25,6 +25,18 @@ if (!modal || !input) {
 
   window.addEventListener('chat:need-display-name', open);
 
+  // Proactive: open modal right after auth completes if the user has no
+  // display_name yet. Avoids the chicken-and-egg where the user can't send
+  // until they have a name, but the modal only opens on send.
+  window.addEventListener('chat:ready', (e) => {
+    const profile = e?.detail || window.__chatProfile;
+    if (profile && !profile.displayName) open();
+  });
+  // Catch-up if chat:ready already fired before this listener mounted
+  if (window.__chatProfile && !window.__chatProfile.displayName) {
+    open();
+  }
+
   cancelBtn.addEventListener('click', close);
   modal.querySelector('.backdrop').addEventListener('click', close);
 

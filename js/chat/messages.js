@@ -14,7 +14,10 @@ const charCount = document.getElementById('char-count');
 
 function refreshSendButton() {
   if (!input || !sendBtn) return;
-  sendBtn.disabled = !input.value.trim() || !currentLessonId || !window.__chatProfile;
+  // Only require non-empty input. currentLessonId + profile are checked at
+  // send time with user-facing error toasts — this avoids the "greyed
+  // button" confusion when those are still loading or racing with init.
+  sendBtn.disabled = !input.value.trim();
 }
 
 export async function openRoom(lessonId, courseId) {
@@ -158,9 +161,23 @@ if (input) {
 if (sendBtn) {
   sendBtn.addEventListener('click', async () => {
     const body = input.value.trim();
-    if (!body || !currentLessonId) return;
+    if (!body) return;
+    // Fallback: if openRoom hasn't set currentLessonId yet (race with
+    // watch.html init), pull from the global set by loadLesson().
+    const lessonId = currentLessonId || window.__currentLessonId;
+    if (!lessonId) {
+      toast('لم يحمّل الدرس بعد — جرّب بعد ثانية.');
+      return;
+    }
     const profile = window.__chatProfile;
-    if (!profile) return;
+    if (!profile) {
+      toast('لم يكتمل تسجيل الدخول — أعد تحميل الصفحة.');
+      return;
+    }
+    // Sync currentLessonId if it was stale so subsequent realtime subscribes use the right room
+    if (currentLessonId !== lessonId) {
+      await openRoom(lessonId, window.__currentCourseId);
+    }
 
     const urlCount = (body.match(/\bhttps?:\/\/\S+/g) || []).length;
     if (urlCount > 3) { toast('الحد الأقصى ٣ روابط في الرسالة.'); return; }
@@ -173,7 +190,7 @@ if (sendBtn) {
     sendBtn.disabled = true;
     try {
       const payload = {
-        lesson_id: currentLessonId,
+        lesson_id: lessonId,
         author_uid: profile.uid,
         author_display_name: profile.displayName,
         is_majid: profile.isMajid,
