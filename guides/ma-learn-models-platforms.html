@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل النماذج والمنصات · MA Learn</title>
+<style>
+  /* ============================================
+     MA LEARN — AI MODELS & PLATFORMS REFERENCE
+     Design system: Gumela + dark-gold
+     ============================================ */
+
+  @font-face {
+    font-family: 'Gumela';
+    src: url('fonts/Gumela-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gumela';
+    src: url('fonts/Gumela-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #0A0A0A;
+    --surface-1: #0D0D0D;
+    --surface-2: #161616;
+    --surface-3: #1A1A1A;
+    --surface-4: #1E1E1E;
+    --border: #333333;
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --white: #F5F0E8;
+    --body: #CCCCCC;
+    --muted: #AAAAAA;
+    --dim: #777777;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--body);
+    font-family: 'Gumela', 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 80px 56px 80px;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 56px;
+  }
+  .header-right { text-align: right; flex: 1; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0;
+    margin-bottom: 14px;
+  }
+  .doc-title {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 44px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--dim);
+    letter-spacing: 1px;
+    direction: ltr;
+    text-align: right;
+  }
+  .header-left { text-align: left; min-width: 160px; }
+  .year {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .update-info {
+    font-size: 11px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+
+  /* ===== SECTION ===== */
+  .section { margin-bottom: 56px; }
+  .section-header { margin-bottom: 24px; }
+  .section-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--dim);
+    direction: ltr;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .section-title {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .section-title .gold-dot { color: var(--gold); margin: 0 8px; }
+  .section-desc {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 720px;
+  }
+
+  /* ===== SUBSECTION LABEL ===== */
+  .subsection-label {
+    font-size: 12px;
+    color: var(--gold);
+    margin: 28px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  /* ===== GRID ===== */
+  .grid {
+    display: grid;
+    gap: 16px;
+  }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    padding: 22px 22px 24px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .card:hover {
+    background: var(--surface-3);
+    border-color: #444;
+    border-top-color: var(--gold);
+  }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+    gap: 10px;
+  }
+  .card-name {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 19px;
+    direction: ltr;
+  }
+  .card-meta {
+    font-size: 11px;
+    color: var(--dim);
+    direction: ltr;
+    text-align: left;
+    flex-shrink: 0;
+  }
+  .card-body {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.75;
+  }
+
+  /* ===== FOOTNOTE ===== */
+  .footnote {
+    background: var(--surface-2);
+    border-right: 3px solid var(--gold);
+    padding: 16px 20px;
+    margin-top: 40px;
+    font-size: 13px;
+    color: var(--gold-light);
+    line-height: 1.8;
+  }
+  .footnote strong { color: var(--gold); font-weight: 700; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-brand {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .footer-meta {
+    font-size: 11px;
+    color: var(--dim);
+    direction: ltr;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 980px) {
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .page { padding: 48px 22px; }
+    .header { flex-direction: column-reverse; gap: 24px; }
+    .header-left { text-align: right; }
+    .doc-title { font-size: 30px; }
+    .year { font-size: 30px; }
+    .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    .section-title { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header-right">
+      <div class="eyebrow">MA Learn · وثيقة مرجعية</div>
+      <h1 class="doc-title">دليل النماذج والمنصات</h1>
+      <div class="doc-subtitle">AI Models &amp; Platforms — Reference Guide</div>
+    </div>
+    <div class="header-left">
+      <div class="year">2026</div>
+      <div class="update-info">
+        آخر تحديث: أبريل 2026<br>
+        المشهد يتغير كل شهرين
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ SECTION 1: LLM ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">LLM — Large Language Models</div>
+      <h2 class="section-title">الفئة الأولى<span class="gold-dot">·</span>نماذج التفكير المنطقي</h2>
+      <p class="section-desc">شريك التفكير الإبداعي في التخطيط والكتابة وبناء الاستراتيجية.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">ChatGPT</div>
+          <div class="card-meta">OpenAI · GPT-4o</div>
+        </div>
+        <div class="card-body">
+          أشهر نماذج الذكاء الاصطناعي. قوي في كتابة المحتوى العام والبرمجة والتفكير الواسع. الخيار الأوسع انتشاراً بين جميع الأدوات.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Claude</div>
+          <div class="card-meta">Anthropic · الاختيار الأول</div>
+        </div>
+        <div class="card-body">
+          استثنائي في تحليل السياقات الطويلة والبريدات الإبداعية المعقدة والتفكير المنظّم. الخيار الأول في منظومة التوجيه الإبداعي.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Gemini</div>
+          <div class="card-meta">Google</div>
+        </div>
+        <div class="card-body">
+          تكامل عميق مع Google Workspace. قوي في البحث والمعالجة متعددة المدخلات. يدعم بناء Gems للمساعدين المخصصين.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2A: IMAGE GENERATION ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">Image Generation Models</div>
+      <h2 class="section-title">الفئة الثانية<span class="gold-dot">·</span>نماذج توليد الصور</h2>
+      <p class="section-desc">الاستوديو الرقمي — من المفهوم البصري للصورة النهائية.</p>
+    </div>
+
+    <div class="subsection-label">النماذج الأساسية</div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">NanoBanana 2</div>
+          <div class="card-meta">Google · Gemini 3.1 Flash Image</div>
+        </div>
+        <div class="card-body">
+          سريع ومتعدد الاستخدامات. مثالي للمراجع البصرية السريعة وتصور الأفكار الأولية والاسكتشات المبكرة قبل الانتقال للنماذج الأعلى دقة.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">NanoBanana Pro</div>
+          <div class="card-meta">التوجيه التفصيلي</div>
+        </div>
+        <div class="card-body">
+          دقة أعلى وتحكم أقوى في الأسلوب البصري. الأنسب للتوجيه الإبداعي التفصيلي والمخرجات الموجهة للعملاء.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">GPT Image 2.0</div>
+          <div class="card-meta">OpenAI · gpt-image-2</div>
+        </div>
+        <div class="card-body">
+          أحدث نموذج من OpenAI بطبقة تفكير قبل التوليد. الأقوى في عرض النصوص داخل الصور — مثالي لموكاب التصميم والإعلانات والإنفوغرافيك. يدعم العربية ودقة 2K.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Seedream V5</div>
+          <div class="card-meta">ByteDance</div>
+        </div>
+        <div class="card-body">
+          جودة بصرية عالية وحساسية جمالية مميزة. تدرّج ألوان سينمائي وإحساس احترافي من أول محاولة.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Flux Pro</div>
+          <div class="card-meta">Black Forest Labs</div>
+        </div>
+        <div class="card-body">
+          المعيار الصناعي في الواقعية والدقة. في النصوص حيث الصور، القاعدة الأكثر استخداماً في النماذج المخصصة.
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection-label">المنصات المبنية على نماذج الصور</div>
+    <div class="grid grid-4">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Midjourney</div>
+          <div class="card-meta">V6.1 · Niji</div>
+        </div>
+        <div class="card-body">
+          المعيار الإبداعي. الأفضل للتوجيه الفني والمود بوردات والجماليات التحريرية.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Grok</div>
+          <div class="card-meta">xAI · Aurora</div>
+        </div>
+        <div class="card-body">
+          واقعية بصرية قوية بقيود أقل، مدمج داخل منصة X.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Reve</div>
+          <div class="card-meta">ثلاثة · سريعة النمو</div>
+        </div>
+        <div class="card-body">
+          تحكم قوي في التكوين والسياق الشخصي عبر الصور.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">ChatGPT Image</div>
+          <div class="card-meta">OpenAI · GPT-4o</div>
+        </div>
+        <div class="card-body">
+          الأدق في النصوص داخل الصور. مميز في موكاب التصميم والتحسين عبر محادثة.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2B: AI UPSCALING ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">AI Upscaling</div>
+      <h2 class="section-title">الفئة الثانية ب<span class="gold-dot">·</span>نماذج رفع الجودة</h2>
+      <p class="section-desc">رفع دقة الصورة بذكاء حقيقي — لا مجرد تكبير.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Topaz Gigapixel</div>
+          <div class="card-meta">Photoshop مع تكامل · Desktop</div>
+        </div>
+        <div class="card-body">
+          المعيار الصناعي للطباعة والتنسيقات الكبيرة. يضيف تفاصيل حقيقية لا مجرد استيفاء.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Magnific</div>
+          <div class="card-meta">Web · الإنتاج التحريري</div>
+        </div>
+        <div class="card-body">
+          تضيف نسيجاً وتفاصيل وافية — تعطي الصور طابعاً يدوياً. الأنسب للتصوير التحريري والأزياء.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3: VIDEO GENERATION ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">Video Generation Models</div>
+      <h2 class="section-title">الفئة الثالثة<span class="gold-dot">·</span>نماذج توليد الفيديو</h2>
+      <p class="section-desc">الحركة والسينما — من الصورة الثابتة للمشهد المتحرك.</p>
+    </div>
+
+    <div class="grid grid-4">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Kling 3</div>
+          <div class="card-meta">Kuaishou</div>
+        </div>
+        <div class="card-body">
+          حركة إنسانية وتعبيرات وجه استثنائية. الأفضل في فيديو البورتريه والأزياء، متخصص في Image to Video.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Seedance 2</div>
+          <div class="card-meta">ByteDance</div>
+        </div>
+        <div class="card-body">
+          اتساق استثنائي للشخصيات عبر اللقطات. يعالج مشكلة التسلسل في الفيديو متعدد اللقطات.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Veo 3.1</div>
+          <div class="card-meta">Google DeepMind</div>
+        </div>
+        <div class="card-body">
+          حركة كاميرا سينمائية ومحاكاة فيزيائية دقيقة. قوي في Text to Video مع توليد صوت مدمج.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Runway Gen-4</div>
+          <div class="card-meta">رائد الصناعة</div>
+        </div>
+        <div class="card-body">
+          تحكم إبداعي قوي وتوجيه حركة الكاميرا وأدوات Motion Brush. موثوق في الإنتاج التجاري.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Luma Ray</div>
+          <div class="card-meta">Luma AI · Ray 2</div>
+        </div>
+        <div class="card-body">
+          حركة سينمائية سلسة مع محاكاة فيزيائية دقيقة. الأنسب لتحريك المنتجات والأجسام.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Grok Video</div>
+          <div class="card-meta">xAI · Aurora</div>
+        </div>
+        <div class="card-body">
+          إنتاج سريع. قوي في حركة البيانات والمشاهد الجوية.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">LTX Video</div>
+          <div class="card-meta">Lightricks · Open Source</div>
+        </div>
+        <div class="card-body">
+          توليد سريع مناسب للتكرار والاختيار. متاح عبر منصات متعددة بالـ API.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Wan</div>
+          <div class="card-meta">Alibaba · Open Source</div>
+        </div>
+        <div class="card-body">
+          جودة حركة عالية ومرونة في الأسلوب البصري. متاح للاستضافة الذاتية وعبر المنصات.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: WORKFLOW PLATFORMS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">Workflow Design Platforms</div>
+      <h2 class="section-title">الفئة الرابعة<span class="gold-dot">·</span>منصات تصميم سير العمل</h2>
+      <p class="section-desc">من الفكرة للتسليم — كل شيء تحت مظلة واحدة.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Weavy AI</div>
+          <div class="card-meta">Node Based · الاختيار الشخصي</div>
+        </div>
+        <div class="card-body">
+          باني سير العمل بنظام Node Based. يربط نماذج التفكير والصور والفيديو في خط إنتاج واحد. ابني مرة واشتغل دائماً.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Flora</div>
+          <div class="card-meta">Visual Workflow</div>
+        </div>
+        <div class="card-body">
+          منصة سير عمل بصري، متخصصة في ربط نماذج الصور والفيديو بمخرجات جمالية قوية.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Magnific (Previously Freepik)</div>
+          <div class="card-meta">All-in-One AI Suite</div>
+        </div>
+        <div class="card-body">
+          منصة شاملة تجمع كل نماذج الصور والفيديو الرئيسية تحت سقف واحد — Flux وImagen وNano Banana وSeedream وGPT Image وVeo وKling وRunway وLuma. تتضمن أدوات تحرير ورفع جودة ومكتبة أصول ضخمة. الأنسب لمن يريد تجربة عدة نماذج باشتراك واحد.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Midjourney</div>
+          <div class="card-meta">Creative Platform</div>
+        </div>
+        <div class="card-body">
+          أكثر من توليد صور — منصة إبداعية كاملة مع محرر وأدوات --sref و--cref والتعديل الداخلي.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Adobe Firefly</div>
+          <div class="card-meta">Creative Cloud · آمن تجارياً</div>
+        </div>
+        <div class="card-body">
+          مدمج في Photoshop. يشمل Generative Fill وExpand وObject Replace. جزء من اشتراك Creative Cloud.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Higgsfield</div>
+          <div class="card-meta">Portrait &amp; Fashion Video</div>
+        </div>
+        <div class="card-body">
+          متخصصة في حركة الإنسان وتحريك الشخصيات. مميزة لمحتوى البورتريه وحملات الأزياء.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">OpenArt</div>
+          <div class="card-meta">Multi-Model · ControlNet</div>
+        </div>
+        <div class="card-body">
+          وصول لـ Flux وSDXL ونماذج مخصصة. أدوات تدريب وControlNet قوية للمخرجات الدقيقة.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-name">Luma</div>
+          <div class="card-meta">Ray 2 · Lifestyle</div>
+        </div>
+        <div class="card-body">
+          واجهة نظيفة ومبهرة. قوية لتحريك منتجات أسلوب الحياة والإعلانات.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTNOTE ============ -->
+  <div class="footnote">
+    <strong>ملاحظة:</strong> هذا الدليل قابل للتحديث — المشهد يتغير كل شهرين. النماذج المميزة بـ Open Source متاحة للاستضافة الذاتية. الاختيارات الشخصية مبنية على التطبيق الفعلي في مشاريع التوجيه الإبداعي.
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-brand">MA Learn · صناعة الإلهام</div>
+    <div class="footer-meta">دليل النماذج والمنصات · وثيقة مرجعية 2026</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -317,7 +317,7 @@
     }
 
     /* PDF button — primitive pill (styled via [data-ui=btn]) */
-    #pdf-area { margin-top: var(--s-4); }
+    #pdf-area { margin-top: var(--s-4); display: flex; flex-wrap: wrap; gap: var(--s-2); }
 
     /* Notes slot (V2 — hidden in V1 via [hidden]) */
     .player-notes {
@@ -593,16 +593,7 @@
 
       <div id="lesson-content" class="lesson-content"></div>
 
-      <div id="pdf-area" style="display:none;">
-        <a id="pdf-btn" href="#" target="_blank" class="pdf-btn" data-ui="btn" data-variant="primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
-          </svg>
-          تحميل ملف PDF
-        </a>
-      </div>
+      <div id="pdf-area" style="display:none;"></div>
 
       <div class="lesson-nav">
         <button class="nav-btn" id="btn-prev" onclick="nav(-1)" disabled>→ السابق</button>
@@ -777,6 +768,23 @@ function buildSidebar() {
   });
 }
 
+// Parse pdf_url cell: supports plain URL or JSON array [{label,url},...]
+function parseResources(raw) {
+  const v = String(raw || '').trim();
+  if (!v) return [];
+  if (v[0] === '[') {
+    try {
+      const arr = JSON.parse(v);
+      if (Array.isArray(arr)) {
+        return arr
+          .filter(r => r && r.url)
+          .map(r => ({ label: r.label || 'تحميل ملف PDF', url: r.url }));
+      }
+    } catch (e) { /* fall through to single-URL fallback */ }
+  }
+  return [{ label: 'تحميل ملف PDF', url: v }];
+}
+
 // ─── PLAYER ───────────────────────────────────────
 function loadLesson(index) {
   if (index < 0 || index >= allLessons.length) return;
@@ -821,12 +829,26 @@ function loadLesson(index) {
     fetchLessonContent(lesson, contentEl);
   }
 
-  // PDF
-  if (lesson.pdf_url) {
-    document.getElementById('pdf-area').style.display = 'block';
-    document.getElementById('pdf-btn').href = lesson.pdf_url;
+  // Resources — supports single URL string OR JSON array [{label,url},...]
+  const pdfArea = document.getElementById('pdf-area');
+  pdfArea.innerHTML = '';
+  const resources = parseResources(lesson.pdf_url);
+  if (resources.length) {
+    pdfArea.style.display = 'flex';
+    resources.forEach(r => {
+      const a = document.createElement('a');
+      a.href = r.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'pdf-btn';
+      a.setAttribute('data-ui', 'btn');
+      a.setAttribute('data-variant', 'primary');
+      const icon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>`;
+      a.innerHTML = icon + r.label;
+      pdfArea.appendChild(a);
+    });
   } else {
-    document.getElementById('pdf-area').style.display = 'none';
+    pdfArea.style.display = 'none';
   }
 
   // Prev / Next
