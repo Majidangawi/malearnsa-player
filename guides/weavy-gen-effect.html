@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل نود Gen Effect في Weavy · MA Learn</title>
+<meta name="description" content="دليل عملي من MA Learn لاستخدام نود Gen Effect في Weavy — تصف التأثير اللي تبيه، وWeavy يبني لك نود تأثير خاص فيك تتحكم فيه بالكامل.">
+<style>
+  /* ============================================
+     MA LEARN — WEAVY · GEN EFFECT NODE GUIDE
+     Design system: Gumela + dark-gold
+     ============================================ */
+
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #0A0A0A;
+    --surface-1: #0D0D0D;
+    --surface-2: #161616;
+    --surface-3: #1A1A1A;
+    --surface-4: #1E1E1E;
+    --border: #333333;
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --white: #F5F0E8;
+    --body: #CCCCCC;
+    --muted: #AAAAAA;
+    --dim: #777777;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--body);
+    font-family: 'Gumela', 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 56px 80px;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .header-right { text-align: right; flex: 1; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .doc-title {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 44px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--dim);
+    letter-spacing: 1px;
+    direction: ltr;
+    text-align: right;
+  }
+  .header-left { text-align: left; min-width: 150px; }
+  .tool-mark {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 30px;
+    line-height: 1;
+    margin-bottom: 10px;
+    direction: ltr;
+  }
+  .update-info {
+    font-size: 11px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+
+  /* ===== INTRO ===== */
+  .intro {
+    font-size: 17px;
+    color: var(--body);
+    line-height: 1.9;
+    max-width: 760px;
+    margin-bottom: 20px;
+  }
+  .intro strong { color: var(--white); font-weight: 700; }
+
+  .callout {
+    background: var(--surface-2);
+    border-right: 3px solid var(--gold);
+    padding: 18px 22px;
+    margin: 28px 0 56px;
+    font-size: 14px;
+    color: var(--gold-light);
+    line-height: 1.85;
+  }
+  .callout strong { color: var(--gold); font-weight: 700; }
+
+  /* ===== SECTION ===== */
+  .section { margin-bottom: 56px; }
+  .section-header { margin-bottom: 28px; }
+  .section-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--dim);
+    direction: ltr;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .section-title {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .section-title .gold-dot { color: var(--gold); margin: 0 8px; }
+  .section-desc {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 720px;
+  }
+
+  /* ===== STEP ===== */
+  .step {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    padding: 28px 28px 8px;
+    margin-bottom: 20px;
+  }
+  .step-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .step-num {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 13px;
+    background: rgba(201, 168, 76, 0.10);
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    padding: 4px 12px;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 21px;
+    line-height: 1.4;
+  }
+  .step-body {
+    font-size: 15px;
+    color: var(--body);
+    line-height: 1.85;
+    max-width: 760px;
+  }
+  .step-body strong { color: var(--white); font-weight: 700; }
+  .step-body + .step-body { margin-top: 12px; }
+
+  .en {
+    direction: ltr;
+    display: inline-block;
+    unicode-bidi: isolate;
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+
+  .kbd {
+    direction: ltr;
+    display: inline-block;
+    unicode-bidi: isolate;
+    background: var(--surface-4);
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    padding: 1px 8px;
+    font-size: 13px;
+    color: var(--white);
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  .shot {
+    margin: 22px -28px 0;
+    padding: 24px 28px 28px;
+    background: var(--surface-1);
+    border-top: 1px solid var(--border);
+  }
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    background: #0f0f0f;
+  }
+  .shot-cap {
+    font-size: 12px;
+    color: var(--dim);
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  /* ===== NOTE LIST ===== */
+  .notes {
+    list-style: none;
+    margin-top: 16px;
+    max-width: 760px;
+  }
+  .notes li {
+    position: relative;
+    padding-right: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.8;
+  }
+  .notes li::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+  }
+  .notes li strong { color: var(--white); font-weight: 700; }
+
+  /* ===== GRID CARDS ===== */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    padding: 22px 22px 24px;
+  }
+  .card-name {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .card-body { font-size: 14px; color: var(--body); line-height: 1.8; }
+
+  /* ===== WORKFLOW LINK BLOCK ===== */
+  .flow-block {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-right: 3px solid var(--gold);
+    padding: 28px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+  }
+  .flow-text { flex: 1; }
+  .flow-title {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  .flow-desc { font-size: 14px; color: var(--muted); line-height: 1.8; }
+  .btn {
+    display: inline-block;
+    background: var(--gold);
+    color: #0A0A0A;
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 30px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .btn:hover { background: var(--gold-light); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+  .btn-ghost:hover { background: rgba(201, 168, 76, 0.10); color: var(--gold-light); }
+
+  /* ===== CTA ===== */
+  .cta {
+    margin-top: 72px;
+    background: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    padding: 52px 48px;
+    text-align: center;
+  }
+  .cta-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .cta-title {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    font-size: 32px;
+    line-height: 1.35;
+    margin-bottom: 18px;
+  }
+  .cta-body {
+    font-size: 16px;
+    color: var(--body);
+    line-height: 1.9;
+    max-width: 640px;
+    margin: 0 auto 22px;
+  }
+  .cta-body strong { color: var(--white); font-weight: 700; }
+  .cta-list {
+    list-style: none;
+    max-width: 560px;
+    margin: 0 auto 30px;
+    text-align: right;
+  }
+  .cta-list li {
+    position: relative;
+    padding-right: 22px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--body);
+    line-height: 1.8;
+  }
+  .cta-list li::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 11px;
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
+  }
+  .cta-note {
+    font-size: 13px;
+    color: var(--dim);
+    margin-top: 18px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-brand {
+    font-family: 'Gumela', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .footer-meta { font-size: 11px; color: var(--dim); direction: ltr; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 860px) {
+    .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    .flow-block { flex-direction: column; align-items: stretch; text-align: right; }
+    .btn { text-align: center; }
+  }
+  @media (max-width: 640px) {
+    .page { padding: 48px 20px; }
+    .header { flex-direction: column-reverse; gap: 22px; }
+    .header-left { text-align: right; }
+    .doc-title { font-size: 29px; }
+    .section-title { font-size: 22px; }
+    .step { padding: 22px 20px 6px; }
+    .step-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .step-title { font-size: 19px; }
+    .shot { margin: 20px -20px 0; padding: 20px; }
+    .cta { padding: 38px 22px; }
+    .cta-title { font-size: 24px; }
+    .cta-body { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header-right">
+      <div class="eyebrow">MA Learn · دليل عملي</div>
+      <h1 class="doc-title">نود Gen Effect في Weavy</h1>
+      <div class="doc-subtitle">Weavy — Gen Effect Node · Step-by-Step</div>
+    </div>
+    <div class="header-left">
+      <div class="tool-mark">Weavy</div>
+      <div class="update-info">
+        آخر تحديث: أغسطس 2026<br>
+        الأدوات تتغير بسرعة
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ INTRO ============ -->
+  <p class="intro">
+    في العادة، لما تبي تأثير معيّن على صورتك، تدوّر على النود الجاهز اللي يعطيك إياه — وإذا ما لقيته، تتنازل عن الفكرة أو تركّب كم نود فوق بعض عشان توصل لشي قريب.
+    <strong>نود Gen Effect يقلب المعادلة:</strong> إنت تصف التأثير اللي في بالك، وWeavy يبني لك نود تأثير خاص فيك — ببـاراته وتحكّمه الكامل.
+  </p>
+  <p class="intro">
+    يعني ما تختار من قائمة. إنت اللي تصنع الأداة، وبعدين تشتغل فيه زي أي نود ثاني داخل الـ workflow.
+  </p>
+
+  <div class="callout">
+    <strong>وش تحتاج قبل ما تبدأ:</strong> حساب على Weavy، ومساحة عمل مفتوحة (<span class="en">flow</span>). هذا الدليل ياخذك من الصفر لين تحصل نود تأثير شغّال وتحت سيطرتك.
+  </div>
+
+  <!-- ============ STEPS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">STEP BY STEP</div>
+      <h2 class="section-title">أربع خطوات<span class="gold-dot">·</span>من الفكرة إلى نود شغّال</h2>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">01</div>
+        <div class="step-title">أضف النود من الكانفس</div>
+      </div>
+      <p class="step-body">
+        اضغط <strong>كليك يمين</strong> في أي مكان فاضي على مساحة العمل، ويطلع لك مربع البحث. اكتب <span class="en">gen effect</span> وبتلقاه أول نتيجة — اضغط عليه.
+      </p>
+      <div class="shot">
+        <img src="assets/weavy-gen-effect/step-1.png" alt="البحث عن نود Gen Effect داخل Weavy بعد الضغط كليك يمين على الكانفس">
+        <div class="shot-cap">كليك يمين على الكانفس ← اكتب <span class="en">gen effect</span> ← اختر النتيجة.</div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">02</div>
+        <div class="step-title">افهم مدخلات النود</div>
+      </div>
+      <p class="step-body">
+        بيفتح لك النود وفيه <strong>مدخلين</strong> فقط:
+      </p>
+      <ul class="notes">
+        <li><strong>حقل الوصف</strong> — تكتب فيه التأثير اللي تبيه بالكلام.</li>
+        <li><strong>المراجع البصرية</strong> (<span class="en">Image references</span>) — ترفع فيه صور تشرح الإحساس اللي تدوّر عليه، لين ثلاث صور.</li>
+      </ul>
+      <p class="step-body">
+        وتحت، زر <span class="en">Generate effect</span> — يشتغل لما تعطيه شي يشتغل عليه.
+      </p>
+      <div class="shot">
+        <img src="assets/weavy-gen-effect/step-2.png" alt="نود Gen Effect مفتوح وفيه حقل الوصف وخانة المراجع البصرية وزر Generate effect">
+        <div class="shot-cap">النود فاضي: حقل وصف فوق، ومراجع بصرية تحت.</div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">03</div>
+        <div class="step-title">اوصف التأثير — أو ورّه إياه</div>
+      </div>
+      <p class="step-body">
+        عندك ثلاث طرق، وكلها صحيحة:
+      </p>
+      <ul class="notes">
+        <li><strong>وصف بس</strong> — اكتب التأثير بكلماتك، مثل <span class="en">dreamy filter effect</span>.</li>
+        <li><strong>مرجع بس</strong> — ارفع صورة فيها الإحساس اللي تبيه وخلّ Weavy يقرأها.</li>
+        <li><strong>الاثنين مع بعض</strong> — وهذي أدقّها. الكلمة تحدد النية، والصورة تحدد الذوق.</li>
+      </ul>
+      <p class="step-body">
+        بعدها اضغط <span class="en">Generate effect</span>.
+      </p>
+      <div class="shot">
+        <img src="assets/weavy-gen-effect/step-3.png" alt="نود Gen Effect وفيه وصف dreamy filter effect وصورة مرجعية واحدة جاهزة للتوليد">
+        <div class="shot-cap">وصف + صورة مرجعية واحدة. لاحظ العدّاد <span class="en">(1/3)</span> — تقدر ترفع لين ثلاث صور.</div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">04</div>
+        <div class="step-title">استلم النود حقك وتحكّم فيه</div>
+      </div>
+      <p class="step-body">
+        Weavy يحلل اللي أعطيته إياه، وبعدها يبني لك <strong>نود تأثير جاهز باسمه الخاص</strong> — في مثالنا طلع <span class="en">Dreamy Soft Glow</span> — ومعه مجموعة بارات تتحكم فيها بنفسك.
+      </p>
+      <p class="step-body">
+        وصّل صورتك بمدخل <span class="en">FileInput</span>، وحرّك البارات لين توصل للي تبيه بالضبط. من هنا وطالع، هو نود عادي داخل الـ workflow: تنسخه، تعيد استخدامه، وتوصله بأي نود ثاني.
+      </p>
+      <div class="shot">
+        <img src="assets/weavy-gen-effect/step-4.png" alt="نود Dreamy Soft Glow موصول بصورة، ومعه بارات Bloom Strength و Bloom Radius و Shadow Lift و Warmth و Saturation">
+        <div class="shot-cap">النود النهائي ومعه باراته: <span class="en">Bloom Strength · Bloom Radius · Shadow Lift · Warmth · Saturation</span>. البارات تختلف حسب التأثير اللي طلبته.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY IT MATTERS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">WHY IT MATTERS</div>
+      <h2 class="section-title">ليه هذا النود يفرق<span class="gold-dot">·</span>فعلاً</h2>
+      <p class="section-desc">الفرق مو في إنه يوفر وقت. الفرق إنه ينقلك من «أستلم اللي يطلع» إلى «أنا اللي أقرر».</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-name">تحكّم بدل مفاجآت</div>
+        <div class="card-body">
+          التوليد العادي يعطيك نتيجة وخلاص. هنا تطلع لك بارات — تعدّل، تخفف، تزوّد، لين تضبط.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-name">ثبات في اللوك</div>
+        <div class="card-body">
+          نفس النود على عشرين صورة يعطيك نفس المعالجة. هذا اللي يخلي شغلك يبان حملة واحدة، مو صور متفرقة.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-name">أصول تتراكم</div>
+        <div class="card-body">
+          كل تأثير تبنيه يصير قطعة تملكها وترجع لها. مع الوقت تبني مكتبة تأثيرات خاصة فيك ما عند أحد غيرك.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>الملاحظة الأهم:</strong> Gen Effect نود واحد في أداة واحدة. القيمة الحقيقية ما تجي من إتقان نود — تجي لما تعرف كيف تربط الأدوات مع بعض في نظام يشتغل لك كل يوم.
+    </div>
+  </section>
+
+  <!-- ============ TIPS ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">PRO TIPS</div>
+      <h2 class="section-title">ثلاث نصائح<span class="gold-dot">·</span>تطلع لك نتيجة أنظف</h2>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-name">اوصف الإحساس، مو الإعدادات</div>
+        <div class="card-body">
+          <span class="en">soft dreamy glow with lifted shadows</span> أوضح بكثير من «زوّد البلوم ٤٥٪». خلّ Weavy يترجم النية لبارات — هذي شغلته.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-name">اختر المرجع بعناية</div>
+        <div class="card-body">
+          صورة مرجعية وحدة قوية أفضل من ثلاث صور متناقضة. لو رفعت ثلاث، خلّها كلها تشاور على نفس الاتجاه.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-name">ابنِ نسخ، لا تدمّر الأصل</div>
+        <div class="card-body">
+          إذا ضبط لك نود، انسخه قبل ما تجرّب عليه. الأصل يبقى مرجع، والنسخة هي اللي تلعب فيها.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRY IT ============ -->
+  <section class="section">
+    <div class="flow-block">
+      <div class="flow-text">
+        <div class="flow-title">جرّبه على الـ workflow الجاهز</div>
+        <div class="flow-desc">
+          فتحت لك نفس مساحة العمل اللي في الصور — افتحها، وصّل صورتك، وشوف الفرق بنفسك قبل ما تبني وحدة من الصفر.
+        </div>
+      </div>
+      <a class="btn" href="https://app.weavy.ai/flow/5ymbphr8OExuNjcLwx85HE?ref=majid75" target="_blank" rel="noopener">افتح الـ Workflow في Weavy</a>
+    </div>
+  </section>
+
+  <!-- ============ CIW CTA ============ -->
+  <section class="cta">
+    <div class="cta-eyebrow">MA Learn · ورشة مباشرة</div>
+    <h2 class="cta-title">تعلّمت نود. تخيّل لو تعلّمت النظام كامل.</h2>
+    <p class="cta-body">
+      Gen Effect خطوة صغيرة داخل شي أكبر بكثير. في ورشة <strong>«معادلة صناعة الإلهام»</strong> ما نعلّمك أداة — نبني معك إطار عمل كامل يخليك تنتج بثبات، وبجودة تقدر تبيعها.
+    </p>
+    <ul class="cta-list">
+      <li>تبني نظامك الإبداعي بالذكاء الاصطناعي من الصفر، خطوة بخطوة</li>
+      <li>ورشة مباشرة</li>
+      <li>تطبيق عملي على بريف عميل</li>
+      <li>مقاعد محدودة عشان كل واحد ياخذ حقه من المتابعة</li>
+    </ul>
+    <a class="btn" href="https://malearnsa.com/creative-ai-workshop/" target="_blank" rel="noopener">اعرف تفاصيل الورشة</a>
+    <div class="cta-note">المقاعد محدودة لكل دفعة — التفاصيل والمواعيد المحدّثة على الصفحة.</div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-brand">MA Learn</div>
+    <div class="footer-meta">Weavy — Gen Effect Node Guide · 2026</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
