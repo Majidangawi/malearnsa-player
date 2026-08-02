@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قاموس الكلمات المفتاحية للصورة · MA Learn</title>
+<meta name="description" content="دليل من MA Learn: 102 كلمة مفتاحية جاهزة للنسخ تتحكم بزاوية الصورة، تعبير الوجه، الإضاءة، التدرج اللوني، والفلاتر في توليد الصور بالذكاء الاصطناعي.">
+<style>
+  /* ============================================
+     MA LEARN — IMAGE KEYWORDS DICTIONARY
+     Design system: Gumela + dark-gold (house guide standard)
+     ============================================ */
+
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-bold.otf') format('opentype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-regular.otf') format('opentype');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-light.otf') format('opentype');
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --bg: #0A0A0A;
+    --surface-1: #0D0D0D;
+    --surface-2: #161616;
+    --surface-3: #1A1A1A;
+    --surface-4: #1E1E1E;
+    --border: #333333;
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --white: #F5F0E8;
+    --body: #CCCCCC;
+    --muted: #AAAAAA;
+    --dim: #777777;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { background: var(--bg); }
+
+  .doc {
+    background: var(--bg);
+    color: var(--body);
+    font-family: 'Gumela', 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 56px 80px;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .header-right { text-align: right; flex: 1; }
+  .eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 14px; }
+  .doc-title {
+    font-weight: 700; color: var(--white);
+    font-size: 44px; line-height: 1.15; margin-bottom: 10px;
+  }
+  .doc-subtitle {
+    font-size: 13px; color: var(--dim);
+    letter-spacing: 1px; direction: ltr; text-align: right;
+  }
+  .header-left { text-align: left; min-width: 150px; }
+  .tool-mark {
+    font-weight: 700; color: var(--gold); font-size: 30px;
+    line-height: 1; margin-bottom: 10px; direction: ltr;
+  }
+  .update-info { font-size: 11px; color: var(--dim); line-height: 1.6; }
+
+  /* ===== INTRO ===== */
+  .intro {
+    font-size: 17px; color: var(--body); line-height: 1.9;
+    max-width: 760px; margin-bottom: 20px;
+  }
+  .intro strong { color: var(--white); font-weight: 700; }
+
+  .callout {
+    background: var(--surface-2);
+    border-right: 3px solid var(--gold);
+    padding: 18px 22px;
+    margin: 28px 0 56px;
+    font-size: 14px;
+    color: var(--gold-light);
+    line-height: 1.85;
+  }
+  .callout strong { color: var(--gold); font-weight: 700; }
+
+  /* ===== SECTION ===== */
+  .section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  .section-header { margin-bottom: 24px; }
+  .section-tag {
+    display: inline-block; font-size: 11px; color: var(--dim);
+    direction: ltr; margin-bottom: 8px; letter-spacing: 0.5px;
+  }
+  .section-title {
+    font-weight: 700; color: var(--white);
+    font-size: 28px; margin-bottom: 8px;
+  }
+  .section-title .gold-dot { color: var(--gold); margin: 0 8px; }
+  .section-title .count { font-size: 15px; color: var(--dim); font-weight: 400; }
+  .section-desc { font-size: 15px; color: var(--muted); max-width: 720px; }
+
+  /* ===== FORMULA ===== */
+  .formula {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    padding: 24px 24px;
+    margin-bottom: 22px;
+  }
+  .formula i {
+    font-style: normal; font-size: 14px; font-weight: 400;
+    color: var(--gold-light);
+    border: 1px dashed rgba(201, 168, 76, 0.45);
+    padding: 7px 14px;
+  }
+  .formula b { color: var(--dim); font-weight: 400; font-size: 15px; }
+
+  /* ===== NOTE LIST ===== */
+  .notes { list-style: none; max-width: 760px; }
+  .notes li {
+    position: relative; padding-right: 20px; margin-bottom: 12px;
+    font-size: 14px; color: var(--body); line-height: 1.8;
+  }
+  .notes li::before {
+    content: ""; position: absolute; right: 0; top: 11px;
+    width: 6px; height: 6px; background: var(--gold);
+  }
+  .notes li strong { color: var(--white); font-weight: 700; }
+
+  /* ===== TOC ===== */
+  .toc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .toc-item {
+    display: flex; flex-direction: column; gap: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    padding: 18px 20px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .toc-item:hover { background: var(--surface-3); }
+  .toc-name { font-weight: 700; color: var(--white); font-size: 16px; }
+  .toc-n { font-size: 12px; color: var(--dim); }
+
+  /* ===== KEYWORD GRID ===== */
+  .kw-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+    gap: 10px;
+  }
+  .kw {
+    position: relative;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    transition: border-color 0.18s ease, background 0.18s ease;
+  }
+  .kw:hover { border-color: var(--gold); background: var(--surface-3); }
+  .kw-main {
+    display: flex; flex-direction: column; gap: 4px;
+    width: 100%; text-align: right;
+    background: none; border: 0; color: inherit;
+    font-family: inherit; font-weight: inherit;
+    padding: 13px 15px 13px 45px;
+    cursor: pointer;
+  }
+  .kw-en {
+    direction: ltr; text-align: left;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 13px; color: var(--gold-light);
+    unicode-bidi: isolate; overflow-wrap: anywhere;
+  }
+  .kw-ar { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .kw-add {
+    position: absolute; top: 0; left: 0;
+    width: 32px; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    border: 0; border-right: 1px solid var(--border);
+    color: var(--dim); font-size: 16px; line-height: 1;
+    font-family: inherit; cursor: pointer;
+    background: var(--surface-1);
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .kw-add:hover { background: rgba(201, 168, 76, 0.12); color: var(--gold); }
+  .kw-add.on { background: var(--gold); color: #0A0A0A; }
+  .kw.copied { border-color: var(--gold); }
+  .kw.copied::after {
+    content: "نُسخت"; position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--gold); color: #0A0A0A;
+    font-weight: 700; font-size: 14px;
+  }
+
+  /* ===== CARDS ===== */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--border);
+    padding: 22px 22px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .card.good { border-top-color: var(--gold); }
+  .card-name { font-weight: 700; color: var(--white); font-size: 18px; }
+  .card-body { font-size: 14px; color: var(--body); line-height: 1.8; }
+  .card pre {
+    direction: ltr; text-align: left;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 13px; line-height: 1.8; color: var(--white);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    padding: 14px;
+    white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-block; background: var(--gold); color: #0A0A0A;
+    font-family: inherit; font-weight: 700; font-size: 15px;
+    padding: 14px 30px; text-decoration: none; white-space: nowrap;
+    border: 1px solid var(--gold); cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .btn:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .btn-ghost { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+  .btn-ghost:hover { background: rgba(201, 168, 76, 0.10); color: var(--gold-light); }
+  .btn-sm { font-size: 12px; font-weight: 400; padding: 9px 18px; margin-top: 16px; }
+
+  /* ===== RECIPE BAR ===== */
+  .recipe {
+    position: fixed; inset-inline: 0; bottom: 0; z-index: 30;
+    background: var(--surface-1);
+    border-top: 2px solid var(--gold);
+    display: none;
+  }
+  .recipe.show { display: block; }
+  .recipe-inner { max-width: 1000px; margin: 0 auto; padding: 14px 56px; }
+  .recipe-head {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .recipe-title { font-weight: 700; color: var(--white); font-size: 15px; }
+  .recipe-n {
+    background: var(--gold); color: #0A0A0A; font-weight: 700;
+    font-size: 12px; padding: 2px 10px;
+  }
+  .recipe-actions { margin-inline-start: auto; display: flex; gap: 8px; }
+  .recipe-out {
+    direction: ltr; text-align: left;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 12px; line-height: 1.75; color: var(--muted);
+    background: var(--surface-2); border: 1px solid var(--border);
+    padding: 10px 12px; margin-top: 12px;
+    max-height: 80px; overflow-y: auto; overflow-wrap: anywhere;
+  }
+
+  /* ===== CTA ===== */
+  .cta {
+    margin-top: 72px;
+    background: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    text-align: center;
+    overflow: hidden;
+  }
+  .cta-banner { display: block; border-bottom: 1px solid var(--border); }
+  .cta-banner img { display: block; width: 100%; height: auto; }
+  .cta-inner { padding: 44px 48px 52px; }
+  .cta-eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 18px; }
+  .cta-title {
+    font-weight: 700; color: var(--white);
+    font-size: 32px; line-height: 1.35; margin-bottom: 18px;
+  }
+  .cta-body {
+    font-size: 16px; color: var(--body); line-height: 1.9;
+    max-width: 640px; margin: 0 auto 22px;
+  }
+  .cta-body strong { color: var(--white); font-weight: 700; }
+  .cta-list { list-style: none; max-width: 560px; margin: 0 auto 30px; text-align: right; }
+  .cta-list li {
+    position: relative; padding-right: 22px; margin-bottom: 10px;
+    font-size: 15px; color: var(--body); line-height: 1.8;
+  }
+  .cta-list li::before {
+    content: ""; position: absolute; right: 0; top: 11px;
+    width: 7px; height: 7px; background: var(--gold);
+  }
+  .cta-dates {
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+    max-width: 620px; margin: 0 auto 26px;
+  }
+  .cta-date {
+    border: 1px solid var(--border); background: var(--surface-2);
+    padding: 10px 16px; font-size: 13px; color: var(--body);
+  }
+  .cta-date b { color: var(--gold); font-weight: 700; display: block; font-size: 12px; margin-bottom: 2px; }
+  .cta-price { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+  .cta-price b { color: var(--white); font-weight: 700; font-size: 22px; }
+  .cta-note { font-size: 13px; color: var(--dim); margin-top: 18px; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center; margin-top: 64px; padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-brand { font-weight: 700; color: var(--gold); font-size: 14px; margin-bottom: 6px; }
+  .footer-meta { font-size: 11px; color: var(--dim); direction: ltr; }
+
+  :where(button, a, [tabindex]):focus-visible {
+    outline: 2px solid var(--gold); outline-offset: 2px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 860px) {
+    .toc { grid-template-columns: 1fr 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .page { padding: 48px 20px 40px; }
+    .header { flex-direction: column-reverse; gap: 22px; }
+    .header-left { text-align: right; }
+    .doc-title { font-size: 29px; }
+    .section-title { font-size: 22px; }
+    .toc { grid-template-columns: 1fr; }
+    .kw-grid { grid-template-columns: 1fr; }
+    .cta-inner { padding: 32px 22px 38px; }
+    .cta-title { font-size: 24px; }
+    .cta-body { font-size: 15px; }
+    .recipe-inner { padding: 12px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc" dir="rtl" lang="ar">
+<div class="page">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header-right">
+      <div class="eyebrow">MA Learn · دليل عملي</div>
+      <h1 class="doc-title">قاموس الكلمات المفتاحية للصورة</h1>
+      <div class="doc-subtitle">Image Keywords · Angles · Expressions · Lighting · Color · FX</div>
+    </div>
+    <div class="header-left">
+      <div class="tool-mark">102</div>
+      <div class="update-info">
+        كلمة جاهزة للنسخ<br>
+        آخر تحديث: أغسطس 2026
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ INTRO ============ -->
+  <p class="intro">
+    أغلب الصور اللي تطلع «مولّدة» ما فيها خلل بالنموذج — فيها خلل بالوصف. تكتب
+    <span class="kw-en">portrait of a man</span> وتترك للنموذج يقرر الزاوية والإضاءة واللون بالنيابة عنك،
+    فيختار المتوسط الآمن اللي شافه بملايين الصور. <strong>النتيجة: صورة تشبه كل شي، وما تشبهك.</strong>
+  </p>
+  <p class="intro">
+    الفرق بين صورة مولّدة وصورة تبان مصوّرة بعدسة هو الكلمات اللي تحت. هذي 102 كلمة مفتاحية،
+    مقسّمة على خمس عائلات: الزاوية، تعبير الوجه، الإضاءة، التدرج اللوني، والفلاتر.
+    كل وحدة فيها قرار — وكل قرار تاخذه إنت، تسحبه من يد النموذج.
+  </p>
+
+  <div class="callout">
+    <strong>كيف تستخدم الدليل:</strong> اضغط أي كلمة عشان تنسخها فورًا. وإذا ضغطت علامة
+    <strong>+</strong> على يسار الكلمة، تنضاف لـ«وصفتك» تحت — تجمع كلمة من كل عائلة، وتنسخ البرومبت كامل بضغطة وحدة.
+  </div>
+
+  <!-- ============ THE FORMULA ============ -->
+  <section class="section" id="formula">
+    <div class="section-header">
+      <div class="section-tag">THE FORMULA</div>
+      <h2 class="section-title">التركيبة<span class="gold-dot">·</span><span class="count">ست طبقات</span></h2>
+      <p class="section-desc">أي صورة قوية مبنية على ست طبقات. اختر كلمة وحدة من كل طبقة — مو خمس.</p>
+    </div>
+
+    <div class="formula">
+      <i>الموضوع</i><b>+</b><i>الزاوية</i><b>+</b><i>التعبير</i><b>+</b><i>الإضاءة</i><b>+</b><i>التدرج اللوني</i><b>+</b><i>التأثير</i>
+    </div>
+
+    <ul class="notes">
+      <li><strong>كلمة وحدة من كل عائلة</strong> — لو كدّست خمس إضاءات، النموذج بيختار وحدة ويتجاهل الباقي — والنتيجة تطلع عشوائية كل مرة.</li>
+      <li><strong>اكتب الكلمات بالإنجليزي</strong> — حتى لو باقي البرومبت عربي. النماذج تدرّبت على توصيفات إنجليزية، وترجمتها العربية تضيع منها.</li>
+      <li><strong>غيّر عنصر واحد بكل تجربة</strong> — لو غيّرت الإضاءة واللون مع بعض، ما راح تعرف مين اللي سوّى الفرق — وما تتعلم شي.</li>
+      <li><strong>ابدأ بالإضاءة قبل أي شي</strong> — هي أكبر عنصر يغيّر إحساس الصورة. اضبطها أول، وبعدين اشتغل على اللون والتأثير.</li>
+    </ul>
+  </section>
+
+  <!-- ============ TOC ============ -->
+  <section class="section" id="toc">
+    <div class="section-header">
+      <div class="section-tag">CONTENTS</div>
+      <h2 class="section-title">العائلات الخمس</h2>
+    </div>
+    <div class="toc">
+      <a class="toc-item" href="#angles"><span class="toc-name">زوايا التصوير والكادر</span><span class="toc-n">20 كلمة</span></a>
+      <a class="toc-item" href="#faces"><span class="toc-name">تعابير الوجه</span><span class="toc-n">20 كلمة</span></a>
+      <a class="toc-item" href="#light"><span class="toc-name">الإضاءة</span><span class="toc-n">22 كلمة</span></a>
+      <a class="toc-item" href="#grade"><span class="toc-name">التدرج اللوني والطابع</span><span class="toc-n">20 كلمة</span></a>
+      <a class="toc-item" href="#fx"><span class="toc-name">الفلاتر والتأثيرات</span><span class="toc-n">20 كلمة</span></a>
+    </div>
+  </section>
+
+  <section class="section" id="angles">
+    <div class="section-header">
+      <div class="section-tag">ANGLE / FRAMING</div>
+      <h2 class="section-title">زوايا التصوير والكادر<span class="gold-dot">·</span><span class="count">20 كلمة</span></h2>
+      <p class="section-desc">الزاوية تقرر مين صاحب السلطة في المشهد، والكادر يقرر كم قريب المشاهد من الإحساس. اختر وحدة، مو ثلاث.</p>
+      <button class="btn btn-ghost btn-sm" type="button" data-copyall="eye level, low angle, high angle, worm&#x27;s eye view, bird&#x27;s eye view, top-down flat lay, dutch angle, over-the-shoulder, point of view shot, extreme close-up, close-up, medium shot, full body shot, wide establishing shot, profile view, three-quarter view, from behind, macro shot, centered symmetrical composition, off-center composition">نسخ كل كلمات هذا القسم</button>
+    </div>
+    <div class="kw-grid">
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="eye level" aria-label="انسخ eye level">
+            <span class="kw-en">eye level</span>
+            <span class="kw-ar">بمستوى العين — محايد وواقعي، أقرب لإحساس العين</span>
+          </button>
+          <button class="kw-add" type="button" data-add="eye level" aria-label="أضف eye level إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="low angle" aria-label="انسخ low angle">
+            <span class="kw-en">low angle</span>
+            <span class="kw-ar">من الأسفل — يضخّم الشخص ويعطيه سلطة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="low angle" aria-label="أضف low angle إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="high angle" aria-label="انسخ high angle">
+            <span class="kw-en">high angle</span>
+            <span class="kw-ar">من الأعلى — يصغّر الشخص ويعطي إحساس الهشاشة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="high angle" aria-label="أضف high angle إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="worm&#x27;s eye view" aria-label="انسخ worm&#x27;s eye view">
+            <span class="kw-en">worm&#x27;s eye view</span>
+            <span class="kw-ar">من مستوى الأرض — مبالغة درامية بالارتفاع</span>
+          </button>
+          <button class="kw-add" type="button" data-add="worm&#x27;s eye view" aria-label="أضف worm&#x27;s eye view إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="bird&#x27;s eye view" aria-label="انسخ bird&#x27;s eye view">
+            <span class="kw-en">bird&#x27;s eye view</span>
+            <span class="kw-ar">من فوق بعيد — مشهد شامل يقرأ المكان كله</span>
+          </button>
+          <button class="kw-add" type="button" data-add="bird&#x27;s eye view" aria-label="أضف bird&#x27;s eye view إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="top-down flat lay" aria-label="انسخ top-down flat lay">
+            <span class="kw-en">top-down flat lay</span>
+            <span class="kw-ar">عمودي على السطح — مثالي للمنتجات والتفاصيل</span>
+          </button>
+          <button class="kw-add" type="button" data-add="top-down flat lay" aria-label="أضف top-down flat lay إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="dutch angle" aria-label="انسخ dutch angle">
+            <span class="kw-en">dutch angle</span>
+            <span class="kw-ar">كادر مايل — توتر وعدم اتزان</span>
+          </button>
+          <button class="kw-add" type="button" data-add="dutch angle" aria-label="أضف dutch angle إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="over-the-shoulder" aria-label="انسخ over-the-shoulder">
+            <span class="kw-en">over-the-shoulder</span>
+            <span class="kw-ar">من فوق الكتف — يخلق علاقة بين شخصين</span>
+          </button>
+          <button class="kw-add" type="button" data-add="over-the-shoulder" aria-label="أضف over-the-shoulder إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="point of view shot" aria-label="انسخ point of view shot">
+            <span class="kw-en">point of view shot</span>
+            <span class="kw-ar">بعين الشخص نفسه — يدخّل المشاهد داخل المشهد</span>
+          </button>
+          <button class="kw-add" type="button" data-add="point of view shot" aria-label="أضف point of view shot إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="extreme close-up" aria-label="انسخ extreme close-up">
+            <span class="kw-en">extreme close-up</span>
+            <span class="kw-ar">قريبة جدًا — تفصيل واحد يملأ الكادر</span>
+          </button>
+          <button class="kw-add" type="button" data-add="extreme close-up" aria-label="أضف extreme close-up إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="close-up" aria-label="انسخ close-up">
+            <span class="kw-en">close-up</span>
+            <span class="kw-ar">قريبة — الوجه والانفعال هما الموضوع</span>
+          </button>
+          <button class="kw-add" type="button" data-add="close-up" aria-label="أضف close-up إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="medium shot" aria-label="انسخ medium shot">
+            <span class="kw-en">medium shot</span>
+            <span class="kw-ar">متوسطة — من الخصر وفوق، لغة الحوار</span>
+          </button>
+          <button class="kw-add" type="button" data-add="medium shot" aria-label="أضف medium shot إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="full body shot" aria-label="انسخ full body shot">
+            <span class="kw-en">full body shot</span>
+            <span class="kw-ar">كاملة — الجسم كامل داخل الكادر</span>
+          </button>
+          <button class="kw-add" type="button" data-add="full body shot" aria-label="أضف full body shot إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="wide establishing shot" aria-label="انسخ wide establishing shot">
+            <span class="kw-en">wide establishing shot</span>
+            <span class="kw-ar">واسعة تأسيسية — تعرّف المكان قبل الشخص</span>
+          </button>
+          <button class="kw-add" type="button" data-add="wide establishing shot" aria-label="أضف wide establishing shot إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="profile view" aria-label="انسخ profile view">
+            <span class="kw-en">profile view</span>
+            <span class="kw-ar">بروفايل جانبي — خط الوجه الجانبي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="profile view" aria-label="أضف profile view إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="three-quarter view" aria-label="انسخ three-quarter view">
+            <span class="kw-en">three-quarter view</span>
+            <span class="kw-ar">ثلاثة أرباع — أكثر زاوية تجامل الوجه</span>
+          </button>
+          <button class="kw-add" type="button" data-add="three-quarter view" aria-label="أضف three-quarter view إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="from behind" aria-label="انسخ from behind">
+            <span class="kw-en">from behind</span>
+            <span class="kw-ar">من الخلف — غموض وسرد بدون وجه</span>
+          </button>
+          <button class="kw-add" type="button" data-add="from behind" aria-label="أضف from behind إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="macro shot" aria-label="انسخ macro shot">
+            <span class="kw-en">macro shot</span>
+            <span class="kw-ar">ماكرو — تكبير تفصيل صغير جدًا</span>
+          </button>
+          <button class="kw-add" type="button" data-add="macro shot" aria-label="أضف macro shot إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="centered symmetrical composition" aria-label="انسخ centered symmetrical composition">
+            <span class="kw-en">centered symmetrical composition</span>
+            <span class="kw-ar">تكوين متناظر — هدوء وقوة بصرية</span>
+          </button>
+          <button class="kw-add" type="button" data-add="centered symmetrical composition" aria-label="أضف centered symmetrical composition إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="off-center composition" aria-label="انسخ off-center composition">
+            <span class="kw-en">off-center composition</span>
+            <span class="kw-ar">الموضوع خارج المنتصف — حركة وتنفّس بالكادر</span>
+          </button>
+          <button class="kw-add" type="button" data-add="off-center composition" aria-label="أضف off-center composition إلى الوصفة">+</button>
+        </div>
+    </div>
+  </section>
+
+  <section class="section" id="faces">
+    <div class="section-header">
+      <div class="section-tag">EXPRESSION</div>
+      <h2 class="section-title">تعابير الوجه<span class="gold-dot">·</span><span class="count">20 كلمة</span></h2>
+      <p class="section-desc">التعبير هو القصة. بدونه تطلع صورة نظيفة وفاضية — تقنيًا صح، وعاطفيًا صفر.</p>
+      <button class="btn btn-ghost btn-sm" type="button" data-copyall="subtle smile, genuine laugh, soft gaze, intense stare, looking away from camera, downcast eyes, eyes closed, contemplative expression, confident smirk, furrowed brow, lips slightly parted, serene expression, weary expression, surprised expression, defiant expression, warm inviting expression, candid unposed moment, neutral deadpan, head tilted down, eyes up, laughing mid-motion">نسخ كل كلمات هذا القسم</button>
+    </div>
+    <div class="kw-grid">
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="subtle smile" aria-label="انسخ subtle smile">
+            <span class="kw-en">subtle smile</span>
+            <span class="kw-ar">ابتسامة خفيفة — ثقة بدون مبالغة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="subtle smile" aria-label="أضف subtle smile إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="genuine laugh" aria-label="انسخ genuine laugh">
+            <span class="kw-en">genuine laugh</span>
+            <span class="kw-ar">ضحكة صادقة — طاقة وحياة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="genuine laugh" aria-label="أضف genuine laugh إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="soft gaze" aria-label="انسخ soft gaze">
+            <span class="kw-en">soft gaze</span>
+            <span class="kw-ar">نظرة هادية — قرب وأمان</span>
+          </button>
+          <button class="kw-add" type="button" data-add="soft gaze" aria-label="أضف soft gaze إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="intense stare" aria-label="انسخ intense stare">
+            <span class="kw-en">intense stare</span>
+            <span class="kw-ar">نظرة حادة مباشرة — مواجهة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="intense stare" aria-label="أضف intense stare إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="looking away from camera" aria-label="انسخ looking away from camera">
+            <span class="kw-en">looking away from camera</span>
+            <span class="kw-ar">نظر بعيد عن الكاميرا — قصة غير مكتملة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="looking away from camera" aria-label="أضف looking away from camera إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="downcast eyes" aria-label="انسخ downcast eyes">
+            <span class="kw-en">downcast eyes</span>
+            <span class="kw-ar">عيون منخفضة — تأمل وانكسار خفيف</span>
+          </button>
+          <button class="kw-add" type="button" data-add="downcast eyes" aria-label="أضف downcast eyes إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="eyes closed" aria-label="انسخ eyes closed">
+            <span class="kw-en">eyes closed</span>
+            <span class="kw-ar">عيون مغمضة — سكون واستسلام للحظة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="eyes closed" aria-label="أضف eyes closed إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="contemplative expression" aria-label="انسخ contemplative expression">
+            <span class="kw-en">contemplative expression</span>
+            <span class="kw-ar">تعبير متأمل — عقل مشغول</span>
+          </button>
+          <button class="kw-add" type="button" data-add="contemplative expression" aria-label="أضف contemplative expression إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="confident smirk" aria-label="انسخ confident smirk">
+            <span class="kw-en">confident smirk</span>
+            <span class="kw-ar">ابتسامة ثقة جانبية — تحدٍ لطيف</span>
+          </button>
+          <button class="kw-add" type="button" data-add="confident smirk" aria-label="أضف confident smirk إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="furrowed brow" aria-label="انسخ furrowed brow">
+            <span class="kw-en">furrowed brow</span>
+            <span class="kw-ar">حاجب مقطّب — تركيز أو انزعاج</span>
+          </button>
+          <button class="kw-add" type="button" data-add="furrowed brow" aria-label="أضف furrowed brow إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="lips slightly parted" aria-label="انسخ lips slightly parted">
+            <span class="kw-en">lips slightly parted</span>
+            <span class="kw-ar">شفاه مفتوحة شوي — لحظة قبل الكلام</span>
+          </button>
+          <button class="kw-add" type="button" data-add="lips slightly parted" aria-label="أضف lips slightly parted إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="serene expression" aria-label="انسخ serene expression">
+            <span class="kw-en">serene expression</span>
+            <span class="kw-ar">تعبير صافي مطمئن — سلام داخلي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="serene expression" aria-label="أضف serene expression إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="weary expression" aria-label="انسخ weary expression">
+            <span class="kw-en">weary expression</span>
+            <span class="kw-ar">تعبير متعب — ثقل وصدق</span>
+          </button>
+          <button class="kw-add" type="button" data-add="weary expression" aria-label="أضف weary expression إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="surprised expression" aria-label="انسخ surprised expression">
+            <span class="kw-en">surprised expression</span>
+            <span class="kw-ar">دهشة — لحظة مفاجأة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="surprised expression" aria-label="أضف surprised expression إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="defiant expression" aria-label="انسخ defiant expression">
+            <span class="kw-en">defiant expression</span>
+            <span class="kw-ar">تحدٍ — رفض واضح بالوجه</span>
+          </button>
+          <button class="kw-add" type="button" data-add="defiant expression" aria-label="أضف defiant expression إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="warm inviting expression" aria-label="انسخ warm inviting expression">
+            <span class="kw-en">warm inviting expression</span>
+            <span class="kw-ar">دفء وترحيب — يقرّب المشاهد</span>
+          </button>
+          <button class="kw-add" type="button" data-add="warm inviting expression" aria-label="أضف warm inviting expression إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="candid unposed moment" aria-label="انسخ candid unposed moment">
+            <span class="kw-en">candid unposed moment</span>
+            <span class="kw-ar">لحظة عفوية غير مرتّبة — أصدق من البوز</span>
+          </button>
+          <button class="kw-add" type="button" data-add="candid unposed moment" aria-label="أضف candid unposed moment إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="neutral deadpan" aria-label="انسخ neutral deadpan">
+            <span class="kw-en">neutral deadpan</span>
+            <span class="kw-ar">تعبير محايد بلا انفعال — برود مقصود</span>
+          </button>
+          <button class="kw-add" type="button" data-add="neutral deadpan" aria-label="أضف neutral deadpan إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="head tilted down, eyes up" aria-label="انسخ head tilted down, eyes up">
+            <span class="kw-en">head tilted down, eyes up</span>
+            <span class="kw-ar">الرأس لتحت والعين لفوق — جاذبية وغموض</span>
+          </button>
+          <button class="kw-add" type="button" data-add="head tilted down, eyes up" aria-label="أضف head tilted down, eyes up إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="laughing mid-motion" aria-label="انسخ laughing mid-motion">
+            <span class="kw-en">laughing mid-motion</span>
+            <span class="kw-ar">ضحك أثناء الحركة — إحساس فيديو مو صورة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="laughing mid-motion" aria-label="أضف laughing mid-motion إلى الوصفة">+</button>
+        </div>
+    </div>
+  </section>
+
+  <section class="section" id="light">
+    <div class="section-header">
+      <div class="section-tag">LIGHTING</div>
+      <h2 class="section-title">الإضاءة<span class="gold-dot">·</span><span class="count">22 كلمة</span></h2>
+      <p class="section-desc">الإضاءة أهم من الكاميرا وأهم من الموديل. غيّر الضوء وحده — تتغير الصورة كلها. وهي أول شي يفضح إن الصورة مولّدة.</p>
+      <button class="btn btn-ghost btn-sm" type="button" data-copyall="soft diffused window light, hard direct sunlight, golden hour light, blue hour light, overcast diffused light, rembrandt lighting, butterfly lighting, split lighting, loop lighting, clamshell lighting, rim light, backlit silhouette, low key lighting, high key lighting, chiaroscuro, dappled light through leaves, practical lights in frame, neon glow, candlelight, top light, bounced fill light, single source lighting">نسخ كل كلمات هذا القسم</button>
+    </div>
+    <div class="kw-grid">
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="soft diffused window light" aria-label="انسخ soft diffused window light">
+            <span class="kw-en">soft diffused window light</span>
+            <span class="kw-ar">ضوء نافذة ناعم — أسهل إضاءة تجمّل الوجه</span>
+          </button>
+          <button class="kw-add" type="button" data-add="soft diffused window light" aria-label="أضف soft diffused window light إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="hard direct sunlight" aria-label="انسخ hard direct sunlight">
+            <span class="kw-en">hard direct sunlight</span>
+            <span class="kw-ar">شمس مباشرة قاسية — ظلال حادة وتباين عالي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="hard direct sunlight" aria-label="أضف hard direct sunlight إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="golden hour light" aria-label="انسخ golden hour light">
+            <span class="kw-en">golden hour light</span>
+            <span class="kw-ar">الساعة الذهبية — دفء منخفض قبل الغروب</span>
+          </button>
+          <button class="kw-add" type="button" data-add="golden hour light" aria-label="أضف golden hour light إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="blue hour light" aria-label="انسخ blue hour light">
+            <span class="kw-en">blue hour light</span>
+            <span class="kw-ar">الساعة الزرقاء — بعد الغروب، برودة وهدوء</span>
+          </button>
+          <button class="kw-add" type="button" data-add="blue hour light" aria-label="أضف blue hour light إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="overcast diffused light" aria-label="انسخ overcast diffused light">
+            <span class="kw-en">overcast diffused light</span>
+            <span class="kw-ar">يوم غائم — ضوء متساوي بلا ظل</span>
+          </button>
+          <button class="kw-add" type="button" data-add="overcast diffused light" aria-label="أضف overcast diffused light إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="rembrandt lighting" aria-label="انسخ rembrandt lighting">
+            <span class="kw-en">rembrandt lighting</span>
+            <span class="kw-ar">رامبرانت — مثلث ضوء صغير على الخد المظلم</span>
+          </button>
+          <button class="kw-add" type="button" data-add="rembrandt lighting" aria-label="أضف rembrandt lighting إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="butterfly lighting" aria-label="انسخ butterfly lighting">
+            <span class="kw-en">butterfly lighting</span>
+            <span class="kw-ar">إضاءة الفراشة — ظل صغير تحت الأنف، بورتريه جمالي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="butterfly lighting" aria-label="أضف butterfly lighting إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="split lighting" aria-label="انسخ split lighting">
+            <span class="kw-en">split lighting</span>
+            <span class="kw-ar">إضاءة منقسمة — نص وجه مضيء ونص مظلم</span>
+          </button>
+          <button class="kw-add" type="button" data-add="split lighting" aria-label="أضف split lighting إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="loop lighting" aria-label="انسخ loop lighting">
+            <span class="kw-en">loop lighting</span>
+            <span class="kw-ar">لوب — ظل أنف صغير جانبي، الأكثر استخدامًا</span>
+          </button>
+          <button class="kw-add" type="button" data-add="loop lighting" aria-label="أضف loop lighting إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="clamshell lighting" aria-label="انسخ clamshell lighting">
+            <span class="kw-en">clamshell lighting</span>
+            <span class="kw-ar">الصدفة — ضوء من فوق وتحت، بشرة نظيفة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="clamshell lighting" aria-label="أضف clamshell lighting إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="rim light" aria-label="انسخ rim light">
+            <span class="kw-en">rim light</span>
+            <span class="kw-ar">ضوء حواف — خط ضوء يفصل الشخص عن الخلفية</span>
+          </button>
+          <button class="kw-add" type="button" data-add="rim light" aria-label="أضف rim light إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="backlit silhouette" aria-label="انسخ backlit silhouette">
+            <span class="kw-en">backlit silhouette</span>
+            <span class="kw-ar">إضاءة خلفية — ظل أسود على خلفية مضيئة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="backlit silhouette" aria-label="أضف backlit silhouette إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="low key lighting" aria-label="انسخ low key lighting">
+            <span class="kw-en">low key lighting</span>
+            <span class="kw-ar">لو-كي — غالب الكادر ظلام، دراما</span>
+          </button>
+          <button class="kw-add" type="button" data-add="low key lighting" aria-label="أضف low key lighting إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="high key lighting" aria-label="انسخ high key lighting">
+            <span class="kw-en">high key lighting</span>
+            <span class="kw-ar">هاي-كي — كادر مضيء بلا ظلال تقريبًا</span>
+          </button>
+          <button class="kw-add" type="button" data-add="high key lighting" aria-label="أضف high key lighting إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="chiaroscuro" aria-label="انسخ chiaroscuro">
+            <span class="kw-en">chiaroscuro</span>
+            <span class="kw-ar">كياروسكورو — تضاد شديد بين الضوء والظل</span>
+          </button>
+          <button class="kw-add" type="button" data-add="chiaroscuro" aria-label="أضف chiaroscuro إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="dappled light through leaves" aria-label="انسخ dappled light through leaves">
+            <span class="kw-en">dappled light through leaves</span>
+            <span class="kw-ar">ضوء مبقّع عبر الشجر — إحساس مكان حقيقي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="dappled light through leaves" aria-label="أضف dappled light through leaves إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="practical lights in frame" aria-label="انسخ practical lights in frame">
+            <span class="kw-en">practical lights in frame</span>
+            <span class="kw-ar">مصادر ضوء داخل الكادر — لمبات، نيون، شاشات</span>
+          </button>
+          <button class="kw-add" type="button" data-add="practical lights in frame" aria-label="أضف practical lights in frame إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="neon glow" aria-label="انسخ neon glow">
+            <span class="kw-en">neon glow</span>
+            <span class="kw-ar">توهج نيون — ألوان مشبعة على البشرة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="neon glow" aria-label="أضف neon glow إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="candlelight" aria-label="انسخ candlelight">
+            <span class="kw-en">candlelight</span>
+            <span class="kw-ar">ضوء شمعة — دافئ ومتذبذب وقريب</span>
+          </button>
+          <button class="kw-add" type="button" data-add="candlelight" aria-label="أضف candlelight إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="top light" aria-label="انسخ top light">
+            <span class="kw-en">top light</span>
+            <span class="kw-ar">ضوء من فوق مباشرة — ظلال عيون درامية</span>
+          </button>
+          <button class="kw-add" type="button" data-add="top light" aria-label="أضف top light إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="bounced fill light" aria-label="انسخ bounced fill light">
+            <span class="kw-en">bounced fill light</span>
+            <span class="kw-ar">ضوء منعكس يفتح الظلال — يخفّف القسوة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="bounced fill light" aria-label="أضف bounced fill light إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="single source lighting" aria-label="انسخ single source lighting">
+            <span class="kw-en">single source lighting</span>
+            <span class="kw-ar">مصدر ضوء واحد — أنظف طريقة تتحكم بالمزاج</span>
+          </button>
+          <button class="kw-add" type="button" data-add="single source lighting" aria-label="أضف single source lighting إلى الوصفة">+</button>
+        </div>
+    </div>
+  </section>
+
+  <section class="section" id="grade">
+    <div class="section-header">
+      <div class="section-tag">COLOR / TONALITY</div>
+      <h2 class="section-title">التدرج اللوني والطابع<span class="gold-dot">·</span><span class="count">20 كلمة</span></h2>
+      <p class="section-desc">اللون هو المزاج. دافي يقرّب، بارد يبعّد، باهت يجدّي، مشبّع يصرخ.</p>
+      <button class="btn btn-ghost btn-sm" type="button" data-copyall="warm golden grade, cool desaturated grade, teal and orange grade, muted earth tones, pastel palette, high contrast monochrome, soft black and white, sepia tone, bleach bypass, crushed blacks, lifted shadows, faded blacks, split toning, cross-processed colors, Kodak Portra 400 palette, CineStill 800T palette, Fuji Velvia saturated palette, low saturation neutral grade, rich saturated colors, monochrome with single color accent, film emulation grade">نسخ كل كلمات هذا القسم</button>
+    </div>
+    <div class="kw-grid">
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="warm golden grade" aria-label="انسخ warm golden grade">
+            <span class="kw-en">warm golden grade</span>
+            <span class="kw-ar">تدرج ذهبي دافي — حنين وراحة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="warm golden grade" aria-label="أضف warm golden grade إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="cool desaturated grade" aria-label="انسخ cool desaturated grade">
+            <span class="kw-en">cool desaturated grade</span>
+            <span class="kw-ar">بارد وباهت — جدية وبُعد عاطفي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="cool desaturated grade" aria-label="أضف cool desaturated grade إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="teal and orange grade" aria-label="انسخ teal and orange grade">
+            <span class="kw-en">teal and orange grade</span>
+            <span class="kw-ar">أزرق وبرتقالي — التدرج السينمائي المشهور</span>
+          </button>
+          <button class="kw-add" type="button" data-add="teal and orange grade" aria-label="أضف teal and orange grade إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="muted earth tones" aria-label="انسخ muted earth tones">
+            <span class="kw-en">muted earth tones</span>
+            <span class="kw-ar">ألوان ترابية هادية — رقي وهدوء</span>
+          </button>
+          <button class="kw-add" type="button" data-add="muted earth tones" aria-label="أضف muted earth tones إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="pastel palette" aria-label="انسخ pastel palette">
+            <span class="kw-en">pastel palette</span>
+            <span class="kw-ar">باستيل — خفة ونعومة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="pastel palette" aria-label="أضف pastel palette إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="high contrast monochrome" aria-label="انسخ high contrast monochrome">
+            <span class="kw-en">high contrast monochrome</span>
+            <span class="kw-ar">أبيض وأسود بتضاد عالي — قوة وحسم</span>
+          </button>
+          <button class="kw-add" type="button" data-add="high contrast monochrome" aria-label="أضف high contrast monochrome إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="soft black and white" aria-label="انسخ soft black and white">
+            <span class="kw-en">soft black and white</span>
+            <span class="kw-ar">أبيض وأسود ناعم — رمادي كثير، شاعرية</span>
+          </button>
+          <button class="kw-add" type="button" data-add="soft black and white" aria-label="أضف soft black and white إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="sepia tone" aria-label="انسخ sepia tone">
+            <span class="kw-en">sepia tone</span>
+            <span class="kw-ar">سيبيا — إحساس أرشيف قديم</span>
+          </button>
+          <button class="kw-add" type="button" data-add="sepia tone" aria-label="أضف sepia tone إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="bleach bypass" aria-label="انسخ bleach bypass">
+            <span class="kw-en">bleach bypass</span>
+            <span class="kw-ar">بليتش بايباس — ألوان باهتة وتضاد عالي، خشونة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="bleach bypass" aria-label="أضف bleach bypass إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="crushed blacks" aria-label="انسخ crushed blacks">
+            <span class="kw-en">crushed blacks</span>
+            <span class="kw-ar">أسود مغلق بلا تفاصيل — عمق وحدة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="crushed blacks" aria-label="أضف crushed blacks إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="lifted shadows, faded blacks" aria-label="انسخ lifted shadows, faded blacks">
+            <span class="kw-en">lifted shadows, faded blacks</span>
+            <span class="kw-ar">ظلال مرفوعة — إحساس فيلم قديم مغسول</span>
+          </button>
+          <button class="kw-add" type="button" data-add="lifted shadows, faded blacks" aria-label="أضف lifted shadows, faded blacks إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="split toning" aria-label="انسخ split toning">
+            <span class="kw-en">split toning</span>
+            <span class="kw-ar">تلوين منفصل — ظلال باردة وإضاءات دافية</span>
+          </button>
+          <button class="kw-add" type="button" data-add="split toning" aria-label="أضف split toning إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="cross-processed colors" aria-label="انسخ cross-processed colors">
+            <span class="kw-en">cross-processed colors</span>
+            <span class="kw-ar">كروس بروسيس — ألوان منحرفة عن الطبيعي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="cross-processed colors" aria-label="أضف cross-processed colors إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="Kodak Portra 400 palette" aria-label="انسخ Kodak Portra 400 palette">
+            <span class="kw-en">Kodak Portra 400 palette</span>
+            <span class="kw-ar">بورترا — بشرة دافية طبيعية جدًا</span>
+          </button>
+          <button class="kw-add" type="button" data-add="Kodak Portra 400 palette" aria-label="أضف Kodak Portra 400 palette إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="CineStill 800T palette" aria-label="انسخ CineStill 800T palette">
+            <span class="kw-en">CineStill 800T palette</span>
+            <span class="kw-ar">سينستل — ليل ونيون وهالات حمراء</span>
+          </button>
+          <button class="kw-add" type="button" data-add="CineStill 800T palette" aria-label="أضف CineStill 800T palette إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="Fuji Velvia saturated palette" aria-label="انسخ Fuji Velvia saturated palette">
+            <span class="kw-en">Fuji Velvia saturated palette</span>
+            <span class="kw-ar">فيلفيا — تشبّع عالي، طبيعة ومناظر</span>
+          </button>
+          <button class="kw-add" type="button" data-add="Fuji Velvia saturated palette" aria-label="أضف Fuji Velvia saturated palette إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="low saturation neutral grade" aria-label="انسخ low saturation neutral grade">
+            <span class="kw-en">low saturation neutral grade</span>
+            <span class="kw-ar">تشبّع منخفض محايد — تحريري ونظيف</span>
+          </button>
+          <button class="kw-add" type="button" data-add="low saturation neutral grade" aria-label="أضف low saturation neutral grade إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="rich saturated colors" aria-label="انسخ rich saturated colors">
+            <span class="kw-en">rich saturated colors</span>
+            <span class="kw-ar">ألوان غنية مشبعة — طاقة وجرأة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="rich saturated colors" aria-label="أضف rich saturated colors إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="monochrome with single color accent" aria-label="انسخ monochrome with single color accent">
+            <span class="kw-en">monochrome with single color accent</span>
+            <span class="kw-ar">أحادي مع لون واحد بارز — تركيز البصر</span>
+          </button>
+          <button class="kw-add" type="button" data-add="monochrome with single color accent" aria-label="أضف monochrome with single color accent إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="film emulation grade" aria-label="انسخ film emulation grade">
+            <span class="kw-en">film emulation grade</span>
+            <span class="kw-ar">محاكاة فيلم — تدرج غير رقمي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="film emulation grade" aria-label="أضف film emulation grade إلى الوصفة">+</button>
+        </div>
+    </div>
+  </section>
+
+  <section class="section" id="fx">
+    <div class="section-header">
+      <div class="section-tag">FILTERS / EFFECTS</div>
+      <h2 class="section-title">الفلاتر والتأثيرات<span class="gold-dot">·</span><span class="count">20 كلمة</span></h2>
+      <p class="section-desc">هذي طبقة الواقعية — الطبقة اللي تخلي الصورة تبان مصوّرة بعدسة، مو مولّدة بنموذج.</p>
+      <button class="btn btn-ghost btn-sm" type="button" data-copyall="35mm film grain, halation, anamorphic lens flare, shallow depth of field, creamy bokeh, motion blur, long exposure, double exposure, lens vignette, soft focus diffusion filter, chromatic aberration, tilt-shift effect, prism refraction, shot through glass, reflection in mirror, star filter on highlights, infrared look, polaroid instant film look, wet plate collodion look, handheld camera shake">نسخ كل كلمات هذا القسم</button>
+    </div>
+    <div class="kw-grid">
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="35mm film grain" aria-label="انسخ 35mm film grain">
+            <span class="kw-en">35mm film grain</span>
+            <span class="kw-ar">حبيبات فيلم — تكسر النعومة الرقمية</span>
+          </button>
+          <button class="kw-add" type="button" data-add="35mm film grain" aria-label="أضف 35mm film grain إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="halation" aria-label="انسخ halation">
+            <span class="kw-en">halation</span>
+            <span class="kw-ar">هالة حمراء حول مصادر الضوء — بصمة الفيلم</span>
+          </button>
+          <button class="kw-add" type="button" data-add="halation" aria-label="أضف halation إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="anamorphic lens flare" aria-label="انسخ anamorphic lens flare">
+            <span class="kw-en">anamorphic lens flare</span>
+            <span class="kw-ar">فليَر أفقي أزرق — لغة السينما</span>
+          </button>
+          <button class="kw-add" type="button" data-add="anamorphic lens flare" aria-label="أضف anamorphic lens flare إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="shallow depth of field" aria-label="انسخ shallow depth of field">
+            <span class="kw-en">shallow depth of field</span>
+            <span class="kw-ar">عمق ضحل — خلفية مذوّبة والموضوع حاد</span>
+          </button>
+          <button class="kw-add" type="button" data-add="shallow depth of field" aria-label="أضف shallow depth of field إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="creamy bokeh" aria-label="انسخ creamy bokeh">
+            <span class="kw-en">creamy bokeh</span>
+            <span class="kw-ar">بوكيه ناعم — دوائر ضوء بالخلفية</span>
+          </button>
+          <button class="kw-add" type="button" data-add="creamy bokeh" aria-label="أضف creamy bokeh إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="motion blur" aria-label="انسخ motion blur">
+            <span class="kw-en">motion blur</span>
+            <span class="kw-ar">ضبابية حركة — إحساس السرعة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="motion blur" aria-label="أضف motion blur إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="long exposure" aria-label="انسخ long exposure">
+            <span class="kw-en">long exposure</span>
+            <span class="kw-ar">تعريض طويل — خطوط ضوء وماء حريري</span>
+          </button>
+          <button class="kw-add" type="button" data-add="long exposure" aria-label="أضف long exposure إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="double exposure" aria-label="انسخ double exposure">
+            <span class="kw-en">double exposure</span>
+            <span class="kw-ar">تعريض مزدوج — صورتين فوق بعض</span>
+          </button>
+          <button class="kw-add" type="button" data-add="double exposure" aria-label="أضف double exposure إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="lens vignette" aria-label="انسخ lens vignette">
+            <span class="kw-en">lens vignette</span>
+            <span class="kw-ar">تعتيم الأطراف — يسحب العين للمنتصف</span>
+          </button>
+          <button class="kw-add" type="button" data-add="lens vignette" aria-label="أضف lens vignette إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="soft focus diffusion filter" aria-label="انسخ soft focus diffusion filter">
+            <span class="kw-en">soft focus diffusion filter</span>
+            <span class="kw-ar">فلتر تنعيم — هالة حالمة حول الإضاءات</span>
+          </button>
+          <button class="kw-add" type="button" data-add="soft focus diffusion filter" aria-label="أضف soft focus diffusion filter إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="chromatic aberration" aria-label="انسخ chromatic aberration">
+            <span class="kw-en">chromatic aberration</span>
+            <span class="kw-ar">انحراف لوني على الحواف — عدسة قديمة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="chromatic aberration" aria-label="أضف chromatic aberration إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="tilt-shift effect" aria-label="انسخ tilt-shift effect">
+            <span class="kw-en">tilt-shift effect</span>
+            <span class="kw-ar">تلت-شفت — يخلّي المشهد كأنه مجسّم صغير</span>
+          </button>
+          <button class="kw-add" type="button" data-add="tilt-shift effect" aria-label="أضف tilt-shift effect إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="prism refraction" aria-label="انسخ prism refraction">
+            <span class="kw-en">prism refraction</span>
+            <span class="kw-ar">انكسار بريزم — أطياف وتشويش مقصود</span>
+          </button>
+          <button class="kw-add" type="button" data-add="prism refraction" aria-label="أضف prism refraction إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="shot through glass" aria-label="انسخ shot through glass">
+            <span class="kw-en">shot through glass</span>
+            <span class="kw-ar">تصوير عبر زجاج — طبقة تفصل المشاهد</span>
+          </button>
+          <button class="kw-add" type="button" data-add="shot through glass" aria-label="أضف shot through glass إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="reflection in mirror" aria-label="انسخ reflection in mirror">
+            <span class="kw-en">reflection in mirror</span>
+            <span class="kw-ar">انعكاس بمرآة — ازدواج وسرد</span>
+          </button>
+          <button class="kw-add" type="button" data-add="reflection in mirror" aria-label="أضف reflection in mirror إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="star filter on highlights" aria-label="انسخ star filter on highlights">
+            <span class="kw-en">star filter on highlights</span>
+            <span class="kw-ar">فلتر نجمة — أشعة من مصادر الضوء</span>
+          </button>
+          <button class="kw-add" type="button" data-add="star filter on highlights" aria-label="أضف star filter on highlights إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="infrared look" aria-label="انسخ infrared look">
+            <span class="kw-en">infrared look</span>
+            <span class="kw-ar">إنفراريد — أوراق بيضاء وسماء غامقة</span>
+          </button>
+          <button class="kw-add" type="button" data-add="infrared look" aria-label="أضف infrared look إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="polaroid instant film look" aria-label="انسخ polaroid instant film look">
+            <span class="kw-en">polaroid instant film look</span>
+            <span class="kw-ar">بولارويد — ألوان مغسولة وإطار فوري</span>
+          </button>
+          <button class="kw-add" type="button" data-add="polaroid instant film look" aria-label="أضف polaroid instant film look إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="wet plate collodion look" aria-label="انسخ wet plate collodion look">
+            <span class="kw-en">wet plate collodion look</span>
+            <span class="kw-ar">لوح مبلل — عيوب وخدوش القرن التاسع عشر</span>
+          </button>
+          <button class="kw-add" type="button" data-add="wet plate collodion look" aria-label="أضف wet plate collodion look إلى الوصفة">+</button>
+        </div>
+        <div class="kw">
+          <button class="kw-main" type="button" data-kw="handheld camera shake" aria-label="انسخ handheld camera shake">
+            <span class="kw-en">handheld camera shake</span>
+            <span class="kw-ar">اهتزاز كاميرا محمولة — إحساس توثيقي</span>
+          </button>
+          <button class="kw-add" type="button" data-add="handheld camera shake" aria-label="أضف handheld camera shake إلى الوصفة">+</button>
+        </div>
+    </div>
+  </section>
+
+  <!-- ============ EXAMPLE ============ -->
+  <section class="section" id="example">
+    <div class="section-header">
+      <div class="section-tag">PUT IT TOGETHER</div>
+      <h2 class="section-title">نفس الفكرة<span class="gold-dot">·</span>مرتين</h2>
+      <p class="section-desc">الفرق مو بالموهبة. الفرق إنك وصفت اللي تشوفه بدل ما تركته للنموذج يخمّن.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-name">بدون كلمات مفتاحية</div>
+        <pre>portrait of a man in a studio</pre>
+        <div class="card-body">
+          النموذج يختار الزاوية والإضاءة واللون بالنيابة عنك. تطلع صورة عامة تشبه ملايين الصور،
+          ولو أعدتها عشر مرات تطلع عشر نتائج ما بينها رابط.
+        </div>
+      </div>
+      <div class="card good">
+        <div class="card-name">بالكلمات المفتاحية</div>
+        <pre>medium shot, three-quarter view, subtle smile, rembrandt lighting, single source lighting, muted earth tones, lifted shadows, 35mm film grain, shallow depth of field</pre>
+        <div class="card-body">
+          كل طبقة صار لها قرار: الكادر، التعبير، الضوء، اللون، والحبيبات.
+          هذي صورة تقدر تعيد إنتاجها وتطوّرها — لأنك تعرف بالضبط وش اللي مسكها.
+        </div>
+      </div>
+    </div>
+
+    <ul class="notes" style="margin-top:22px">
+      <li>لاحظ إن الوصف الثاني ما فيه ولا صفة حماسية مثل <strong>masterpiece</strong> أو <strong>8k</strong> أو <strong>ultra realistic</strong>. الوصف التقني الدقيق يغلبها كل مرة.</li>
+      <li>ابدأ بنسخة كاملة، وبعدين احذف كلمة وحدة وشوف وش راح. هذي أسرع طريقة تتعلم وش يسوي كل عنصر فعليًا.</li>
+    </ul>
+
+    <button class="btn btn-ghost btn-sm" type="button" data-copyall="medium shot, three-quarter view, subtle smile, rembrandt lighting, single source lighting, muted earth tones, lifted shadows, 35mm film grain, shallow depth of field">نسخ المثال المبني</button>
+  </section>
+
+  <!-- ============ CIW CTA ============ -->
+  <section class="cta">
+    <a class="cta-banner" href="https://malearnsa.com/creative-ai-workshop/" target="_blank" rel="noopener">
+      <img src="assets/image-keywords/ciw-banner.jpg" alt="معادلة صناعة الإلهام — ورشة MA Learn المباشرة" width="1400" height="787" loading="lazy">
+    </a>
+    <div class="cta-inner">
+    <div class="cta-eyebrow">MA Learn · ورشة مباشرة</div>
+    <h2 class="cta-title">الكلمات تعطيك صورة. المعادلة تعطيك طريقة.</h2>
+    <p class="cta-body">
+      هذا القاموس يخليك تتحكم بصورة وحدة. في ورشة <strong>«معادلة صناعة الإلهام 2.0»</strong>
+      ما نعلّمك أداة ولا قائمة كلمات — نبني معك نظام إبداعي كامل بالذكاء الاصطناعي،
+      من الفكرة للمخرج النهائي اللي تقدر تشتغل فيه فعليًا وتبيعه.
+    </p>
+    <ul class="cta-list">
+      <li>ثلاثة أيام مباشرة مع ماجد عنقاوي — مو تسجيل</li>
+      <li>تبني نظامك الإبداعي خطوة بخطوة، مو مجرد أدوات متفرقة</li>
+      <li>تطبيق عملي على بريف حقيقي، مع متابعة على شغلك</li>
+      <li>ثلاثين مقعد لكل دفعة عشان كل واحد ياخذ حقه</li>
+    </ul>
+    <div class="cta-dates">
+      <div class="cta-date"><b>الدفعة الرابعة</b>٢٥–٢٧ أغسطس</div>
+      <div class="cta-date"><b>الدفعة الخامسة</b>٨–١٠ سبتمبر</div>
+      <div class="cta-date"><b>الدفعة السادسة</b>١٥–١٧ سبتمبر</div>
+    </div>
+    <div class="cta-price"><b>١٬٣٩٩ ريال</b> · المقعد</div>
+    <a class="btn" href="https://malearnsa.com/creative-ai-workshop/" target="_blank" rel="noopener">اعرف تفاصيل الورشة</a>
+    <div class="cta-note">المقاعد محدودة لكل دفعة — التفاصيل والمواعيد المحدّثة على الصفحة.</div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-brand">MA Learn</div>
+    <div class="footer-meta">Image Keywords Dictionary · 102 keywords · 2026</div>
+  </footer>
+
+</div>
+
+<!-- ============ RECIPE BAR ============ -->
+<div class="recipe" id="recipe">
+  <div class="recipe-inner">
+    <div class="recipe-head">
+      <span class="recipe-title">وصفتك</span>
+      <span class="recipe-n" id="recipeN">٠</span>
+      <div class="recipe-actions">
+        <button class="btn btn-sm" type="button" id="recipeCopy" style="margin-top:0">نسخ الوصفة</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="recipeClear" style="margin-top:0">تفريغ</button>
+      </div>
+    </div>
+    <div class="recipe-out" id="recipeOut"></div>
+  </div>
+</div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var AR = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+  function ar(n) { return String(n).split("").map(function (d) { return AR[+d]; }).join(""); }
+
+  function copy(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).catch(fallback);
+      return;
+    }
+    fallback();
+
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (err) { /* clipboard unavailable */ }
+      document.body.removeChild(ta);
+    }
+  }
+
+  function flash(btn, label) {
+    var original = btn.textContent;
+    btn.textContent = label;
+    setTimeout(function () { btn.textContent = original; }, 1400);
+  }
+
+  var recipe = [];
+  var doc = document.querySelector(".doc");
+  var bar = document.getElementById("recipe");
+  var out = document.getElementById("recipeOut");
+  var nEl = document.getElementById("recipeN");
+
+  function paint() {
+    nEl.textContent = ar(recipe.length);
+    out.textContent = recipe.join(", ") || "—";
+    bar.classList.toggle("show", recipe.length > 0);
+    doc.style.paddingBottom = recipe.length ? "150px" : "";
+    Array.prototype.forEach.call(document.querySelectorAll("[data-add]"), function (el) {
+      el.classList.toggle("on", recipe.indexOf(el.getAttribute("data-add")) !== -1);
+    });
+  }
+
+  function toggle(k) {
+    if (recipe.indexOf(k) === -1) { recipe.push(k); }
+    else { recipe = recipe.filter(function (x) { return x !== k; }); }
+    paint();
+  }
+
+  document.addEventListener("click", function (e) {
+    var add = e.target.closest("[data-add]");
+    if (add) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggle(add.getAttribute("data-add"));
+      return;
+    }
+
+    var all = e.target.closest("[data-copyall]");
+    if (all) {
+      copy(all.getAttribute("data-copyall"));
+      flash(all, "تم النسخ");
+      return;
+    }
+
+    var kw = e.target.closest("[data-kw]");
+    if (kw) {
+      copy(kw.getAttribute("data-kw"));
+      kw.classList.add("copied");
+      setTimeout(function () { kw.classList.remove("copied"); }, 850);
+    }
+  });
+
+  document.getElementById("recipeCopy").addEventListener("click", function (e) {
+    if (!recipe.length) { return; }
+    copy(recipe.join(", "));
+    flash(e.currentTarget, "تم النسخ");
+  });
+
+  document.getElementById("recipeClear").addEventListener("click", function () {
+    recipe = [];
+    paint();
+  });
+
+  paint();
+})();
+</script>
+</body>
+</html>
