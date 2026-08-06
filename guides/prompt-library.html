@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة البرومبتات الجاهزة · MA Learn</title>
+<meta name="description" content="دليل من MA Learn: 29 برومبت كامل جاهز للنسخ لتوليد صور واقعية — بورتريه فيلمي، إدارتوريال داكن، وحملات منتجات ومجوهرات فخمة. يشتغل مع Midjourney و Nano Banana و Soul و Flux و GPT Image.">
+<style>
+  /* ============================================
+     MA LEARN — READY-MADE PROMPT LIBRARY
+     Design system: Gumela + dark-gold (house guide standard)
+     ============================================ */
+
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-bold.otf') format('opentype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-regular.otf') format('opentype');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gumela';
+    src: url('../fonts/gumela-arabic-light.otf') format('opentype');
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --bg: #0A0A0A;
+    --surface-1: #0D0D0D;
+    --surface-2: #161616;
+    --surface-3: #1A1A1A;
+    --surface-4: #1E1E1E;
+    --border: #333333;
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --white: #F5F0E8;
+    --body: #CCCCCC;
+    --muted: #AAAAAA;
+    --dim: #777777;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { background: var(--bg); }
+
+  .doc {
+    background: var(--bg);
+    color: var(--body);
+    font-family: 'Gumela', 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 56px 80px;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .header-right { text-align: right; flex: 1; }
+  .eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 14px; }
+  .doc-title {
+    font-weight: 700; color: var(--white);
+    font-size: 44px; line-height: 1.15; margin-bottom: 10px;
+  }
+  .doc-subtitle {
+    font-size: 13px; color: var(--dim);
+    letter-spacing: 1px; direction: ltr; text-align: right;
+  }
+  .header-left { text-align: left; min-width: 150px; }
+  .tool-mark {
+    font-weight: 700; color: var(--gold); font-size: 30px;
+    line-height: 1; margin-bottom: 10px; direction: ltr;
+  }
+  .update-info { font-size: 11px; color: var(--dim); line-height: 1.6; }
+
+  /* ===== INTRO ===== */
+  .intro {
+    font-size: 17px; color: var(--body); line-height: 1.9;
+    max-width: 760px; margin-bottom: 20px;
+  }
+  .intro strong { color: var(--white); font-weight: 700; }
+  .kw-en {
+    direction: ltr; unicode-bidi: isolate;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.88em; color: var(--gold-light);
+  }
+
+  .callout {
+    background: var(--surface-2);
+    border-right: 3px solid var(--gold);
+    padding: 18px 22px;
+    margin: 28px 0 56px;
+    font-size: 14px;
+    color: var(--gold-light);
+    line-height: 1.85;
+  }
+  .callout strong { color: var(--gold); font-weight: 700; }
+
+  /* ===== SECTION ===== */
+  .section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  .section-header { margin-bottom: 24px; }
+  .section-tag {
+    display: inline-block; font-size: 11px; color: var(--dim);
+    direction: ltr; margin-bottom: 8px; letter-spacing: 0.5px;
+  }
+  .section-title {
+    font-weight: 700; color: var(--white);
+    font-size: 28px; margin-bottom: 8px;
+  }
+  .section-title .gold-dot { color: var(--gold); margin: 0 8px; }
+  .section-title .count { font-size: 15px; color: var(--dim); font-weight: 400; }
+  .section-desc { font-size: 15px; color: var(--muted); max-width: 720px; }
+
+  /* ===== FORMULA ===== */
+  .formula {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    padding: 24px 24px;
+    margin-bottom: 22px;
+  }
+  .formula i {
+    font-style: normal; font-size: 14px; font-weight: 400;
+    color: var(--gold-light);
+    border: 1px dashed rgba(201, 168, 76, 0.45);
+    padding: 7px 14px;
+  }
+  .formula b { color: var(--dim); font-weight: 400; font-size: 15px; }
+
+  /* ===== NOTE LIST ===== */
+  .notes { list-style: none; max-width: 760px; }
+  .notes li {
+    position: relative; padding-right: 20px; margin-bottom: 12px;
+    font-size: 14px; color: var(--body); line-height: 1.8;
+  }
+  .notes li::before {
+    content: ""; position: absolute; right: 0; top: 11px;
+    width: 6px; height: 6px; background: var(--gold);
+  }
+  .notes li strong { color: var(--white); font-weight: 700; }
+
+  /* ===== TOC ===== */
+  .toc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .toc-item {
+    display: flex; flex-direction: column; gap: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    padding: 18px 20px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .toc-item:hover { background: var(--surface-3); }
+  .toc-name { font-weight: 700; color: var(--white); font-size: 16px; }
+  .toc-n { font-size: 12px; color: var(--dim); }
+  .toc-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+
+  /* ===== PROMPT CARD ===== */
+  .prompts { display: flex; flex-direction: column; gap: 14px; }
+  .prompt {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--border);
+    transition: border-color 0.18s ease;
+  }
+  .prompt:hover { border-top-color: var(--gold); }
+  .prompt.open { border-top-color: var(--gold); }
+  .prompt-head {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 18px 22px 0;
+  }
+  .prompt-id {
+    flex-shrink: 0;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    direction: ltr; font-size: 11px; font-weight: 700;
+    color: var(--gold); letter-spacing: 1px;
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    padding: 5px 9px; line-height: 1;
+  }
+  .prompt-name { font-weight: 700; color: var(--white); font-size: 17px; line-height: 1.5; }
+  .prompt-copy { margin-inline-start: auto; flex-shrink: 0; }
+  .prompt-note {
+    font-size: 14px; color: var(--muted); line-height: 1.8;
+    padding: 10px 22px 0; max-width: 760px;
+  }
+  .prompt-note strong { color: var(--body); font-weight: 700; }
+  .prompt-wrap { position: relative; padding: 14px 22px 0; }
+  .prompt-pre {
+    direction: ltr; text-align: left;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 12.5px; line-height: 1.85; color: var(--white);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    padding: 16px;
+    white-space: pre-wrap; overflow-wrap: anywhere;
+    max-height: 128px; overflow: hidden;
+  }
+  .prompt.open .prompt-pre { max-height: none; }
+  .prompt-fade {
+    position: absolute; inset-inline: 22px; bottom: 0; height: 62px;
+    background: linear-gradient(180deg, rgba(13,13,13,0) 0%, #0D0D0D 88%);
+    pointer-events: none;
+  }
+  .prompt.open .prompt-fade { display: none; }
+  .prompt-foot { padding: 0 22px 18px; }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-block; background: var(--gold); color: #0A0A0A;
+    font-family: inherit; font-weight: 700; font-size: 15px;
+    padding: 14px 30px; text-decoration: none; white-space: nowrap;
+    border: 1px solid var(--gold); cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .btn:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .btn-ghost { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+  .btn-ghost:hover { background: rgba(201, 168, 76, 0.10); color: var(--gold-light); }
+  .btn-sm { font-size: 12px; font-weight: 700; padding: 9px 18px; }
+  .btn-link {
+    background: none; border: 0; color: var(--dim);
+    font-family: inherit; font-weight: 400; font-size: 12.5px;
+    cursor: pointer; padding: 12px 0 0;
+    border-bottom: 1px solid transparent;
+  }
+  .btn-link:hover { color: var(--gold); }
+
+  /* ===== CTA ===== */
+  .cta {
+    margin-top: 72px;
+    background: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    text-align: center;
+    overflow: hidden;
+  }
+  .cta-banner { display: block; border-bottom: 1px solid var(--border); }
+  .cta-banner img { display: block; width: 100%; height: auto; }
+  .cta-inner { padding: 44px 48px 52px; }
+  .cta-eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 18px; }
+  .cta-title {
+    font-weight: 700; color: var(--white);
+    font-size: 32px; line-height: 1.35; margin-bottom: 18px;
+  }
+  .cta-body {
+    font-size: 16px; color: var(--body); line-height: 1.9;
+    max-width: 640px; margin: 0 auto 22px;
+  }
+  .cta-body strong { color: var(--white); font-weight: 700; }
+  .cta-list { list-style: none; max-width: 560px; margin: 0 auto 30px; text-align: right; }
+  .cta-list li {
+    position: relative; padding-right: 22px; margin-bottom: 10px;
+    font-size: 15px; color: var(--body); line-height: 1.8;
+  }
+  .cta-list li::before {
+    content: ""; position: absolute; right: 0; top: 11px;
+    width: 7px; height: 7px; background: var(--gold);
+  }
+  .cta-dates {
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+    max-width: 620px; margin: 0 auto 26px;
+  }
+  .cta-date {
+    border: 1px solid var(--border); background: var(--surface-2);
+    padding: 10px 16px; font-size: 13px; color: var(--body);
+  }
+  .cta-date b { color: var(--gold); font-weight: 700; display: block; font-size: 12px; margin-bottom: 2px; }
+  .cta-price { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+  .cta-price b { color: var(--white); font-weight: 700; font-size: 22px; }
+  .cta-note { font-size: 13px; color: var(--dim); margin-top: 18px; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center; margin-top: 64px; padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-brand { font-weight: 700; color: var(--gold); font-size: 14px; margin-bottom: 6px; }
+  .footer-meta { font-size: 11px; color: var(--dim); direction: ltr; }
+
+  :where(button, a, [tabindex]):focus-visible {
+    outline: 2px solid var(--gold); outline-offset: 2px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 860px) {
+    .toc { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .page { padding: 48px 20px 40px; }
+    .header { flex-direction: column-reverse; gap: 22px; }
+    .header-left { text-align: right; }
+    .doc-title { font-size: 29px; }
+    .section-title { font-size: 22px; }
+    .prompt-head { flex-wrap: wrap; gap: 10px; padding: 16px 16px 0; }
+    .prompt-copy { margin-inline-start: 0; width: 100%; }
+    .prompt-copy .btn-sm { width: 100%; }
+    .prompt-name { font-size: 16px; }
+    .prompt-note { padding: 10px 16px 0; font-size: 13.5px; }
+    .prompt-wrap { padding: 12px 16px 0; }
+    .prompt-fade { inset-inline: 16px; }
+    .prompt-foot { padding: 0 16px 16px; }
+    .prompt-pre { font-size: 12px; padding: 13px; }
+    .cta-inner { padding: 32px 22px 38px; }
+    .cta-title { font-size: 24px; }
+    .cta-body { font-size: 15px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc" dir="rtl" lang="ar">
+<div class="page">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header-right">
+      <div class="eyebrow">MA Learn · هدية</div>
+      <h1 class="doc-title">مكتبة البرومبتات الجاهزة</h1>
+      <div class="doc-subtitle">Ready-Made Prompts · Film Portrait · Dark Editorial · Luxury Campaign</div>
+    </div>
+    <div class="header-left">
+      <div class="tool-mark">29</div>
+      <div class="update-info">
+        برومبت جاهز للنسخ<br>
+        آخر تحديث: أغسطس 2026
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ INTRO ============ -->
+  <p class="intro">
+    أغلب الناس تكتب سطر وتنتظر معجزة. تكتب <span class="kw-en">beautiful editorial portrait</span>
+    وتتوقع النموذج يقرأ اللي في راسك. ما راح يقراه — راح يعطيك المتوسط الآمن اللي شافه في ملايين الصور.
+    <strong>والنتيجة صورة تشبه كل شي، وما تشبهك.</strong>
+  </p>
+  <p class="intro">
+    هذي ٢٩ برومبت كاملة، مكتوبة بالطريقة اللي تشتغل فعلًا: كل قرار مأخوذ ومكتوب — الزاوية، العدسة،
+    الفتحة، مصدر الضوء الواحد وين هو بالضبط، لون البشرة، حبيبة الفيلم، وحتى العيوب المقصودة اللي
+    تخلي الصورة تبان <strong>مصوّرة</strong> مو <strong>مولّدة</strong>. خذها كما هي، أو بدّل الموضوع
+    واحتفظ بالهيكل — الهيكل هو الشغل.
+  </p>
+
+  <div class="callout">
+    <strong>كيف تستخدمها:</strong> اضغط «نسخ البرومبت» في أي بطاقة، وألصقه في الأداة اللي تشتغل عليها —
+    Midjourney، Nano Banana، Soul، Flux، Seedream، GPT Image، أو أي نموذج ثاني.
+    البرومبتات بالإنجليزي عن قصد: النماذج تدرّبت على توصيفات إنجليزية، والترجمة تضيّع نص المعنى.
+  </div>
+
+  <!-- ============ THE RULES ============ -->
+  <section class="section" id="rules">
+    <div class="section-header">
+      <div class="section-tag">HOW TO USE</div>
+      <h2 class="section-title">أربع قواعد قبل ما تعدّل أي برومبت</h2>
+      <p class="section-desc">هذي المكتبة مو مجرد نسخ ولصق — كل برومبت فيها درس. اقرأ القواعد مرة وحدة، وبعدها اشتغل.</p>
+    </div>
+
+    <div class="formula">
+      <i>الموضوع</i><b>+</b><i>الكادر والزاوية</i><b>+</b><i>الملابس والمواد</i><b>+</b><i>الضوء</i><b>+</b><i>العدسة</i><b>+</b><i>التدرج</i><b>+</b><i>العيوب</i>
+    </div>
+
+    <ul class="notes">
+      <li><strong>بدّل الموضوع، لا تلمس الهيكل</strong> — غيّر «امرأة تركية ٢١ سنة» لأي موضوع تبيه، وخلّ الإضاءة والعدسة والتدرج مثل ما هي. الهيكل هو اللي يعطي الصورة مستواها، مو الموضوع.</li>
+      <li><strong>غيّر شي واحد بكل تجربة</strong> — لو غيّرت الإضاءة والعدسة مع بعض، ما راح تعرف مين اللي سوّى الفرق — وما تتعلم شي من التجربة.</li>
+      <li><strong>لا تشيل العيوب</strong> — المسام، الشعيرات الناعمة، الخصلة اللاصقة على الخد، الكتف المرفوع ملّي. هذي بالضبط اللي تفرّق بين صورة مصوّرة وصورة مولّدة. أول شي الناس تشيله، وهو آخر شي المفروض تشيله.</li>
+      <li><strong>البرومبتات اللي تذكر «reference image» تبي صورة مرجعية</strong> — ما راح تشتغل صح لحالها. ارفع الصورة أول، وبعدين ألصق البرومبت.</li>
+    </ul>
+  </section>
+
+  <!-- ============ TOC ============ -->
+  <section class="section" id="toc">
+    <div class="section-header">
+      <div class="section-tag">CONTENTS</div>
+      <h2 class="section-title">ثلاث عائلات</h2>
+    </div>
+    <div class="toc">
+      <a class="toc-item" href="#film">
+        <span class="toc-name">بورتريه فيلمي</span>
+        <span class="toc-n">8 برومبتات</span>
+        <span class="toc-desc">دفا، شمس منخفضة، Kodak Portra، حبيبة ظاهرة. الإحساس قبل الحدّة.</span>
+      </a>
+      <a class="toc-item" href="#dark">
+        <span class="toc-name">إدارتوريال داكن</span>
+        <span class="toc-n">11 برومبت</span>
+        <span class="toc-desc">سلسلة كاملة بنفس الإضاءة ونفس الملابس — كذا تبني «سِت» مو صورة يتيمة.</span>
+      </a>
+      <a class="toc-item" href="#luxury">
+        <span class="toc-name">حملات فخمة</span>
+        <span class="toc-n">10 برومبتات</span>
+        <span class="toc-desc">منتج، مجوهرات، أزياء، ماكرو. البرومبتات اللي تتباع فعليًا للعملاء.</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CHAPTER 1 — FILM PORTRAIT
+       ============================================================ -->
+  <section class="section" id="film">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 01</div>
+      <h2 class="section-title">بورتريه فيلمي<span class="gold-dot">·</span><span class="count">ثمانية برومبتات</span></h2>
+      <p class="section-desc">
+        العائلة الأولى كلها مبنية على نفس العمود الفقري: شمس منخفضة أو ضوء شباك واحد، بدون فيل،
+        محاكاة Kodak Portra 400، حبيبة ظاهرة، ونهاية مطفية. غيّر الموضوع براحتك — العمود يظل ثابت.
+      </p>
+    </div>
+
+    <div class="prompts">
+
+      <!-- 01 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">01</span>
+          <h3 class="prompt-name">ظلال السعف على الجدار</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">البطل هنا الظل، مو الفستان. خطوط سعف مايلة على جدار طيني عنبري، وشمس صحراوية وحدة قاسية بدون أي إضاءة تعبئة. <strong>جرّبه لأي بورتريه تبيه قاسي ودافي بنفس الوقت.</strong></p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Editorial wedding portrait. 21-year-old Turkish woman, oval face fully visible and lit, warm olive skin, dark brown wavy hair, defined brows, soft matte lips, calm non-smiling expression, eyes gently lowered, serene, hands clasped at waist. White lace-bodice mermaid gown with veil. Tight diagonal palm-frond shadow stripes across a warm amber stucco wall; subject three-quarter crop, medium-close, placed center-right. Single hard low-angle desert sun, no fill. Kodak Portra warm highlights, crushed near-black shadows, high contrast, matte finish, fine grain.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 02 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">02</span>
+          <h3 class="prompt-name">قُرب حميمي</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">راس مايل على حضور مو ظاهر في الكادر. <strong>الحيلة إن الشي المهم خارج الصورة</strong> — والمشاهد يكمّل الباقي في راسه.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Solo female model, Turkish, 21, wavy hair loose, eyes closed, head tilted forward as if resting against an unseen presence, one hand raised near her own collarbone. Warm low glow lighting, shallow depth of field, soft blur at edges of frame. Black slip top. Portra 400, grain, micro skin realism, non-smiling, intimate close-crop editorial, vertical 4:5.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 03 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">03</span>
+          <h3 class="prompt-name">الروكوكو — جالسة</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">مشهد كامل: تسريحة روكوكو، قفاز ساتان أسود محمول مو ملبوس، ولمبة عنابي على اليمين تعطي لمسة عنبرية على الترقوة. <strong>هذا وأخوه اللي بعده سلسلة وحدة</strong> — نفس المكان، لحظتين مختلفتين.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A low-angle, close-up vertical shot in 4:5 format shows a 20-year-old woman seated at the edge of the Rococo vanity bench, torso turned toward camera, the black satin opera glove now held loosely in one hand rather than worn, fingers trailing the fabric absently. Her long brown hair cascades over one bare shoulder as her head tilts down and toward the camera, cold non-smiling editorial stare cutting upward through her lashes. She wears the strapless black corset dress against bare shoulders, visible micro skin realism — pores, peach fuzz, natural undertones, no retouching. The burgundy lamp glows steadily to her right, its fabric shade casting a rich, soft amber accent across her collarbone. Floral damask wallpaper in warm cream hues and golden hour window light complete the background. Palette of warm amber, milky white, black, rich burgundy, and matte gold, blown highlights, lifted milky blacks. Shot at f/1.8, 50mm, shallow depth of field, dreamy falloff. Heavy film grain, matte finish, Kodak Portra 400 emulation. Mood: sultry, opulent, cinematic, editorial coolness and melancholy. No text, no logos.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 04 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">04</span>
+          <h3 class="prompt-name">الروكوكو — تمشي</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">نفس المشهد بس بحركة: الشعر متحرك مع بلور خفيف في أطرافه والوجه يظل حاد. <strong>كذا تبني سلسلة، مو صورة يتيمة</strong> — وهذا اللي يفرّق شغل محترف عن صورة عابرة.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">low-angle vertical 4:5 shot shows a 20-year-old woman mid-stride, walking away from the Rococo vanity, caught glancing back over one bare shoulder at the last second. Long brown hair swings mid-motion, slightly blurred at the ends from the movement while her face stays sharp. Cold, non-smiling editorial stare thrown back over her shoulder, chin tucked low. The black satin opera glove is now fully worn on one arm, opposite hand trailing along the vanity's carved edge as she passes it. She wears the strapless black corset dress against bare shoulders, visible micro skin realism — pores, peach fuzz, natural undertones, no retouching. The burgundy lamp glows behind her, now a soft out-of-focus warm blur in the background alongside the floral damask wallpaper and golden hour light. Palette of warm amber, milky white, black, rich burgundy, matte gold, blown highlights, lifted milky blacks. Shot at f/1.8, 50mm, shallow depth of field, subtle motion blur in the trailing hair. Heavy film grain, matte finish, Kodak Portra 400 emulation. Mood: sultry, restless, cinematic, melancholic. No text, no logos.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 05 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">05</span>
+          <h3 class="prompt-name">شجرة الكريسمس</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">باك لايت قوي من الشباك يسوي هالة وريم لايت على الشعر والكتوف. <strong>البرومبت مبني للدفا مو للمناسبة</strong> — بدّل الشجرة بأي شي وبيظل يشتغل.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Editorial portrait of a 21-year-old Turkish woman leaning against a decorated Christmas tree, long dark brown hair swept over one shoulder, soft over-the-shoulder gaze into the lens. Wearing a delicate cream lace-trim camisole. Cozy warm interior at golden hour, evergreen pine branches and a blurred red bow in the foreground, soft window light flaring behind her. Shot on Kodak Portra 400, warm underexposed analog mood, matte finish, muted golden-amber palette. Strong backlight from a window creating a soft haze and rim light on hair and shoulders, warm ambient fill on the face, gentle bloom in the highlights. Micro skin realism — visible pores, peach fuzz, natural dewy texture, no airbrushing. Soft introspective non-smiling expression. Shallow depth of field, medium-format editorial framing, foreground bokeh. No text, no logos.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 06 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">06</span>
+          <h3 class="prompt-name">شانيل في مراكش</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">سطح واحد بس من الوجه مضوّي، والباقي يروح للأسود. <strong>الفستان الكريمي هو اللي يمسك الضوء</strong> — والجسم يتنحت بالظلمة مو بالإضاءة.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Warm dim editorial portrait, low-key exposure with the figure modeled by darkness, rich underexposed shadow side, Kodak Portra 400 emulation. A striking, commanding 21-year-old Turkish woman, deep warm bronze skin with the shadow side of her face falling into near-black while a single hard low-sun plane catches her cheekbone, brow and the bridge of her nose — strong sculpted bone structure, sharp full brows, glossy-nude lips, intense level gaze, dark wavy voluminous hair. Dewy minimal makeup, realistic skin with visible pores and peach fuzz, no airbrushing, non-smiling. She wears a cream Chanel sequin-embroidered one-shoulder party dress with diamond matelassé beadwork, pearl-and-gold chain layering, an embroidered camellia Chanel clutch held close — the cream fabric catching and holding the single plane of light. Only one plane of her is lit; the rest falls into warm shadow. Behind her a soft out-of-focus ochre Marrakech wall, deep milky environment shadows but the figure modeled richer than the backdrop. Low desaturation, creamy compressed highlights, fine analog grain in the shadows. Documentary fashion campaign, intimate.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 07 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">07</span>
+          <h3 class="prompt-name">الذراع تؤطّر الوجه</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">عين وحدة ظاهرة، والنص الثاني من الوجه ضايع في الظل. <strong>أقوى تكوين في الـ beauty الداكن</strong> — وأسهل واحد تكرره على أي موديل.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A close-up, tight vertical 4:5 crop shows a Turkish woman about 21 years old, captured at eye-level with a shallow depth of field, rendered in rich, low-key beauty editorial style. The shot appears to have been taken on a 50mm lens at f/2, displaying dramatic lighting with luminous amber and sepia-chiaroscuro highlights. One of her arms, bare and warmly lit, is curved overhead framing her face, while the other hand is softly brought up near her chin, the delicate fingers adorned with a thin ring and resting near her parted lips. A single visible hazel eye gazes directly into camera, framed by thick, loose, windblown strands of dark brown hair streaked across her face. The other half of the face is lost to deep shadow, the right side and part of the background dissolving into near-black to evoke an enveloping, intimate mood. The highlighted skin displays natural realism — fine pores, peach fuzz catching the light, and glossy lips are clearly visible, with a heavy analog grain from the high-contrast, distinctly filmic capture. The soft, golden rim light rakes over the cheekbone, arm, and lips, while the background is strictly dark, amplifying the dramatic, editorial tone.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 08 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">08</span>
+          <h3 class="prompt-name">الغروب والفلير</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">شمس منخفضة ورا الشعر، فلير حقيقي، ومساحة فاضية فوق للسما. <strong>لاحظ إنه يطلب المساحة الفاضية صراحة</strong> — هذي اللي تخليك تحط عنوان فوقها بعدين.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Editorial portrait, young woman with long dark wavy hair blowing in wind, three-quarter angle, chin tilted up, gaze off to the side (not at camera). Backlit by low golden-hour sun creating strong lens flare and rim light through hair strands. Wearing white ribbed tank top, cream off-shoulder knit cardigan slipping down arms, dark striped low-rise trousers with belt. Background: silhouetted treeline against gradient sunset sky (amber to deep teal), sun as small bright orb near horizon. Shot on Kodak Portra 400, 35mm film grain, matte finish, slight halation around highlights, soft focus falloff, analog warmth, non-smiling editorial expression, subject centered with negative space above for sky. Cinematic, wistful, golden-hour mood.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CHAPTER 2 — DARK EDITORIAL
+       ============================================================ -->
+  <section class="section" id="dark">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 02</div>
+      <h2 class="section-title">إدارتوريال داكن<span class="gold-dot">·</span><span class="count">أحد عشر برومبت</span></h2>
+      <p class="section-desc">
+        هذي مو إحدى عشرة صورة منفصلة — هذي <strong>«سِت» واحد</strong>: نفس الإضاءة (مصدر ناعم واحد من اليسار
+        مع سقوط سريع)، نفس الخلفية (بني-أسود شبه صامت)، نفس العدسة (85mm)، ونفس الفستان تقريبًا.
+        اللي يتغيّر: الإيماءة، الوضعية، والتسريحة. هذي طريقة بناء ملف أعمال متماسك — لو غيّرت كل شي كل مرة،
+        ما بنيت شي.
+      </p>
+    </div>
+
+    <div class="prompts">
+
+      <!-- 09 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">09</span>
+          <h3 class="prompt-name">الباب الخشبي</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">الأساس اللي تبني عليه السلسلة كلها: <strong>مصدر ضوء واحد من يسار الكاميرا، وسقوط سريع للأسود</strong> قبل ما يوصل السواعد. احفظ هذي الجملة واستخدمها في كل شي.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A medium-close portrait at eye level, featuring a woman who appears at least 20 years old and positioned close to a large dark wooden doorway that swallows most of the background into warm-neutral brown-black near-silhouette darkness with just enough detail to read as an interior. She has voluminous dark brown wavy hair, center-parted, blown out with body and shine, the edges catching a faint soft rim light where they meet the dark background. Her fair skin displays visible natural texture, with pores and peach fuzz apparent, showing a warm-neutral undertone and no signs of airbrushing. A single soft directional light source from camera-left falls fully across her face, neck, and upper chest, with fast, steep falloff — by the time the light reaches her lower arms, they've already sunk into the same near-black as the background and the edges dissolve rather than cut off hard. She has a calm and knowing expression, with one eyebrow very slightly raised, a soft sidelong glance away from camera, and lips closed and relaxed. One hand rests loosely at her side, already half-lost in shadow; the other tucks behind the waistband of her skirt. She wears a white cotton corset-style bralette with ruched gathered cups and visible boning seams, paired with a black high-waisted skirt. Accessories include a layered pearl choker with small dangling pearls and small pearl drop earrings. The image has a matte finish throughout, with no clipped whites, deep but not fully crushed blacks, fine subtle grain concentrated in the shadow areas, low-to-moderate contrast, and a quiet, slightly guarded mood. The composition is vertical 4:5, medium-close crop mid-thigh up, with shallow depth of field and 85mm compression. There is no text, no logos, and no watermarks present.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 10 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">10</span>
+          <h3 class="prompt-name">الدوران</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">سرعة غالق بطيئة: التنورة تتبلوّر والوجه يظل حاد. <strong>الحركة تُوصف، ما تُطلب</strong> — لا تكتب «حركة»، اكتب وش اللي يتبلور ووش اللي يظل حاد.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A medium shot at eye level, a 20-year-old woman caught mid-spin, her black skirt flared outward with visible motion blur trailing its hem from a deliberately slow shutter speed, while her face and upper body remain fully sharp — the contrast between frozen expression and blurred fabric doing the work of implied movement. Voluminous dark brown wavy hair, center-parted, also caught mid-motion with a few strands trailing outward, sharp near the roots and softly blurred at the tips. Fair skin displays visible natural texture, pores and peach fuzz apparent, warm-neutral undertone, no airbrushing. Her expression is composed despite the motion, eyes meeting camera directly with a soft catchlight, lips closed, a faint knowing calm rather than exuberance. She wears a white cotton corset-style bralette with ruched gathered cups and visible boning seams, the black high-waisted skirt now shown mid-flare, its pleats catching the motion. Layered pearl choker with small dangling pearls, small pearl drop earrings. Background is the same warm-neutral brown-black near-silhouette darkness, dissolving completely behind her. A single soft directional light source from camera-left falls across her face and upper chest with steep, fast falloff into the dark background. Matte finish, deep but not fully crushed blacks, fine subtle grain in shadow, low-to-moderate contrast. Vertical 4:5, medium crop mid-thigh up, shallow depth of field, 85mm compression. No text, no logos, no watermarks.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 11 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">11</span>
+          <h3 class="prompt-name">من ورا الباب</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">شي داكن خارج الفوكس في مقدمة الكادر يعطي إحساس إنك دخلت على المشهد بالغلط. <strong>أرخص حيلة لصورة تبان صادقة.</strong></p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A mid-close shot at eye level, taken through a soft out-of-focus dark foreground shape — possibly the blurred edge of a doorway or drape at the bottom corner of frame — partially obscures the lower edge of the image, creating the candid illusion of stumbling onto the scene. The subject is a young woman, approximately 20 years old, whose hair is styled in a modern, glossy, voluminous blowout with a prominent deep side-part and the ends gently curled inward, catching a clean, defined highlight. Her fair skin shows natural complexion and warm-neutral tone, with no airbrushing visible. She is making an unguarded, sudden eye contact with the camera, her eyes wide and lips just parted as though caught by the lens at the last moment. She wears a structured burgundy corset mini dress in a heavy opaque material with a sweetheart neckline, visible boning, cap sleeves, and is accessorized with small vintage drop earrings. The background dissolves into soft, warm-neutral brown-black near-silhouette darkness, while a single, soft, directional light source from camera-left creates steep falloff shadows across her face. The matte finish, fine subtle grain, and low-to-moderate contrast suggest high-quality editorial digital capture or fine-grained film. The vertical 4:5 aspect ratio and tight mid-close crop are combined with very shallow depth of field, yielding dreamy foreground softness and a cinematic 85mm lens compression, with no visible text, logos, or watermarks anywhere in frame. The overall mood is intimate, cinematic, and candid.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 12 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">12</span>
+          <h3 class="prompt-name">الشيزلونغ</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">استرخاء وطول جسم؛ المخمل يعطي ملمس المقدمة. <strong>لاحظ إن التباين هنا أخف من باقي السلسلة</strong> — الهدوء يحتاج ضوء أهدأ.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A mid-shot at eye level showcases a 20-year-old woman reclining across a luxurious, deep-toned velvet chaise longue, her upper body extended against the furniture's raised end. She has fair skin with a cool, neutral undertone, open eyes gazing toward the ceiling's middle distance, and hair in a smooth, vertically pinned French twist at the back of her head, one strand softly framing her face. Her lips are closed and neutral, contributing to her languid but engaged expression. She wears a structured, opaque burgundy corset-style mini dress with cap sleeves and boning details, accented by red-and-white swirl drop earrings. No brands, logos, or text are visible. Negative space and soft, deep shadow recede into the neutral brown-black background, with the chaise's curved contour and velvet nap providing distinct foreground textures. A single directional soft light source shines gently from camera left, creating a gradual, shadowed falloff without dramatic contrast; throughout, the palette is dominated by muted burgundy, deep shadow neutrals, and cool undertones. Captured with minimal grain, low-to-moderate contrast, vertical 4:5 aspect with an 85mm lens and a shallow depth of field for gentle bokeh out of focus. The atmosphere is calm, contemplative, stylish, and intimate.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 13 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">13</span>
+          <h3 class="prompt-name">الشباك والقرط</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">لحظة تجهيز، مو بوز. الشيش نص مقفول يقطّع الضوء لشريط. <strong>أصدق برومبت في السلسلة</strong> — لأنه يوصف فعل، مو وقفة.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A mid-shot at eye level, capturing a 20-year-old young woman standing beside a tall window with its wooden shutter half-closed, the shutter's slats admitting a soft, broken band of cool light across the frame's left edge, most of the window itself falling out of focus behind her. Both hands are raised to one ear, mid-gesture fastening her earring, elbows lifted, head tilted slightly toward her working hands — a small, private act of getting ready rather than a pose. Her hair is styled in soft pinned rolls along the nape, a vintage-leaning set with the front smoothed cleanly back from her forehead. She is fair-skinned with a cool, neutral undertone, natural unretouched skin texture visible — pores, soft peach fuzz — fully matte finish, no sheen. Her expression is absorbed and inward, eyes lowered toward the gesture, lips softly closed. She wears the structured, opaque burgundy corset-style mini dress with sweetheart neckline, visible boning detail, and small cap sleeves, the second round red-and-white swirled drop earring already in place on the far ear. The background beyond the shutter dissolves into cool neutral brown-black near-silhouette darkness. The shutter's soft light band is the single light source, falling gently across her raised arms, face, and neckline, gradual falloff, no hard cutoff. Matte finish throughout, deep but not fully crushed blacks, subtle fine film-style grain, low-to-moderate contrast. Vertical 4:5, mid-shot framing waist-up, 85mm compression, shallow depth of field. No text, no logos, no watermarks.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 14 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">14</span>
+          <h3 class="prompt-name">إطار الذراع</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">اليد فوق الراس تسوي مثلث حول الوجه، والضوء داخل المثلث ناعم وخارجه ظل. <strong>حيلة تكوين تشتغل مع أي موديل وأي فستان.</strong></p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A close eye-level shot shows a 20-year-old woman in a compositional trick: she raises her arm and rests her hand on top of her own head, creating a natural triangular frame around her face perfectly captured through the triangle by the camera. Her fair skin with matte, unretouched natural texture — pores and peach fuzz visible — features cool, neutral undertones. Her brows are level, lips closed with one side smirking slightly for a sly, conspiratorial look. Her hair is smoothed away from her face into a neat low coil, keeping the arm-frame graphic and clean. The structured cap sleeve and shoulder of her opaque burgundy corset-style dress are visible at her bent arm, and a round red-and-white swirled drop earring dangles below her exposed ear. The background is a cool, neutral brown-black near-silhouette darkness. Lighting is a single soft directional source from camera left, giving soft graduated light inside the arm-frame like a window and shadow outside her arm. Vertical 4:5 crop, 85mm compression, and shallow depth of field are used. The overall aesthetic is rich matte, deep but not crushed blacks, subtle fine analog film grain, and low-to-moderate contrast for a mysterious, sophisticated mood. No visible text, watermarks, or logos.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 15 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">15</span>
+          <h3 class="prompt-name">الستارة</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">ثلث الكادر مغطى بستارة خارج الفوكس. <strong>عمق بدون ما تغيّر أي شي في الإضاءة</strong> — أسرع طريقة تكسر مسطّحية الصورة.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">An eye-level mid-shot photograph focuses on a young woman, 20 years old, posed beyond the softly out-of-focus edge of a thick, opaque curtain that occupies the right third of the frame in extreme foreground, its delicate weave catching a hint of spill light that veils part of the scene in diffused atmospheric blur. She stands at a subtle three-quarter angle, arms relaxed with one hand lightly holding her opposite wrist at the front. Her hair is parted smoothly down the center and pulled back into a low bun, her fair skin presented with unretouched texture — matte pore detail and a cool, neutral undertone. Her calm, grounded expression features a direct, unfussy gaze just past the camera, lips closed, with no hint of emotion or tension. She wears a structured, opaque burgundy corset-style mini dress with a sweetheart neckline, visible boning, and small cap sleeves, accessorized by round red-and-white swirled drop earrings. The background is a gently gradated, subdued brown-black, containing no identifiable detail. Soft, directional light from camera left falls across her face and torso, casting a subtle glow onto the nearby curtain and creating serene, gradual shadows with matte finishes across the image. The 4:5 vertical composition utilizes 85mm lens compression, low-to-moderate contrast, and a gentle film grain visible in shadow areas, drawing the eye to the model's face with a shallow depth of field and pronounced foreground separation. No text, branding, or visible logos are present. The overall mood is poised, pensive, and quietly elegant.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 16 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">16</span>
+          <h3 class="prompt-name">اليد على الرقبة</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">كل الكادر مبني على إيماءة وحدة، والضوء له وظيفة وحدة: يمشي من الكوع للساعد للرقبة للكتف كشريط واحد. <strong>أنظف برومبت في المكتبة كلها — اقراه مرتين.</strong></p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A mid-shot at eye level of a 20-year-old woman standing in near-darkness, her body turned three-quarters away from camera, caught in the single unified gesture the whole frame is built around: her head bowed slightly forward and one hand raised to the back of her own neck, fingers resting there lightly, elbow lifted — the universal, wordless posture of a person pausing mid-thought. Every element serves this one gesture. Art direction: the frame is stripped to three tones only — the deep burgundy of her structured, opaque corset-style mini dress with sweetheart neckline, visible boning, and small cap sleeves; the cool fair matte tone of her skin; and the cool neutral brown-black darkness that holds everything else. No props, no foreground devices, no jewelry except one round red-and-white swirled drop earring on the visible ear — the single small accent the eye can rest on. Her hair is smoothed into a low, bare knot, chosen specifically to leave the line of her bowed neck and raised arm completely clean and legible. Photography: a single soft directional light source from camera-left is placed to do exactly one job — it traces the continuous line from her lifted elbow, down her raised forearm, along the curve of her bowed neck, and across her shoulder into the dress, one unbroken ribbon of soft light through the dark, with gradual gentle falloff on every side. The camera holds at eye level, 85mm compression, shallow depth of field, framed with generous dark negative space above her bowed head so the emptiness itself carries weight. Her skin shows natural unretouched texture — pores, soft peach fuzz — fully matte, cool neutral undertone. Her expression, barely visible in three-quarter loss, is simply quiet: eyes lowered, lips closed, nothing performed. Matte finish throughout, deep but not fully crushed blacks, subtle fine film-style grain, low-to-moderate contrast. Vertical 4:5, mid-shot framing hip-up. No text, no logos, no watermarks.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 17 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">17</span>
+          <h3 class="prompt-name">الموجات القصيرة</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">تسريحة finger-waves وتعبير بارد ومقيّم. <strong>نفس الفستان، شخصية ثانية</strong> — التسريحة لحالها تقدر تغيّر عصر الصورة كامل.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A mid-shot at eye level shows a young woman, at least 20 years old, with her upper back and one shoulder leaning against an unseen wall just outside the frame's left edge, ankles crossed and one knee slightly bent in a distinctive upright pose. Her hair is arranged in soft, sculpted finger-waves lying close to her scalp, which present a vintage-inspired texture markedly different from loose waves, a sleek bun, or a braided crown. She is fair-skinned with subtle, natural, unretouched complexion showing skin texture, and has a warm-neutral undertone. Her facial expression is cool and appraising, with one eyebrow faintly raised, gaze directed to the middle distance instead of at the camera, and lips closed with a slight downward press at the left corner — giving a detached, poised air. She wears a structured, opaque burgundy corset-style mini dress featuring a matte finish, a sweetheart neckline, visible boning detail, and small cap sleeves, as well as small vintage-style drop earrings. The background is dissolving into a warm-neutral, slightly sepia brown-black near-silhouette darkness, and a single soft directional light from camera-left grazes her face and structured bodice with a steep falloff toward the hem. The color palette consists of deep burgundy, fair warm skin, and brown-black shadow. The framing is vertical 4:5, mid-shot just above the knees using 85mm telephoto compression and shallow depth of field. There is no text, logo, or watermark. Matte finish, low to moderate contrast, with deep blacks (not fully crushed) and subtle film-style grain. The overall mood is cinematic, subdued, and poised.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 18 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">18</span>
+          <h3 class="prompt-name">النظرة المشكّكة</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">حاجب مرفوع، عين ضيّقة شوي، ونظرة جانبية. <strong>هذا برومبت تعبير أكثر منه برومبت إضاءة</strong> — وهنا تشوف كيف تُكتب الشخصية بالكلام.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A straight-on, medium-close portrait at eye level captures a young woman with voluminous dark brown wavy hair, center-parted and blown out with body and shine, catching soft cool-toned rim light against a shadowed background. Her fair skin displays visible natural texture, with pores and peach fuzz apparent, and a cool, neutral undertone; the image intentionally avoids airbrushing or digital correction. The subject's skeptical and self-possessed expression is defined by one slightly raised eyebrow, one eye subtly narrowed in a side-glance away from the camera, and fully relaxed, closed lips. She wears a white, opaque cotton corset-style bralette with ruched, gathered fabric on the cups, visible boning seams, and a loosely double-looped front tie bow that sits just off-center, paired with a matte black high-waisted skirt. At her throat is a layered pearl choker with small dangling pearls, complemented by small pearl drop earrings. Her shoulders are asymmetrically set — one dropped lower — while her hands rest in relaxed positions: one loosely at her side, the other tucking slightly behind the skirt's waistband. The background is an ornate dark wood carved door or panel with a rounded decorative motif at the upper edge, but it softly dissolves into shadow from a single cool, soft light source coming from camera-left. This illumination falls delicately across her face, neck, and upper chest then fades, causing her lower arms and hands to recede gently into shadow without harsh cutoffs. The frame utilizes a soft matte film emulation, gently underexposed with lifted, desaturated shadows, cool neutral-brown grading, fine grain visible especially in shadow areas, and overall low contrast. The overall mood is reserved and editorial, with a hazy, subtle, and cool-toned, softly enigmatic atmosphere.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 19 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">19</span>
+          <h3 class="prompt-name">من الخلف</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">ظهر وكتف ونظرة فوق الكتف، وخلفية مبعثرة (مرايا وإطارات وورد ناشف) كلها خارج الفوكس. <strong>آخر لقطة في السِت — واللي تعطيه إحساس المكان.</strong></p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A three-quarter back angle, medium-full, hip-up editorial portrait centers a young woman, 20 years old, captured at eye level with shallow depth of field and 85mm lens compression. Her voluminous, blown-out dark brown hair with waves and shine is styled in a center part, falling over a fair-skinned back that reveals visible pores and fine peach fuzz, with a cool undertone and no evidence of airbrushing or digital retouching. She wears a white cotton corset-style bralette with ruched, gathered cups and visible boning seams; the front features a loosely double-looped bow sitting off-center. Straps are adjustable with small metal hardware visible on her shoulders, paired with a black, high-waisted skirt of fuller, pleated fabric that catches subtle movement. Accessories include a layered pearl choker with small dangling pearls, small pearl drop earrings, and thin rings on her fingers. Her lips are closed and relaxed as she gazes directly and calmly at the lens over her shoulder, twisting her upper torso, with one arm extended in front to rest on a weathered wooden mantel and her hand splayed gently. The cluttered, dim background is softly blurred: antique mirror and picture frames, and dried floral arrangements melt into the haze with desaturated brown colors. Soft, cool, directional light sculpts her shoulder blade and jawline, fading down her back into gentle shadow. Color palette is neutral and cool-brown, with film emulation that features fine film grain concentrated in the shadows, soft matte texture throughout, and a vertical 4:5 editorial framing with low overall contrast. No readable text, logos, or watermarks are present. The mood is quietly cinematic, poised, and serene.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CHAPTER 3 — LUXURY CAMPAIGN
+       ============================================================ -->
+  <section class="section" id="luxury">
+    <div class="section-header">
+      <div class="section-tag">CHAPTER 03</div>
+      <h2 class="section-title">حملات فخمة<span class="gold-dot">·</span><span class="count">عشرة برومبتات</span></h2>
+      <p class="section-desc">
+        هذي العائلة اللي تتباع. منتج، مجوهرات، أزياء، وماكرو — وكلها مبنية على نفس المبدأ:
+        <strong>حدّد المادة، حدّد الضوء، وحدّد وش ممنوع</strong>. لاحظ إن أغلبها فيها قائمة
+        <span class="kw-en">Negatives</span> صريحة — هذي مو زيادة، هذي اللي تمنع النموذج يرجع لعاداته.
+      </p>
+    </div>
+
+    <div class="prompts">
+
+      <!-- 20 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">20</span>
+          <h3 class="prompt-name">ملمع الشفاه</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">ماكرو منتج: قطرة جل شبه شفافة على رأس الأبليكيتور، فقاعات هوا ظاهرة، وخلفية بيضا نظيفة. <strong>برومبت الجمال التجاري القياسي</strong> — بدّل المنتج وخلّ الباقي.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Shot on a high-resolution full-frame digital camera with a 100mm macro lens at f/9, captured from an ultra-tight frontal angle that elevates the product into a sculptural object suspended in space, lighting setup built with a high-key diffused top light paired with controlled side fill to create liquid highlights and soft internal reflections inside the gloss, color tone clean and modern with translucent rose-pink hues floating against a sterile white environment, fine cinematic grain layered with a restrained Ian Buosi–inspired paperscan texture to prevent the image from feeling overly synthetic, product is a lip gloss applicator coated in a generous bead of semi-translucent pink gloss, gel-like and viscous with visible air bubbles and micro droplets clinging to the surface, applicator wand minimal and cylindrical with a matte white finish, scale rendered larger-than-life to emphasize sensuality and texture, textures emphasized in the gloss viscosity, wet surface tension, condensation droplets, soft applicator fibers and smooth plastic casing, background reduced to a seamless high-key white studio void to isolate materiality and color, product placement frozen mid-air with the gloss droplet perched delicately on the applicator tip to suggest softness and gravity, emotion conveyed is indulgent, tactile, quietly seductive, composition centered and vertical with strong negative space reinforcing luxury minimalism, camera motion static to preserve hyper clarity and micro detail, photographer style blending contemporary luxury beauty advertising with editorial still-life precision reminiscent of modern skincare and cosmetic campaigns, vibe clean, sensual, elevated, post processes refined with highlight discipline, micro-contrast tuning, and true-to-material color grading, aesthetics rooted in modern beauty minimalism where texture, light, and restraint transform a cosmetic formula into a fashion-level object of desire.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 21 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">21</span>
+          <h3 class="prompt-name">تعليقة حرف النون</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">حملة مجوهرات بدون وجه: من الفك لأعلى الصدر، ساتان قرمزي، والتعليقة ١٫٥ سم بالضبط. <strong>لاحظ إنه يحدد المقاس بالسنتي</strong> — هذي الجملة الوحيدة اللي تمنع النموذج يكبّر القطعة.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Luxury jewelry campaign photograph: a close-up shot of a woman wearing the necklace, cropped so her face is NOT visible — the frame shows only from her jawline and neck down to her upper chest and décolletage, with her smooth warm-toned skin filling most of the frame. She wears an elegant draped deep crimson-red satin garment across one shoulder and her chest, its rich folds catching the light, and the background behind her is the same deep warm crimson red as the reference beauty shot (second reference image) — the exact same red family and tonality as the campaign set. The very fine plain gold cable-link chain is worn naturally around her neck, resting on her skin with a soft realistic contact shadow, and the pendant hangs at the center of her chest below the base of her throat. SCALE: the pendant is tiny and dainty — exactly 1.5 centimeters in diameter, fingertip-sized, delicate against her chest, never oversized. The pendant is the exact piece from the first reference image (the product sheet), every detail preserved: a small round brushed satin-gold disc, matte with fine directional brushed-metal grain, never mirror polish, the Arabic letter noon (ن) pierced fully through the disc as an open cut-out — the crescent letter shape and its small lozenge-shaped dot as empty negative space with her skin showing through the openings — and five small round brilliant-cut diamonds in white-gold bezel settings arced along the lower outer edge of the disc, center stone slightly larger, showing only soft white surface reflections — restrained shine, no starburst sparkle, not transparent. The necklace is photographed in the scene, not composited: the gold lit by the same warm soft key light as her skin, subtle red ambient bounce from the garment and background on its edges, shared color grade and shallow depth of field, the chain and pendant resting naturally on the skin with true contact shadows. Natural skin texture with fine pores. No face, no text, no logos. High-end jewelry campaign photography.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 22 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">22</span>
+          <h3 class="prompt-name">الحقل الذهبي</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">يشتغل مع صورة مرجعية: يحافظ على الموديل والملابس حرفيًا، ويغيّر <strong>التصوير</strong> بس. <strong>أقوى برومبت في المكتبة لو عندك منتج أو لوك جاهز</strong> وتبي تعيد تصويره في مكان ثاني.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Reproduce the woman and the full outfit from the attached reference image exactly and faithfully — her face, bone structure, skin, hair colour, hair length and hair texture, and every element of the garment: its cut, proportion, construction, seams, closures, colour and fabric weight. Do not redesign, restyle, substitute, recolour or "improve" any part of the wardrobe or the identity. Everything below describes only how she is photographed.
+
+Editorial full-length fashion photograph, 9:16 vertical. Camera at chest height, dead level, no tilt — the distant hill ridge crosses the frame exactly at her shoulder line. Subject centred and standing in the middle third; the upper 30 percent of the frame is empty pale sky, the lower 70 percent unbroken dry grass. Head just below the top third line, full body down to the grass line at her feet.
+
+She stands square to camera, weight settled evenly, shoulders relaxed and slightly dropped, chin lifted a fraction so she looks very slightly down her nose. Direct unperformed gaze straight into the lens — no smile, mouth closed and soft, jaw unclenched. Both hands pushed deep into her side pockets, wrists disappearing into the cloth, no fingers visible at all; if the garment from the reference has no pockets, both hands hang loose and fully relaxed at her sides with fingers naturally separated and slightly curled, palms turned toward the thighs.
+
+Skin left completely real — visible pores, vellus hair catching the light along the jaw and hairline, faint capillary redness at the inner eye corners and the rim of the nostril, iris fibre and an irregular soft limbal ring. Hair moving in a steady low wind: individual strands separating and lifting off the crown with air between them, two thin strands pressed flat across one cheekbone.
+
+Material behaviour of the referenced garment: it reads under this light as broad simple masses with almost no specular — no sheen, no travelling highlight down any edge. Only the largest structural folds are legible, sitting where the cloth's own weight puts them. Flat, even frontal illumination across the torso, no raking light, no contour shadows, the cloth hanging away from the body rather than moulding to it.
+
+Setting: open rolling grassland at the end of the day, waist-high dry wheat-coloured grass, individually resolved stalks and seed heads in the near foreground blurring into a continuous warm field texture at mid distance. Two low ochre hills close the middle ground, a hazy blue-grey mountain ridge far behind, above it a washed near-white sky with one soft indistinct cloud mass at upper right. No structures, no path, no signage, no other figures.
+
+Light: flat, near-shadowless found daylight from a low sun heavily veiled by atmospheric haze — the whole sky acting as one enormous diffuser. No hard key, no cast shadow on the ground, no hotspot anywhere on the face or the cloth; shading is open, warm and gradual, sitting only inside the folds. A single broad low catchlight in each eye. Nothing in this frame is lit; everything is found.
+
+Optics: 85mm from a distance, deep depth of field, the figure sharp head to hem and the near grass stalks sharp; mid-field grass and the mountain ridge fall gently soft with genuine atmospheric recession, not blur.
+
+Palette: the referenced garment's own colour against warm ochre and dry wheat across the entire lower frame and pale desaturated grey-blue in the sky. Nothing else in the frame carries colour.
+
+Grade: warm film — gently desaturated mids, blacks lifted with a brown toe, warm highlights held short of yellow, fine natural grain, no vignette. Chosen and named, not a generic cinematic drift.
+
+Imperfections: two thin hair strands stuck across one cheekbone and crossing the eye line · one shoulder of the garment sitting a few millimetres higher than the other where the arm has pulled it · a single broken grass stalk bent forward at a sharp angle in the near-left foreground.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 23 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">23</span>
+          <h3 class="prompt-name">انعكاس الشمبانيا</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">القصة كلها داخل عدسة نظارة سباحة. <strong>الانعكاس هو البطل، مو الوجه</strong> — وهذي أذكى طريقة تحكي إعلان في صورة وحدة.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Ultra-realistic luxury champagne campaign image, extreme macro of the upper-right quadrant of a man's face, vertical 3:4, camera slightly above eye level and angled down — dark wet hairline at the top edge, the brow and eye hidden behind a mirrored swimming goggle filling the centre of the frame, the bridge of the nose and upper cheek running out of the bottom-right corner.
+
+Subject: an adult man in his thirties, warm sun-tanned Mediterranean skin, dark wet hair pushed back off the forehead, a thick natural untrimmed brow visible above the goggle rim, the eye itself completely concealed by the mirror.
+
+Hero material: a black rubber-framed competition swimming goggle with a fully mirrored chrome-blue lens, the lens convex so it bends and compresses what it reflects. The reflection is the entire story — a man in an open white cotton shirt and dark sunglasses standing in bright sunlight, pouring pale rose champagne from a dark green bottle into a coupe glass, the pour caught mid-stream as a continuous ribbon, a green treeline and pale blue sky behind him. The mirror coating carries fine radial smearing and two or three dried water spots.
+
+Detail: real skin — open pores across the cheek and the side of the nose, fine vellus hair catching the sun, two small dark moles, faint sun-freckling, capillary warmth at the nostril crease. Individual beaded water droplets sit proud on the skin, each holding its own tiny hard specular highlight and casting a small soft shadow beneath; some droplets have merged into larger irregular beads, a few have flattened and lost their dome. Wet hair separated into distinct strands with water tracking down them. Droplets cling along the black rubber goggle frame and pool at the lens edge.
+
+Finish: the skin is wet and sheened but not oily; the lens is a hard mirror; the rubber frame is glossy black. Many controlled speculars, carried by the droplets and the lens — the skin itself stays matte underneath the water.
+
+Optics: 100mm macro, deep depth of field, sharp from the skin pores through the droplets and into the reflected scene, so the bottle, the pour and the glass all stay legible inside the lens.
+
+Light: full hard midday sun from high and slightly behind camera-right — a direct small source throwing crisp tiny shadows under every droplet, a hot bright edge along the top of the goggle frame, and one blown specular streak across the upper curve of the lens. No fill; the shadow inside the brow and beneath the goggle strap goes deep but stays colour-true, never muddy.
+
+Colour: warm sun-tanned amber skin against the cool chrome-blue of the mirror, with pale rose pink as the single accent, appearing only inside the reflection. A deliberate warm-skin against cool-mirror split, produced by the subject matter and not by a grade.
+
+Grade: neutral and true-to-life, contemporary commercial digital — clean whites, natural saturation, no filmic wash, no cinematic drift.
+
+Negatives: no text, no logos, no watermarks, no typography, no visible eye behind the lens, no transparent or clear lens, no plastic skin, no over-smoothing, no airbrushing, no beauty filter, no symmetrical or repeating droplets, no CGI render, no illustration, no teal-and-orange grade, no lens flare, no bloom, no soft diffused lighting, no studio softbox, no shallow blurred background inside the reflection, no distorted or duplicated hands on the pouring figure, no extra fingers.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 24 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">24</span>
+          <h3 class="prompt-name">الأيادي والضوء المقصوص</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">شعاع واحد مقصوص بحواف حادة يرمي ظلال أصابع طويلة على الخلفية. <strong>إضاءة المجوهرات الإدارتورية</strong> — والقائمة السلبية هنا تحميك من أصابع زايدة.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Ultra-realistic luxury jewelry campaign, extreme focus on two elegant feminine hands raised and reaching upward in a graceful ballet-like gesture, one hand crossing gently in front of the other, fingers long and extended, wrists elongated. Vertical 4:5.
+
+The hands wear the exact ring(s) shown in the attached reference image — reproduce the jewelry faithfully: same stones, same pear cuts, same setting, same metal, same proportions, correct scale on the finger. Do not redesign or restyle the piece. The diamonds are the brightest specular event in the frame, throwing correct fire and sparkle under the hard beam.
+
+Subject: warm golden-tan skin with real texture — visible pores, knuckle creases, tendons and faint veins raised by the gesture, fine vellus hairs, natural well-groomed nails with a pale nude manicure; the skin lightly sheened so it catches bright, crisp speculars along the knuckles and the backs of the fingers; graceful, refined, not stiff.
+
+Optics: 100mm macro, sharp on the rings and skin detail, deep enough depth of field to hold both hands, gentle falloff, no background blur.
+
+Light: CUT LIGHT — a single hard, small light source (bare fresnel / optical spot) raking the hands from the upper left, precisely shaped and flagged with cutters so the beam is carved to fall only across the hands and stops with a clean, defined edge. This produces long, hard-edged, crisp-edged cast shadows of the fingers thrown across the background, a sharp light-to-shadow transition on the skin, bright speculars where the beam hits and deep true-black shadow where it is cut. High contrast, controlled, editorial. The background is lit separately as a soft luminous cool gradient — a gentle glow at the upper left falling smoothly into deep shadow toward the lower and right edges — kept clean of the hard key.
+
+Palette: warm golden skin against a cool blue-gray gradient background. Natural warm-key / cool-background colour-temperature separation from the light, not a colour grade. Neutral true-to-life grade, no film emulation.
+
+Negative: no soft flat lighting, no diffused wraparound light, no soft-edged fuzzy shadows, no extra fingers, no missing fingers, no fused or warped fingers, no bent-wrong joints, no plastic skin, no over-smoothing, no airbrushing, no CGI render, no waxy skin, no over-saturation, no HDR glow, no bloom, no fake sparkle stars, no redesigned jewelry, no altered setting, no floating ring, no teal-and-orange grade, no cinematic LUT, no logos, no text, no illustration.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 25 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">25</span>
+          <h3 class="prompt-name">الثوب والمصعد</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">لقطة كاملة من زاوية منخفضة، شبه أحادية اللون، والثوب هو أفتح شي في الكادر. <strong>برومبت خليجي المزاج بالكامل</strong> — ويوصف بناء الثوب بدقة عشان النموذج ما يخربه.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Ultra-realistic high-fashion editorial, single tall refined Gulf/Saudi male model dominating a glass elevator inside a modern skyscraper at night, low-angle full-body shot looking up so the figure towers. Dim, low-key, high-contrast, near-monochrome metallic mood. Vertical 4:5 campaign framing.
+
+Subject: tall, lean, strong sharp jawline, warm brown skin with real pores and texture rendered in dramatic light, slicked-back slightly wet hair with individual strands and a natural sheen, a few strands loose. Oversized black rectangular sunglasses, matte frame.
+
+Wardrobe & material: a pristine off-white Saudi thobe with a faint cool metallic sheen in the weave, long sleeves, a clean banded collar, a neat front placket, tailored and crisp with real cotton drape and a few honest soft creases at the elbow and where it breaks near the ankle; polished silver cufflinks and a slim steel watch as metallic accents. One hand resting on the brushed-steel handrail, the other relaxed at the side; the thobe is the brightest, most luminous value in an otherwise dark frame.
+
+Detail & reflection (authored, physically correct): a single hard light source rakes across the scene; the sunglasses lenses catch that light as a hard compressed reflection along with distant city glints, curved correctly; the brushed-steel handrail and elevator trim carry sharp anisotropic specular streaks; the transparent glass walls show low soft reflections and frosted silhouettes with one faint fingerprint smudge. Outside the glass: dark blurred geometric glass architecture with scattered cool city lights, deep out of focus.
+
+Optics: 35mm low-angle, slightly wide to hold the full figure and architecture, sharp on the face and thobe texture with deep falloff toward the edges.
+
+Light: dim, low-key, single hard directional source from high and to one side, strong chiaroscuro, deep true-black shadows, a bright rim separating the shoulder and jaw from the dark, minimal fill; black is allowed to be black. Metallic surfaces are the only bright specular events besides the rim.
+
+Palette: near-monochrome — gunmetal, steel-blue, graphite and black, with the off-white thobe and warm skin as the only lifted values. Contrast comes from the light, not a grade. Neutral true-to-life grade, no film emulation.
+
+Negative: no plastic skin, no CGI render, no over-smoothing, no airbrushing, no waxy fabric, no mannequin stiffness, no flat even lighting, no lifted shadows, no over-saturation, no HDR glow, no bloom, no lens flare balls, no teal-and-orange grade, no cinematic LUT, no warped or impossible reflections, no extra fingers, no distorted glasses, no incorrect thobe construction, no logos, no text, no illustration.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 26 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">26</span>
+          <h3 class="prompt-name">من داخل الكرتون</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">فيش آي من جوّا الصندوق للأعلى، واليد داخلة على العدسة. <strong>برومبت الأنبوكسينق اللي يشتغل للبراندات السعودية</strong> — وأبراج الKAFD في الخلفية تعطيه المكان.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">An ultra-wide fisheye shot from inside an open kraft cardboard carton looking straight up out of the box opening, the four inner corrugated walls rising around all four edges in the extreme foreground, soft-focus and warmly lit, framing a circular fisheye view above. A Saudi woman in her late twenties leans over the box opening, caught in the single gesture the frame is built around: reaching one hand down and forward through the opening directly into the lens, palm and splayed fingers filling the center foreground at exaggerated fisheye scale, while her face and shoulders curve back smaller above. She wears a flowing camel-beige open abaya over a matching inner dress, with a softly draped beige shayla scarf framing her face and covering her hair, layered delicate gold necklaces at the throat, small gold drop earrings. Fair-to-olive skin with a luminous natural glow and visible real texture, warm undertone, softly defined brows, a poised warm expression, eyes to the lens, a gentle confident smile. A slim gold ring on the reaching hand, a wavy gold cuff at the wrist, warm highlights on the gold. Beyond the box opening, the modern towers of Riyadh's King Abdullah Financial District curve inward from the fisheye distortion, a clear desert-blue sky above, a pale stone plaza far below. A single hard direct source of high Gulf sunlight from the top-left throws a bright lens flare across the sky, warm bounce onto the near cardboard walls, the box interior in gentle shadow. High-clarity finish, warm camel-and-honey against desert-azure, fine subtle grain, moderate-to-punchy contrast. Vertical 4:5, ~15mm fisheye, deep depth of field with the nearest cardboard edge softly out of focus, strong barrel distortion. No text, no logos, no watermarks. Elegant, warm, sunlit, and confident.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 27 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">27</span>
+          <h3 class="prompt-name">لحظة الوعي</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">انقسام حراري: مفتاح ذهبي دافي على نص الوجه وظل بارد على النص الثاني. <strong>مبني للأغلفة والثمبنيلز</strong> — فيه مساحة باردة فاضية على اليمين للعنوان.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">A medium-close portrait at eye level, a young MENA creative in their late twenties caught in the single instant the frame is built around — turning toward a warm light entering from camera-left, one hand lifting mid-reach as if to meet it, the exact moment the expression shifts from guarded to awake. Dark hair with natural texture and a loose fall, the edge catching a warm gold rim where it meets the light. Fair-to-olive skin with visible natural texture — pores and fine detail apparent, warm undertone, no airbrushing, a faint sheen of real skin. The expression is the whole image: lips just parting into the start of an unforced smile, eyes lit and widening as they catch the light, wonder that reads as remembered rather than performed. They wear relaxed, textured creative's clothing — a soft linen shirt in muted oatmeal, sleeves pushed up, a trace of colored paint on the fingers of the reaching hand as the single accent of play. Background is a cool charcoal-blue near-dark studio interior dissolving into deep shadow, with generous cool negative space held to the right of frame for later title placement. A single warm gold directional light source from camera-left floods across the face, neck, and reaching hand — its one job the temperature split: honey-gold key on the awakening side, cool blue fill left behind in the shadows, a soft saturated accent glow (a screen's colored light) grazing the jaw. Matte finish, deep but not fully crushed blacks, fine subtle film-style grain concentrated in the cool shadow, low-to-moderate contrast, warm-gold-into-cool-shadow grade. Vertical 4:5, medium-close crop chest-up, 85mm compression, shallow depth of field. No text, no logos, no watermarks. Awakening, warm, quietly joyful.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 28 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">28</span>
+          <h3 class="prompt-name">الشنطة الفضية</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">صيغة مختلفة تمامًا: البرومبت مكتوب كحقول (نوع اللقطة، الموضوع، البيئة، الإضاءة…) مو كفقرة. <strong>جرّب الصيغتين وشوف أيها يضبط مع نموذجك</strong> — بعض النماذج تحب الحقول أكثر.</p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">Photo Type: Low-angle medium shot, high-fashion editorial campaign
+Subject: Young Caucasian female model with sleek platinum blonde hair in a low bun, stoic expression
+Subject Position: Angled three-quarter view, chin raised, holding a handbag at hip height
+Subject Focus: Tack sharp focus on subject and metallic handbag
+Subject Wearing: Oversized black wool coat, black turtleneck, sleek black leather trousers, dark wrap sunglasses, holding a structured metallic silver leather handbag
+Environment: Minimalist studio setting with a neutral dark backdrop
+Environment Focus: Softly blurred seamless background
+Environment Description: Sleek, high-contrast, moody, modern high-fashion atmosphere
+Emotion: Aloof confidence and cold modern luxury
+Lighting: High-contrast directional chiaroscuro lighting with a diagonal beam creating sharp highlights
+Time of Day: Studio lighting
+Textures: Reflective metallic leather, matte wool fabric grain, glossy leather, slick hair
+Image Type: High-contrast fashion editorial, cool muted color grading
+Film Stock: Crisp digital camera aesthetic</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+      <!-- 29 -->
+      <article class="prompt">
+        <div class="prompt-head">
+          <span class="prompt-id">29</span>
+          <h3 class="prompt-name">قرط سواروفسكي</h3>
+          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+        </div>
+        <p class="prompt-note">أدق برومبت في المكتبة: يوصف حلقتين متشابكتين — وحدة ملساء ووحدة مرصّعة — ويمنع النموذج يخلطهم بثلاث جمل صريحة. <strong>كذا تحمي تفصيلة منتج من خيال النموذج.</strong></p>
+        <div class="prompt-wrap">
+          <pre class="prompt-pre">[FRAMING]
+Three-quarter front portrait, head-and-shoulders crop, framed from mid-chest to crown. Model Stacy — lean angular face, blue-grey eyes, natural freckles, medium-fair skin with visible pore texture — gazes directly into camera with calm, unblinking intensity. Head rotated approximately 20° to camera-right, enough to reveal her left ear and the earring in full lateral clarity. Hair down, slightly tousled, loose blonde strands falling across shoulders and jaw. Earring occupies a prominent, sharply resolved zone in the left third of frame. Composition follows rule of thirds: earring anchors the left vertical axis, face occupies center-right. 4:5 aspect ratio.
+
+[PRODUCT]
+Swarovski Dextera double-hoop earring, rhodium-plated. TWO INTERLOCKING CIRCULAR HOOPS OF EQUAL DIAMETER, looped through one another like chain links — this chain-link geometry is non-negotiable and must be reproduced exactly. UPPER HOOP: plain, smooth, perfectly uniform polished rhodium-silver tubular ring — completely stone-free, zero texture, zero crystals, mirror-like specular surface catching a single bright rim of hard light along its upper arc. LOWER HOOP: fully encrusted with dense pavé-set crystals around its entire 360° circumference — every millimeter of the lower hoop's tubular surface covered in tightly packed faceted crystals. The upper hoop clips to the earlobe; the pavé lower hoop hangs freely below, looped through the upper. No hybrid design. No crystals on the upper hoop. No bare metal on the lower hoop. Sharp in-camera focus on earring surface — same film grain and tonal rendering as skin, hair, and fabric.
+
+[PERSON CONTEXT]
+Model Stacy: blonde, blue-grey eyes, angular jaw, medium-fair skin with natural freckles and visible pore micro-texture. Partial face — full face visible from chin to crown, direct gaze. Left ear and neck fully revealed by head turn. No heavy makeup — clean editorial skin, natural brow, bare lip.
+
+[INTERACTION]
+Model wearing earring. Static, composed. No gesture. The earring hangs naturally from the left earlobe, upper polished hoop at lobe level, pavé lower hoop suspended below. Stillness communicates quiet authority.
+
+[LIGHTING]
+Single hard key light, side raking, 45° camera-left, positioned at face height. Hard direct strobe, no diffusion. 5500K daylight neutral. Creates dramatic chiaroscuro: left side of face — forehead, cheekbone, nose bridge — receives sharp, high-contrast illumination. Right side of face and neck falls into deep shadow with minimal fill — shadow edge is crisp, not graduated. The polished upper hoop of the earring catches a bright, sharp rim of specular light along its top arc — a single clean highlight line on the smooth rhodium surface. The pavé lower hoop scatters multiple pinpoint directional sparkle glints across its crystal facets — hard light produces distinct crystal catchlights, not soft glow. No fill reflector. Deep charcoal seamless paper backdrop, fading to near-black at frame edges, slight tonal variation from ambient scatter — not flat, not banded. Under-camera fill: none. Shadow on right jaw and neck is deep and unrelieved.
+
+[LENS & CAMERA]
+Shot on 85mm portrait lens, aperture f/2.8, shallow depth of field. Sharp focus plane locked on earring and left cheekbone simultaneously. Background falls into soft dark bokeh. Slight focus roll-off on right side of face. No zoom compression artifacts. Analog film simulation: Ilford HP5 pushed one stop — visible silver halide grain unified across skin, hair, fabric weave, and jewelry surface. Grain is organic, not digital noise. Full monochrome — no color channel, no toning, no selenium or sepia cast. Pure silver-gelatin tonal range: deep blacks, rich mid-greys, bright but not clipped highlights on the polished hoop.
+
+[SKIN &amp; DETAIL]
+Realistic skin texture — natural pores, micro-imperfections, faint freckles across nose and cheeks visible in the lit zone. No smoothing, no retouching, no airbrushing.</pre>
+          <div class="prompt-fade"></div>
+        </div>
+        <div class="prompt-foot"><button class="btn-link" type="button" data-toggle>عرض البرومبت كامل</button></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta">
+    <a class="cta-banner" href="https://malearnsa.com/creative-ai-workshop/" target="_blank" rel="noopener">
+      <img src="assets/prompt-library/ciw-banner.jpg" alt="معادلة صناعة الإلهام — ورشة MA Learn المباشرة" width="1400" height="787" loading="lazy">
+    </a>
+    <div class="cta-inner">
+    <div class="cta-eyebrow">MA Learn · ورشة مباشرة</div>
+    <h2 class="cta-title">البرومبتات تعطيك صور. المعادلة تعطيك شغل.</h2>
+    <p class="cta-body">
+      هذي المكتبة تخليك تطلّع صورة تشبه الإعلانات. بس الفرق بين واحد يطلّع صور حلوة وواحد
+      يشتغل فيها ويبيعها هو <strong>النظام</strong>. في ورشة <strong>«معادلة صناعة الإلهام 2.0»</strong>
+      ما نعلّمك أداة ولا قائمة برومبتات — نبني معك نظام إبداعي كامل بالذكاء الاصطناعي،
+      من الفكرة للمخرج النهائي اللي تقدر تسلّمه لعميل.
+    </p>
+    <ul class="cta-list">
+      <li>ثلاثة أيام مباشرة مع ماجد عنقاوي — مو تسجيل</li>
+      <li>تبني نظامك الإبداعي خطوة بخطوة، مو مجرد أدوات متفرقة</li>
+      <li>تطبيق عملي على بريف حقيقي، مع متابعة على شغلك</li>
+      <li>ثلاثين مقعد لكل دفعة عشان كل واحد ياخذ حقه</li>
+    </ul>
+    <div class="cta-dates">
+      <div class="cta-date"><b>الدفعة الرابعة</b>٢٥–٢٧ أغسطس</div>
+      <div class="cta-date"><b>الدفعة الخامسة</b>٨–١٠ سبتمبر</div>
+      <div class="cta-date"><b>الدفعة السادسة</b>١٥–١٧ سبتمبر</div>
+    </div>
+    <div class="cta-price"><b>١٬٣٩٩ ريال</b> · المقعد</div>
+    <a class="btn" href="https://malearnsa.com/creative-ai-workshop/" target="_blank" rel="noopener">اعرف تفاصيل الورشة</a>
+    <div class="cta-note">المقاعد محدودة لكل دفعة — التفاصيل والمواعيد المحدّثة على الصفحة.</div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-brand">MA Learn</div>
+    <div class="footer-meta">Ready-Made Prompt Library · 29 prompts · 2026</div>
+  </footer>
+
+</div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  function copy(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).catch(fallback);
+      return;
+    }
+    fallback();
+
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (err) { /* clipboard unavailable */ }
+      document.body.removeChild(ta);
+    }
+  }
+
+  function flash(btn, label) {
+    var original = btn.getAttribute("data-label") || btn.textContent;
+    btn.setAttribute("data-label", original);
+    btn.textContent = label;
+    setTimeout(function () { btn.textContent = original; }, 1500);
+  }
+
+  document.addEventListener("click", function (e) {
+    var toggle = e.target.closest("[data-toggle]");
+    if (toggle) {
+      var card = toggle.closest(".prompt");
+      var open = card.classList.toggle("open");
+      toggle.textContent = open ? "طيّ البرومبت" : "عرض البرومبت كامل";
+      if (!open) { card.scrollIntoView({ block: "nearest" }); }
+      return;
+    }
+
+    var btn = e.target.closest("[data-copy]");
+    if (btn) {
+      var pre = btn.closest(".prompt").querySelector(".prompt-pre");
+      copy(pre.textContent.trim());
+      flash(btn, "تم النسخ");
+    }
+  });
+})();
+</script>
+</body>
+</html>
