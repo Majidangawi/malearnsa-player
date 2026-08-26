@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <!-- CIW V2 course reference — Fashion Campaign Direction (bilingual). Design system: ma3adala 2.0 poster-dark. -->
+  <title>اتجاهات حملات الأزياء · Fashion Campaign Direction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family:'Gumela'; src:url('../fonts/gumela-arabic-bold.otf') format('opentype'); font-weight:700; font-display:swap; }
+    @font-face { font-family:'Gumela'; src:url('../fonts/gumela-arabic-regular.otf') format('opentype'); font-weight:400; font-display:swap; }
+
+    /* ---------- Design system: poster-dark × chunky rounded (ma3adala 2.0) ---------- */
+    :root{
+      --bg:#151009; --bg-2:#1d1610; --card:#231a12; --card-2:#2a2016;
+      --ink:#f8f0e6; --muted:#cbbba9; --faint:#96897a;
+      --accent:#ff6a3c; --accent-hot:#ff8a5c; --accent-deep:#c8390f;
+      --on-accent:#2a1105;
+      --lav:#cfc2f5; --lav-soft:#e4dcfb; --lav-deep:#4f4380; --on-lav:#221a3d;
+      --line:rgba(248,240,230,.11); --line-strong:rgba(248,240,230,.2);
+      --r-xl:34px; --r-lg:28px; --r-md:22px; --r-pill:999px;
+      --disp:'Gumela','Cairo',sans-serif; --body:'Cairo',sans-serif;
+      --ease:cubic-bezier(.22,1,.36,1);
+    }
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family:var(--body); background:var(--bg); color:var(--ink);
+      line-height:1.75; overflow-x:hidden; -webkit-font-smoothing:antialiased;
+    }
+    ::selection{ background:var(--accent); color:var(--on-accent); }
+    img{ display:block; max-width:100%; }
+    a{ color:inherit; }
+
+    .glow-wrap{ position:relative; }
+    .glow-wrap::before{
+      content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+      background:
+        radial-gradient(58% 44% at 50% -4%, rgba(255,96,44,.30), transparent 68%),
+        radial-gradient(34% 26% at 88% 22%, rgba(255,132,72,.10), transparent 70%);
+    }
+
+    .wrap{ width:min(1120px, 92%); margin-inline:auto; position:relative; z-index:1; }
+
+    .disp{ font-family:var(--disp); font-weight:700; line-height:1.4; letter-spacing:-0.01em; }
+    h1.disp{ font-size:clamp(1.62rem, 5.2vw, 3.05rem); }
+    .hl{ color:var(--accent-hot); }
+    .lead{ color:var(--muted); font-size:clamp(.98rem, 1.8vw, 1.14rem); }
+
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px; padding:8px 18px 8px 20px;
+      border:1.5px solid var(--line-strong); border-radius:var(--r-pill);
+      font-size:.8rem; font-weight:800; color:var(--muted);
+      background:rgba(248,240,230,.04);
+    }
+    .eyebrow .num{
+      background:var(--accent); color:var(--on-accent); font-weight:900;
+      border-radius:var(--r-pill); padding:2px 12px; font-size:.78rem;
+    }
+    .eyebrow.lav-e .num{ background:var(--lav); color:var(--on-lav); }
+
+    .meta-line{ color:var(--faint); font-weight:700; font-size:.9rem; display:flex; flex-wrap:wrap; gap:8px 0; justify-content:center; align-items:center; }
+    .meta-line .sep{ margin-inline:14px; color:var(--accent); }
+
+    /* ---------- hero ---------- */
+    header.hero{ text-align:center; padding-block:clamp(72px, 11vw, 140px) clamp(48px, 7vw, 88px); }
+    .hero .eyebrow{ margin-bottom:28px; }
+    .hero h1{ max-width:840px; margin-inline:auto; }
+    .hero .lead{ max-width:640px; margin:20px auto 0; }
+    .hero .meta-line{ margin-top:34px; }
+
+    /* ---------- campaign sections ---------- */
+    .camp{ padding-block:clamp(56px, 8vw, 104px); border-top:1.5px solid var(--line); }
+    .camp-head{ display:flex; flex-direction:column; align-items:flex-start; gap:16px; margin-bottom:30px; }
+    .camp-title{ font-family:var(--disp); font-weight:700; font-size:clamp(1.3rem, 3vw, 1.9rem); line-height:1.35; }
+    .camp-title .en{ direction:ltr; unicode-bidi:isolate; }
+    .camp-title .season{ color:var(--faint); font-family:var(--body); font-weight:700; font-size:.62em; margin-inline-start:12px; white-space:nowrap; }
+
+    .shots{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; direction:ltr; }
+    .shots img{
+      width:100%; height:100%; object-fit:cover; aspect-ratio:var(--ar, 4/5);
+      border-radius:var(--r-md); border:1.5px solid var(--line);
+      background:var(--card);
+    }
+    .shots.land{ --ar:3/2; }
+
+    /* bilingual direction block */
+    .dir{
+      margin-top:26px; display:grid; grid-template-columns:1fr 1fr; gap:14px;
+    }
+    .dir-card{
+      background:var(--card); border:1.5px solid var(--line); border-radius:var(--r-lg);
+      padding:clamp(22px, 3vw, 32px);
+    }
+    .dir-card .tag{
+      display:inline-block; font-size:.72rem; font-weight:900; letter-spacing:.08em;
+      color:var(--on-accent); background:var(--accent); border-radius:var(--r-pill);
+      padding:3px 14px; margin-bottom:14px;
+    }
+    .dir-card.en{ direction:ltr; text-align:left; }
+    .dir-card.en .tag{ background:var(--lav); color:var(--on-lav); letter-spacing:.14em; text-transform:uppercase; }
+    .dir-card p{ color:var(--muted); font-size:clamp(.95rem, 1.6vw, 1.06rem); font-weight:600; }
+    .dir-card.en p{ font-weight:400; line-height:1.7; }
+
+    /* footer */
+    footer{ text-align:center; padding-block:clamp(56px, 8vw, 96px); border-top:1.5px solid var(--line); }
+
+    @media (max-width:760px){
+      .shots{ grid-template-columns:repeat(3, 1fr); gap:8px; }
+      .shots img{ border-radius:14px; }
+      .dir{ grid-template-columns:1fr; }
+      .camp-title .season{ display:block; margin:6px 0 0; }
+    }
+    @media (max-width:480px){
+      .shots{ grid-template-columns:1fr 1fr; }
+      .shots img:first-child{ grid-column:1 / -1; --ar:16/10; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glow-wrap">
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow"><span class="num">١٠ حملات</span> مرجع إبداعي · ورشة الذكاء الاصطناعي الإبداعي</span>
+      <h1 class="disp">اتجاهات إبداعية <span class="hl">لحملات الأزياء</span></h1>
+      <p class="lead">عشر حملات عالمية، وخلاصة الاتجاه الإبداعي وراء كل وحدة — بالعربي والإنجليزي. لاحظ كيف كل اتجاه هو فكرة وحدة واضحة تُنفَّذ بلا تردد.</p>
+      <div class="meta-line">
+        <span>Fashion Campaign Direction</span><span class="sep">·</span>
+        <span>Creative Direction Reference</span><span class="sep">·</span>
+        <span>MA Learn</span>
+      </div>
+    </div>
+  </header>
+</div>
+
+<main class="wrap">
+
+  <!-- 01 Gucci -->
+  <section class="camp" id="gucci">
+    <div class="camp-head">
+      <span class="eyebrow"><span class="num">01</span> Gucci</span>
+      <h2 class="camp-title"><span class="en">Gucci — “Of Course a Horse”</span><span class="season">Spring/Summer 2020</span></h2>
+    </div>
+    <div class="shots land">
+      <img src="assets/fashion-campaign-direction/img-01.jpg" alt="Gucci — Of Course a Horse — horse inside an airplane cabin">
+      <img src="assets/fashion-campaign-direction/img-02.jpg" alt="Gucci — Of Course a Horse — horse at a street café table">
+      <img src="assets/fashion-campaign-direction/img-03.jpg" alt="Gucci — Of Course a Horse — model riding a horse through a pool">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>أدخِل الخيول — رمز الحرية — في مواقف إنسانية يومية عادية، لخلق عالم عبثي يتعايش فيه الخيل والإنسان.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Bring horses—the symbol of liberty—into ordinary human situations, creating an absurd world where horses and people coexist.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Diesel -->
+  <section class="camp" id="diesel">
+    <div class="camp-head">
+      <span class="eyebrow lav-e"><span class="num">02</span> Diesel</span>
+      <h2 class="camp-title"><span class="en">Diesel — “Be Stupid”</span><span class="season">2010</span></h2>
+    </div>
+    <div class="shots land">
+      <img src="assets/fashion-campaign-direction/img-04.jpg" alt="Diesel — Be Stupid — climbing a fence with flowers">
+      <img src="assets/fashion-campaign-direction/img-05.jpg" alt="Diesel — Be Stupid — swan float, only the stupid can be truly brilliant">
+      <img src="assets/fashion-campaign-direction/img-06.jpg" alt="Diesel — Be Stupid — billboard in the street">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>احتفِ بالقرار غير العقلاني: أن تتصرّف بدل ما تلعبها آمنة — وحوّل «الغباء» إلى رمز للشجاعة والغريزة والتفرّد.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Celebrate the irrational decision to act rather than play it safe, turning “stupidity” into a symbol of courage, instinct and individuality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Jacquemus -->
+  <section class="camp" id="jacquemus">
+    <div class="camp-head">
+      <span class="eyebrow"><span class="num">03</span> Jacquemus</span>
+      <h2 class="camp-title"><span class="en">Jacquemus — “La Bomba”</span><span class="season">Spring/Summer 2018</span></h2>
+    </div>
+    <div class="shots">
+      <img src="assets/fashion-campaign-direction/img-07.jpg" alt="Jacquemus — La Bomba — backbend on black volcanic beach">
+      <img src="assets/fashion-campaign-direction/img-08.jpg" alt="Jacquemus — La Bomba — beaded dress on volcanic landscape">
+      <img src="assets/fashion-campaign-direction/img-09.jpg" alt="Jacquemus — La Bomba — white dress against dark sky">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>عبّر عن المجموعة من خلال حسّية الصيف المتوسطي وحركته وبساطته، واستخدم الأرض البركانية كتضاد درامي مع الملابس.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Express the collection through the sensuality, movement and simplicity of a Mediterranean summer, using the volcanic landscape as a dramatic counterpoint to the clothes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Loewe Paula's Ibiza -->
+  <section class="camp" id="loewe-paulas">
+    <div class="camp-head">
+      <span class="eyebrow lav-e"><span class="num">04</span> Loewe</span>
+      <h2 class="camp-title"><span class="en">Loewe — “Paula’s Ibiza”</span><span class="season">2020</span></h2>
+    </div>
+    <div class="shots">
+      <img src="assets/fashion-campaign-direction/img-10.jpg" alt="Loewe — Paula's Ibiza — couple in white with birds overhead">
+      <img src="assets/fashion-campaign-direction/img-11.jpg" alt="Loewe — Paula's Ibiza — lying on a bed of marigolds">
+      <img src="assets/fashion-campaign-direction/img-12.jpg" alt="Loewe — Paula's Ibiza — neon looks on a rickshaw">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>حوّل روح إيبيزا إلى عالم بصري من الحرية والحِرفة واللون والعيش الصيفي الغريب الممتع، متجذّر في الإرث البوهيمي لمتجر Paula's.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Turn the spirit of Ibiza into a visual world of freedom, craft, color and eccentric summer living, rooted in the bohemian heritage of Paula’s.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Valentino -->
+  <section class="camp" id="valentino">
+    <div class="camp-head">
+      <span class="eyebrow"><span class="num">05</span> Valentino</span>
+      <h2 class="camp-title"><span class="en">Valentino — “Pink PP”</span><span class="season">Fall/Winter 2022</span></h2>
+    </div>
+    <div class="shots">
+      <img src="assets/fashion-campaign-direction/img-15.jpg" alt="Valentino — Pink PP — Zendaya in pink suit on pink background">
+      <img src="assets/fashion-campaign-direction/img-14.jpg" alt="Valentino — Pink PP — pink coat in pink doorway">
+      <img src="assets/fashion-campaign-direction/img-13.jpg" alt="Valentino — Pink PP — cut-out pink look in motion">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>أزِل كل متغيّر بصري تقريبًا ما عدا وردي Valentino الجديد المميّز، وحوّل العالم كله إلى مسرح أحادي اللون — للّون والشخصية والموضة.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Remove almost every visual variable except Valentino’s new signature pink, turning the entire world into a monochromatic stage for color, personality and fashion.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Miu Miu -->
+  <section class="camp" id="miu-miu">
+    <div class="camp-head">
+      <span class="eyebrow lav-e"><span class="num">06</span> Miu Miu</span>
+      <h2 class="camp-title"><span class="en">Miu Miu — “Character Study”</span><span class="season">Fall/Winter 2022</span></h2>
+    </div>
+    <div class="shots">
+      <img src="assets/fashion-campaign-direction/img-16.jpg" alt="Miu Miu — Character Study — direct portrait, grey blazer">
+      <img src="assets/fashion-campaign-direction/img-17.jpg" alt="Miu Miu — Character Study — laughing portrait">
+      <img src="assets/fashion-campaign-direction/img-18.jpg" alt="Miu Miu — Character Study — portrait against blue curtain">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>تعامل مع الحملة كدراسة شخصية: بورتريهات مباشرة تجعل فردية كل إنسان وحضوره — لا الملابس وحدها — هي الموضوع.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Treat the campaign as a study of character, using direct portraits to make each person's individuality and attitude—not the clothes alone—the subject.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Loewe Illusionary Moments -->
+  <section class="camp" id="loewe-illusionary">
+    <div class="camp-head">
+      <span class="eyebrow"><span class="num">07</span> Loewe</span>
+      <h2 class="camp-title"><span class="en">Loewe — “Illusionary Moments”</span><span class="season">Spring/Summer 2023</span></h2>
+    </div>
+    <div class="shots">
+      <img src="assets/fashion-campaign-direction/img-20.jpg" alt="Loewe — Illusionary Moments — striped balloon dress">
+      <img src="assets/fashion-campaign-direction/img-21.jpg" alt="Loewe — Illusionary Moments — portrait with yellow bag">
+      <img src="assets/fashion-campaign-direction/img-19.jpg" alt="Loewe — Illusionary Moments — logo cover with sculptural red look">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>حوّل الحملة إلى خدعة مسرحية: تلاعَب بالمقياس والمنظور والإكسسوارات وجسد الإنسان، حتى يتساءل المشاهد: وش الحقيقي هنا؟</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Turn the campaign into a theatrical illusion, manipulating scale, perspective, props and the human body so that the viewer questions what is real.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 Moschino -->
+  <section class="camp" id="moschino">
+    <div class="camp-head">
+      <span class="eyebrow lav-e"><span class="num">08</span> Moschino</span>
+      <h2 class="camp-title"><span class="en">Moschino</span><span class="season">Fall/Winter 2022</span></h2>
+    </div>
+    <div class="shots">
+      <img src="assets/fashion-campaign-direction/img-23.jpg" alt="Moschino FW22 — black and white group tableau">
+      <img src="assets/fashion-campaign-direction/img-24.jpg" alt="Moschino FW22 — candelabra and shadows">
+      <img src="assets/fashion-campaign-direction/img-22.jpg" alt="Moschino FW22 — couture group with lampshade hat">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>حوّل النساء إلى قطع أثاث مزخرفة حيّة، وادمج العارضات والملابس والأغراض في عالم سريالي واحد من البذخ الباروكي.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Turn women into living pieces of ornate furniture, merging the models, clothing and objects into one surreal world of baroque extravagance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 Balmain -->
+  <section class="camp" id="balmain">
+    <div class="camp-head">
+      <span class="eyebrow"><span class="num">09</span> Balmain</span>
+      <h2 class="camp-title"><span class="en">Balmain</span><span class="season">Fall/Winter 2022</span></h2>
+    </div>
+    <div class="shots">
+      <img src="assets/fashion-campaign-direction/img-25.jpg" alt="Balmain FW22 — gold armor plate look in desert">
+      <img src="assets/fashion-campaign-direction/img-26.jpg" alt="Balmain FW22 — black sculpted dress on green ground">
+      <img src="assets/fashion-campaign-direction/img-27.jpg" alt="Balmain FW22 — group in graphic armor-like knits">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>ترجم الحماية والصمود والأمل إلى موضة، من خلال لغة بصرية تجمع الدروع والأمان مع عناصر رقيقة تتعايش جنبًا إلى جنب.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Translate protection, resilience and hope into fashion through the visual language of armor, security and delicate elements existing together.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 Fendi -->
+  <section class="camp" id="fendi">
+    <div class="camp-head">
+      <span class="eyebrow lav-e"><span class="num">10</span> Fendi</span>
+      <h2 class="camp-title"><span class="en">Fendi</span><span class="season">Fall/Winter 2022</span></h2>
+    </div>
+    <div class="shots">
+      <img src="assets/fashion-campaign-direction/img-28.jpg" alt="Fendi FW22 — portrait on mint green background">
+      <img src="assets/fashion-campaign-direction/img-29.jpg" alt="Fendi FW22 — tailored taupe look">
+      <img src="assets/fashion-campaign-direction/img-30.jpg" alt="Fendi FW22 — group in soft tones with fur and gloves">
+    </div>
+    <div class="dir">
+      <div class="dir-card">
+        <span class="tag">الاتجاه الإبداعي</span>
+        <p>اخلق توازنًا بصريًا بين المتضادات — القوة والنعومة، المراجع التاريخية والموضة المعاصرة — من خلال بورتريه منضبط وخامات متباينة.</p>
+      </div>
+      <div class="dir-card en">
+        <span class="tag">Creative Direction</span>
+        <p>Create a visual balance between opposites—strength and softness, historical references and contemporary fashion—through controlled portraiture and contrasting textures.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="meta-line">
+      <span>MA Learn · صناعة الإلهام</span><span class="sep">·</span>
+      <span>مرجع تعليمي داخلي — الصور ملك حملاتها الأصلية</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
