@@ -22,25 +22,25 @@
 }
 
 :root {
-  /* Brand — gold as editorial ink */
-  --c-gold:          oklch(0.74 0.12 82);
-  --c-gold-bright:   oklch(0.82 0.13 85);
-  --c-gold-dim:      oklch(0.58 0.09 82);
-  --c-gold-faint:    oklch(0.74 0.12 82 / 0.10);
+  /* Brand — poster-dark × chunky rounded V4 accent (was editorial gold) */
+  --c-gold:          #ff6a3c;
+  --c-gold-bright:   #ff8a5c;
+  --c-gold-dim:      #c8390f;
+  --c-gold-faint:    rgba(255, 106, 60, 0.12);
 
-  /* Surfaces — neutrals pulled slightly toward gold hue at very low chroma */
-  --c-ink-0:         oklch(0.08 0.003 82);
-  --c-ink-1:         oklch(0.11 0.004 82);
-  --c-ink-2:         oklch(0.14 0.005 82);
-  --c-ink-3:         oklch(0.18 0.006 82);
-  --c-ink-4:         oklch(0.23 0.006 82);
-  --c-ink-5:         oklch(0.30 0.007 82);
+  /* Surfaces — warm poster-dark browns (V4 ramp) */
+  --c-ink-0:         #151009;
+  --c-ink-1:         #1d1610;
+  --c-ink-2:         #231a12;
+  --c-ink-3:         #2a2016;
+  --c-ink-4:         #372c1e;
+  --c-ink-5:         #4a3d2c;
 
-  /* Text */
-  --c-fg:            oklch(0.96 0.006 82);
-  --c-fg-2:          oklch(0.80 0.008 82);
-  --c-fg-3:          oklch(0.62 0.009 82);
-  --c-fg-4:          oklch(0.48 0.008 82);
+  /* Text — warm cream ink */
+  --c-fg:            #f8f0e6;
+  --c-fg-2:          #cbbba9;
+  --c-fg-3:          #96897a;
+  --c-fg-4:          #756a5c;
 
   /* Semantic — muted to harmonize with gold */
   --c-success:       oklch(0.74 0.11 150);
@@ -55,15 +55,15 @@
   --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
   --s-page-x: clamp(16px, 3vw, 40px);
 
-  /* Radius */
-  --r-xs: 4px;  --r-sm: 6px;  --r-md: 10px;
-  --r-lg: 14px; --r-xl: 20px; --r-pill: 9999px;
+  /* Radius — chunky rounded (V4) */
+  --r-xs: 6px;  --r-sm: 10px; --r-md: 14px;
+  --r-lg: 22px; --r-xl: 28px; --r-pill: 9999px;
 
-  /* Elevation */
-  --e-card:   0 1px 2px rgba(0,0,0,0.4), 0 0 0 1px oklch(0.25 0.006 82 / 0.5);
-  --e-raised: 0 8px 24px rgba(0,0,0,0.5), 0 0 0 1px oklch(0.30 0.007 82 / 0.6);
-  --e-modal:  0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px oklch(0.35 0.008 82 / 0.7);
-  --e-focus:  0 0 0 2px oklch(0.74 0.12 82 / 0.35);
+  /* Elevation — warm cream rings on poster-dark */
+  --e-card:   0 1px 2px rgba(0,0,0,0.4), 0 0 0 1px rgba(248,240,230,0.09);
+  --e-raised: 0 8px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(248,240,230,0.12);
+  --e-modal:  0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(248,240,230,0.14);
+  --e-focus:  0 0 0 2px rgba(255,106,60,0.35);
 
   /* Motion */
   --dur-fast: 150ms; --dur-med: 220ms; --dur-slow: 320ms;
@@ -104,6 +104,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+::selection { background: var(--c-gold); color: #2a1105; }
 h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 700; line-height: 1.2; }
 button, input, select, textarea { font: inherit; color: inherit; }
 a { color: var(--c-gold-bright); text-decoration: none; }

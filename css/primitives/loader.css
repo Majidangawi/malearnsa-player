@@ -10,9 +10,11 @@
 
 [data-ui="loader"] {
   --main-size: 4em;
-  --text-color: var(--c-gold);
-  --shine-color: var(--c-gold-bright);
-  --shadow-color: var(--c-gold);
+  /* Pinned to legacy editorial gold — loaders stay unchanged in the V4
+     poster-dark reskin (Majid's call, 2026-08-30). Do not remap to accent. */
+  --text-color: oklch(0.74 0.12 82);
+  --shine-color: oklch(0.82 0.13 85);
+  --shadow-color: oklch(0.74 0.12 82);
   display: flex;
   justify-content: center;
   align-items: center;
