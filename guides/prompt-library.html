@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مكتبة البرومبتات الجاهزة · MA Learn</title>
 <meta name="description" content="دليل من MA Learn: 28 برومبت كامل جاهز للنسخ لتوليد صور واقعية — بورتريه فيلمي، إدارتوريال داكن، وحملات منتجات ومجوهرات فخمة. يشتغل مع Midjourney و Nano Banana و Soul و Flux و GPT Image.">
+<link rel="stylesheet" href="https://malearnsa.com/brand/tokens.css">
 <style>
   /* ============================================
      MA LEARN — READY-MADE PROMPT LIBRARY
-     Design system: Gumela + dark-gold (house guide standard)
+     Design System V4 — "poster-dark x chunky rounded"
+     Tokens come from https://malearnsa.com/brand/tokens.css — NEVER redeclared here.
+     Reskinned 2026-09-07. Rollback tag: pre-v4-reskin-20260907
      ============================================ */
 
   @font-face {
@@ -27,20 +30,6 @@
     font-weight: 300; font-style: normal; font-display: swap;
   }
 
-  :root {
-    --bg: #0A0A0A;
-    --surface-1: #0D0D0D;
-    --surface-2: #161616;
-    --surface-3: #1A1A1A;
-    --surface-4: #1E1E1E;
-    --border: #333333;
-    --gold: #C9A84C;
-    --gold-light: #E8D08A;
-    --white: #F5F0E8;
-    --body: #CCCCCC;
-    --muted: #AAAAAA;
-    --dim: #777777;
-  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -48,9 +37,9 @@
 
   .doc {
     background: var(--bg);
-    color: var(--body);
-    font-family: 'Gumela', 'Segoe UI', Tahoma, Arial, sans-serif;
-    font-weight: 300;
+    color: var(--muted);
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-weight: 400;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -63,132 +52,145 @@
     padding: 80px 56px 80px;
   }
 
+  /* Display face — V4 rule: Gumela for headings and brand marks only,
+     never body copy and never buttons. */
+  .doc-title, .section-title, .cta-title, .toc-name,
+  .prompt-name, .tool-mark, .footer-brand {
+    font-family: 'Gumela', 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+  }
+
   /* ===== HEADER ===== */
   .header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     padding-bottom: 32px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--line);
     margin-bottom: 48px;
   }
   .header-right { text-align: right; flex: 1; }
-  .eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 14px; }
+  .eyebrow { font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
   .doc-title {
-    font-weight: 700; color: var(--white);
+    font-weight: 700; color: var(--ink);
     font-size: 44px; line-height: 1.15; margin-bottom: 10px;
   }
   .doc-subtitle {
-    font-size: 13px; color: var(--dim);
+    font-size: 13px; color: var(--faint-2);
     letter-spacing: 1px; direction: ltr; text-align: right;
   }
   .header-left { text-align: left; min-width: 150px; }
   .tool-mark {
-    font-weight: 700; color: var(--gold); font-size: 30px;
+    font-weight: 700; color: var(--accent); font-size: 30px;
     line-height: 1; margin-bottom: 10px; direction: ltr;
   }
-  .update-info { font-size: 11px; color: var(--dim); line-height: 1.6; }
+  .update-info { font-size: 11px; color: var(--faint-2); line-height: 1.6; }
 
   /* ===== INTRO ===== */
   .intro {
-    font-size: 17px; color: var(--body); line-height: 1.9;
+    font-size: 17px; color: var(--muted); line-height: 1.9;
     max-width: 760px; margin-bottom: 20px;
   }
-  .intro strong { color: var(--white); font-weight: 700; }
+  .intro strong { color: var(--ink); font-weight: 700; }
   .kw-en {
     direction: ltr; unicode-bidi: isolate;
     font-family: 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.88em; color: var(--gold-light);
+    font-size: 0.88em; color: var(--accent-hot);
   }
 
   .callout {
-    background: var(--surface-2);
-    border-right: 3px solid var(--gold);
+    background: var(--card);
+    border-inline-start: 3px solid var(--accent);
+    border-radius: var(--r-lg);
     padding: 18px 22px;
     margin: 28px 0 56px;
     font-size: 14px;
-    color: var(--gold-light);
+    color: var(--accent-hot);
     line-height: 1.85;
   }
-  .callout strong { color: var(--gold); font-weight: 700; }
+  .callout strong { color: var(--accent); font-weight: 700; }
 
   /* ===== SECTION ===== */
   .section { margin-bottom: 56px; scroll-margin-top: 24px; }
   .section-header { margin-bottom: 24px; }
   .section-tag {
-    display: inline-block; font-size: 11px; color: var(--dim);
+    display: inline-block; font-size: 11px; color: var(--faint-2);
     direction: ltr; margin-bottom: 8px; letter-spacing: 0.5px;
   }
   .section-title {
-    font-weight: 700; color: var(--white);
+    font-weight: 700; color: var(--ink);
     font-size: 28px; margin-bottom: 8px;
   }
-  .section-title .gold-dot { color: var(--gold); margin: 0 8px; }
-  .section-title .count { font-size: 15px; color: var(--dim); font-weight: 400; }
-  .section-desc { font-size: 15px; color: var(--muted); max-width: 720px; }
+  .section-title .accent-dot { color: var(--accent); margin: 0 8px; }
+  .section-title .count { font-size: 15px; color: var(--faint-2); font-weight: 400; }
+  .section-desc { font-size: 15px; color: var(--faint); max-width: 720px; }
 
   /* ===== FORMULA ===== */
   .formula {
     display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-top: 2px solid var(--gold);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--r-lg);
     padding: 24px 24px;
     margin-bottom: 22px;
   }
   .formula i {
     font-style: normal; font-size: 14px; font-weight: 400;
-    color: var(--gold-light);
-    border: 1px dashed rgba(201, 168, 76, 0.45);
+    color: var(--accent-hot);
+    border: 1px dashed var(--accent-line);
+    border-radius: var(--r-pill);
     padding: 7px 14px;
   }
-  .formula b { color: var(--dim); font-weight: 400; font-size: 15px; }
+  .formula b { color: var(--faint-2); font-weight: 400; font-size: 15px; }
 
   /* ===== NOTE LIST ===== */
   .notes { list-style: none; max-width: 760px; }
   .notes li {
     position: relative; padding-right: 20px; margin-bottom: 12px;
-    font-size: 14px; color: var(--body); line-height: 1.8;
+    font-size: 14px; color: var(--muted); line-height: 1.8;
   }
   .notes li::before {
     content: ""; position: absolute; right: 0; top: 11px;
-    width: 6px; height: 6px; background: var(--gold);
+    width: 6px; height: 6px; background: var(--accent);
   }
-  .notes li strong { color: var(--white); font-weight: 700; }
+  .notes li strong { color: var(--ink); font-weight: 700; }
 
   /* ===== TOC ===== */
   .toc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .toc-item {
     display: flex; flex-direction: column; gap: 6px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-top: 2px solid var(--gold);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--r-lg);
     padding: 18px 20px;
     text-decoration: none;
     transition: background 0.2s ease;
   }
-  .toc-item:hover { background: var(--surface-3); }
-  .toc-name { font-weight: 700; color: var(--white); font-size: 16px; }
-  .toc-n { font-size: 12px; color: var(--dim); }
-  .toc-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+  .toc-item:hover { background: var(--card-2); }
+  .toc-name { font-weight: 700; color: var(--ink); font-size: 16px; }
+  .toc-n { font-size: 12px; color: var(--faint-2); }
+  .toc-desc { font-size: 12.5px; color: var(--faint); line-height: 1.6; }
 
   /* ===== PROMPT SHOT ===== */
-  .prompt-shot { margin: 0; padding: 18px 22px 0; background: var(--surface-2); }
+  .prompt-shot { margin: 0; padding: 18px 22px 0; background: var(--card); }
   .prompt-shot img {
     display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto;
-    border: 1px solid var(--border); background: var(--surface-1);
+    border: 1px solid var(--line); background: var(--bg);
+    border-radius: var(--r-md);
   }
 
   /* ===== PROMPT CARD ===== */
   .prompts { display: flex; flex-direction: column; gap: 14px; }
   .prompt {
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-top: 2px solid var(--border);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--line);
+    border-radius: var(--r-lg);
     transition: border-color 0.18s ease;
   }
-  .prompt:hover { border-top-color: var(--gold); }
-  .prompt.open { border-top-color: var(--gold); }
+  .prompt:hover { border-top-color: var(--accent); }
+  .prompt.open { border-top-color: var(--accent); }
   .prompt-head {
     display: flex; align-items: flex-start; gap: 14px;
     padding: 18px 22px 0;
@@ -197,24 +199,26 @@
     flex-shrink: 0;
     font-family: 'SF Mono', Menlo, Consolas, monospace;
     direction: ltr; font-size: 11px; font-weight: 700;
-    color: var(--gold); letter-spacing: 1px;
-    border: 1px solid rgba(201, 168, 76, 0.4);
+    color: var(--accent); letter-spacing: 1px;
+    border: 1px solid var(--accent-line);
+    border-radius: var(--r-pill);
     padding: 5px 9px; line-height: 1;
   }
-  .prompt-name { font-weight: 700; color: var(--white); font-size: 17px; line-height: 1.5; }
+  .prompt-name { font-weight: 700; color: var(--ink); font-size: 17px; line-height: 1.5; }
   .prompt-copy { margin-inline-start: auto; flex-shrink: 0; }
   .prompt-note {
-    font-size: 14px; color: var(--muted); line-height: 1.8;
+    font-size: 14px; color: var(--faint); line-height: 1.8;
     padding: 10px 22px 0; max-width: 760px;
   }
-  .prompt-note strong { color: var(--body); font-weight: 700; }
+  .prompt-note strong { color: var(--muted); font-weight: 700; }
   .prompt-wrap { position: relative; padding: 14px 22px 0; }
   .prompt-pre {
     direction: ltr; text-align: left;
     font-family: 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 12.5px; line-height: 1.85; color: var(--white);
-    background: var(--surface-1);
-    border: 1px solid var(--border);
+    font-size: 12.5px; line-height: 1.85; color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
     padding: 16px;
     white-space: pre-wrap; overflow-wrap: anywhere;
     max-height: 128px; overflow: hidden;
@@ -222,87 +226,92 @@
   .prompt.open .prompt-pre { max-height: none; }
   .prompt-fade {
     position: absolute; inset-inline: 22px; bottom: 0; height: 62px;
-    background: linear-gradient(180deg, rgba(13,13,13,0) 0%, #0D0D0D 88%);
+    background: linear-gradient(180deg, rgba(21,16,9,0) 0%, var(--bg) 88%);
     pointer-events: none;
   }
   .prompt.open .prompt-fade { display: none; }
   .prompt-foot { padding: 0 22px 18px; }
 
-  /* ===== BUTTONS ===== */
+  /* ===== BUTTONS =====
+     V4 rule 2: one primary CTA per view, and orange belongs to it.
+     The 28 per-prompt copy buttons are utilities -> .btn-ghost.
+     The only solid accent fill on this page is the workshop CTA at the bottom. */
   .btn {
-    display: inline-block; background: var(--gold); color: #0A0A0A;
+    display: inline-block; background: var(--accent); color: var(--on-accent);
     font-family: inherit; font-weight: 700; font-size: 15px;
     padding: 14px 30px; text-decoration: none; white-space: nowrap;
-    border: 1px solid var(--gold); cursor: pointer;
+    border: 1px solid var(--accent); border-radius: var(--r-pill); cursor: pointer;
     transition: background 0.2s ease;
   }
-  .btn:hover { background: var(--gold-light); border-color: var(--gold-light); }
-  .btn-ghost { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
-  .btn-ghost:hover { background: rgba(201, 168, 76, 0.10); color: var(--gold-light); }
+  .btn:hover { background: var(--accent-hot); border-color: var(--accent-hot); }
+  .btn-ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  .btn-ghost:hover { background: var(--accent-soft); color: var(--accent-hot); }
   .btn-sm { font-size: 12px; font-weight: 700; padding: 9px 18px; }
   .btn-link {
-    background: none; border: 0; color: var(--dim);
+    background: none; border: 0; color: var(--faint-2);
     font-family: inherit; font-weight: 400; font-size: 12.5px;
     cursor: pointer; padding: 12px 0 0;
     border-bottom: 1px solid transparent;
   }
-  .btn-link:hover { color: var(--gold); }
+  .btn-link:hover { color: var(--accent); }
 
   /* ===== CTA ===== */
   .cta {
     margin-top: 72px;
-    background: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
-    border: 1px solid var(--border);
-    border-top: 2px solid var(--gold);
+    background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: var(--r-2xl);
     text-align: center;
     overflow: hidden;
   }
   .cta-banner { display: block; padding: 40px 48px 0; }
   .cta-banner img {
     display: block; width: 100%; max-width: 400px; height: auto; margin: 0 auto;
-    border: 1px solid var(--border);
+    border: 1px solid var(--line); border-radius: var(--r-lg);
   }
   .cta-inner { padding: 44px 48px 52px; }
-  .cta-eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 18px; }
+  .cta-eyebrow { font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 18px; }
   .cta-title {
-    font-weight: 700; color: var(--white);
+    font-weight: 700; color: var(--ink);
     font-size: 32px; line-height: 1.35; margin-bottom: 18px;
   }
   .cta-body {
-    font-size: 16px; color: var(--body); line-height: 1.9;
+    font-size: 16px; color: var(--muted); line-height: 1.9;
     max-width: 640px; margin: 0 auto 22px;
   }
-  .cta-body strong { color: var(--white); font-weight: 700; }
+  .cta-body strong { color: var(--ink); font-weight: 700; }
   .cta-list { list-style: none; max-width: 560px; margin: 0 auto 30px; text-align: right; }
   .cta-list li {
     position: relative; padding-right: 22px; margin-bottom: 10px;
-    font-size: 15px; color: var(--body); line-height: 1.8;
+    font-size: 15px; color: var(--muted); line-height: 1.8;
   }
   .cta-list li::before {
     content: ""; position: absolute; right: 0; top: 11px;
-    width: 7px; height: 7px; background: var(--gold);
+    width: 7px; height: 7px; background: var(--accent);
   }
   .cta-dates {
     display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
     max-width: 620px; margin: 0 auto 26px;
   }
   .cta-date {
-    border: 1px solid var(--border); background: var(--surface-2);
-    padding: 10px 16px; font-size: 13px; color: var(--body);
+    border: 1px solid var(--line); background: var(--card);
+    border-radius: var(--r-pill);
+    padding: 10px 16px; font-size: 13px; color: var(--muted);
   }
-  .cta-date b { color: var(--gold); font-weight: 700; display: block; font-size: 12px; margin-bottom: 2px; }
-  .cta-note { font-size: 13px; color: var(--dim); margin-top: 18px; }
+  .cta-date b { color: var(--accent); font-weight: 700; display: block; font-size: 12px; margin-bottom: 2px; }
+  .cta-note { font-size: 13px; color: var(--faint-2); margin-top: 18px; }
 
   /* ===== FOOTER ===== */
   .footer {
     text-align: center; margin-top: 64px; padding-top: 32px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--line);
   }
-  .footer-brand { font-weight: 700; color: var(--gold); font-size: 14px; margin-bottom: 6px; }
-  .footer-meta { font-size: 11px; color: var(--dim); direction: ltr; }
+  .footer-brand { font-weight: 700; color: var(--accent); font-size: 14px; margin-bottom: 6px; }
+  .footer-meta { font-size: 11px; color: var(--faint-2); direction: ltr; }
 
   :where(button, a, [tabindex]):focus-visible {
-    outline: 2px solid var(--gold); outline-offset: 2px;
+    outline: 2px solid var(--accent); outline-offset: 2px;
   }
 
   /* ===== RESPONSIVE ===== */
@@ -352,7 +361,7 @@
       <div class="tool-mark">28</div>
       <div class="update-info">
         برومبت جاهز للنسخ<br>
-        آخر تحديث: أغسطس 2026
+        آخر تحديث: سبتمبر 2026
       </div>
     </div>
   </header>
@@ -427,7 +436,7 @@
   <section class="section" id="film">
     <div class="section-header">
       <div class="section-tag">CHAPTER 01</div>
-      <h2 class="section-title">بورتريه فيلمي<span class="gold-dot">·</span><span class="count">ثمانية برومبتات</span></h2>
+      <h2 class="section-title">بورتريه فيلمي<span class="accent-dot">·</span><span class="count">ثمانية برومبتات</span></h2>
       <p class="section-desc">
         العائلة الأولى كلها مبنية على نفس العمود الفقري: شمس منخفضة أو ضوء شباك واحد، بدون فيل،
         محاكاة Kodak Portra 400، حبيبة ظاهرة، ونهاية مطفية. غيّر الموضوع براحتك — العمود يظل ثابت.
@@ -444,7 +453,7 @@
         <div class="prompt-head">
           <span class="prompt-id">01</span>
           <h3 class="prompt-name">ظلال السعف على الجدار</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">البطل هنا الظل، مو الفستان. خطوط سعف مايلة على جدار طيني عنبري، وشمس صحراوية وحدة قاسية بدون أي إضاءة تعبئة. <strong>جرّبه لأي بورتريه تبيه قاسي ودافي بنفس الوقت.</strong></p>
         <div class="prompt-wrap">
@@ -462,7 +471,7 @@
         <div class="prompt-head">
           <span class="prompt-id">02</span>
           <h3 class="prompt-name">قُرب حميمي</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">راس مايل على حضور مو ظاهر في الكادر. <strong>الحيلة إن الشي المهم خارج الصورة</strong> — والمشاهد يكمّل الباقي في راسه.</p>
         <div class="prompt-wrap">
@@ -480,7 +489,7 @@
         <div class="prompt-head">
           <span class="prompt-id">03</span>
           <h3 class="prompt-name">الروكوكو — جالسة</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">مشهد كامل: تسريحة روكوكو، قفاز ساتان أسود محمول مو ملبوس، ولمبة عنابي على اليمين تعطي لمسة عنبرية على الترقوة. <strong>هذا وأخوه اللي بعده سلسلة وحدة</strong> — نفس المكان، لحظتين مختلفتين.</p>
         <div class="prompt-wrap">
@@ -498,7 +507,7 @@
         <div class="prompt-head">
           <span class="prompt-id">04</span>
           <h3 class="prompt-name">الروكوكو — تمشي</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">نفس المشهد بس بحركة: الشعر متحرك مع بلور خفيف في أطرافه والوجه يظل حاد. <strong>كذا تبني سلسلة، مو صورة يتيمة</strong> — وهذا اللي يفرّق شغل محترف عن صورة عابرة.</p>
         <div class="prompt-wrap">
@@ -516,7 +525,7 @@
         <div class="prompt-head">
           <span class="prompt-id">05</span>
           <h3 class="prompt-name">شجرة الكريسمس</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">باك لايت قوي من الشباك يسوي هالة وريم لايت على الشعر والكتوف. <strong>البرومبت مبني للدفا مو للمناسبة</strong> — بدّل الشجرة بأي شي وبيظل يشتغل.</p>
         <div class="prompt-wrap">
@@ -534,7 +543,7 @@
         <div class="prompt-head">
           <span class="prompt-id">06</span>
           <h3 class="prompt-name">شانيل في مراكش</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">سطح واحد بس من الوجه مضوّي، والباقي يروح للأسود. <strong>الفستان الكريمي هو اللي يمسك الضوء</strong> — والجسم يتنحت بالظلمة مو بالإضاءة.</p>
         <div class="prompt-wrap">
@@ -552,7 +561,7 @@
         <div class="prompt-head">
           <span class="prompt-id">07</span>
           <h3 class="prompt-name">الذراع تؤطّر الوجه</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">عين وحدة ظاهرة، والنص الثاني من الوجه ضايع في الظل. <strong>أقوى تكوين في الـ beauty الداكن</strong> — وأسهل واحد تكرره على أي موديل.</p>
         <div class="prompt-wrap">
@@ -570,7 +579,7 @@
         <div class="prompt-head">
           <span class="prompt-id">08</span>
           <h3 class="prompt-name">الغروب والفلير</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">شمس منخفضة ورا الشعر، فلير حقيقي، ومساحة فاضية فوق للسما. <strong>لاحظ إنه يطلب المساحة الفاضية صراحة</strong> — هذي اللي تخليك تحط عنوان فوقها بعدين.</p>
         <div class="prompt-wrap">
@@ -589,7 +598,7 @@
   <section class="section" id="dark">
     <div class="section-header">
       <div class="section-tag">CHAPTER 02</div>
-      <h2 class="section-title">إدارتوريال داكن<span class="gold-dot">·</span><span class="count">أحد عشر برومبت</span></h2>
+      <h2 class="section-title">إدارتوريال داكن<span class="accent-dot">·</span><span class="count">أحد عشر برومبت</span></h2>
       <p class="section-desc">
         هذي مو إحدى عشرة صورة منفصلة — هذي <strong>«سِت» واحد</strong>: نفس الإضاءة (مصدر ناعم واحد من اليسار
         مع سقوط سريع)، نفس الخلفية (بني-أسود شبه صامت)، نفس العدسة (85mm)، ونفس الفستان تقريبًا.
@@ -608,7 +617,7 @@
         <div class="prompt-head">
           <span class="prompt-id">09</span>
           <h3 class="prompt-name">الباب الخشبي</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">الأساس اللي تبني عليه السلسلة كلها: <strong>مصدر ضوء واحد من يسار الكاميرا، وسقوط سريع للأسود</strong> قبل ما يوصل السواعد. احفظ هذي الجملة واستخدمها في كل شي.</p>
         <div class="prompt-wrap">
@@ -626,7 +635,7 @@
         <div class="prompt-head">
           <span class="prompt-id">10</span>
           <h3 class="prompt-name">الدوران</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">سرعة غالق بطيئة: التنورة تتبلوّر والوجه يظل حاد. <strong>الحركة تُوصف، ما تُطلب</strong> — لا تكتب «حركة»، اكتب وش اللي يتبلور ووش اللي يظل حاد.</p>
         <div class="prompt-wrap">
@@ -644,7 +653,7 @@
         <div class="prompt-head">
           <span class="prompt-id">11</span>
           <h3 class="prompt-name">من ورا الباب</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">شي داكن خارج الفوكس في مقدمة الكادر يعطي إحساس إنك دخلت على المشهد بالغلط. <strong>أرخص حيلة لصورة تبان صادقة.</strong></p>
         <div class="prompt-wrap">
@@ -662,7 +671,7 @@
         <div class="prompt-head">
           <span class="prompt-id">12</span>
           <h3 class="prompt-name">الشيزلونغ</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">استرخاء وطول جسم؛ المخمل يعطي ملمس المقدمة. <strong>لاحظ إن التباين هنا أخف من باقي السلسلة</strong> — الهدوء يحتاج ضوء أهدأ.</p>
         <div class="prompt-wrap">
@@ -680,7 +689,7 @@
         <div class="prompt-head">
           <span class="prompt-id">13</span>
           <h3 class="prompt-name">الشباك والقرط</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">لحظة تجهيز، مو بوز. الشيش نص مقفول يقطّع الضوء لشريط. <strong>أصدق برومبت في السلسلة</strong> — لأنه يوصف فعل، مو وقفة.</p>
         <div class="prompt-wrap">
@@ -698,7 +707,7 @@
         <div class="prompt-head">
           <span class="prompt-id">14</span>
           <h3 class="prompt-name">إطار الذراع</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">اليد فوق الراس تسوي مثلث حول الوجه، والضوء داخل المثلث ناعم وخارجه ظل. <strong>حيلة تكوين تشتغل مع أي موديل وأي فستان.</strong></p>
         <div class="prompt-wrap">
@@ -716,7 +725,7 @@
         <div class="prompt-head">
           <span class="prompt-id">15</span>
           <h3 class="prompt-name">الستارة</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">ثلث الكادر مغطى بستارة خارج الفوكس. <strong>عمق بدون ما تغيّر أي شي في الإضاءة</strong> — أسرع طريقة تكسر مسطّحية الصورة.</p>
         <div class="prompt-wrap">
@@ -734,7 +743,7 @@
         <div class="prompt-head">
           <span class="prompt-id">16</span>
           <h3 class="prompt-name">اليد على الرقبة</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">كل الكادر مبني على إيماءة وحدة، والضوء له وظيفة وحدة: يمشي من الكوع للساعد للرقبة للكتف كشريط واحد. <strong>أنظف برومبت في المكتبة كلها — اقراه مرتين.</strong></p>
         <div class="prompt-wrap">
@@ -752,7 +761,7 @@
         <div class="prompt-head">
           <span class="prompt-id">17</span>
           <h3 class="prompt-name">الموجات القصيرة</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">تسريحة finger-waves وتعبير بارد ومقيّم. <strong>نفس الفستان، شخصية ثانية</strong> — التسريحة لحالها تقدر تغيّر عصر الصورة كامل.</p>
         <div class="prompt-wrap">
@@ -770,7 +779,7 @@
         <div class="prompt-head">
           <span class="prompt-id">18</span>
           <h3 class="prompt-name">النظرة المشكّكة</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">حاجب مرفوع، عين ضيّقة شوي، ونظرة جانبية. <strong>هذا برومبت تعبير أكثر منه برومبت إضاءة</strong> — وهنا تشوف كيف تُكتب الشخصية بالكلام.</p>
         <div class="prompt-wrap">
@@ -788,7 +797,7 @@
         <div class="prompt-head">
           <span class="prompt-id">19</span>
           <h3 class="prompt-name">من الخلف</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">ظهر وكتف ونظرة فوق الكتف، وخلفية مبعثرة (مرايا وإطارات وورد ناشف) كلها خارج الفوكس. <strong>آخر لقطة في السِت — واللي تعطيه إحساس المكان.</strong></p>
         <div class="prompt-wrap">
@@ -807,7 +816,7 @@
   <section class="section" id="luxury">
     <div class="section-header">
       <div class="section-tag">CHAPTER 03</div>
-      <h2 class="section-title">حملات فخمة<span class="gold-dot">·</span><span class="count">تسعة برومبتات</span></h2>
+      <h2 class="section-title">حملات فخمة<span class="accent-dot">·</span><span class="count">تسعة برومبتات</span></h2>
       <p class="section-desc">
         هذي العائلة اللي تتباع. منتج، مجوهرات، أزياء، وماكرو — وكلها مبنية على نفس المبدأ:
         <strong>حدّد المادة، حدّد الضوء، وحدّد وش ممنوع</strong>. لاحظ إن أغلبها فيها قائمة
@@ -825,7 +834,7 @@
         <div class="prompt-head">
           <span class="prompt-id">20</span>
           <h3 class="prompt-name">ملمع الشفاه</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">ماكرو منتج: قطرة جل شبه شفافة على رأس الأبليكيتور، فقاعات هوا ظاهرة، وخلفية بيضا نظيفة. <strong>برومبت الجمال التجاري القياسي</strong> — بدّل المنتج وخلّ الباقي.</p>
         <div class="prompt-wrap">
@@ -843,7 +852,7 @@
         <div class="prompt-head">
           <span class="prompt-id">21</span>
           <h3 class="prompt-name">التعليقة الكلاسيكية</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">حملة مجوهرات بدون وجه: من الفك لأعلى الصدر، ساتان قرمزي، وتعليقة ذهب كلاسيكية بسيطة ١٫٥ سم بالضبط. <strong>لاحظ إنه يحدد المقاس بالسنتي</strong> — هذي الجملة الوحيدة اللي تمنع النموذج يكبّر القطعة.</p>
         <div class="prompt-wrap">
@@ -861,7 +870,7 @@
         <div class="prompt-head">
           <span class="prompt-id">22</span>
           <h3 class="prompt-name">الحقل الذهبي</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">يشتغل مع صورة مرجعية: يحافظ على الموديل والملابس حرفيًا، ويغيّر <strong>التصوير</strong> بس. <strong>أقوى برومبت في المكتبة لو عندك منتج أو لوك جاهز</strong> وتبي تعيد تصويره في مكان ثاني.</p>
         <div class="prompt-wrap">
@@ -899,7 +908,7 @@ Imperfections: two thin hair strands stuck across one cheekbone and crossing the
         <div class="prompt-head">
           <span class="prompt-id">23</span>
           <h3 class="prompt-name">انعكاس الشمبانيا</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">القصة كلها داخل عدسة نظارة سباحة. <strong>الانعكاس هو البطل، مو الوجه</strong> — وهذي أذكى طريقة تحكي إعلان في صورة وحدة.</p>
         <div class="prompt-wrap">
@@ -935,7 +944,7 @@ Negatives: no text, no logos, no watermarks, no typography, no visible eye behin
         <div class="prompt-head">
           <span class="prompt-id">24</span>
           <h3 class="prompt-name">الأيادي والضوء المقصوص</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">شعاع واحد مقصوص بحواف حادة يرمي ظلال أصابع طويلة على الخلفية. <strong>إضاءة المجوهرات الإدارتورية</strong> — والقائمة السلبية هنا تحميك من أصابع زايدة.</p>
         <div class="prompt-wrap">
@@ -965,7 +974,7 @@ Negative: no soft flat lighting, no diffused wraparound light, no soft-edged fuz
         <div class="prompt-head">
           <span class="prompt-id">25</span>
           <h3 class="prompt-name">الثوب والمصعد</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">لقطة كاملة من زاوية منخفضة، شبه أحادية اللون، والثوب هو أفتح شي في الكادر. <strong>برومبت خليجي المزاج بالكامل</strong> — ويوصف بناء الثوب بدقة عشان النموذج ما يخربه.</p>
         <div class="prompt-wrap">
@@ -997,7 +1006,7 @@ Negative: no plastic skin, no CGI render, no over-smoothing, no airbrushing, no 
         <div class="prompt-head">
           <span class="prompt-id">26</span>
           <h3 class="prompt-name">من داخل الكرتون</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">فيش آي من جوّا الصندوق للأعلى، واليد داخلة على العدسة. <strong>برومبت الأنبوكسينق اللي يشتغل للبراندات السعودية</strong> — وأبراج الKAFD في الخلفية تعطيه المكان.</p>
         <div class="prompt-wrap">
@@ -1015,7 +1024,7 @@ Negative: no plastic skin, no CGI render, no over-smoothing, no airbrushing, no 
         <div class="prompt-head">
           <span class="prompt-id">27</span>
           <h3 class="prompt-name">لحظة الوعي</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">انقسام حراري: مفتاح ذهبي دافي على نص الوجه وظل بارد على النص الثاني. <strong>مبني للأغلفة والثمبنيلز</strong> — فيه مساحة باردة فاضية على اليمين للعنوان.</p>
         <div class="prompt-wrap">
@@ -1033,7 +1042,7 @@ Negative: no plastic skin, no CGI render, no over-smoothing, no airbrushing, no 
         <div class="prompt-head">
           <span class="prompt-id">28</span>
           <h3 class="prompt-name">الشنطة الفضية</h3>
-          <span class="prompt-copy"><button class="btn btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
+          <span class="prompt-copy"><button class="btn btn-ghost btn-sm" type="button" data-copy>نسخ البرومبت</button></span>
         </div>
         <p class="prompt-note">صيغة مختلفة تمامًا: البرومبت مكتوب كحقول (نوع اللقطة، الموضوع، البيئة، الإضاءة…) مو كفقرة. <strong>جرّب الصيغتين وشوف أيها يضبط مع نموذجك</strong> — بعض النماذج تحب الحقول أكثر.</p>
         <div class="prompt-wrap">
@@ -1080,7 +1089,6 @@ Film Stock: Crisp digital camera aesthetic</pre>
       <li>ثلاثين مقعد لكل دفعة عشان كل واحد ياخذ حقه</li>
     </ul>
     <div class="cta-dates">
-      <div class="cta-date"><b>الدفعة الرابعة</b>٢٥–٢٧ أغسطس</div>
       <div class="cta-date"><b>الدفعة الخامسة</b>٨–١٠ سبتمبر</div>
       <div class="cta-date"><b>الدفعة السادسة</b>١٥–١٧ سبتمبر</div>
     </div>
