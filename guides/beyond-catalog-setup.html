@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond Catalog OS · Setup Guide</title>
+<meta name="description" content="Step-by-step installation of the Beyond Catalog OS operator folder on the owner's computer, with every command, link and prompt.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://player.malearnsa.com/guides/beyond-catalog-setup.html">
+<link rel="icon" href="https://malearnsa.com/beyond-fmcg/brand/beyond-fmcg-mark-black@512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Mulish:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://malearnsa.com/beyond-fmcg/brand/beyond-tokens.css">
+<style>
+:root{--y:#FBD420;--k:#000;--ink:#1F1F1F;--muted:#666;--line:#E7E7E4;--bg2:#F6F6F3;--ok:#1E7F4F}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:Mulish,system-ui,sans-serif;font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.top{background:var(--y);border-bottom:2px solid var(--k)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:14px 24px}
+.top img{height:34px}.top b{font-family:Montserrat;font-weight:900;font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-left:auto}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+main.wrap{padding:48px 24px 96px}
+h1{font-family:Montserrat;font-weight:900;font-size:clamp(30px,5vw,46px);line-height:1.15;margin:0 0 12px;letter-spacing:-.01em}
+h2{font-family:Montserrat;font-weight:800;font-size:24px;margin:0 0 8px;line-height:1.3}
+h3{font-family:Montserrat;font-weight:800;font-size:16px;margin:22px 0 8px}
+.lede{font-size:19px;color:var(--muted);max-width:64ch;margin:0 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--muted);margin-bottom:36px}
+.toc{background:var(--bg2);border-radius:20px;padding:20px 24px;margin-bottom:44px}
+.toc ol{margin:8px 0 0;padding-left:22px;columns:2;gap:28px}.toc li{margin:4px 0;break-inside:avoid}.toc a{color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--y)}
+section{padding:36px 0;border-top:1px solid var(--line)}
+.step{display:flex;gap:16px;align-items:flex-start;margin-bottom:6px}
+.num{flex:none;width:44px;height:44px;border-radius:14px;background:var(--k);color:var(--y);font-family:Montserrat;font-weight:900;font-size:18px;display:grid;place-items:center}
+.who{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--bg2);margin:0 6px 8px 0}
+.who.claude{background:#E9E4FF}.who.owner{background:#FFF3C4}.who.majid{background:#DDF4E6}
+p{margin:0 0 12px}ul,ol{margin:0 0 12px;padding-left:22px}li{margin:4px 0}
+code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:14px;background:var(--bg2);padding:2px 6px;border-radius:6px}
+pre{position:relative;background:#111;color:#f4f4f2;border-radius:14px;padding:16px 56px 16px 18px;overflow:auto;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13.5px;line-height:1.6;margin:10px 0 16px}
+pre code{background:none;padding:0;color:inherit;font-size:inherit}
+.copy{position:absolute;top:10px;right:10px;border:1px solid #444;background:#222;color:#eee;font:600 12px Mulish,sans-serif;padding:5px 10px;border-radius:999px;cursor:pointer}.copy:hover{background:var(--y);color:#000;border-color:var(--y)}
+.say{border-left:4px solid var(--y);background:#FFFBE6;padding:12px 16px;border-radius:0 12px 12px 0;margin:10px 0 16px;font-size:16px}
+.say b{font-family:Montserrat;font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px;color:#7a6400}
+.check{border:1.5px solid var(--ok);border-radius:12px;padding:10px 14px;margin:10px 0 6px;font-size:15px}.check b{color:var(--ok)}
+.note{background:var(--bg2);border-radius:12px;padding:10px 14px;margin:10px 0;font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0 16px}th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--y);text-decoration-thickness:2px;text-underline-offset:3px}
+.foot{border-top:2px solid var(--k);padding:24px;font-size:13px;color:var(--muted);text-align:center}
+@media (max-width:640px){.toc ol{columns:1}.step{gap:12px}.num{width:36px;height:36px;border-radius:10px;font-size:15px}pre{padding-right:18px}.copy{position:static;display:inline-block;margin-bottom:8px}}
+@media print{.copy{display:none}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><img src="https://malearnsa.com/beyond-fmcg/brand/beyond-fmcg-logo-black.svg" alt="Beyond FMCG"><b>Catalog OS · Setup guide</b></div></div>
+<main class="wrap">
+<h1>Set up the Beyond Catalog OS operator on your computer</h1>
+<p class="lede">One session, about 45 minutes, done together. At the end, Claude on this computer runs the catalog website: window products, imports from links and spreadsheets, hiding products, publishing. Every command, link and prompt is on this page.</p>
+<div class="meta"><span>Version 1.0 · September 2026</span><span>For: Beyond FMCG owner + Majid</span><span>Mac first; Windows notes where they differ</span></div>
+
+<div class="toc"><b>Steps</b><ol>
+<li><a href="#s0">Before you start</a></li><li><a href="#s1">Install the tools</a></li><li><a href="#s2">Activate Claude</a></li><li><a href="#s3">Put the folder in place</a></li><li><a href="#s4">Open the folder and say "set up"</a></li><li><a href="#s5">Log into GitHub</a></li><li><a href="#s6">The three links Claude will ask for</a></li><li><a href="#s7">Access check</a></li><li><a href="#s8">First real task together</a></li><li><a href="#s9">Bookmarks</a></li><li><a href="#s10">Everyday prompts</a></li><li><a href="#s11">Migration day (later)</a></li><li><a href="#s12">If something fails</a></li></ol></div>
+
+<section id="s0"><div class="step"><div class="num">0</div><div><h2>Before you start</h2>
+<p>Bring these to the session:</p>
+<ul><li>The folder zip <code>beyond-catalog-operator.zip</code> (Majid brings it on a USB stick or a link).</li>
+<li>The owner's Google account and password (the one that will own the catalog later).</li>
+<li>A GitHub account for the owner. If none: create one at <a href="https://github.com/signup">github.com/signup</a> during step 5.</li>
+<li>A Claude account with a paid plan (Pro or Max) at <a href="https://claude.ai">claude.ai</a>. Claude Code needs it.</li>
+<li>Admin rights on the computer (to install tools).</li></ul>
+<div class="note">Legend: <span class="who claude">Claude</span> does it automatically · <span class="who owner">Owner</span> clicks or types · <span class="who majid">Majid</span> supplies something only he has.</div>
+</div></div></section>
+
+<section id="s1"><div class="step"><div class="num">1</div><div><h2>Install the tools</h2>
+<p><span class="who owner">Owner</span> Open <b>Terminal</b> (Mac: Spotlight → type "Terminal"). Paste each block and press Enter. Say yes to any prompt.</p>
+<h3>1a. Homebrew (Mac package manager) and Git</h3>
+<pre><button class="copy">Copy</button><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+xcode-select --install</code></pre>
+<p class="note">On Apple Silicon the installer ends with two lines starting <code>echo …</code> and <code>eval …</code> to add brew to your PATH. Paste those two lines too, then close and reopen Terminal.</p>
+<h3>1b. GitHub CLI, Node, Python</h3>
+<pre><button class="copy">Copy</button><code>brew install gh node python@3.12</code></pre>
+<h3>1c. clasp (Google Apps Script tool) and the Excel helper</h3>
+<pre><button class="copy">Copy</button><code>npm install -g @google/clasp
+pip3 install openpyxl</code></pre>
+<h3>1d. Claude Code</h3>
+<pre><button class="copy">Copy</button><code>curl -fsSL https://claude.ai/install.sh | bash</code></pre>
+<p class="note">Alternative: <code>npm install -g @anthropic-ai/claude-code</code>. Docs: <a href="https://docs.claude.com/en/docs/claude-code/overview">docs.claude.com → Claude Code</a>.</p>
+<div class="check"><b>Check</b> — every line prints a version:</div>
+<pre><button class="copy">Copy</button><code>git --version &amp;&amp; gh --version &amp;&amp; node --version &amp;&amp; python3 --version &amp;&amp; clasp --version &amp;&amp; claude --version</code></pre>
+<p class="note"><b>Windows:</b> install <a href="https://git-scm.com/download/win">Git</a>, <a href="https://cli.github.com">GitHub CLI</a>, <a href="https://nodejs.org">Node LTS</a>, <a href="https://www.python.org/downloads/">Python 3.12</a> (tick "Add python.exe to PATH"), then in PowerShell: <code>npm install -g @google/clasp @anthropic-ai/claude-code</code> and <code>pip install openpyxl</code>. Use PowerShell wherever this page says Terminal.</p>
+</div></div></section>
+
+<section id="s2"><div class="step"><div class="num">2</div><div><h2>Activate Claude on this computer</h2>
+<p><span class="who owner">Owner</span> In Terminal:</p>
+<pre><button class="copy">Copy</button><code>claude</code></pre>
+<p>Claude Code opens and asks you to log in. Choose <b>Claude account</b>, a browser opens, sign in with the owner's Claude account, come back to Terminal. Type <code>/exit</code> to leave for now.</p>
+<div class="check"><b>Check</b> — <code>claude --version</code> prints a version and the login step does not repeat.</div>
+</div></div></section>
+
+<section id="s3"><div class="step"><div class="num">3</div><div><h2>Put the folder in place</h2>
+<p><span class="who majid">Majid</span> hands over the zip. <span class="who owner">Owner</span> unzips it into the home folder:</p>
+<pre><button class="copy">Copy</button><code>mkdir -p ~/beyond-catalog &amp;&amp; cd ~/beyond-catalog
+unzip ~/Downloads/beyond-catalog-operator.zip -d ~/beyond-catalog
+chmod +x tools/bf tools/bf.py
+ls</code></pre>
+<div class="check"><b>Check</b> — you see <code>CLAUDE.md  MIGRATION.md  ONBOARDING.md  README.md  apps-script  config  docs  tools</code> (and a hidden <code>.claude</code> folder).</div>
+</div></div></section>
+
+<section id="s4"><div class="step"><div class="num">4</div><div><h2>Open the folder in Claude Code and say "set up"</h2>
+<pre><button class="copy">Copy</button><code>cd ~/beyond-catalog &amp;&amp; claude</code></pre>
+<p>When Claude Code is open, type exactly:</p>
+<div class="say"><b>Say to Claude</b>set up</div>
+<p><span class="who claude">Claude</span> reads <code>CLAUDE.md</code>, opens <code>ONBOARDING.md</code> and walks you through steps 5 to 9 below, one at a time. It runs the commands itself and asks you only for browser logins and the three links. If Claude asks permission to run <code>tools/bf</code> or <code>gh</code>, choose <b>Yes, and don't ask again</b>.</p>
+<p class="note">If Claude instead asks "what would you like to do", say: <em>Follow ONBOARDING.md step by step, starting at step 1.</em></p>
+</div></div></section>
+
+<section id="s5"><div class="step"><div class="num">5</div><div><h2>Log into GitHub</h2>
+<p><span class="who claude">Claude</span> runs:</p>
+<pre><button class="copy">Copy</button><code>gh auth login</code></pre>
+<p><span class="who owner">Owner</span> answers the questions: <b>GitHub.com</b> → <b>HTTPS</b> → authenticate Git: <b>Yes</b> → <b>Login with a web browser</b>. Copy the 8-character code, press Enter, paste it in the browser, authorize.</p>
+<div class="check"><b>Check</b> — <code>gh auth status</code> shows "Logged in to github.com account &lt;owner's username&gt;".</div>
+<p class="note">Google login for clasp (<code>clasp login</code>) is only needed on migration day. Claude will skip it now.</p>
+</div></div></section>
+
+<section id="s6"><div class="step"><div class="num">6</div><div><h2>The three links Claude will ask for</h2>
+<p><span class="who claude">Claude</span> runs <code>tools/bf setup</code>, which asks four questions in the terminal. Nothing you type there goes into the chat.</p>
+<table><tr><th>Prompt</th><th>Value today (our accounts)</th><th>Where it comes from</th></tr>
+<tr><td>Apps Script web app URL</td><td><code>https://script.google.com/macros/s/AKfycbwzA26Mfu_3dQNXndRjjReH5wExBEWBmXEo1HLe5pbLHYeEB39c63VcqT8AT1FGMcan/exec</code></td><td>Sheet → Extensions → Apps Script → Deploy → Manage deployments → Web app URL</td></tr>
+<tr><td>Admin key</td><td><span class="who majid">Majid</span> reads it out or shows it on his screen</td><td>Google Sheet "Beyond Catalog OS" → tab <b>Settings</b> → row <code>admin_key</code></td></tr>
+<tr><td>GitHub repo</td><td><code>Majidangawi/malearnsa</code></td><td>The repo that hosts the site (after migration: the owner's own repo)</td></tr>
+<tr><td>Public site URL</td><td><code>https://malearnsa.com/beyond-fmcg/</code></td><td>Must end with <code>/</code></td></tr></table>
+<p>Links to keep open during the session: the sheet <a href="https://docs.google.com/spreadsheets/d/13snSA6Z2Z9QhyUxK1ABk9ZW2y4487Bfk9McuwhqjQ8Y/edit">Beyond Catalog OS</a> (Majid shares it with the owner as Editor first), the site <a href="https://malearnsa.com/beyond-fmcg/">malearnsa.com/beyond-fmcg</a>.</p>
+<div class="check"><b>Check</b> — the setup command ends by printing the access check with <code>"all_ok": true</code>. The config is saved at <code>~/.config/beyond-catalog/config.env</code>, readable only by the owner.</div>
+</div></div></section>
+
+<section id="s7"><div class="step"><div class="num">7</div><div><h2>Access check and a harmless test</h2>
+<p><span class="who claude">Claude</span> runs:</p>
+<pre><button class="copy">Copy</button><code>tools/bf check
+tools/bf brands
+tools/bf status</code></pre>
+<p>and reads back: Apps Script ping ok, sheet counts, GitHub login and repo ok, site reachable; the brand order; products count, publish state, last backup. Nothing is changed.</p>
+<div class="check"><b>Check</b> — <code>all_ok: true</code>. If not, see <a href="#s12">If something fails</a>.</div>
+</div></div></section>
+
+<section id="s8"><div class="step"><div class="num">8</div><div><h2>First real task together</h2>
+<p>Confirms the whole loop: sheet → publish → live in about 3 minutes.</p>
+<div class="say"><b>Say to Claude</b>Put Nestlé first on the home page and wait until it is live.</div>
+<p><span class="who claude">Claude</span> shows the brand list, asks for a yes, runs <code>tools/bf window brands NESTLE --wait</code>, and reports when the site rebuilt. Open <a href="https://malearnsa.com/beyond-fmcg/">the site</a>: Nestlé leads the brand row and the Window products.</p>
+<div class="say"><b>Then say</b>Put Unilever back first.</div>
+<div class="check"><b>Check</b> — Unilever is first again on the live site.</div>
+</div></div></section>
+
+<section id="s9"><div class="step"><div class="num">9</div><div><h2>Bookmarks for the owner</h2>
+<ul><li><b>Admin page</b>: the Apps Script URL from step 6 followed by <code>?page=admin&amp;key=</code> and the admin key. Claude prints the full link in the terminal on request: <em>"print my admin link"</em>. Keep it private: the link is the password.</li>
+<li><b>The sheet</b>: link above.</li>
+<li><b>The site</b>: <a href="https://malearnsa.com/beyond-fmcg/">malearnsa.com/beyond-fmcg</a> (after migration: the owner's domain).</li>
+<li><b>Publish history</b>: <code>gh run list -R Majidangawi/malearnsa --workflow=beyond-catalog.yml</code> or the repo's Actions tab.</li>
+<li><b>Manuals</b>: in the folder, <code>docs/manual-en.md</code> and <code>docs/manual-ar.md</code>. Ask Claude: <em>"open the manual"</em>.</li></ul>
+<p class="note">Setup is complete. Claude writes the summary into <code>.migration-progress.md</code> in the folder.</p>
+</div></div></section>
+
+<section id="s10"><div class="step"><div class="num">10</div><div><h2>Everyday prompts</h2>
+<p>Open Terminal, <code>cd ~/beyond-catalog &amp;&amp; claude</code>, then say what you want. Claude always shows the list first and asks before changing anything.</p>
+<table><tr><th>You want</th><th>Say</th><th>Under the hood</th></tr>
+<tr><td>Brands first on the home page</td><td>"Put Unilever, then Nestlé, first on the home page"</td><td><code>bf window brands UNILEVER NESTLE --wait</code></td></tr>
+<tr><td>Specific products first</td><td>"Show these codes first: 186485, 114527"</td><td><code>bf window products 186485 114527 --wait</code></td></tr>
+<tr><td>Reset the order</td><td>"Remove the featured products"</td><td><code>bf window clear</code></td></tr>
+<tr><td>Add from a supplier link</td><td>"Add all Blue Bell products from McLane" / paste a link</td><td><code>bf import-link &lt;url&gt; --preview</code> then real</td></tr>
+<tr><td>Add from Excel</td><td>"Import ~/Desktop/products.xlsx"</td><td><code>bf import-xlsx file.xlsx</code></td></tr>
+<tr><td>Add from a Google Sheet</td><td>"Import this Google Sheet" + link</td><td><code>bf import-gsheet &lt;link&gt;</code></td></tr>
+<tr><td>Get a blank template</td><td>"Give me the import template"</td><td><code>bf template</code></td></tr>
+<tr><td>Hide products</td><td>"Hide the Chewits products" → reply <b>ARCHIVE</b> when asked</td><td><code>bf delete --sub-brand CHEWITS --yes ARCHIVE</code></td></tr>
+<tr><td>Bring them back</td><td>"Restore Chewits"</td><td><code>bf restore --sub-brand CHEWITS</code></td></tr>
+<tr><td>Is it live?</td><td>"Is the site published?" / "Publish now"</td><td><code>bf status</code> · <code>bf publish --wait</code></td></tr>
+<tr><td>What came in</td><td>"Show today's requests"</td><td><code>bf rows Requests --last 20</code></td></tr>
+<tr><td>Backups</td><td>"Make a backup" / "list backups"</td><td><code>bf backup</code> · <code>bf backup list</code></td></tr></table>
+<p class="note">Quotes, sample statuses and retailer approvals are done in the <b>admin page</b> (Requests and Customers tabs) or directly in the sheet. See <code>docs/manual-en.md</code>.</p>
+</div></div></section>
+
+<section id="s11"><div class="step"><div class="num">11</div><div><h2>Migration day (later, together)</h2>
+<p>Same folder, one prompt:</p>
+<div class="say"><b>Say to Claude</b>migrate</div>
+<p><span class="who claude">Claude</span> follows <code>MIGRATION.md</code> step by step with you. What the owner needs ready that day:</p>
+<ul><li>Google account (Workspace recommended: 1,500 emails/day instead of ~100). Claude will run <code>clasp login</code> for it.</li>
+<li>GitHub account (done in step 5).</li>
+<li>Access to the domain's DNS, to add <code>catalog.&lt;domain&gt;</code>.</li>
+<li>About 2 hours.</li></ul>
+<p>What happens, in order: copy the sheet into the owner's Drive → push the script and authorise it (two clicks) → deploy the web app → new GitHub repo with the site → Pages + domain → secrets and the publish token → settings review → purge test data → full end-to-end test → remove Majid's access → rotate the key. At the end, Claude re-runs step 6 with the owner's own links.</p>
+</div></div></section>
+
+<section id="s12"><div class="step"><div class="num">12</div><div><h2>If something fails</h2>
+<table><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+<tr><td><code>command not found: claude</code> / <code>gh</code> / <code>clasp</code></td><td>PATH not refreshed</td><td>Close and reopen Terminal; on Apple Silicon make sure the two brew PATH lines were pasted (step 1a).</td></tr>
+<tr><td>Apps Script: <code>unauthorized</code></td><td>Wrong admin key</td><td>Copy it again from Settings → <code>admin_key</code>, run <code>tools/bf setup</code>.</td></tr>
+<tr><td>Apps Script: HTML page / 404</td><td>Wrong URL, or deployment not "Anyone"</td><td>Use the <code>/exec</code> URL from Manage deployments; access must be "Anyone". A one-off 404 is normal and retried automatically.</td></tr>
+<tr><td>GitHub repo: not found</td><td>Owner's GitHub has no access</td><td>Before migration the repo is Majid's: Majid adds the owner as collaborator, or skip the repo check until migration.</td></tr>
+<tr><td>Site check fails</td><td>URL missing the trailing <code>/</code></td><td>Re-run <code>tools/bf setup</code>.</td></tr>
+<tr><td>Change not on the site after 5 min</td><td>Publish run failed or CDN lag</td><td>Say "is the site published?" — Claude reads <code>bf status</code> and the last run's log.</td></tr>
+<tr><td>Emails logged <code>failed</code></td><td>Daily Gmail limit reached</td><td>Resumes next day; Workspace raises the limit. Requests are safe in the sheet.</td></tr>
+<tr><td>Claude keeps asking permission</td><td>Allowlist not applied</td><td>Answer "Yes, and don't ask again", or check <code>.claude/settings.json</code> exists in the folder.</td></tr></table>
+<p>Anything else: send Majid the last 20 lines of the terminal.</p>
+</div></div></section>
+</main>
+<div class="foot">Beyond Catalog OS · built by MA Studio · this page is private to Beyond FMCG · <a href="https://malearnsa.com/beyond-fmcg/">site</a></div>
+<script>
+document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => { const t = b.parentElement.querySelector('code').innerText; navigator.clipboard.writeText(t).then(() => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1500); }); }));
+</script>
+</body>
+</html>
