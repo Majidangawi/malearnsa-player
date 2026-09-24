@@ -380,7 +380,7 @@ sup.g-ref a { text-decoration: none; font-weight: 800; padding-inline: 2px; }
 <header class="g-hero">
   <div class="g-wrap">
     <nav class="g-top" aria-label="تنقّل الدليل">
-      <a class="g-back-link" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}"><span aria-hidden="true">→</span> ارجع للدرس</a>
+      <a class="g-back-link" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}if(!/skool\.com/.test(document.referrer)){location.href='https://player.malearnsa.com/watch.html?course=intro-to-creative-ai';return false}"><span aria-hidden="true">→</span> ارجع للدرس</a>
       <span class="g-brand"><b class="en">MA Learn</b><span class="g-brand-course"> · مدخل إلى الذكاء الاصطناعي الإبداعي</span></span>
     </nav>
 
@@ -560,7 +560,7 @@ sup.g-ref a { text-decoration: none; font-weight: 800; padding-inline: 2px; }
 
   <div class="g-end">
     <p>خلصت الدليل؟ ارجع للدرس وكمّل من المكان اللي وقفت فيه.</p>
-    <a class="g-btn" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}">ارجع للدرس</a>
+    <a class="g-btn" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}if(!/skool\.com/.test(document.referrer)){location.href='https://player.malearnsa.com/watch.html?course=intro-to-creative-ai';return false}">ارجع للدرس</a>
   </div>
 
   <section class="g-sources" aria-labelledby="sources">
