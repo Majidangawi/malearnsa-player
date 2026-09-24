@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<!--
+  ITCAI LESSON GUIDE · Design System V4 (poster-dark x chunky rounded)
+  Course: مدخل إلى الذكاء الاصطناعي الإبداعي · Lesson 9: Gemini (الفئة الأولى: شريك التفكير)
+  Rebuilt from the April 2026 lesson PDF (t2-09). Facts re-checked 2026-09-24; change log in MA EA
+  projects/ma-learn-launch/cif/itcai-guides/changes/itcai-09-gemini.json.
+  Tokens come ONLY from https://malearnsa.com/brand/tokens.css. Never redeclare a token here.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل Gemini · MA Learn</title>
+<meta name="description" content="دليل درس Gemini: وش يميّزه في قراءة الصور والفيديو، اندماجه مع Google Workspace وأسعاره، وكيف تبني Custom Gem لشغلك الإبداعي.">
+<link rel="canonical" href="https://player.malearnsa.com/guides/itcai-09-gemini.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:site_name" content="MA Learn">
+<meta property="og:title" content="دليل Gemini">
+<meta property="og:description" content="دليل درس Gemini: وش يميّزه في قراءة الصور والفيديو، اندماجه مع Google Workspace وأسعاره، وكيف تبني Custom Gem لشغلك الإبداعي.">
+<meta property="og:url" content="https://player.malearnsa.com/guides/itcai-09-gemini.html">
+<meta name="theme-color" content="#151009">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://malearnsa.com/brand/tokens.css">
+<style>
+/* ITCAI guide components · V4. Tokens are linked above, never redeclared here.
+   Focus ring = var(--focus). Motion = var(--dur-*) + var(--lift); tokens.css zeroes both under reduced motion. */
+
+@font-face {
+  font-family: 'Gumela';
+  src: url('https://malearnsa.com/brand_assets/gumela-arabic-bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg); color: var(--muted);
+  font-family: var(--body); font-size: var(--fs-body); line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+::selection { background: var(--accent); color: var(--on-accent); }
+p, li, dd, td, th { text-wrap: pretty; }
+a {
+  color: var(--accent-hot); text-decoration-color: var(--accent-line);
+  text-decoration-thickness: 1.5px; text-underline-offset: 4px;
+  transition: color var(--dur-fast) var(--ease);
+}
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; box-shadow: var(--focus); border-radius: var(--r-xs); }
+strong, b { color: var(--ink); font-weight: 700; }
+.en { unicode-bidi: isolate; direction: ltr; }      /* Latin name inside Arabic copy */
+.hl, .g-meta.hl { color: var(--accent-hot); }
+
+/* ── Layout ─────────────────────────────────────────── */
+.g-wrap { max-width: 820px; margin-inline: auto; padding-inline: var(--page-x); }
+main.g-wrap { padding-block: var(--s-6) 0; }
+.g-sec { margin-block-start: var(--s-7); }
+.g-sec > * + * { margin-block-start: var(--s-4); }
+.g-sec > .g-h2 + * { margin-block-start: var(--s-5); }
+main > .g-callout, main > .g-note { margin-block-start: var(--s-6); }
+main > .g-intro + .g-callout { margin-block-start: var(--s-4); }
+
+/* ── Hero: top bar, eyebrow, title, chips, update stamp ── */
+.g-hero {
+  background-image: var(--glow-hero); background-repeat: no-repeat;
+  text-align: center; padding-block: var(--s-4) var(--s-7);
+  border-block-end: 1.5px solid var(--line);
+}
+.g-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-block-end: var(--s-7); text-align: start; }
+.g-brand { font-size: var(--fs-label); font-weight: 700; color: var(--faint); }
+.g-brand b { font-weight: 900; }
+.g-back-link {
+  display: inline-flex; align-items: center; gap: 8px; flex: none;
+  border: 1.5px solid var(--line-strong); background: var(--wash-2); color: var(--ink);
+  border-radius: var(--r-pill); padding: 7px 18px;
+  font-size: var(--fs-sm); font-weight: 700; text-decoration: none;
+  transition: transform var(--dur-med) var(--ease), background var(--dur-med) var(--ease);
+}
+.g-back-link:hover { transform: var(--lift); background: var(--card-2); color: var(--ink); }
+.g-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
+  padding-block: 6px; padding-inline: 6px 18px;
+  border: 1.5px solid var(--line-strong); border-radius: var(--r-pill); background: var(--wash);
+  font-size: var(--fs-label); font-weight: 800; color: var(--muted); text-align: start;
+}
+.g-eyebrow .num {
+  flex: none; background: var(--accent-soft); color: var(--accent-hot);
+  border-radius: var(--r-pill); padding: 2px 12px; font-weight: 900;
+}
+.g-title {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: var(--fs-h1); line-height: 1.35; margin-block: var(--s-5) var(--s-4);
+  text-wrap: balance;
+}
+.g-hero .g-chips { justify-content: center; }
+.g-meta-row {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 14px;
+  margin-block-start: var(--s-5); font-size: var(--fs-label); font-weight: 700; color: var(--faint);
+}
+.g-stamp {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: var(--r-pill);
+  border: 1.5px solid var(--line-strong); background: var(--wash-2); color: var(--muted);
+}
+.g-stamp::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); flex: none; }
+.g-stamp time { color: var(--ink); }
+
+/* ── Headings ───────────────────────────────────────── */
+.g-h2 {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: max(var(--fs-h3), 1.3rem); line-height: var(--lh-disp);
+  padding-block-end: 12px; border-block-end: 1.5px solid var(--line);
+}
+.g-idx { color: var(--accent); margin-inline-end: 10px; }
+.g-h2-sub { display: block; font-family: var(--body); font-size: var(--fs-label); font-weight: 700; color: var(--faint); margin-block-start: 2px; }
+.g-h3, .g-card h3, .g-panel-head h3 {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: 1.08rem; line-height: 1.5;
+}
+.g-meta { font-size: var(--fs-label); font-weight: 700; color: var(--faint); }
+
+/* ── Intro + callouts ───────────────────────────────── */
+.g-intro, .g-callout {
+  background: var(--card); border: 1.5px solid var(--line);
+  border-inline-start: 3px solid var(--accent); border-radius: var(--r-lg);
+}
+.g-intro {
+  margin-block-start: var(--s-6); padding: 20px 24px;
+  font-size: var(--fs-lead); line-height: 1.9; font-weight: 600; color: var(--ink);
+}
+.g-callout { padding: 16px 22px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-callout > * + * { margin-block-start: 6px; }
+.g-callout-label { display: block; font-weight: 800; color: var(--accent-hot); }
+.g-callout.is-rule { color: var(--ink); font-weight: 700; font-size: var(--fs-body); }
+.g-callout.is-tip { background: var(--wash); border-inline-start-color: var(--line-strong); color: var(--faint); }
+.g-callout.is-update { background: var(--accent-soft); border-color: var(--accent-line); border-inline-start-color: var(--accent); color: var(--ink); }
+
+/* ── Tags, inline refs, chips ───────────────────────── */
+.g-tag {
+  display: inline-flex; align-items: center; gap: 6px; vertical-align: middle;
+  border-radius: var(--r-pill); padding: 2px 12px;
+  font-size: var(--fs-micro); font-weight: 800; line-height: 1.6;
+  background: var(--accent-soft); color: var(--accent-hot); max-width: 100%; overflow-wrap: anywhere;
+}
+.g-tag.is-lav { background: var(--lav-soft-bg); color: var(--lav); }
+.g-tag.is-neutral { background: var(--wash-2); color: var(--muted); }
+sup.g-ref { font-size: .68em; line-height: 0; }
+sup.g-ref + sup.g-ref::before { content: "،"; font-weight: 400; }
+sup.g-ref a { text-decoration: none; font-weight: 800; padding-inline: 2px; }
+.g-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.g-chip {
+  border: 1.5px solid var(--line-strong); border-radius: var(--r-pill); background: var(--wash);
+  padding: 5px 16px; font-size: var(--fs-sm); font-weight: 700; color: var(--muted); unicode-bidi: isolate;
+  max-width: 100%; overflow-wrap: anywhere;
+}
+.g-chip.is-on { background: var(--accent-soft); border-color: var(--accent-line); color: var(--ink); }
+
+/* ── Lists ──────────────────────────────────────────── */
+.g-list { list-style: none; display: grid; gap: 8px; }
+.g-list > li { position: relative; padding-inline-start: 20px; }
+.g-list > li::before {
+  content: ""; position: absolute; inset-inline-start: 2px; top: calc(.875em - 3px);
+  width: 6px; height: 6px; border-radius: 2px; background: var(--accent);
+}
+
+/* ── Cards + grids ──────────────────────────────────── */
+.g-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+.g-grid.is-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.g-card { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 20px 22px; }
+.g-card > * + * { margin-block-start: 8px; }
+.g-card p, .g-card li { font-size: var(--fs-sm); line-height: 1.85; }
+.g-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.g-card.is-pick {
+  border-color: var(--accent-line);
+  background: linear-gradient(180deg, var(--accent-soft), transparent 70%), var(--card);
+}
+
+/* ── Tiles (label + value) ──────────────────────────── */
+.g-tiles { list-style: none; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr)); }
+.g-tiles > li {
+  background: var(--card); border: 1.5px solid var(--line); border-block-start: 2px solid var(--accent-line);
+  border-radius: var(--r-md); padding: 12px 14px; text-align: center;
+}
+.g-tiles.is-4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); }
+.g-tiles .t-en { display: block; font-size: var(--fs-micro); font-weight: 700; color: var(--faint); unicode-bidi: isolate; }
+.g-tiles .t-val { display: block; color: var(--ink); font-weight: 700; font-size: var(--fs-sm); line-height: 1.6; }
+
+/* ── Panel (head / body / foot) ─────────────────────── */
+.g-panel { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-xl); }
+.g-panel-head {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px;
+  padding: 16px 22px; background: var(--wash); border-block-end: 1.5px solid var(--line);
+  border-radius: calc(var(--r-xl) - 1.5px) calc(var(--r-xl) - 1.5px) 0 0;
+}
+.g-panel-body { padding: 18px 22px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-panel-body > * + * { margin-block-start: 12px; }
+.g-panel-foot { padding: 14px 22px 18px; border-block-start: 1.5px solid var(--line); }
+
+/* ── Steps (pipeline) ───────────────────────────────── */
+.g-steps { list-style: none; counter-reset: s; display: grid; gap: 12px; }
+.g-steps > li { counter-increment: s; position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 14px; }
+.g-steps > li::before {
+  content: counter(s, arabic-indic); position: relative; z-index: 1;
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--card); border: 1.5px solid var(--accent-line); color: var(--accent-hot);
+  font-family: var(--disp); font-weight: 700; font-size: 1.05rem;
+}
+.g-steps > li:not(:last-child)::after {
+  content: ""; position: absolute; inset-inline-start: 19px; top: 44px; bottom: -12px;
+  width: 2px; background: var(--line-strong);
+}
+
+/* ── Data table ─────────────────────────────────────── */
+.g-table-wrap { overflow-x: auto; background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); }
+.g-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.g-table th, .g-table td { padding: 12px 16px; text-align: start; vertical-align: top; border-block-end: 1px solid var(--line); }
+.g-table thead th { background: var(--wash); font-size: var(--fs-label); font-weight: 800; color: var(--faint); }
+.g-table tbody th { color: var(--ink); font-weight: 700; }
+.g-table th small { display: block; font-size: var(--fs-micro); font-weight: 600; color: var(--faint); }
+.g-table .num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; unicode-bidi: isolate; }
+.g-table tbody tr:last-child > * { border-block-end: 0; }
+.g-footnote { font-size: var(--fs-label); color: var(--faint); }
+
+/* ── Voice: pull quote ──────────────────────────────── */
+.g-pull { margin-block-start: var(--s-7); padding-block: var(--s-6); border-block: 1.5px solid var(--line); text-align: center; }
+.g-pull p {
+  max-width: 640px; margin-inline: auto; text-wrap: balance;
+  font-family: var(--disp); font-weight: 700; font-size: var(--fs-h3); line-height: 1.7; color: var(--ink);
+}
+
+/* ── Reflection (lavender section) ──────────────────── */
+.g-reflect .g-h2 { border-block-end-color: var(--lav-line); }
+.g-qs { list-style: none; counter-reset: q; display: grid; gap: 10px; }
+.g-qs > li {
+  counter-increment: q; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg);
+  padding-block: 12px; padding-inline: 12px 18px; color: var(--ink);
+}
+.g-qs > li::before {
+  content: counter(q, arabic-indic); width: 44px; height: 44px; display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--lav-soft-bg); color: var(--lav);
+  font-family: var(--disp); font-weight: 700; font-size: 1.2rem;
+}
+
+/* ── End: back to lesson (the page's one orange CTA) ── */
+.g-end {
+  margin-block-start: var(--s-7); padding: var(--s-6) var(--s-5); text-align: center;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-2xl);
+}
+.g-end p { margin-block-end: var(--s-4); }
+.g-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--grad-accent); color: var(--on-accent); box-shadow: var(--shadow-accent);
+  border-radius: var(--r-pill); padding: 14px 34px;
+  font-family: var(--body); font-weight: 800; font-size: 1rem; line-height: 1.4; text-decoration: none;
+  transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+}
+.g-btn:hover { transform: var(--lift); box-shadow: var(--shadow-accent-hover); color: var(--on-accent); }
+
+/* ── Sources ────────────────────────────────────────── */
+.g-sources { margin-block-start: var(--s-7); }
+.g-sources .g-h3 { font-size: 1rem; }
+.g-sources > p { margin-block-start: 4px; font-size: var(--fs-label); color: var(--faint); }
+.g-sources ol { list-style: none; counter-reset: src; display: grid; gap: 4px; margin-block-start: 12px; }
+.g-sources li {
+  counter-increment: src; position: relative; padding-block: 4px; padding-inline: 28px 8px;
+  font-size: var(--fs-label); line-height: 1.7; color: var(--faint);
+  overflow-wrap: anywhere; border-radius: var(--r-xs); scroll-margin-top: 24px;
+}
+.g-sources li::before { content: counter(src, arabic-indic); position: absolute; inset-inline-start: 6px; top: 4px; color: var(--accent-hot); font-weight: 800; }
+.g-sources li:target { background: var(--accent-soft); }
+
+/* ── Footer ─────────────────────────────────────────── */
+.g-foot {
+  margin-block-start: var(--s-7); padding-block: var(--s-5); border-block-start: 1.5px solid var(--line);
+  text-align: center; font-size: var(--fs-label); color: var(--faint);
+}
+.g-foot b { color: var(--muted); font-weight: 800; }
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (min-width: 720px) {
+  .g-sec { margin-block-start: var(--s-8); }
+}
+@media (max-width: 520px) {
+  .g-brand .g-brand-course { display: none; }
+  .g-eyebrow { flex-direction: column; gap: 8px; padding: 0; border: 0; background: none; border-radius: 0; text-align: center; }
+  .g-intro { padding: 18px 18px; }
+  .g-card { padding: 18px; }
+  .g-panel-head, .g-panel-body, .g-panel-foot { padding-inline: 18px; }
+  .g-table th, .g-table td { padding: 10px 12px; }
+  .g-end { padding: var(--s-5) var(--s-4); }
+}
+
+/* ── Print: screen PDF stays poster-dark (V4 rule 6). Add class="paper" on <html> for physical print. ── */
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: var(--bg); }
+  body { padding-block: 12mm; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .g-top, .g-end { display: none; }
+  .g-hero { padding-block: 0 var(--s-5); }
+  .g-sec { margin-block-start: var(--s-6); }
+  .g-intro, .g-callout, .g-card, .g-panel, .g-pull,
+  .g-steps > li, .g-qs > li, .g-tiles > li, .g-table tr { break-inside: avoid; }
+  .g-h2, .g-h3 { break-after: avoid; }
+  .g-table-wrap { overflow: visible; }
+  .g-sources a::after { content: " " attr(href); color: var(--faint); unicode-bidi: isolate; direction: ltr; }
+}
+</style>
+</head>
+<body>
+
+<header class="g-hero">
+  <div class="g-wrap">
+    <nav class="g-top" aria-label="تنقّل الدليل">
+      <a class="g-back-link" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}"><span aria-hidden="true">→</span> ارجع للدرس</a>
+      <span class="g-brand"><b class="en">MA Learn</b><span class="g-brand-course"> · مدخل إلى الذكاء الاصطناعي الإبداعي</span></span>
+    </nav>
+
+    <p class="g-eyebrow"><span class="num">الدرس التاسع من ١٧</span><span>الوحدة ٣ · الفئة الأولى: شريك التفكير</span></p>
+    <h1 class="g-title"><span class="en">Gemini</span></h1>
+    <ul class="g-chips" aria-label="محاور الدرس">
+      <li class="g-chip is-on">Google</li>
+      <li class="g-chip">Multimodal LLM</li>
+    </ul>
+    <div class="g-meta-row">
+      <span class="g-stamp">آخر تحديث: <time datetime="2026-09-24">سبتمبر ٢٠٢٦</time></span>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="g-wrap">
+
+  <p class="g-intro"><span class="en">Gemini</span> مو مجرد شريك تفكير، هو أداة تختصر عليك. قوته الحقيقية في إنه مدمج في كل أدوات <span class="en">Google</span> اللي تستخدمها يومياً، وفي قراءته القوية للصور والمحتوى البصري.</p>
+
+  <aside class="g-callout is-update">
+    <span class="g-callout-label"><span class="g-tag">تحديث سبتمبر ٢٠٢٦</span></span>
+    <p>الدرس مسجّل في أبريل ٢٠٢٦. هذي أهم المعلومات المحدّثة اليوم، والتفاصيل تحت كل واحدة في مكانها:</p>
+    <ul class="g-list">
+      <li>تطبيق <span class="en">Gemini</span> اليوم شغّال على <span class="en">3.6 Flash</span> و<span class="en">3.1 Pro</span>، ومتاح في السعودية مجاناً، وأسعار الخطط المدفوعة معلنة بالريال.<sup class="g-ref"><a href="#src-1" aria-label="المصدر ١">١</a></sup></li>
+      <li>في قراءة الصور، الفرق بين النماذج الكبيرة ضاق كثير، و<span class="en">Gemini</span> ما عاد في المركز الأول بترتيب <span class="en">Vision Arena</span>.<sup class="g-ref"><a href="#src-3" aria-label="المصدر ٣">٣</a></sup></li>
+      <li><span class="en">ChatGPT</span> اليوم يتصل بـ <span class="en">Gmail</span> و<span class="en">Google Drive</span> وتطبيقات ثانية، بس <span class="en">Gemini</span> يشتغل من جوّا <span class="en">Gmail</span> و<span class="en">Docs</span> نفسها، مو من برّا.<sup class="g-ref"><a href="#src-4" aria-label="المصدر ٤">٤</a></sup></li>
+      <li>الـ <span class="en">Gems</span> متاحة حتى في الخطة المجانية، وتقدر تضيف لها ملفات مرجعية وتشاركها مع غيرك.<sup class="g-ref"><a href="#src-8" aria-label="المصدر ٨">٨</a></sup></li>
+    </ul>
+  </aside>
+
+  <section class="g-sec" aria-labelledby="s1">
+    <h2 class="g-h2" id="s1"><span class="g-idx">٠١</span>وش يميّز <span class="en">Gemini</span>؟</h2>
+    <div class="g-grid is-2">
+      <article class="g-card">
+        <h3>فهم السوق والاستراتيجية</h3>
+        <p>تحس إنه يفهم السياق التجاري والسوقي بشكل عميق. الـ <span class="en">insights</span> اللي تجي منه في الاستراتيجيات مميزة ومباشرة، يحسّك إنه مرّ بنفس اللي مررت فيه.</p>
+      </article>
+      <article class="g-card is-pick">
+        <div class="g-card-head">
+          <h3>قراءة الصور وتحليلها</h3>
+          <span class="g-tag">محدّث</span>
+        </div>
+        <p>لما تعطيه صورة يقرأها بعمق ويفككها لك تفصيلة تفصيلة، وهذا هو السبب الرئيسي لاستخدامه في العمل الإبداعي البصري.</p>
+        <p>لما سجّلت الدرس كنت أشوفه يتفوق على <span class="en">Claude</span> و<span class="en">ChatGPT</span> بمراحل. اليوم الصورة تغيّرت: في ترتيب <span class="en">Vision Arena</span> (تحديث ١٣ سبتمبر ٢٠٢٦) أقوى النماذج من <span class="en">Anthropic</span> و<span class="en">Alibaba</span> و<span class="en">Meta</span> و<span class="en">Google</span> و<span class="en">OpenAI</span> صارت متقاربة جداً. المركز الأول صار لنموذج من <span class="en">Claude</span>، وأعلى نموذج من <span class="en">Gemini</span> جا في المركز ١٢ بفارق ٢١ نقطة بس.<sup class="g-ref"><a href="#src-3" aria-label="المصدر ٣">٣</a></sup></p>
+      </article>
+    </div>
+    <p class="g-callout is-tip">لا تاخذ الترتيب كلمة أخيرة. جرّب نفس الصورة على <span class="en">Gemini</span> وعلى النموذج اللي تستخدمه، وقارن بنفسك. وهذا بالضبط سؤال التأمل الثالث تحت.</p>
+  </section>
+
+  <section class="g-sec" aria-labelledby="s2">
+    <h2 class="g-h2" id="s2"><span class="g-idx">٠٢</span>يفهم كل شيء<span class="g-h2-sub">Multimodal</span></h2>
+    <p><span class="en">Gemini</span> نموذج متعدد المدخلات، يعني ما تقتصر تعاملك معه على النص فقط.</p>
+    <ul class="g-tiles is-4">
+      <li><span class="t-en">TEXT</span><span class="t-val">نصوص وأوامر</span></li>
+      <li><span class="t-en">IMAGE</span><span class="t-val">صور وتحليل بصري</span></li>
+      <li><span class="t-en">VIDEO</span><span class="t-val">فيديوهات كاملة</span></li>
+      <li><span class="t-en">AUDIO</span><span class="t-val">صوت وتفريغ</span></li>
+    </ul>
+    <aside class="g-callout">
+      <p><strong>أدّه فيديو وتكلم معه عنه، يردّ وهو فاهم كل تفصيلة فيه.</strong> وهذي من أقوى نقاطه في الشغل الإبداعي.</p>
+    </aside>
+    <aside class="g-callout is-tip">
+      <p><span class="g-tag">محدّث</span> حدود الرفع اليوم: في الخطة المجانية مجموع الفيديو لحد ٥ دقايق والصوت لحد ١٠ دقايق، ومع <span class="en">Google AI Pro</span> أو <span class="en">Ultra</span> توصل لساعة فيديو و٣ ساعات صوت.<sup class="g-ref"><a href="#src-9" aria-label="المصدر ٩">٩</a></sup></p>
+      <p>وصار كمان يطلع صور بـ <span class="en">Nano Banana</span> من نفس المحادثة، وفيديو بـ <span class="en">Gemini Omni</span> في الخطط المدفوعة. بس تركيز هذا الدرس على الفهم والتحليل.<sup class="g-ref"><a href="#src-2" aria-label="المصدر ٢">٢</a></sup><sup class="g-ref"><a href="#src-10" aria-label="المصدر ١٠">١٠</a></sup></p>
+    </aside>
+  </section>
+
+  <section class="g-sec" aria-labelledby="s3">
+    <h2 class="g-h2" id="s3"><span class="g-idx">٠٣</span>الاندماج مع <span class="en">Google Workspace</span>، الميزة الكبرى</h2>
+    <p>ليش تدفع ٢٠ دولار لـ <span class="en">ChatGPT</span> منفصلاً وأنت بـ ١٤ دولار (أو ١٦٫٨٠ لو شهري بدون التزام) تحصل على <span class="en">Gemini</span> مدمج مع كل أدوات <span class="en">Google</span> اللي تستخدمها أصلاً؟ <span class="g-tag">محدّث</span><sup class="g-ref"><a href="#src-6" aria-label="المصدر ٦">٦</a></sup></p>
+    <div class="g-panel">
+      <div class="g-panel-head">
+        <h3><span class="en">Google Workspace</span>: كل شيء تحت مظلة واحدة</h3>
+        <span class="g-meta"><span class="en">Business Standard</span> · من ١٤ دولار / شهر</span>
+      </div>
+      <div class="g-panel-body">
+        <ul class="g-chips" aria-label="أدوات Google Workspace">
+          <li class="g-chip">Gmail</li>
+          <li class="g-chip">Google Drive</li>
+          <li class="g-chip">Google Docs</li>
+          <li class="g-chip">Google Calendar</li>
+          <li class="g-chip">Google Slides</li>
+          <li class="g-chip is-on">Gemini AI</li>
+        </ul>
+      </div>
+      <div class="g-panel-foot">
+        <p class="g-meta">خطة <span class="en">Starter</span> (٧ دولار) فيها <span class="en">Gemini</span> داخل <span class="en">Gmail</span> وتطبيق <span class="en">Gemini</span> بس. <span class="en">Gemini</span> داخل <span class="en">Docs</span> و<span class="en">Drive</span> و<span class="en">Slides</span> و<span class="en">Meet</span> يبدأ من <span class="en">Standard</span>.<sup class="g-ref"><a href="#src-6" aria-label="المصدر ٦">٦</a></sup></p>
+      </div>
+    </div>
+    <div class="g-grid is-2">
+      <article class="g-card">
+        <div class="g-card-head">
+          <h3><span class="en">ChatGPT</span> منفرد</h3>
+          <span class="g-tag">محدّث</span>
+        </div>
+        <p>٢٠ دولار. يقدر اليوم يتصل بـ <span class="en">Gmail</span> و<span class="en">Google Drive</span> وتطبيقات ثانية عن طريق الـ <span class="en">Apps</span>، بس يظل برّا أدواتك: تروح له، وهو يسحب منها.<sup class="g-ref"><a href="#src-4" aria-label="المصدر ٤">٤</a></sup><sup class="g-ref"><a href="#src-5" aria-label="المصدر ٥">٥</a></sup></p>
+      </article>
+      <article class="g-card is-pick">
+        <h3><span class="en">Google Workspace + Gemini</span></h3>
+        <p>١٤ دولار بالتزام سنوي، أو ١٦٫٨٠ شهري. <span class="en">LLM</span> متكامل مع البريد، الملفات، التقويم، والمستندات، ويشتغل من جوّاها.<sup class="g-ref"><a href="#src-6" aria-label="المصدر ٦">٦</a></sup><sup class="g-ref"><a href="#src-7" aria-label="المصدر ٧">٧</a></sup></p>
+      </article>
+    </div>
+    <aside class="g-callout">
+      <span class="g-callout-label">حسابك <span class="en">Gmail</span> شخصي؟</span>
+      <p>ما تحتاج <span class="en">Workspace</span> عشان توصل لـ <span class="en">Gemini</span> داخل أدواتك. خطة <span class="en">Google AI Plus</span> تعطيك <span class="en">Gemini</span> داخل <span class="en">Gmail</span> و<span class="en">Vids</span>، و<span class="en">Google AI Pro</span> تعطيك <span class="en">Gemini</span> داخل <span class="en">Gmail</span> و<span class="en">Docs</span> و<span class="en">Vids</span> مع ٥ تيرابايت تخزين وحدود استخدام أعلى.<sup class="g-ref"><a href="#src-1" aria-label="المصدر ١">١</a></sup></p>
+    </aside>
+    <div class="g-table-wrap" role="region" aria-label="مقارنة الأسعار الشهرية" tabindex="0">
+      <table class="g-table">
+        <thead>
+          <tr><th scope="col">الخطة</th><th scope="col" class="num">دولار/شهر</th><th scope="col" class="num">ريال/شهر</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row"><span class="en">ChatGPT Plus</span><small>مساعد منفصل، يتصل بأدواتك عن طريق الـ Apps</small></th><td class="num">$20</td><td class="num"><span class="en">~75</span></td></tr>
+          <tr><th scope="row"><span class="en">Workspace Business Standard</span><small>التزام سنوي، للمستخدم الواحد</small></th><td class="num">$14</td><td class="num"><span class="en">~52.5</span></td></tr>
+          <tr><th scope="row"><span class="en">Workspace Business Standard</span><small>شهري مرن بدون التزام</small></th><td class="num">$16.80</td><td class="num"><span class="en">~63</span></td></tr>
+          <tr><th scope="row"><span class="en">Google AI Plus</span><small>حساب شخصي، سعر السعودية بالريال</small></th><td class="num">$4.99</td><td class="num">18.99</td></tr>
+          <tr><th scope="row"><span class="en">Google AI Pro</span><small>حساب شخصي، سعر السعودية بالريال</small></th><td class="num">$19.99</td><td class="num">85.99</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="g-footnote">* الأسعار بتاريخ ٢٤ سبتمبر ٢٠٢٦. أسعار الدولار من صفحات <span class="en">Google</span> و<span class="en">OpenAI</span> الأمريكية، والريال محسوب على ٣٫٧٥، إلا خطط <span class="en">Google AI</span> فهي من صفحة السعودية الرسمية مباشرة. أسعار <span class="en">Workspace</span> ما تشمل الضريبة، وممكن تختلف حسب بلدك.<sup class="g-ref"><a href="#src-1" aria-label="المصدر ١">١</a></sup><sup class="g-ref"><a href="#src-2" aria-label="المصدر ٢">٢</a></sup><sup class="g-ref"><a href="#src-5" aria-label="المصدر ٥">٥</a></sup><sup class="g-ref"><a href="#src-6" aria-label="المصدر ٦">٦</a></sup></p>
+  </section>
+
+  <section class="g-sec" aria-labelledby="s4">
+    <h2 class="g-h2" id="s4"><span class="g-idx">٠٤</span>مساعد مخصص لكل مهمة<span class="g-h2-sub">Custom Gems</span></h2>
+    <p>الـ <span class="en">Custom Gems</span> هي نسخ مخصصة من <span class="en">Gemini</span> تبنيها أنت. كل <span class="en">Gem</span> له مهمة محددة، وأسلوب محدد، يشتغل بيها في كل مرة تفتحه بدون ما تشرح من جديد.</p>
+    <ol class="g-steps">
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>افتح الـ <span class="en">Gems</span></h3><span class="g-tag is-neutral en">New Gem</span></div>
+        <p>افتح <span class="en">Gemini</span> ← اضغط على <strong class="en">Gems</strong> ← اختر <strong class="en">New Gem</strong>. تلاقي <span class="en">Gems</span> في القائمة الجانبية، ولو أول مرة تسوي <span class="en">Gem</span> تلاقيها تحت <span class="en">Settings and help</span>.<sup class="g-ref"><a href="#src-8" aria-label="المصدر ٨">٨</a></sup></p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>سمّه واكتب التعليمات</h3><span class="g-tag is-neutral en">Instructions</span></div>
+        <p>سمّه، وأضف الـ <strong class="en">Instructions</strong>، وهي <span class="en">System Prompt</span>: مين هو، وش يسوي، كيف يفكر، وش المدخلات والمخرجات.</p>
+        <p><span class="g-tag">محدّث</span> وتحت <span class="en">Knowledge</span> تقدر تضيف ملفات مرجعية من جهازك أو من <span class="en">Drive</span>، عشان يشتغل على مراجعك وأسلوبك أنت.<sup class="g-ref"><a href="#src-8" aria-label="المصدر ٨">٨</a></sup></p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>خلّ <span class="en">Claude</span> يكتبها معك</h3><span class="g-tag is-neutral en">Claude</span></div>
+        <p>لكتابة الـ <span class="en">System Prompt</span> استخدم <strong class="en">Claude</strong>. هو يسأل ويأخذ ويعطي حتى يوصلك للنتيجة اللي تبغاها بالضبط.</p>
+        <p class="g-meta">وفيه كمان زر <span class="en">Use Gemini to re-write instructions</span> داخل صفحة الـ <span class="en">Gem</span> لو تبي نقطة بداية سريعة.<sup class="g-ref"><a href="#src-8" aria-label="المصدر ٨">٨</a></sup></p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>اختبر وعدّل</h3><span class="g-tag is-neutral en">Preview</span></div>
+        <p>اختبر الـ <span class="en">Gem</span> مباشرة داخل المنصة، في خانة المعاينة جنب التعليمات، وعدّل لحين تصل للنتيجة المثالية.</p>
+      </div></li>
+    </ol>
+    <div class="g-grid is-2">
+      <article class="g-card is-pick">
+        <h3><span class="en">MA Photographer Prompt</span></h3>
+        <p>تعطيه صورة مرجعية، يكتب لك برومبت احترافي بنفس تقسيمتك وأسلوبك البصري. بدون ما تكتب حرف واحد من البرومبت بيدك.</p>
+      </article>
+      <article class="g-card is-pick">
+        <h3><span class="en">Mood Extractor</span></h3>
+        <p>تعطيه صورة، يحللها بالكامل: <span class="en">DNA Summary</span>، <span class="en">Color Architecture</span>، نظام الإضاءة، الـ <span class="en">Composition</span>، <span class="en">Emotional Tone</span>، ويكتب لك <span class="en">Prompt</span> ونقيضه <span class="en">Negative Prompt</span>.</p>
+      </article>
+    </div>
+    <p class="g-callout is-tip">الـ <span class="en">Gem</span> اللي تسويه على الويب يطلع لك في تطبيق الجوال وفي لوحة <span class="en">Gemini</span> الجانبية داخل <span class="en">Google Workspace</span>، وتقدر تشاركه مع فريقك.<sup class="g-ref"><a href="#src-8" aria-label="المصدر ٨">٨</a></sup></p>
+  </section>
+
+  <blockquote class="g-pull">
+    <p><span class="en">Gemini</span> يقرأ صورك، يكتب إيميلاتك، يشتغل داخل كل أدواتك.<br><span class="hl">ما عدت تكتب، بس توجّه.</span></p>
+  </blockquote>
+
+  <section class="g-sec g-reflect" aria-labelledby="reflect">
+    <h2 class="g-h2" id="reflect">تأمل قبل ما تكمل</h2>
+    <ol class="g-qs">
+      <li><p>وش أداة <span class="en">Google</span> تستخدمها يومياً وما فكرت إنك تربطها بـ <span class="en">Gemini</span>؟</p></li>
+      <li><p>لو بنيت <span class="en">Custom Gem</span> لشغلك الإبداعي، وش تكون مهمته الرئيسية؟</p></li>
+      <li><p>جرّب تعطي <span class="en">Gemini</span> صورة إبداعية وتطلب منه تحليلها. وش أضاف لك مقارنة بتحليلك أنت؟</p></li>
+    </ol>
+  </section>
+
+  <div class="g-end">
+    <p>خلصت الدليل؟ ارجع للدرس وكمّل من المكان اللي وقفت فيه.</p>
+    <a class="g-btn" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}">ارجع للدرس</a>
+  </div>
+
+  <section class="g-sources" aria-labelledby="sources">
+    <h2 class="g-h3" id="sources">المصادر</h2>
+    <p>المعلومات اللي تتغيّر بسرعة (الأسعار، النماذج، المزايا) راجعناها من مصادرها بتاريخ ٢٤ سبتمبر ٢٠٢٦.</p>
+    <ol>
+      <li id="src-1"><a href="https://gemini.google/sa/subscriptions/?hl=ar" target="_blank" rel="noopener">خطط Google AI في السعودية: الأسعار بالريال والمزايا</a> · Google</li>
+      <li id="src-2"><a href="https://gemini.google/us/subscriptions/?hl=en" target="_blank" rel="noopener">Google AI Plus, Pro &amp; Ultra: US plans and prices (USD), models and features</a> · Google</li>
+      <li id="src-3"><a href="https://arena.ai/leaderboard/vision" target="_blank" rel="noopener">Vision Arena leaderboard (updated Sep 13, 2026)</a> · Arena (LMArena)</li>
+      <li id="src-4"><a href="https://help.openai.com/en/articles/11487775-connectors-in-chatgpt" target="_blank" rel="noopener">Connected apps in ChatGPT</a> · OpenAI Help Center</li>
+      <li id="src-5"><a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">What is ChatGPT Plus?</a> · OpenAI Help Center</li>
+      <li id="src-6"><a href="https://workspace.google.com/pricing" target="_blank" rel="noopener">Google Workspace plans and pricing</a> · Google</li>
+      <li id="src-7"><a href="https://workspace.google.com/blog/product-announcements/empowering-businesses-with-AI" target="_blank" rel="noopener">Google Workspace enables the future of AI-powered work for every business (Jan 2025)</a> · Google Workspace Blog</li>
+      <li id="src-8"><a href="https://support.google.com/gemini/answer/15146780?hl=en" target="_blank" rel="noopener">Create, use and manage Gems</a> · Gemini Apps Help</li>
+      <li id="src-9"><a href="https://support.google.com/gemini/answer/14903178?hl=en" target="_blank" rel="noopener">Upload and analyze files in Gemini Apps</a> · Gemini Apps Help</li>
+      <li id="src-10"><a href="https://gemini.google/release-notes/" target="_blank" rel="noopener">Gemini Apps release notes</a> · Google</li>
+    </ol>
+  </section>
+
+</main>
+
+<footer class="g-foot">
+  <div class="g-wrap">
+    <p><b class="en">MA Learn</b> · صناعة الإلهام</p>
+    <p>الدرس التاسع · الفئة الأولى: شريك التفكير · <span class="en">Gemini</span></p>
+  </div>
+</footer>
+
+</body>
+</html>

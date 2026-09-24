@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!--
+  ITCAI lesson guide · t2-02 «العقلية والتوقعات» · Design System V4 (poster-dark x chunky rounded)
+  Built from the ITCAI guide template (MA EA projects/ma-learn-launch/cif/itcai-guides/). Research date 2026-09-24.
+  Tokens come ONLY from https://malearnsa.com/brand/tokens.css. Never redeclare a token here.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>العقلية والتوقعات · MA Learn</title>
+<meta name="description" content="النقاط السبع اللي تحطها في بالك وإنت تتعامل مع الذكاء الاصطناعي طوال الكورس، ووين تراجع وش تعرف عنك كل أداة.">
+<link rel="canonical" href="https://player.malearnsa.com/guides/itcai-02-mindset-expectations.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:site_name" content="MA Learn">
+<meta property="og:title" content="العقلية والتوقعات">
+<meta property="og:description" content="النقاط السبع اللي تحطها في بالك وإنت تتعامل مع الذكاء الاصطناعي طوال الكورس، ووين تراجع وش تعرف عنك كل أداة.">
+<meta property="og:url" content="https://player.malearnsa.com/guides/itcai-02-mindset-expectations.html">
+<meta name="theme-color" content="#151009">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://malearnsa.com/brand/tokens.css">
+<style>
+/* ITCAI guide components · V4. Tokens are linked above, never redeclared here.
+   Focus ring = var(--focus). Motion = var(--dur-*) + var(--lift); tokens.css zeroes both under reduced motion. */
+
+@font-face {
+  font-family: 'Gumela';
+  src: url('https://malearnsa.com/brand_assets/gumela-arabic-bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg); color: var(--muted);
+  font-family: var(--body); font-size: var(--fs-body); line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+::selection { background: var(--accent); color: var(--on-accent); }
+p, li, dd, td, th { text-wrap: pretty; }
+a {
+  color: var(--accent-hot); text-decoration-color: var(--accent-line);
+  text-decoration-thickness: 1.5px; text-underline-offset: 4px;
+  transition: color var(--dur-fast) var(--ease);
+}
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; box-shadow: var(--focus); border-radius: var(--r-xs); }
+strong, b { color: var(--ink); font-weight: 700; }
+.en { unicode-bidi: isolate; direction: ltr; }      /* Latin name inside Arabic copy */
+.hl, .g-meta.hl { color: var(--accent-hot); }
+
+/* ── Layout ─────────────────────────────────────────── */
+.g-wrap { max-width: 820px; margin-inline: auto; padding-inline: var(--page-x); }
+main.g-wrap { padding-block: var(--s-6) 0; }
+.g-sec { margin-block-start: var(--s-7); }
+.g-sec > * + * { margin-block-start: var(--s-4); }
+.g-sec > .g-h2 + * { margin-block-start: var(--s-5); }
+main > .g-callout, main > .g-note { margin-block-start: var(--s-6); }
+main > .g-intro + .g-callout { margin-block-start: var(--s-4); }
+
+/* ── Hero: top bar, eyebrow, title, chips, update stamp ── */
+.g-hero {
+  background-image: var(--glow-hero); background-repeat: no-repeat;
+  text-align: center; padding-block: var(--s-4) var(--s-7);
+  border-block-end: 1.5px solid var(--line);
+}
+.g-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-block-end: var(--s-7); text-align: start; }
+.g-brand { font-size: var(--fs-label); font-weight: 700; color: var(--faint); }
+.g-brand b { font-weight: 900; }
+.g-back-link {
+  display: inline-flex; align-items: center; gap: 8px; flex: none;
+  border: 1.5px solid var(--line-strong); background: var(--wash-2); color: var(--ink);
+  border-radius: var(--r-pill); padding: 7px 18px;
+  font-size: var(--fs-sm); font-weight: 700; text-decoration: none;
+  transition: transform var(--dur-med) var(--ease), background var(--dur-med) var(--ease);
+}
+.g-back-link:hover { transform: var(--lift); background: var(--card-2); color: var(--ink); }
+.g-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
+  padding-block: 6px; padding-inline: 6px 18px;
+  border: 1.5px solid var(--line-strong); border-radius: var(--r-pill); background: var(--wash);
+  font-size: var(--fs-label); font-weight: 800; color: var(--muted); text-align: start;
+}
+.g-eyebrow .num {
+  flex: none; background: var(--accent-soft); color: var(--accent-hot);
+  border-radius: var(--r-pill); padding: 2px 12px; font-weight: 900;
+}
+.g-title {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: var(--fs-h1); line-height: 1.35; margin-block: var(--s-5) var(--s-4);
+  text-wrap: balance;
+}
+.g-hero .g-chips { justify-content: center; }
+.g-meta-row {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 14px;
+  margin-block-start: var(--s-5); font-size: var(--fs-label); font-weight: 700; color: var(--faint);
+}
+.g-stamp {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: var(--r-pill);
+  border: 1.5px solid var(--line-strong); background: var(--wash-2); color: var(--muted);
+}
+.g-stamp::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); flex: none; }
+.g-stamp time { color: var(--ink); }
+
+/* ── Headings ───────────────────────────────────────── */
+.g-h2 {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: max(var(--fs-h3), 1.3rem); line-height: var(--lh-disp);
+  padding-block-end: 12px; border-block-end: 1.5px solid var(--line);
+}
+.g-idx { color: var(--accent); margin-inline-end: 10px; }
+.g-h2-sub { display: block; font-family: var(--body); font-size: var(--fs-label); font-weight: 700; color: var(--faint); margin-block-start: 2px; }
+.g-h3, .g-card h3, .g-panel-head h3 {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: 1.08rem; line-height: 1.5;
+}
+.g-meta { font-size: var(--fs-label); font-weight: 700; color: var(--faint); }
+
+/* ── Intro + callouts ───────────────────────────────── */
+.g-intro, .g-callout {
+  background: var(--card); border: 1.5px solid var(--line);
+  border-inline-start: 3px solid var(--accent); border-radius: var(--r-lg);
+}
+.g-intro {
+  margin-block-start: var(--s-6); padding: 20px 24px;
+  font-size: var(--fs-lead); line-height: 1.9; font-weight: 600; color: var(--ink);
+}
+.g-callout { padding: 16px 22px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-callout > * + * { margin-block-start: 6px; }
+.g-callout-label { display: block; font-weight: 800; color: var(--accent-hot); }
+.g-callout.is-rule { color: var(--ink); font-weight: 700; font-size: var(--fs-body); }
+.g-callout.is-tip { background: var(--wash); border-inline-start-color: var(--line-strong); color: var(--faint); }
+.g-callout.is-update { background: var(--accent-soft); border-color: var(--accent-line); border-inline-start-color: var(--accent); color: var(--ink); }
+
+/* ── Tags, inline refs, chips ───────────────────────── */
+.g-tag {
+  display: inline-flex; align-items: center; gap: 6px; vertical-align: middle;
+  border-radius: var(--r-pill); padding: 2px 12px;
+  font-size: var(--fs-micro); font-weight: 800; line-height: 1.6;
+  background: var(--accent-soft); color: var(--accent-hot); max-width: 100%; overflow-wrap: anywhere;
+}
+.g-tag.is-lav { background: var(--lav-soft-bg); color: var(--lav); }
+.g-tag.is-neutral { background: var(--wash-2); color: var(--muted); }
+sup.g-ref { font-size: .68em; line-height: 0; }
+sup.g-ref + sup.g-ref::before { content: "،"; font-weight: 400; }
+sup.g-ref a { text-decoration: none; font-weight: 800; padding-inline: 2px; }
+.g-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.g-chip {
+  border: 1.5px solid var(--line-strong); border-radius: var(--r-pill); background: var(--wash);
+  padding: 5px 16px; font-size: var(--fs-sm); font-weight: 700; color: var(--muted); unicode-bidi: isolate;
+  max-width: 100%; overflow-wrap: anywhere;
+}
+.g-chip.is-on { background: var(--accent-soft); border-color: var(--accent-line); color: var(--ink); }
+
+/* ── Lists ──────────────────────────────────────────── */
+.g-list { list-style: none; display: grid; gap: 8px; }
+.g-list > li { position: relative; padding-inline-start: 20px; }
+.g-list > li::before {
+  content: ""; position: absolute; inset-inline-start: 2px; top: calc(.875em - 3px);
+  width: 6px; height: 6px; border-radius: 2px; background: var(--accent);
+}
+
+/* ── Cards + grids ──────────────────────────────────── */
+.g-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+.g-grid.is-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.g-card { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 20px 22px; }
+.g-card > * + * { margin-block-start: 8px; }
+.g-card p, .g-card li { font-size: var(--fs-sm); line-height: 1.85; }
+.g-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.g-card.is-pick {
+  border-color: var(--accent-line);
+  background: linear-gradient(180deg, var(--accent-soft), transparent 70%), var(--card);
+}
+
+/* ── Numbered cards ─────────────────────────────────── */
+.g-numlist { list-style: none; counter-reset: n; display: grid; gap: 12px; }
+.g-numlist > li {
+  counter-increment: n; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 20px 22px;
+}
+.g-numlist > li::before {
+  content: counter(n, arabic-indic); width: 52px; height: 52px; display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--accent-soft); color: var(--accent-hot);
+  font-family: var(--disp); font-weight: 700; font-size: 1.6rem; line-height: 1;
+}
+.g-numlist > li > div > * + * { margin-block-start: 6px; }
+.g-numlist p { font-size: var(--fs-sm); line-height: 1.85; }
+
+/* ── Tiles (label + value) ──────────────────────────── */
+.g-tiles { list-style: none; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr)); }
+.g-tiles > li {
+  background: var(--card); border: 1.5px solid var(--line); border-block-start: 2px solid var(--accent-line);
+  border-radius: var(--r-md); padding: 12px 14px; text-align: center;
+}
+.g-tiles.is-start > li { text-align: start; }
+.g-tiles .t-en { display: block; font-size: var(--fs-micro); font-weight: 700; color: var(--faint); unicode-bidi: isolate; }
+.g-tiles .t-val { display: block; color: var(--ink); font-weight: 700; font-size: var(--fs-sm); line-height: 1.6; }
+.g-tiles .t-desc { display: block; font-size: var(--fs-label); color: var(--faint); line-height: 1.7; margin-block-start: 2px; }
+
+/* ── Panel (head / body / foot) + spec grid ─────────── */
+.g-panel { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-xl); }
+.g-panel-head {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px;
+  padding: 16px 22px; background: var(--wash); border-block-end: 1.5px solid var(--line);
+  border-radius: calc(var(--r-xl) - 1.5px) calc(var(--r-xl) - 1.5px) 0 0;
+}
+.g-panel-body { padding: 18px 22px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-panel-body > * + * { margin-block-start: 12px; }
+.g-panel-foot { padding: 14px 22px 18px; border-block-start: 1.5px solid var(--line); }
+.g-spec { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); }
+.g-spec > div { background: var(--wash); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 10px 14px; }
+.g-spec dt { font-size: var(--fs-micro); font-weight: 700; color: var(--faint); }
+.g-spec dd { color: var(--ink); font-size: var(--fs-sm); font-weight: 600; line-height: 1.6; }
+
+/* ── Key rows (label column + body) ─────────────────── */
+.g-rows { list-style: none; display: grid; gap: 10px; }
+.g-rows > li {
+  display: grid; grid-template-columns: minmax(96px, 150px) 1fr;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg);
+}
+.g-rows .r-key {
+  display: flex; flex-direction: column; justify-content: center; gap: 2px;
+  padding: 14px 18px; background: var(--wash-2); border-inline-end: 1.5px solid var(--line);
+  border-start-start-radius: inherit; border-end-start-radius: inherit;
+}
+.g-rows .r-key b { color: var(--accent-hot); font-weight: 800; font-size: var(--fs-sm); unicode-bidi: isolate; }
+.g-rows .r-key small { font-size: var(--fs-micro); font-weight: 700; color: var(--faint); }
+.g-rows .r-body { padding: 14px 20px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-rows .r-body > * + * { margin-block-start: 6px; }
+.g-eg { padding-inline-start: 12px; border-inline-start: 2px solid var(--line-strong); color: var(--faint); font-size: var(--fs-label); }
+
+/* ── Steps (pipeline) ───────────────────────────────── */
+.g-steps { list-style: none; counter-reset: s; display: grid; gap: 12px; }
+.g-steps > li { counter-increment: s; position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 14px; }
+.g-steps > li::before {
+  content: counter(s, arabic-indic); position: relative; z-index: 1;
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--card); border: 1.5px solid var(--accent-line); color: var(--accent-hot);
+  font-family: var(--disp); font-weight: 700; font-size: 1.05rem;
+}
+.g-steps > li:not(:last-child)::after {
+  content: ""; position: absolute; inset-inline-start: 19px; top: 44px; bottom: -12px;
+  width: 2px; background: var(--line-strong);
+}
+
+/* ── Prompt block (LTR, tap selects all) ────────────── */
+.g-prompt { background: var(--media); border: 1.5px solid var(--line); border-radius: var(--r-lg); }
+.g-prompt figcaption {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px;
+  padding: 12px 18px; border-block-end: 1.5px solid var(--line);
+  font-size: var(--fs-label); font-weight: 700; color: var(--faint);
+}
+.g-prompt pre {
+  direction: ltr; text-align: start; white-space: pre-wrap; overflow-wrap: anywhere;
+  padding: 16px 18px; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: .84rem; line-height: 1.9; color: var(--ink);
+}
+.g-prompt code { font: inherit; -webkit-user-select: all; user-select: all; }
+.g-prompt .k { color: var(--accent-hot); }
+
+/* ── Quote box ──────────────────────────────────────── */
+.g-quote { background: var(--card); border: 1.5px solid var(--accent-line); border-radius: var(--r-lg); padding: 16px 22px; }
+.g-quote figcaption { font-size: var(--fs-label); font-weight: 700; color: var(--faint); margin-block-end: 6px; }
+.g-quote blockquote { color: var(--accent-hot); font-weight: 600; line-height: 1.9; }
+
+/* ── Data table ─────────────────────────────────────── */
+.g-table-wrap { overflow-x: auto; background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); }
+.g-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.g-table th, .g-table td { padding: 12px 16px; text-align: start; vertical-align: top; border-block-end: 1px solid var(--line); }
+.g-table thead th { background: var(--wash); font-size: var(--fs-label); font-weight: 800; color: var(--faint); }
+.g-table tbody th { color: var(--ink); font-weight: 700; }
+.g-table th small { display: block; font-size: var(--fs-micro); font-weight: 600; color: var(--faint); }
+.g-table .num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; unicode-bidi: isolate; }
+.g-table tbody tr:last-child > * { border-block-end: 0; }
+.g-table tfoot th, .g-table tfoot td {
+  border-block-end: 0; border-block-start: 1.5px solid var(--accent-line);
+  background: var(--accent-soft); color: var(--ink); font-weight: 800;
+}
+.g-footnote { font-size: var(--fs-label); color: var(--faint); }
+
+/* ── Voice: personal note, pull quote ───────────────── */
+.g-note { background: var(--lav-soft-bg); border: 1.5px solid var(--lav-line); border-radius: var(--r-xl); padding: 22px 24px; }
+.g-note > * + * { margin-block-start: 10px; }
+.g-note p { color: var(--ink); }
+.g-note-sign { font-family: var(--disp); font-weight: 700; color: var(--lav); }
+.g-pull { margin-block-start: var(--s-7); padding-block: var(--s-6); border-block: 1.5px solid var(--line); text-align: center; }
+.g-pull p {
+  max-width: 640px; margin-inline: auto; text-wrap: balance;
+  font-family: var(--disp); font-weight: 700; font-size: var(--fs-h3); line-height: 1.7; color: var(--ink);
+}
+
+/* ── Reflection (lavender section) ──────────────────── */
+.g-reflect .g-h2 { border-block-end-color: var(--lav-line); }
+.g-qs { list-style: none; counter-reset: q; display: grid; gap: 10px; }
+.g-qs > li {
+  counter-increment: q; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg);
+  padding-block: 12px; padding-inline: 12px 18px; color: var(--ink);
+}
+.g-qs > li::before {
+  content: counter(q, arabic-indic); width: 44px; height: 44px; display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--lav-soft-bg); color: var(--lav);
+  font-family: var(--disp); font-weight: 700; font-size: 1.2rem;
+}
+
+/* ── End: back to lesson (the page's one orange CTA) ── */
+.g-end {
+  margin-block-start: var(--s-7); padding: var(--s-6) var(--s-5); text-align: center;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-2xl);
+}
+.g-end p { margin-block-end: var(--s-4); }
+.g-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--grad-accent); color: var(--on-accent); box-shadow: var(--shadow-accent);
+  border-radius: var(--r-pill); padding: 14px 34px;
+  font-family: var(--body); font-weight: 800; font-size: 1rem; line-height: 1.4; text-decoration: none;
+  transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+}
+.g-btn:hover { transform: var(--lift); box-shadow: var(--shadow-accent-hover); color: var(--on-accent); }
+
+/* ── Sources ────────────────────────────────────────── */
+.g-sources { margin-block-start: var(--s-7); }
+.g-sources .g-h3 { font-size: 1rem; }
+.g-sources > p { margin-block-start: 4px; font-size: var(--fs-label); color: var(--faint); }
+.g-sources ol { list-style: none; counter-reset: src; display: grid; gap: 4px; margin-block-start: 12px; }
+.g-sources li {
+  counter-increment: src; position: relative; padding-block: 4px; padding-inline: 28px 8px;
+  font-size: var(--fs-label); line-height: 1.7; color: var(--faint);
+  overflow-wrap: anywhere; border-radius: var(--r-xs); scroll-margin-top: 24px;
+}
+.g-sources li::before { content: counter(src, arabic-indic); position: absolute; inset-inline-start: 6px; top: 4px; color: var(--accent-hot); font-weight: 800; }
+.g-sources li:target { background: var(--accent-soft); }
+
+/* ── Footer ─────────────────────────────────────────── */
+.g-foot {
+  margin-block-start: var(--s-7); padding-block: var(--s-5); border-block-start: 1.5px solid var(--line);
+  text-align: center; font-size: var(--fs-label); color: var(--faint);
+}
+.g-foot b { color: var(--muted); font-weight: 800; }
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (min-width: 720px) {
+  .g-sec { margin-block-start: var(--s-8); }
+}
+@media (max-width: 520px) {
+  .g-brand .g-brand-course { display: none; }
+  .g-eyebrow { flex-direction: column; gap: 8px; padding: 0; border: 0; background: none; border-radius: 0; text-align: center; }
+  .g-intro { padding: 18px 18px; }
+  .g-card, .g-numlist > li { padding: 18px; }
+  .g-numlist > li { gap: 14px; }
+  .g-numlist > li::before { width: 44px; height: 44px; font-size: 1.35rem; }
+  .g-panel-head, .g-panel-body, .g-panel-foot { padding-inline: 18px; }
+  .g-rows > li { grid-template-columns: 1fr; }
+  .g-rows .r-key {
+    flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: 4px 10px;
+    border-inline-end: 0; border-block-end: 1.5px solid var(--line);
+    border-end-start-radius: 0; border-start-end-radius: inherit;
+  }
+  .g-table th, .g-table td { padding: 10px 12px; }
+  .g-end { padding: var(--s-5) var(--s-4); }
+}
+
+/* ── Print: screen PDF stays poster-dark (V4 rule 6). Add class="paper" on <html> for physical print. ── */
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: var(--bg); }
+  body { padding-block: 12mm; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .g-top, .g-end { display: none; }
+  .g-hero { padding-block: 0 var(--s-5); }
+  .g-sec { margin-block-start: var(--s-6); }
+  .g-intro, .g-callout, .g-card, .g-panel, .g-note, .g-quote, .g-prompt, .g-pull,
+  .g-numlist > li, .g-rows > li, .g-steps > li, .g-qs > li, .g-tiles > li, .g-table tr { break-inside: avoid; }
+  .g-h2, .g-h3 { break-after: avoid; }
+  .g-table-wrap { overflow: visible; }
+  .g-sources a::after { content: " " attr(href); color: var(--faint); unicode-bidi: isolate; direction: ltr; }
+}
+
+/* Lesson-specific: small attribution line under the pull quote */
+.g-pull .g-pull-sub {
+  font-family: var(--body); font-weight: 600; font-size: var(--fs-sm); line-height: 1.8;
+  color: var(--faint); margin-block-start: var(--s-3);
+}
+</style>
+</head>
+<body>
+
+<header class="g-hero">
+  <div class="g-wrap">
+    <nav class="g-top" aria-label="تنقّل الدليل">
+      <a class="g-back-link" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}"><span aria-hidden="true">→</span> ارجع للدرس</a>
+      <span class="g-brand"><b class="en">MA Learn</b><span class="g-brand-course"> · مدخل إلى الذكاء الاصطناعي الإبداعي</span></span>
+    </nav>
+
+    <p class="g-eyebrow"><span class="num">الدرس الثاني من ١٧</span><span>الوحدة ٢ · منظومة الذكاء الاصطناعي للمبدعين</span></p>
+    <h1 class="g-title">العقلية والتوقعات</h1>
+    <div class="g-meta-row">
+      <span class="g-stamp">آخر تحديث: <time datetime="2026-09-24">سبتمبر ٢٠٢٦</time></span>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="g-wrap">
+
+  <p class="g-intro">عشان نستفيد من أي شيء في الدنيا، لازم يكون هدفنا منه واضح وواقعي. الذكاء الاصطناعي ما يختلف عن هذي القاعدة. سبع نقاط تحطها في اعتبارك طوال رحلتك في الكورس. مو قواعد، مو قيود، طريقة تفكير.</p>
+
+  <aside class="g-callout is-update">
+    <span class="g-callout-label"><span class="g-tag">تحديث سبتمبر ٢٠٢٦</span></span>
+    <p>النقاط السبع زي ما هي، ما تغيّر فيها شيء. اللي تحرّك من وقت تسجيل الدرس هو أدوات «الذاكرة» اللي تتكلم عنها النقطة السابعة: ChatGPT صار يعرض لك ملخص باللي يعرفه عنك وتعدّل عليه بنفسك<sup class="g-ref"><a href="#src-7" aria-label="المصدر ٧">٧</a></sup>، وClaude صار يرتّب ذاكرته في مواضيع تقرأها وتصحّحها<sup class="g-ref"><a href="#src-10" aria-label="المصدر ١٠">١٠</a></sup>. يعني نصيحة «راجع معه كل فترة» صارت أسهل من قبل. التفاصيل تحت النقاط.</p>
+  </aside>
+
+  <section class="g-sec" aria-labelledby="s1">
+    <h2 class="g-h2" id="s1">النقاط السبع</h2>
+    <ol class="g-numlist">
+      <li><div>
+        <h3 class="g-h3">إنت المدير، والذكاء الاصطناعي هو الموظف</h3>
+        <p>الذكاء الاصطناعي يتفوق عليك في بعض المهام، لكن إنت اللي تقود الدفة. حدّد وش تفوّضه ووش يعطيك تميّزك. الدايركشن واللمسات الأخيرة؟ هذي لك. كتابة المحتوى والتكرار؟ هذي له. حدّد وين كل طرف قبل ما تبدأ.</p>
+      </div></li>
+      <li><div>
+        <h3 class="g-h3">الذكاء الاصطناعي مو إله</h3>
+        <p>هو أداة، ولها نسبة خطأ مو بسيطة<sup class="g-ref"><a href="#src-1" aria-label="المصدر ١">١</a> <a href="#src-2" aria-label="المصدر ٢">٢</a></sup>. ما تعطيه ثقة عمياء. راجع وراه، قوله وين أخطأ ووين أحسن. إنت القائد وهو التابع، ما تعكس المعادلة.</p>
+      </div></li>
+      <li><div>
+        <h3 class="g-h3">إنت السبب</h3>
+        <p>الذكاء الاصطناعي يعتمد عليك ١٠٠٪. القصة، النسق، الدور، المهمة: كل شيء يجيه منك. إذا ما أعطيته السياق الكافي، إنت السبب في النتيجة الضعيفة. والعكس تماماً، كلما أحسنت المهمة، كلما جاءت النتيجة أقوى.</p>
+      </div></li>
+      <li><div>
+        <h3 class="g-h3">لا تخاف، مو فايتك شيء</h3>
+        <p>ما في «متأخر» في هذا الموضوع. كل يوم في شيء جديد، ولو تجري وراء كل شيء، ما راح توصل لأي مكان. فكّر كأنك تبني بيتاً، بتستخدم بس اللي يفيدك ويضيفلك.</p>
+      </div></li>
+      <li><div>
+        <h3 class="g-h3">إنت الخبير، مو الذكاء الاصطناعي</h3>
+        <p>هو يكتب ويصنع ويسوي، لكن ما يعرف وش الكويس ووش الوحش. ما يعرف وش تحس تجاه الصورة. استثمارك في تطوير نفسك هو رأس المال الحقيقي. الذكاء الاصطناعي يسرّع شغلك، لكن ما يخليك فنان. هذا دورك إنت.</p>
+      </div></li>
+      <li><div>
+        <h3 class="g-h3">جرّب، جرّب، جرّب</h3>
+        <p>ما في شيء يعلّمك على العمل مع الذكاء الاصطناعي غير التجربة. ادفع فلوس عشان تجرّب، اصرف وقت وجهد. التجربة تبني فهم، والفهم يبني نتائج. ما في طريق ثاني.</p>
+      </div></li>
+      <li><div>
+        <h3 class="g-h3">الأدوات تتغير، الأسلوب يبقى، والعمل تراكمي</h3>
+        <p>كل شهرين في نموذج جديد أو أداة أحسن. لو ربطت نفسك بأداة واحدة راح تتعب من الملاحقة. اللي يبقى معك هو أسلوب تفكيرك: كيف تصيغ المهمة، كيف تقيّم النتيجة، كيف تحسّن.</p>
+        <p>إنت ما تشغّل جهاز وخلاص، إنت تبني نظام عمل ونظام حياة. وهذا النظام ينتقل معك لأي أداة جديدة في ثواني.</p>
+        <p>ولما تشتغل معه بانتظام، يبدأ يدرسك، يحاول يفهمك، ومع الوقت يصير أفضل لك أنت تحديداً. راجع معه كل فترة وش يعرف عنك، صحّح، حسّن، أضف. مو جلسة واحدة وتنتهي، علاقة تبنيها مع الوقت.</p>
+      </div></li>
+    </ol>
+    <p class="g-callout is-tip">مثال على سرعة التغيير: <span class="en">Midjourney</span> لحاله نزّل <span class="en">V8&nbsp;Alpha</span><sup class="g-ref"><a href="#src-3" aria-label="المصدر ٣">٣</a></sup> في مارس ٢٠٢٦، وصار <span class="en">V8.1</span> النموذج الافتراضي في يونيو<sup class="g-ref"><a href="#src-4" aria-label="المصدر ٤">٤</a></sup>، ونزل <span class="en">V8.2</span> في يوليو<sup class="g-ref"><a href="#src-5" aria-label="المصدر ٥">٥</a></sup>. ثلاث نسخ في حوالي أربع شهور، وهذي أداة وحدة بس.</p>
+  </section>
+
+  <section class="g-sec" aria-labelledby="s2">
+    <h2 class="g-h2" id="s2">وين تراجع وش يعرف عنك<span class="g-h2-sub">النقطة السابعة في أشهر الأدوات، بتاريخ سبتمبر ٢٠٢٦</span></h2>
+    <p>النقطة السابعة تقول «راجع معه كل فترة». هذي الأماكن اللي تسوي فيها هذي المراجعة اليوم.</p>
+    <ul class="g-rows">
+      <li>
+        <div class="r-key"><b>ChatGPT</b><small>الذاكرة</small></div>
+        <div class="r-body">
+          <p>من الإعدادات: <span class="en">Personalization</span> ثم <span class="en">Memory</span><sup class="g-ref"><a href="#src-6" aria-label="المصدر ٦">٦</a></sup>. من يونيو ٢٠٢٦ صار ChatGPT يرتّب اللي يعرفه عنك من محادثاتك في «ملخص ذاكرة» تقرأه وتعدّل عليه بنفسك<sup class="g-ref"><a href="#src-7" aria-label="المصدر ٧">٧</a> <a href="#src-8" aria-label="المصدر ٨">٨</a></sup>. <span class="g-tag">جديد</span></p>
+          <p class="g-eg">الملخص بدأ مع الخطط المدفوعة في أمريكا، وOpenAI قالت إنه بيوصل لباقي الدول والخطة المجانية بالتدريج. إذا ما ظهر لك للحين، تقدر تشوف الذكريات المحفوظة وتعدّلها أو تحذفها من نفس المكان.</p>
+        </div>
+      </li>
+      <li>
+        <div class="r-key"><b>Claude</b><small>الذاكرة</small></div>
+        <div class="r-body">
+          <p>من الإعدادات: <span class="en">Memory</span>. كل اللي يتذكره Claude مرتّب في مواضيع <span class="en">(Topics)</span>، تفتح أي موضوع وتقرأه وتعدّله أو تحذفه، والتصحيح يمشي على كل محادثاتك الجاية. وتقدر تقوله في نفس المحادثة وش يتذكر أو ينسى<sup class="g-ref"><a href="#src-9" aria-label="المصدر ٩">٩</a> <a href="#src-10" aria-label="المصدر ١٠">١٠</a></sup>. <span class="g-tag">جديد</span></p>
+          <p class="g-eg">الذاكرة شغالة تلقائياً في خطط <span class="en">Free</span> و<span class="en">Pro</span> و<span class="en">Max</span>، وفي خطط الشركات يشغّلها المسؤول. والمواضيع الحساسة ما تنحفظ إلا إذا فعّلتها بنفسك.</p>
+        </div>
+      </li>
+      <li>
+        <div class="r-key"><b>Gemini</b><small>الذاكرة</small></div>
+        <div class="r-body">
+          <p>من <span class="en">Settings &amp; help</span> ثم <span class="en">Personal Intelligence</span> تشغّل أو تطفي <span class="en">Memory</span>. يتعلم من محادثاتك السابقة، وتقدر تصحّحه مباشرة في المحادثة، وتدير محادثاتك من <span class="en">Gemini Apps Activity</span><sup class="g-ref"><a href="#src-11" aria-label="المصدر ١١">١١</a></sup>.</p>
+          <p class="g-eg">تحتاج حساب <span class="en">Google</span> شخصي، وعمرك ١٨ وفوق، ويكون <span class="en">Keep&nbsp;Activity</span> شغّال.</p>
+        </div>
+      </li>
+      <li>
+        <div class="r-key"><b>Midjourney</b><small>الذوق البصري</small></div>
+        <div class="r-body">
+          <p>نفس الفكرة بس للعين: من صفحة <span class="en">Personalize</span> تختار الصور اللي تعجبك وتبني بروفايل يعرف ذوقك، وتقدر تسوي أكثر من بروفايل، و<span class="en">Moodboards</span> من صورك إنت<sup class="g-ref"><a href="#src-12" aria-label="المصدر ١٢">١٢</a></sup>. في <span class="en">V8.2</span> صار يفهم ذوقك أحسن كل ما زادت اختياراتك<sup class="g-ref"><a href="#src-5" aria-label="المصدر ٥">٥</a></sup>.</p>
+        </div>
+      </li>
+    </ul>
+    <p class="g-callout is-tip">أسماء القوائم تتغير كثير. إذا ما لقيتها، اسأل الأداة نفسها: «وين أشوف وش تعرف عني؟». وChatGPT وClaude متاحين رسمياً في السعودية<sup class="g-ref"><a href="#src-13" aria-label="المصدر ١٣">١٣</a> <a href="#src-14" aria-label="المصدر ١٤">١٤</a></sup>، بس بعض المزايا الجديدة توصل للخطط المدفوعة أو لدول معيّنة قبل غيرها.</p>
+  </section>
+
+  <blockquote class="g-pull">
+    <p>مو لازم تحفظ هذي النقاط،<br><span class="hl">ولكن خليها أسلوب تعاملك مع الذكاء الاصطناعي.</span></p>
+    <p class="g-pull-sub">كل نقطة فيها تغيّر طريقة تعاملك مع كل درس جاي</p>
+  </blockquote>
+
+  <section class="g-sec g-reflect" aria-labelledby="reflect">
+    <h2 class="g-h2" id="reflect">تأمل قبل ما تكمل</h2>
+    <ol class="g-qs">
+      <li><p>وين تحس إنك تميل لتعكس المعادلة، وتخلي الذكاء الاصطناعي هو اللي يقود؟</p></li>
+      <li><p>وش المهمة الإبداعية اللي تبغى تحافظ عليها بيدك، وما تفوّضها لأي أداة؟</p></li>
+      <li><p>من بين النقاط السبع، أيها تحس إنها الأصعب تطبيقاً عليك شخصياً؟</p></li>
+    </ol>
+  </section>
+
+  <div class="g-end">
+    <p>خلصت الدليل؟ ارجع للدرس وكمّل من المكان اللي وقفت فيه.</p>
+    <a class="g-btn" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}">ارجع للدرس</a>
+  </div>
+
+  <section class="g-sources" aria-labelledby="sources">
+    <h2 class="g-h3" id="sources">المصادر</h2>
+    <p>المعلومات اللي تتغيّر بسرعة (النماذج، المزايا، أماكن الإعدادات) راجعناها من مصادرها بتاريخ ٢٤ سبتمبر ٢٠٢٦.</p>
+    <ol>
+      <li id="src-1"><a href="https://support.claude.com/en/articles/8525154-claude-is-providing-incorrect-or-misleading-responses-what-s-going-on" target="_blank" rel="noopener"><span class="en">Claude is providing incorrect or misleading responses</span></a> · <span class="en">Claude Help Center</span></li>
+      <li id="src-2"><a href="https://arxiv.org/abs/2509.04664" target="_blank" rel="noopener"><span class="en">Why Language Models Hallucinate</span></a> · بحث لباحثين من <span class="en">OpenAI</span> على <span class="en">arXiv</span>، سبتمبر ٢٠٢٥</li>
+      <li id="src-3"><a href="https://updates.midjourney.com/v8-alpha/" target="_blank" rel="noopener"><span class="en">V8 Alpha</span></a> · <span class="en">Midjourney</span>، ١٧ مارس ٢٠٢٦</li>
+      <li id="src-4"><a href="https://updates.midjourney.com/v8-1-is-now-the-default-model/" target="_blank" rel="noopener"><span class="en">V8.1 is now the default model</span></a> · <span class="en">Midjourney</span>، ١١ يونيو ٢٠٢٦</li>
+      <li id="src-5"><a href="https://updates.midjourney.com/version-8-2/" target="_blank" rel="noopener"><span class="en">Version 8.2</span></a> · <span class="en">Midjourney</span>، ٢٤ يوليو ٢٠٢٦</li>
+      <li id="src-6"><a href="https://help.openai.com/en/articles/8590148-memory-faq" target="_blank" rel="noopener"><span class="en">Memory in ChatGPT</span></a> · <span class="en">OpenAI Help Center</span></li>
+      <li id="src-7"><a href="https://openai.com/index/chatgpt-memory-dreaming/" target="_blank" rel="noopener"><span class="en">Dreaming: Better memory for a more helpful ChatGPT</span></a> · <span class="en">OpenAI</span>، يونيو ٢٠٢٦</li>
+      <li id="src-8"><a href="https://www.engadget.com/2187811/chatgpt-s-memory-is-getting-better-especially-if-you-re-on-the-free-tier/" target="_blank" rel="noopener"><span class="en">ChatGPT's memory is getting better</span></a> · <span class="en">Engadget</span>، ٤ يونيو ٢٠٢٦</li>
+      <li id="src-9"><a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context" target="_blank" rel="noopener"><span class="en">Use Claude's chat search and memory</span></a> · <span class="en">Claude Help Center</span></li>
+      <li id="src-10"><a href="https://claude.com/blog/claudes-memory-works-everywhere-and-you-decide-whats-in-it" target="_blank" rel="noopener"><span class="en">Claude's memory works everywhere, and you decide what's in it</span></a> · <span class="en">Anthropic</span>، ٢٥ أغسطس ٢٠٢٦</li>
+      <li id="src-11"><a href="https://support.google.com/gemini/answer/16598469?hl=en" target="_blank" rel="noopener"><span class="en">Get personalization with memory of your past Gemini chats</span></a> · <span class="en">Gemini Apps Help</span></li>
+      <li id="src-12"><a href="https://updates.midjourney.com/profiles-and-moodboards/" target="_blank" rel="noopener"><span class="en">Profiles and Moodboards</span></a> · <span class="en">Midjourney</span>، ديسمبر ٢٠٢٤</li>
+      <li id="src-13"><a href="https://help.openai.com/en/articles/7947663-chatgpt-supported-countries" target="_blank" rel="noopener"><span class="en">ChatGPT Supported Countries</span></a> · <span class="en">OpenAI Help Center</span></li>
+      <li id="src-14"><a href="https://www.anthropic.com/supported-countries" target="_blank" rel="noopener"><span class="en">Supported countries and regions</span></a> · <span class="en">Anthropic</span></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer class="g-foot">
+  <div class="g-wrap">
+    <p><b class="en">MA Learn</b> · صناعة الإلهام</p>
+    <p>الدرس الثاني · منظومة الذكاء الاصطناعي للمبدعين · العقلية والتوقعات</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -4,60 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>دليل النماذج والمنصات · MA Learn</title>
+<meta name="description" content="دليل مرجعي لنماذج الذكاء الاصطناعي ومنصاته للمبدعين: نماذج التفكير، الصور، رفع الجودة، الفيديو، ومنصات سير العمل. محدّث بتاريخ 24 سبتمبر 2026.">
+<meta name="theme-color" content="#151009">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://malearnsa.com/brand/tokens.css">
 <style>
   /* ============================================
-     MA LEARN — AI MODELS & PLATFORMS REFERENCE
-     Design system: Gumela + dark-gold
+     MA LEARN · AI MODELS & PLATFORMS REFERENCE
+     Design System V4 (poster-dark). Tokens are linked above from
+     malearnsa.com/brand/tokens.css and never redeclared here.
+     Migrated from the legacy palette by token remap only; layout unchanged.
      ============================================ */
 
   @font-face {
     font-family: 'Gumela';
-    src: url('../fonts/gumela-arabic-bold.otf') format('opentype');
+    src: url('https://malearnsa.com/brand_assets/gumela-arabic-bold.otf') format('opentype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
-  }
-  @font-face {
-    font-family: 'Gumela';
-    src: url('../fonts/gumela-arabic-regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Gumela';
-    src: url('../fonts/gumela-arabic-light.otf') format('opentype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  :root {
-    --bg: #0A0A0A;
-    --surface-1: #0D0D0D;
-    --surface-2: #161616;
-    --surface-3: #1A1A1A;
-    --surface-4: #1E1E1E;
-    --border: #333333;
-    --gold: #C9A84C;
-    --gold-light: #E8D08A;
-    --white: #F5F0E8;
-    --body: #CCCCCC;
-    --muted: #AAAAAA;
-    --dim: #777777;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
     background: var(--bg);
-    color: var(--body);
-    font-family: 'Gumela', 'Segoe UI', Tahoma, Arial, sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
+    color: var(--muted);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: var(--lh-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  ::selection { background: var(--accent); color: var(--on-accent); }
+  a {
+    color: var(--accent-hot);
+    text-decoration-color: var(--accent-line);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+    transition: color var(--dur-fast) var(--ease);
+  }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; box-shadow: var(--focus); border-radius: var(--r-xs); }
+  .en { unicode-bidi: isolate; direction: ltr; }
+  .nw { white-space: nowrap; }
 
   .page {
     max-width: 1180px;
@@ -71,47 +62,48 @@
     justify-content: space-between;
     align-items: flex-start;
     padding-bottom: 32px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1.5px solid var(--line);
     margin-bottom: 56px;
   }
-  .header-right { text-align: right; flex: 1; }
+  .header-right { text-align: start; flex: 1; }
   .eyebrow {
     font-size: 12px;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--accent-hot);
     text-transform: uppercase;
     letter-spacing: 0;
     margin-bottom: 14px;
   }
   .doc-title {
-    font-family: 'Gumela', sans-serif;
+    font-family: var(--disp);
     font-weight: 700;
-    color: var(--white);
+    color: var(--ink);
     font-size: 44px;
     line-height: 1.15;
     margin-bottom: 10px;
   }
   .doc-subtitle {
     font-size: 13px;
-    color: var(--dim);
+    color: var(--faint);
     letter-spacing: 1px;
     direction: ltr;
-    text-align: right;
+    text-align: end;
   }
-  .header-left { text-align: left; min-width: 160px; }
+  .header-left { text-align: end; min-width: 160px; }
   .year {
-    font-family: 'Gumela', sans-serif;
+    font-family: var(--disp);
     font-weight: 700;
-    color: var(--gold);
+    color: var(--accent);
     font-size: 38px;
     line-height: 1;
     margin-bottom: 10px;
   }
   .update-info {
     font-size: 11px;
-    color: var(--dim);
+    color: var(--faint);
     line-height: 1.6;
   }
+  .update-info time { color: var(--ink); font-weight: 700; }
 
   /* ===== SECTION ===== */
   .section { margin-bottom: 56px; }
@@ -119,19 +111,19 @@
   .section-tag {
     display: inline-block;
     font-size: 11px;
-    color: var(--dim);
+    color: var(--faint);
     direction: ltr;
     margin-bottom: 8px;
     letter-spacing: 0.5px;
   }
   .section-title {
-    font-family: 'Gumela', sans-serif;
+    font-family: var(--disp);
     font-weight: 700;
-    color: var(--white);
+    color: var(--ink);
     font-size: 28px;
     margin-bottom: 8px;
   }
-  .section-title .gold-dot { color: var(--gold); margin: 0 8px; }
+  .section-title .dot { color: var(--accent); margin: 0 8px; }
   .section-desc {
     font-size: 15px;
     color: var(--muted);
@@ -141,10 +133,10 @@
   /* ===== SUBSECTION LABEL ===== */
   .subsection-label {
     font-size: 12px;
-    color: var(--gold);
+    color: var(--accent-hot);
     margin: 28px 0 14px;
     padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1.5px solid var(--line);
     font-weight: 700;
     letter-spacing: 0;
   }
@@ -160,73 +152,137 @@
 
   /* ===== CARD ===== */
   .card {
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-top: 2px solid var(--gold);
+    min-width: 0;
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-top: 2px solid var(--accent-line);
+    border-radius: var(--r-lg);
     padding: 22px 22px 24px;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: background var(--dur-med) var(--ease), border-color var(--dur-med) var(--ease);
   }
   .card:hover {
-    background: var(--surface-3);
-    border-color: #444;
-    border-top-color: var(--gold);
+    background: var(--card-2);
+    border-color: var(--line-strong);
+    border-top-color: var(--accent);
   }
   .card-head {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 14px;
-    gap: 10px;
+    gap: 4px 10px;
   }
   .card-name {
-    font-family: 'Gumela', sans-serif;
+    font-family: var(--disp);
     font-weight: 700;
-    color: var(--white);
+    color: var(--ink);
     font-size: 19px;
     direction: ltr;
   }
   .card-meta {
     font-size: 11px;
-    color: var(--dim);
+    color: var(--faint);
     direction: ltr;
-    text-align: left;
+    text-align: end;
     flex-shrink: 0;
   }
   .card-body {
     font-size: 14px;
-    color: var(--body);
+    color: var(--muted);
     line-height: 1.75;
   }
+  .card-body p + p { margin-top: 8px; }
+  .card-body .upd { color: var(--ink); }
+
+  /* status flags: new / renamed / retired */
+  .flags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .flag {
+    display: inline-block;
+    border-radius: var(--r-pill);
+    padding: 1px 10px;
+    font-size: var(--fs-micro);
+    font-weight: 800;
+    line-height: 1.7;
+    background: var(--accent-soft);
+    color: var(--accent-hot);
+    border: 1.5px solid var(--accent-line);
+  }
+  .flag.is-renamed { background: var(--wash-2); color: var(--ink); border-color: var(--line-strong); }
+  .flag.is-retired { background: var(--danger-bg); color: var(--danger); border-color: var(--danger-line); }
+  .card.is-retired { border-top-color: var(--danger-line); }
+  .card.is-retired .card-name { color: var(--faint); }
 
   /* ===== FOOTNOTE ===== */
   .footnote {
-    background: var(--surface-2);
-    border-right: 3px solid var(--gold);
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-inline-start: 3px solid var(--accent);
+    border-radius: var(--r-lg);
     padding: 16px 20px;
     margin-top: 40px;
     font-size: 13px;
-    color: var(--gold-light);
+    color: var(--muted);
     line-height: 1.8;
   }
-  .footnote strong { color: var(--gold); font-weight: 700; }
+  .footnote strong { color: var(--accent-hot); font-weight: 700; }
+  .footnote.update-note {
+    margin-top: 0;
+    margin-bottom: 56px;
+    background: var(--accent-soft);
+    border-color: var(--accent-line);
+    border-inline-start-color: var(--accent);
+    color: var(--ink);
+    font-size: 14px;
+  }
+
+  /* ===== SOURCES ===== */
+  .sources { margin-top: 56px; }
+  .sources-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 24px;
+    font-size: 12.5px;
+    line-height: 1.7;
+  }
+  .sources-list li {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--faint);
+    padding-inline-start: 14px;
+    position: relative;
+  }
+  .sources-list li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0.75em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-line);
+  }
+  .sources-list a { color: var(--muted); }
+  .sources-list a:hover { color: var(--accent-hot); }
 
   /* ===== FOOTER ===== */
   .footer {
     text-align: center;
     margin-top: 64px;
     padding-top: 32px;
-    border-top: 1px solid var(--border);
+    border-top: 1.5px solid var(--line);
   }
   .footer-brand {
-    font-family: 'Gumela', sans-serif;
+    font-family: var(--disp);
     font-weight: 700;
-    color: var(--gold);
+    color: var(--accent-hot);
     font-size: 14px;
     margin-bottom: 6px;
   }
   .footer-meta {
     font-size: 11px;
-    color: var(--dim);
+    color: var(--faint);
     direction: ltr;
   }
 
@@ -238,11 +294,12 @@
   @media (max-width: 640px) {
     .page { padding: 48px 22px; }
     .header { flex-direction: column-reverse; gap: 24px; }
-    .header-left { text-align: right; }
+    .header-left { text-align: start; }
     .doc-title { font-size: 30px; }
     .year { font-size: 30px; }
     .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
     .section-title { font-size: 22px; }
+    .sources-list { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -255,22 +312,27 @@
     <div class="header-right">
       <div class="eyebrow">MA Learn · وثيقة مرجعية</div>
       <h1 class="doc-title">دليل النماذج والمنصات</h1>
-      <div class="doc-subtitle">AI Models &amp; Platforms — Reference Guide</div>
+      <div class="doc-subtitle">AI Models &amp; Platforms · Reference Guide</div>
     </div>
     <div class="header-left">
       <div class="year">2026</div>
       <div class="update-info">
-        آخر تحديث: أبريل 2026<br>
+        آخر تحديث: <time datetime="2026-09-24">24 سبتمبر 2026</time><br>
         المشهد يتغير كل شهرين
       </div>
     </div>
   </header>
 
+  <!-- ============ UPDATE NOTE ============ -->
+  <div class="footnote update-note">
+    <strong>تحديث سبتمبر 2026:</strong> النسخة الأولى من هذا الدليل انكتبت في أبريل 2026، واليوم الصورة تغيّرت: Weavy صار اسمه Figma Weave، وFreepik صار Magnific، وMidjourney وصل V8.2، ونزلت نماذج جديدة زي GPT-6 وGPT Image 2.5 وSeedance 2.5 وGemini Omni Flash، وOpenAI قفلت تطبيق Sora. حدّثنا كل بطاقة في مكانها، وأضفنا اللي صار يهمّك كمبدع، وعلّمنا اللي توقف. المصادر كلها في آخر الدليل.
+  </div>
+
   <!-- ============ SECTION 1: LLM ============ -->
   <section class="section">
     <div class="section-header">
-      <div class="section-tag">LLM — Large Language Models</div>
-      <h2 class="section-title">الفئة الأولى<span class="gold-dot">·</span>نماذج التفكير المنطقي</h2>
+      <div class="section-tag">LLM · Large Language Models</div>
+      <h2 class="section-title">الفئة الأولى<span class="dot">·</span>نماذج التفكير المنطقي</h2>
       <p class="section-desc">شريك التفكير الإبداعي في التخطيط والكتابة وبناء الاستراتيجية.</p>
     </div>
 
@@ -278,10 +340,11 @@
       <div class="card">
         <div class="card-head">
           <div class="card-name">ChatGPT</div>
-          <div class="card-meta">OpenAI · GPT-4o</div>
+          <div class="card-meta">OpenAI · GPT-6</div>
         </div>
         <div class="card-body">
-          أشهر نماذج الذكاء الاصطناعي. قوي في كتابة المحتوى العام والبرمجة والتفكير الواسع. الخيار الأوسع انتشاراً بين جميع الأدوات.
+          <p>أشهر نماذج الذكاء الاصطناعي. قوي في كتابة المحتوى العام والبرمجة والتفكير الواسع. الخيار الأوسع انتشاراً بين جميع الأدوات.</p>
+          <p class="upd">في سبتمبر 2026 نزلت عائلة GPT-6 بثلاث نسخ: Astra وSol وLuna، والنموذج اللي يطلع لك في المحادثة يختلف حسب خطتك. أما GPT-4o فوقّفته OpenAI داخل ChatGPT من 13 فبراير 2026.</p>
         </div>
       </div>
 
@@ -291,17 +354,19 @@
           <div class="card-meta">Anthropic · الاختيار الأول</div>
         </div>
         <div class="card-body">
-          استثنائي في تحليل السياقات الطويلة والبريدات الإبداعية المعقدة والتفكير المنظّم. الخيار الأول في منظومة التوجيه الإبداعي.
+          <p>استثنائي في تحليل السياقات الطويلة والبريفات الإبداعية المعقدة والتفكير المنظّم. الخيار الأول في منظومة التوجيه الإبداعي.</p>
+          <p class="upd">أحدث نموذج عام اليوم Claude Opus 5.5، نزل 22 سبتمبر 2026، ومعه Sonnet 5 الأسرع، والاثنين يستوعبون سياق طويل لحد مليون token.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
           <div class="card-name">Gemini</div>
-          <div class="card-meta">Google</div>
+          <div class="card-meta">Google · Gemini 3</div>
         </div>
         <div class="card-body">
-          تكامل عميق مع Google Workspace. قوي في البحث والمعالجة متعددة المدخلات. يدعم بناء Gems للمساعدين المخصصين.
+          <p>تكامل عميق مع Google Workspace. قوي في البحث والمعالجة متعددة المدخلات. يدعم بناء Gems للمساعدين المخصصين.</p>
+          <p class="upd">ومن داخله توصل لـ Nano Banana للصور، ولـ Gemini Omni Flash للفيديو لو مشترك في Google AI Plus أو Pro أو Ultra. وصار له تطبيق على Mac وWindows.</p>
         </div>
       </div>
     </div>
@@ -311,59 +376,76 @@
   <section class="section">
     <div class="section-header">
       <div class="section-tag">Image Generation Models</div>
-      <h2 class="section-title">الفئة الثانية<span class="gold-dot">·</span>نماذج توليد الصور</h2>
-      <p class="section-desc">الاستوديو الرقمي — من المفهوم البصري للصورة النهائية.</p>
+      <h2 class="section-title">الفئة الثانية<span class="dot">·</span>نماذج توليد الصور</h2>
+      <p class="section-desc">الاستوديو الرقمي، من المفهوم البصري للصورة النهائية.</p>
     </div>
 
     <div class="subsection-label">النماذج الأساسية</div>
     <div class="grid grid-2">
       <div class="card">
         <div class="card-head">
-          <div class="card-name">NanoBanana 2</div>
+          <div class="card-name">Nano Banana 2</div>
           <div class="card-meta">Google · Gemini 3.1 Flash Image</div>
         </div>
         <div class="card-body">
-          سريع ومتعدد الاستخدامات. مثالي للمراجع البصرية السريعة وتصور الأفكار الأولية والاسكتشات المبكرة قبل الانتقال للنماذج الأعلى دقة.
+          <p>سريع ومتعدد الاستخدامات. مثالي للمراجع البصرية السريعة وتصور الأفكار الأولية والاسكتشات المبكرة قبل الانتقال للنماذج الأعلى دقة.</p>
+          <p class="upd">يحافظ على شبه لين 5 شخصيات و14 غرض في نفس الشغل، ويطلع لحد 4K. وهو اليوم الافتراضي في تطبيق Gemini وGoogle Flow. أما أول نسخة من Nano Banana، واسمها التقني Gemini 2.5 Flash Image، فصارت قديمة، وGoogle توقفها في الـ API يوم 2 أكتوبر 2026.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">NanoBanana Pro</div>
-          <div class="card-meta">التوجيه التفصيلي</div>
+          <div class="card-name">Nano Banana Pro</div>
+          <div class="card-meta">Google · التوجيه التفصيلي</div>
         </div>
         <div class="card-body">
-          دقة أعلى وتحكم أقوى في الأسلوب البصري. الأنسب للتوجيه الإبداعي التفصيلي والمخرجات الموجهة للعملاء.
+          <p>دقة أعلى وتحكم أقوى في الأسلوب البصري. الأنسب للتوجيه الإبداعي التفصيلي والمخرجات الموجهة للعملاء.</p>
+          <p class="upd">في تطبيق Gemini ما عاد هو الافتراضي، توصله من قائمة النقاط الثلاث وقت إعادة توليد الصورة لو مشترك في Google AI Pro أو Ultra.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">GPT Image 2.0</div>
-          <div class="card-meta">OpenAI · gpt-image-2</div>
+          <div class="card-name">GPT Image 2.5</div>
+          <div class="card-meta">OpenAI · Flare / Sunburst</div>
         </div>
         <div class="card-body">
-          أحدث نموذج من OpenAI بطبقة تفكير قبل التوليد. الأقوى في عرض النصوص داخل الصور — مثالي لموكاب التصميم والإعلانات والإنفوغرافيك. يدعم العربية ودقة 2K.
+          <p>أحدث نموذج صور من OpenAI، نزل 8 سبتمبر 2026 بعد GPT Image 2. الأقوى في عرض النصوص داخل الصور، مثالي لموكاب التصميم والإعلانات والإنفوغرافيك.</p>
+          <p class="upd">صار أدق في التعديل: يغيّر اللي طلبته بس ويحافظ على الباقي، ويحافظ على ملامح الشخص من صورتك المرجعية، ويدعم الخلفيات الشفافة. في الـ API له نسختين: Flare السريعة، وSunburst للدقة الأعلى.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Seedream V5</div>
-          <div class="card-meta">ByteDance</div>
+          <div class="card-name">Seedream 5.0</div>
+          <div class="card-meta">ByteDance · Lite / Pro</div>
         </div>
         <div class="card-body">
-          جودة بصرية عالية وحساسية جمالية مميزة. تدرّج ألوان سينمائي وإحساس احترافي من أول محاولة.
+          <p>جودة بصرية عالية وحساسية جمالية مميزة. تدرّج ألوان سينمائي وإحساس احترافي من أول محاولة.</p>
+          <p class="upd">نسخة Pro تضيف تعديل بالتحديد والرسم على الصورة، وفصل الصورة لطبقات، وإنفوغرافيك مليان نصوص، وتفهم البرومبت وتكتب داخل الصورة بحوالي 12 لغة منتشرة.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Flux Pro</div>
-          <div class="card-meta">Black Forest Labs</div>
+          <div class="card-name">FLUX</div>
+          <div class="card-meta">Black Forest Labs · FLUX.2 / FLUX 3</div>
         </div>
         <div class="card-body">
-          المعيار الصناعي في الواقعية والدقة. في النصوص حيث الصور، القاعدة الأكثر استخداماً في النماذج المخصصة.
+          <p>المعيار الصناعي في الواقعية والدقة، وفي النصوص داخل الصور. القاعدة الأكثر استخداماً في النماذج المخصصة.</p>
+          <p class="upd">الجيل الحالي FLUX.2، ومعه Max الأعلى جودة وKlein الخفيف. وفي 23 يوليو 2026 نزل FLUX 3 في Early Access: نموذج واحد يتعلّم من الصورة والفيديو والصوت، وبدأ بالفيديو أول. وفيه أوزان مفتوحة بترخيص للي يبغى يشغّل FLUX على أجهزته.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="flags"><span class="flag">جديد</span></div>
+        <div class="card-head">
+          <div class="card-name">HUMAIN Image 1</div>
+          <div class="card-meta">HUMAIN × Adobe · Arabic prompts</div>
+        </div>
+        <div class="card-body">
+          <p>نموذج صور مبني للسعودية: تكتب البرومبت بالعربي، ويطلع لك صور قريبة من ثقافتنا وسياقنا. أعلنته Adobe وHUMAIN في 31 أغسطس 2026، ومكانه داخل Adobe Firefly وAdobe Express.</p>
+          <p class="upd">ولو أنت مواطن أو مقيم في السعودية (13 سنة وفوق)، تقدر تسجّل في البرنامج الوطني وتاخذ Firefly Standard مع مزايا Express Premium مجاناً 12 شهر. التفعيل يوصل تدريجياً قبل نهاية 2026.</p>
         </div>
       </div>
     </div>
@@ -373,40 +455,44 @@
       <div class="card">
         <div class="card-head">
           <div class="card-name">Midjourney</div>
-          <div class="card-meta">V6.1 · Niji</div>
+          <div class="card-meta">V8.2 · Niji 7</div>
         </div>
         <div class="card-body">
-          المعيار الإبداعي. الأفضل للتوجيه الفني والمود بوردات والجماليات التحريرية.
+          <p>المعيار الإبداعي. الأفضل للتوجيه الفني والمود بوردات والجماليات التحريرية.</p>
+          <p class="upd">V8.2 هو الافتراضي من 24 يوليو 2026، ويطلع الصورة 2K مباشرة لو شغّلت HD.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Grok</div>
-          <div class="card-meta">xAI · Aurora</div>
+          <div class="card-name">Grok Imagine</div>
+          <div class="card-meta">SpaceXAI · Grok</div>
         </div>
         <div class="card-body">
-          واقعية بصرية قوية بقيود أقل، مدمج داخل منصة X.
+          <p>واقعية بصرية قوية بقيود أقل، مدمج داخل منصة X.</p>
+          <p class="upd">توليد الصور في Grok صار اسمه Grok Imagine، ويشتغل من grok.com/imagine بتوليد وتعديل. والشركة اللي وراه صار اسمها SpaceXAI بعد ما استحوذت SpaceX على xAI.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
           <div class="card-name">Reve</div>
-          <div class="card-meta">ثلاثة · سريعة النمو</div>
+          <div class="card-meta">Reve 2.1 · 4K</div>
         </div>
         <div class="card-body">
-          تحكم قوي في التكوين والسياق الشخصي عبر الصور.
+          <p>تحكم قوي في التكوين والسياق الشخصي عبر الصور.</p>
+          <p class="upd">من 3 يونيو 2026 صار على Reve 2.1: يخطط تكوين الصورة قبل ما يرسمها، يطلع 4K أصلي، وتعدّل كل عنصر في الصورة لحاله من المحرر.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">ChatGPT Image</div>
-          <div class="card-meta">OpenAI · GPT-4o</div>
+          <div class="card-name">ChatGPT Images</div>
+          <div class="card-meta">OpenAI · Images 2.5</div>
         </div>
         <div class="card-body">
-          الأدق في النصوص داخل الصور. مميز في موكاب التصميم والتحسين عبر محادثة.
+          <p>الأدق في النصوص داخل الصور. مميز في موكاب التصميم والتحسين عبر محادثة.</p>
+          <p class="upd">صار يشتغل على Images 2.5 بدل GPT-4o، ومعه Sketch ترسم فيه فكرتك بيدك، وقوالب جاهزة زي الفلاير وصور المنتجات، وتعليقات تحطها على جزء محدد من الصورة.</p>
         </div>
       </div>
     </div>
@@ -416,18 +502,19 @@
   <section class="section">
     <div class="section-header">
       <div class="section-tag">AI Upscaling</div>
-      <h2 class="section-title">الفئة الثانية ب<span class="gold-dot">·</span>نماذج رفع الجودة</h2>
-      <p class="section-desc">رفع دقة الصورة بذكاء حقيقي — لا مجرد تكبير.</p>
+      <h2 class="section-title">الفئة الثانية ب<span class="dot">·</span>نماذج رفع الجودة</h2>
+      <p class="section-desc">رفع دقة الصورة بذكاء حقيقي، لا مجرد تكبير.</p>
     </div>
 
     <div class="grid grid-2">
       <div class="card">
         <div class="card-head">
           <div class="card-name">Topaz Gigapixel</div>
-          <div class="card-meta">Photoshop مع تكامل · Desktop</div>
+          <div class="card-meta">Topaz Labs · Desktop · Plugin · Web</div>
         </div>
         <div class="card-body">
-          المعيار الصناعي للطباعة والتنسيقات الكبيرة. يضيف تفاصيل حقيقية لا مجرد استيفاء.
+          <p>المعيار الصناعي للطباعة والتنسيقات الكبيرة. يضيف تفاصيل حقيقية لا مجرد استيفاء.</p>
+          <p class="upd">يكبّر الصورة لحد 6 مرات تقريباً، كتطبيق مستقل على Mac وWindows أو Plugin داخل Photoshop وLightroom Classic. وصار موجود داخل Adobe نفسها: Generative Upscale في Photoshop وLightroom، وUpscale Image في Firefly.</p>
         </div>
       </div>
 
@@ -437,7 +524,8 @@
           <div class="card-meta">Web · الإنتاج التحريري</div>
         </div>
         <div class="card-body">
-          تضيف نسيجاً وتفاصيل وافية — تعطي الصور طابعاً يدوياً. الأنسب للتصوير التحريري والأزياء.
+          <p>تضيف نسيجاً وتفاصيل وافية، وتعطي الصور طابعاً يدوياً. الأنسب للتصوير التحريري والأزياء.</p>
+          <p class="upd">من 28 أبريل 2026 صارت Freepik كلها اسمها Magnific، والـ Upscaler جزء منها: يكبّر لحد 16× ولحد 10K في الخطط الأعلى، ووضع Creative فيه يضيف تفاصيل بجرأة. وفيه كمان رفع جودة الفيديو لحد 4K.</p>
         </div>
       </div>
     </div>
@@ -447,28 +535,30 @@
   <section class="section">
     <div class="section-header">
       <div class="section-tag">Video Generation Models</div>
-      <h2 class="section-title">الفئة الثالثة<span class="gold-dot">·</span>نماذج توليد الفيديو</h2>
-      <p class="section-desc">الحركة والسينما — من الصورة الثابتة للمشهد المتحرك.</p>
+      <h2 class="section-title">الفئة الثالثة<span class="dot">·</span>نماذج توليد الفيديو</h2>
+      <p class="section-desc">الحركة والسينما، من الصورة الثابتة للمشهد المتحرك.</p>
     </div>
 
     <div class="grid grid-4">
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Kling 3</div>
-          <div class="card-meta">Kuaishou</div>
+          <div class="card-name">Kling 3.0</div>
+          <div class="card-meta">Kuaishou · 3.0 / Omni</div>
         </div>
         <div class="card-body">
-          حركة إنسانية وتعبيرات وجه استثنائية. الأفضل في فيديو البورتريه والأزياء، متخصص في Image to Video.
+          <p>حركة إنسانية وتعبيرات وجه استثنائية. الأفضل في فيديو البورتريه والأزياء، متخصص في Image to Video.</p>
+          <p class="upd">من 5 فبراير 2026 صار على 3.0: لين 15 ثانية، صوت أصلي، وعدة لقطات في توليدة وحدة. ونسخة Omni تاخذ فيديو مرجعي وتثبّت منه شكل الشخصية وصوتها.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Seedance 2</div>
+          <div class="card-name">Seedance 2.5</div>
           <div class="card-meta">ByteDance</div>
         </div>
         <div class="card-body">
-          اتساق استثنائي للشخصيات عبر اللقطات. يعالج مشكلة التسلسل في الفيديو متعدد اللقطات.
+          <p>اتساق استثنائي للشخصيات عبر اللقطات. يعالج مشكلة التسلسل في الفيديو متعدد اللقطات.</p>
+          <p class="upd">نسخة 2.5 نزلت 31 يوليو 2026: مقطع 30 ثانية بالصوت في توليدة وحدة، ومراجع لين 30 صورة و10 فيديوهات و10 مقاطع صوت، وتعدّل لحظة محددة في المقطع بدل ما تعيده كله.</p>
         </div>
       </div>
 
@@ -478,57 +568,99 @@
           <div class="card-meta">Google DeepMind</div>
         </div>
         <div class="card-body">
-          حركة كاميرا سينمائية ومحاكاة فيزيائية دقيقة. قوي في Text to Video مع توليد صوت مدمج.
+          <p>حركة كاميرا سينمائية ومحاكاة فيزيائية دقيقة. قوي في Text to Video مع توليد صوت مدمج.</p>
+          <p class="upd">لسه هو إصدار Veo الحالي، وتلاقيه في Gemini وGoogle Flow.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Runway Gen-4</div>
+          <div class="card-name">Runway Gen-4.5</div>
           <div class="card-meta">رائد الصناعة</div>
         </div>
         <div class="card-body">
-          تحكم إبداعي قوي وتوجيه حركة الكاميرا وأدوات Motion Brush. موثوق في الإنتاج التجاري.
+          <p>تحكم إبداعي قوي وتوجيه حركة الكاميرا. موثوق في الإنتاج التجاري.</p>
+          <p class="upd">Gen-4.5 هو نموذجهم الحالي للفيديو، ومعه Aleph 2.0 اللي يعدّل فيديو جاهز بكلامك.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Luma Ray</div>
-          <div class="card-meta">Luma AI · Ray 2</div>
+          <div class="card-name">Luma Ray3.2</div>
+          <div class="card-meta">Luma AI · Ray3.2</div>
         </div>
         <div class="card-body">
-          حركة سينمائية سلسة مع محاكاة فيزيائية دقيقة. الأنسب لتحريك المنتجات والأجسام.
+          <p>حركة سينمائية سلسة مع محاكاة فيزيائية دقيقة. الأنسب لتحريك المنتجات والأجسام.</p>
+          <p class="upd">Ray3.2 نزل يونيو 2026: لين 16 keyframe في المقطع، و1080p، وHDR بتصدير EXR للتلوين والمؤثرات. أما Ray2 فصار نسخة قديمة.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Grok Video</div>
-          <div class="card-meta">xAI · Aurora</div>
+          <div class="card-name">Grok Imagine Video</div>
+          <div class="card-meta">SpaceXAI · 1.5</div>
         </div>
         <div class="card-body">
-          إنتاج سريع. قوي في حركة البيانات والمشاهد الجوية.
+          <p>إنتاج سريع. قوي في حركة البيانات والمشاهد الجوية.</p>
+          <p class="upd">نسخة Grok Imagine 1.5، المتاحة Preview في الـ API من 3 يونيو 2026، تحوّل صورة ثابتة لمقطع بحركة كاميرا وأجواء، وتحافظ على الصورة الأصلية.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">LTX Video</div>
-          <div class="card-meta">Lightricks · Open Source</div>
+          <div class="card-name">LTX-2.5</div>
+          <div class="card-meta">LTX · Open Source</div>
         </div>
         <div class="card-body">
-          توليد سريع مناسب للتكرار والاختيار. متاح عبر منصات متعددة بالـ API.
+          <p>توليد سريع مناسب للتكرار والاختيار. متاح عبر منصات متعددة بالـ API.</p>
+          <p class="upd">أوزان LTX-2 صارت مفتوحة بالكامل من يناير 2026، وآخر نسخة LTX-2.5 نزلت 11 أغسطس 2026، وفيها لقطات متعددة ودعم ComfyUI من أول يوم.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Wan</div>
-          <div class="card-meta">Alibaba · Open Source</div>
+          <div class="card-name">Wan 3.0</div>
+          <div class="card-meta">Alibaba</div>
         </div>
         <div class="card-body">
-          جودة حركة عالية ومرونة في الأسلوب البصري. متاح للاستضافة الذاتية وعبر المنصات.
+          <p>جودة حركة عالية ومرونة في الأسلوب البصري.</p>
+          <p class="upd">Wan 3.0 يطلع مقطع 30 ثانية بالصوت، ويقبل لين 20 مرجع. الأوزان المفتوحة للاستضافة الذاتية لسه على Wan 2.2 وما قبله، أما 3.0 فمن موقعهم والـ API والمنصات.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="flags"><span class="flag">جديد</span></div>
+        <div class="card-head">
+          <div class="card-name">Gemini Omni Flash</div>
+          <div class="card-meta">Google · Omni</div>
+        </div>
+        <div class="card-body">
+          <p>تعدّل الفيديو بالمحادثة: تغيّر المكان أو الزاوية أو تضيف عنصر، وكل تعليمة تبني على اللي قبلها والشخصيات ثابتة. يقبل نص وصور وصوت وفيديو كمدخلات.</p>
+          <p class="upd">متاح في تطبيق Gemini لمشتركي Google AI Plus وPro وUltra، وفي Google Flow وYouTube Shorts.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="flags"><span class="flag">جديد</span></div>
+        <div class="card-head">
+          <div class="card-name">FLUX 3 Video</div>
+          <div class="card-meta">Black Forest Labs · Early Access</div>
+        </div>
+        <div class="card-body">
+          <p>فيديو بالصوت لين 20 ثانية في توليدة وحدة، من نص أو صورة أو keyframes، ويعدّل مقطع جاهز بالبرومبت ويخلي الباقي زي ما هو، بدقة لحد 4K.</p>
+          <p class="upd">نزل Early Access في 23 يوليو 2026، وتلاقيه على Magnific وOpenArt.</p>
+        </div>
+      </div>
+
+      <div class="card is-retired">
+        <div class="flags"><span class="flag is-retired">متوقف</span></div>
+        <div class="card-head">
+          <div class="card-name">Sora</div>
+          <div class="card-meta">OpenAI</div>
+        </div>
+        <div class="card-body">
+          <p>كان من أشهر نماذج الفيديو، لكن OpenAI قفلت تطبيق Sora وموقعه في 26 أبريل 2026، وقفلت الـ API في 24 سبتمبر 2026.</p>
+          <p class="upd">لو كنت تعتمد عليه، البدائل فوق: Veo وKling وSeedance.</p>
         </div>
       </div>
     </div>
@@ -538,38 +670,43 @@
   <section class="section">
     <div class="section-header">
       <div class="section-tag">Workflow Design Platforms</div>
-      <h2 class="section-title">الفئة الرابعة<span class="gold-dot">·</span>منصات تصميم سير العمل</h2>
-      <p class="section-desc">من الفكرة للتسليم — كل شيء تحت مظلة واحدة.</p>
+      <h2 class="section-title">الفئة الرابعة<span class="dot">·</span>منصات تصميم سير العمل</h2>
+      <p class="section-desc">من الفكرة للتسليم، كل شيء تحت مظلة واحدة.</p>
     </div>
 
     <div class="grid grid-3">
       <div class="card">
+        <div class="flags"><span class="flag is-renamed">كان اسمه Weavy</span></div>
         <div class="card-head">
-          <div class="card-name">Weavy AI</div>
+          <div class="card-name">Figma Weave</div>
           <div class="card-meta">Node Based · الاختيار الشخصي</div>
         </div>
         <div class="card-body">
-          باني سير العمل بنظام Node Based. يربط نماذج التفكير والصور والفيديو في خط إنتاج واحد. ابني مرة واشتغل دائماً.
+          <p>باني سير العمل بنظام Node Based. يربط نماذج التفكير والصور والفيديو في خط إنتاج واحد. ابني مرة واشتغل دائماً.</p>
+          <p class="upd">هو Weavy نفسه: Figma استحوذت عليه في 30 أكتوبر 2025 وصار اسمه Figma Weave، ورابطه weave.figma.com. فيه نماذج Google وOpenAI وKling وByteDance وBlack Forest Labs وRunway وLuma وغيرها، مع أدوات تعديل احترافية زي Inpaint وRelight وUpscale.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div class="card-name">Flora</div>
+          <div class="card-name">FLORA</div>
           <div class="card-meta">Visual Workflow</div>
         </div>
         <div class="card-body">
-          منصة سير عمل بصري، متخصصة في ربط نماذج الصور والفيديو بمخرجات جمالية قوية.
+          <p>منصة سير عمل بصري، متخصصة في ربط نماذج الصور والفيديو بمخرجات جمالية قوية.</p>
+          <p class="upd">كانفس فيه نماذج النص والصور والفيديو مع بعض، وفيه Techniques: سير عمل جاهز بناه فريق FLORA ومبدعين، تشغّله على طول أو تفتحه في الكانفس حقك.</p>
         </div>
       </div>
 
       <div class="card">
+        <div class="flags"><span class="flag is-renamed">كان اسمه Freepik</span></div>
         <div class="card-head">
-          <div class="card-name">Magnific (Previously Freepik)</div>
+          <div class="card-name">Magnific</div>
           <div class="card-meta">All-in-One AI Suite</div>
         </div>
         <div class="card-body">
-          منصة شاملة تجمع كل نماذج الصور والفيديو الرئيسية تحت سقف واحد — Flux وImagen وNano Banana وSeedream وGPT Image وVeo وKling وRunway وLuma. تتضمن أدوات تحرير ورفع جودة ومكتبة أصول ضخمة. الأنسب لمن يريد تجربة عدة نماذج باشتراك واحد.
+          <p>منصة شاملة تجمع كل نماذج الصور والفيديو الرئيسية تحت سقف واحد، زي GPT Image وNano Banana وSeedream وSeedance وKling وVeo وFLUX وRunway وGrok Imagine. تتضمن أدوات تحرير ورفع جودة وصوت، ومكتبة أصول ضخمة. الأنسب لمن يريد تجربة عدة نماذج باشتراك واحد.</p>
+          <p class="upd">وفيها Spaces: كانفس Node Based تبني فيه سير عملك وتشتغل عليه مع فريقك.</p>
         </div>
       </div>
 
@@ -579,47 +716,63 @@
           <div class="card-meta">Creative Platform</div>
         </div>
         <div class="card-body">
-          أكثر من توليد صور — منصة إبداعية كاملة مع محرر وأدوات --sref و--cref والتعديل الداخلي.
+          <p>أكثر من توليد صور، منصة إبداعية كاملة مع محرر وأدوات <span class="en nw">--sref</span> والتعديل الداخلي.</p>
+          <p class="upd">في V8.2 صار فيه Edit Model، وهو اللي أخذ مكان <span class="en nw">--cref</span> والـ Omni Reference: ترفق لين 4 صور مرجعية وتكتب التعديل بكلامك.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
           <div class="card-name">Adobe Firefly</div>
-          <div class="card-meta">Creative Cloud · آمن تجارياً</div>
+          <div class="card-meta">Adobe · آمن تجارياً</div>
         </div>
         <div class="card-body">
-          مدمج في Photoshop. يشمل Generative Fill وExpand وObject Replace. جزء من اشتراك Creative Cloud.
+          <p>مدمج في Photoshop. يشمل Generative Fill وGenerative Expand.</p>
+          <p class="upd">اليوم Firefly منصة بحد ذاتها بخطط خاصة غير Creative Cloud: نموذج Firefly Image 5، ونماذج شركاء زي Google وOpenAI وKling وRunway وLuma وTopaz، وFirefly Boards للمود بورد. انتبه: صفة «آمن تجارياً» تخص نماذج Adobe نفسها، أما نماذج الشركاء فAdobe تقول إنك أنت اللي تقرر إذا تناسب مشروعك.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
           <div class="card-name">Higgsfield</div>
-          <div class="card-meta">Portrait &amp; Fashion Video</div>
+          <div class="card-meta">Portrait &amp; Fashion · All-in-One</div>
         </div>
         <div class="card-body">
-          متخصصة في حركة الإنسان وتحريك الشخصيات. مميزة لمحتوى البورتريه وحملات الأزياء.
+          <p>متخصصة في حركة الإنسان وتحريك الشخصيات. مميزة لمحتوى البورتريه وحملات الأزياء.</p>
+          <p class="upd">اليوم صارت منصة شاملة: Cinema Studio 4.0 للمشاهد السينمائية، ونماذج شركات ثانية زي Seedance 2.5 وNano Banana Pro، وأكثر من 50 نموذج عبر الـ API، وتقدر تشغّلها من داخل Claude وChatGPT.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
           <div class="card-name">OpenArt</div>
-          <div class="card-meta">Multi-Model · ControlNet</div>
+          <div class="card-meta">Multi-Model · Characters</div>
         </div>
         <div class="card-body">
-          وصول لـ Flux وSDXL ونماذج مخصصة. أدوات تدريب وControlNet قوية للمخرجات الدقيقة.
+          <p class="upd">منصة تجمع أحدث نماذج الصور والفيديو والصوت، زي GPT Image 2.5 وSeedance 2.5 وKling 3.0 وWan 3.0 وFLUX 3. قوتها اليوم في بناء شخصيات ثابتة تعيد استخدامها، وعوالم 3D تحط فيها شخصياتك.</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
           <div class="card-name">Luma</div>
-          <div class="card-meta">Ray 2 · Lifestyle</div>
+          <div class="card-meta">Luma Agents · Ray3.2 · UNI-1.1</div>
         </div>
         <div class="card-body">
-          واجهة نظيفة ومبهرة. قوية لتحريك منتجات أسلوب الحياة والإعلانات.
+          <p>واجهة نظيفة ومبهرة. قوية لتحريك منتجات أسلوب الحياة والإعلانات.</p>
+          <p class="upd">Dream Machine وRay2 صاروا نسخ قديمة. اليوم Luma App فيه Luma Agents اللي تخطط وتولّد وتعدّل معك عبر المشروع كله، مع Ray3.2 للفيديو وUNI-1.1 للصور، ونماذج ثانية زي Veo 3.1 وKling 3.0.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="flags"><span class="flag">جديد</span></div>
+        <div class="card-head">
+          <div class="card-name">Google Flow</div>
+          <div class="card-meta">Google · AI Creative Studio</div>
+        </div>
+        <div class="card-body">
+          <p>استوديو Google الإبداعي: تجمع فيه Veo 3.1 وNano Banana وGemini Omni في مكان واحد، من الفكرة للمشهد.</p>
+          <p class="upd">المزايا تختلف حسب اشتراكك في Google AI ومنطقتك، فشيّك وش المتاح لك.</p>
         </div>
       </div>
     </div>
@@ -627,8 +780,80 @@
 
   <!-- ============ FOOTNOTE ============ -->
   <div class="footnote">
-    <strong>ملاحظة:</strong> هذا الدليل قابل للتحديث — المشهد يتغير كل شهرين. النماذج المميزة بـ Open Source متاحة للاستضافة الذاتية. الاختيارات الشخصية مبنية على التطبيق الفعلي في مشاريع التوجيه الإبداعي.
+    <strong>ملاحظة:</strong> هذا الدليل قابل للتحديث، المشهد يتغير كل شهرين. النماذج المميزة بـ Open Source متاحة للاستضافة الذاتية. الاختيارات الشخصية مبنية على التطبيق الفعلي في مشاريع التوجيه الإبداعي.
   </div>
+
+  <!-- ============ SOURCES ============ -->
+  <section class="section sources">
+    <div class="section-header">
+      <div class="section-tag">Sources</div>
+      <h2 class="section-title">المصادر</h2>
+      <p class="section-desc">المعلومات اللي تتغيّر بسرعة (الإصدارات، الأسماء، التوفّر) راجعناها من مصادرها بتاريخ 24 سبتمبر 2026.</p>
+    </div>
+
+    <div class="subsection-label">نماذج التفكير</div>
+    <ul class="sources-list">
+      <li><a class="en" href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">GPT-6 Astra: A new generation of intelligence · OpenAI</a></li>
+      <li><a class="en" href="https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/" target="_blank" rel="noopener">OpenAI launches GPT-6 Sol and Luna · TechCrunch</a></li>
+      <li><a class="en" href="https://openai.com/index/retiring-gpt-4o-and-older-models/" target="_blank" rel="noopener">Retiring GPT-4o and older models in ChatGPT · OpenAI</a></li>
+      <li><a class="en" href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">Models overview · Claude Docs</a></li>
+      <li><a class="en" href="https://gemini.google/release-notes/" target="_blank" rel="noopener">Gemini Apps release notes · Google</a></li>
+      <li><a class="en" href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Gemini API release notes · Google</a></li>
+    </ul>
+
+    <div class="subsection-label">نماذج الصور ومنصاتها</div>
+    <ul class="sources-list">
+      <li><a class="en" href="https://blog.google/innovation-and-ai/technology/ai/nano-banana-2/" target="_blank" rel="noopener">Nano Banana 2 · Google Blog</a></li>
+      <li><a class="en" href="https://openai.com/index/introducing-chatgpt-images-2-5/" target="_blank" rel="noopener">Introducing ChatGPT Images 2.5 · OpenAI</a></li>
+      <li><a class="en" href="https://platform.openai.com/docs/models/gpt-image-2.5-flare" target="_blank" rel="noopener">GPT-Image-2.5 Flare · OpenAI API Docs</a></li>
+      <li><a class="en" href="https://seed.bytedance.com/en/seedream5_0_pro" target="_blank" rel="noopener">Seedream 5.0 Pro · ByteDance Seed</a></li>
+      <li><a class="en" href="https://bfl.ai/" target="_blank" rel="noopener">FLUX models · Black Forest Labs</a></li>
+      <li><a class="en" href="https://bfl.ai/blog/flux-3" target="_blank" rel="noopener">FLUX 3: Real World Models · Black Forest Labs</a></li>
+      <li><a class="en" href="https://bfl.ai/models/flux-3" target="_blank" rel="noopener">FLUX 3: One Multimodal Model · Black Forest Labs</a></li>
+      <li><a class="en" href="https://ai.google.dev/gemini-api/docs/deprecations" target="_blank" rel="noopener">Gemini deprecations · Gemini API</a></li>
+      <li><a class="en" href="https://news.adobe.com/news/2026/08/adobe-mcit-and-humain-expand-partnership" target="_blank" rel="noopener">Adobe, MCIT and HUMAIN expand partnership · Adobe</a></li>
+      <li><a class="en" href="https://www.adobe.com/sa_en/products/firefly/partner-models/humain.html" target="_blank" rel="noopener">HUMAIN Image 1 in Adobe Firefly · Adobe</a></li>
+      <li><a class="en" href="https://docs.midjourney.com/hc/en-us/articles/32199405667853-Version" target="_blank" rel="noopener">Version · Midjourney Docs</a></li>
+      <li><a class="en" href="https://updates.midjourney.com/version-8-2/" target="_blank" rel="noopener">Version 8.2 · Midjourney Updates</a></li>
+      <li><a class="en" href="https://docs.midjourney.com/hc/en-us/articles/48495453462797-Edit-Model" target="_blank" rel="noopener">Edit Model · Midjourney Docs</a></li>
+      <li><a class="en" href="https://x.ai/news/grok-imagine-1-5" target="_blank" rel="noopener">Grok Imagine 1.5 · SpaceXAI</a></li>
+      <li><a class="en" href="https://en.wikipedia.org/wiki/SpaceXAI" target="_blank" rel="noopener">SpaceXAI · Wikipedia</a></li>
+      <li><a class="en" href="https://app.reve.com/model" target="_blank" rel="noopener">Reve 2.1 · Reve</a></li>
+    </ul>
+
+    <div class="subsection-label">رفع الجودة</div>
+    <ul class="sources-list">
+      <li><a class="en" href="https://www.topazlabs.com/gigapixel" target="_blank" rel="noopener">Topaz Gigapixel · Topaz Labs</a></li>
+      <li><a class="en" href="https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/non-adobe-models-in-adobe-products.html" target="_blank" rel="noopener">Partner models in Adobe products · Adobe Help</a></li>
+      <li><a class="en" href="https://www.magnific.com/ai/image-upscaler" target="_blank" rel="noopener">AI Image Upscaler · Magnific</a></li>
+      <li><a class="en" href="https://www.prnewswire.com/news-releases/freepik-becomes-magnific-hits-230m-arr-and-introduces-the-no-collar-creative-economy-302755376.html" target="_blank" rel="noopener">Freepik becomes Magnific · PR Newswire</a></li>
+    </ul>
+
+    <div class="subsection-label">نماذج الفيديو</div>
+    <ul class="sources-list">
+      <li><a class="en" href="https://www.globenewswire.com/news-release/2026/02/05/3232837/0/en/kling-ai-launches-3-0-model-ushering-in-an-era-where-everyone-can-be-a-director.html" target="_blank" rel="noopener">Kling AI Launches 3.0 Model · GlobeNewswire</a></li>
+      <li><a class="en" href="https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5" target="_blank" rel="noopener">Introducing Seedance 2.5 · ByteDance Seed</a></li>
+      <li><a class="en" href="https://labs.google/flow/about" target="_blank" rel="noopener">Google Flow · Google</a></li>
+      <li><a class="en" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni/" target="_blank" rel="noopener">Introducing Gemini Omni · Google Blog</a></li>
+      <li><a class="en" href="https://runwayml.com/" target="_blank" rel="noopener">Runway · Gen-4.5</a></li>
+      <li><a class="en" href="https://lumalabs.ai/llm-info" target="_blank" rel="noopener">Luma: official product info · Luma AI</a></li>
+      <li><a class="en" href="https://ltx.io/newsroom" target="_blank" rel="noopener">Newsroom · LTX</a></li>
+      <li><a class="en" href="https://wan.video/" target="_blank" rel="noopener">Wan 3.0 · Alibaba Cloud</a></li>
+      <li><a class="en" href="https://github.com/Wan-Video" target="_blank" rel="noopener">Wan-Video open-source repos · GitHub</a></li>
+      <li><a class="en" href="https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation" target="_blank" rel="noopener">What to know about the Sora discontinuation · OpenAI Help</a></li>
+    </ul>
+
+    <div class="subsection-label">منصات سير العمل</div>
+    <ul class="sources-list">
+      <li><a class="en" href="https://weave.figma.com/" target="_blank" rel="noopener">Figma Weave · Figma</a></li>
+      <li><a class="en" href="https://www.figma.com/blog/welcome-weavy-to-figma/" target="_blank" rel="noopener">Introducing Figma Weave · Figma Blog</a></li>
+      <li><a class="en" href="https://www.flora.ai/" target="_blank" rel="noopener">FLORA</a></li>
+      <li><a class="en" href="https://www.magnific.com/" target="_blank" rel="noopener">Magnific</a></li>
+      <li><a class="en" href="https://www.adobe.com/products/firefly.html" target="_blank" rel="noopener">Adobe Firefly · Adobe</a></li>
+      <li><a class="en" href="https://higgsfield.ai/" target="_blank" rel="noopener">Higgsfield</a></li>
+      <li><a class="en" href="https://openart.ai/ai-model/" target="_blank" rel="noopener">OpenArt models · OpenArt</a></li>
+    </ul>
+  </section>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<!--
+  ITCAI lesson guide · Design System V4 (poster-dark x chunky rounded)
+  Course: مدخل إلى الذكاء الاصطناعي الإبداعي · lesson 5 of 17 (t2-05)
+  Rebuilt from the April 2026 lesson PDF. Facts researched 2026-09-24; change log in MA EA projects/ma-learn-launch/cif/itcai-guides/changes/.
+  Tokens come ONLY from https://malearnsa.com/brand/tokens.css. Never redeclare a token here.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الفئة الثالثة: أنظمة تصميم سير العمل · MA Learn</title>
+<meta name="description" content="دليل درس أنظمة سير العمل: كيف تشتغل المنصات المبنية على النودز، أبرز منصاتها اليوم (Figma Weave وMagnific Spaces وFLORA)، ومثال حقيقي لحملة مجوهرات من الفكرة للتسليم.">
+<link rel="canonical" href="https://player.malearnsa.com/guides/itcai-05-workflow-systems.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:site_name" content="MA Learn">
+<meta property="og:title" content="الفئة الثالثة: أنظمة تصميم سير العمل">
+<meta property="og:description" content="دليل درس أنظمة سير العمل: كيف تشتغل المنصات المبنية على النودز، أبرز منصاتها اليوم (Figma Weave وMagnific Spaces وFLORA)، ومثال حقيقي لحملة مجوهرات من الفكرة للتسليم.">
+<meta property="og:url" content="https://player.malearnsa.com/guides/itcai-05-workflow-systems.html">
+<meta name="theme-color" content="#151009">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://malearnsa.com/brand/tokens.css">
+<style>
+/* ITCAI guide components · V4. Tokens are linked above, never redeclared here.
+   Focus ring = var(--focus). Motion = var(--dur-*) + var(--lift); tokens.css zeroes both under reduced motion. */
+
+@font-face {
+  font-family: 'Gumela';
+  src: url('https://malearnsa.com/brand_assets/gumela-arabic-bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg); color: var(--muted);
+  font-family: var(--body); font-size: var(--fs-body); line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+::selection { background: var(--accent); color: var(--on-accent); }
+p, li, dd, td, th { text-wrap: pretty; }
+a {
+  color: var(--accent-hot); text-decoration-color: var(--accent-line);
+  text-decoration-thickness: 1.5px; text-underline-offset: 4px;
+  transition: color var(--dur-fast) var(--ease);
+}
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; box-shadow: var(--focus); border-radius: var(--r-xs); }
+strong, b { color: var(--ink); font-weight: 700; }
+.en { unicode-bidi: isolate; direction: ltr; }      /* Latin name inside Arabic copy */
+.hl, .g-meta.hl { color: var(--accent-hot); }
+
+/* ── Layout ─────────────────────────────────────────── */
+.g-wrap { max-width: 820px; margin-inline: auto; padding-inline: var(--page-x); }
+main.g-wrap { padding-block: var(--s-6) 0; }
+.g-sec { margin-block-start: var(--s-7); }
+.g-sec > * + * { margin-block-start: var(--s-4); }
+.g-sec > .g-h2 + * { margin-block-start: var(--s-5); }
+main > .g-callout, main > .g-note { margin-block-start: var(--s-6); }
+main > .g-intro + .g-callout { margin-block-start: var(--s-4); }
+
+/* ── Hero: top bar, eyebrow, title, chips, update stamp ── */
+.g-hero {
+  background-image: var(--glow-hero); background-repeat: no-repeat;
+  text-align: center; padding-block: var(--s-4) var(--s-7);
+  border-block-end: 1.5px solid var(--line);
+}
+.g-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-block-end: var(--s-7); text-align: start; }
+.g-brand { font-size: var(--fs-label); font-weight: 700; color: var(--faint); }
+.g-brand b { font-weight: 900; }
+.g-back-link {
+  display: inline-flex; align-items: center; gap: 8px; flex: none;
+  border: 1.5px solid var(--line-strong); background: var(--wash-2); color: var(--ink);
+  border-radius: var(--r-pill); padding: 7px 18px;
+  font-size: var(--fs-sm); font-weight: 700; text-decoration: none;
+  transition: transform var(--dur-med) var(--ease), background var(--dur-med) var(--ease);
+}
+.g-back-link:hover { transform: var(--lift); background: var(--card-2); color: var(--ink); }
+.g-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
+  padding-block: 6px; padding-inline: 6px 18px;
+  border: 1.5px solid var(--line-strong); border-radius: var(--r-pill); background: var(--wash);
+  font-size: var(--fs-label); font-weight: 800; color: var(--muted); text-align: start;
+}
+.g-eyebrow .num {
+  flex: none; background: var(--accent-soft); color: var(--accent-hot);
+  border-radius: var(--r-pill); padding: 2px 12px; font-weight: 900;
+}
+.g-title {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: var(--fs-h1); line-height: 1.35; margin-block: var(--s-5) var(--s-4);
+  text-wrap: balance;
+}
+.g-hero .g-chips { justify-content: center; }
+.g-meta-row {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 14px;
+  margin-block-start: var(--s-5); font-size: var(--fs-label); font-weight: 700; color: var(--faint);
+}
+.g-stamp {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: var(--r-pill);
+  border: 1.5px solid var(--line-strong); background: var(--wash-2); color: var(--muted);
+}
+.g-stamp::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); flex: none; }
+.g-stamp time { color: var(--ink); }
+
+/* ── Headings ───────────────────────────────────────── */
+.g-h2 {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: max(var(--fs-h3), 1.3rem); line-height: var(--lh-disp);
+  padding-block-end: 12px; border-block-end: 1.5px solid var(--line);
+}
+.g-idx { color: var(--accent); margin-inline-end: 10px; }
+.g-h2-sub { display: block; font-family: var(--body); font-size: var(--fs-label); font-weight: 700; color: var(--faint); margin-block-start: 2px; }
+.g-h3, .g-card h3, .g-panel-head h3 {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: 1.08rem; line-height: 1.5;
+}
+.g-meta { font-size: var(--fs-label); font-weight: 700; color: var(--faint); }
+
+/* ── Intro + callouts ───────────────────────────────── */
+.g-intro, .g-callout {
+  background: var(--card); border: 1.5px solid var(--line);
+  border-inline-start: 3px solid var(--accent); border-radius: var(--r-lg);
+}
+.g-intro {
+  margin-block-start: var(--s-6); padding: 20px 24px;
+  font-size: var(--fs-lead); line-height: 1.9; font-weight: 600; color: var(--ink);
+}
+.g-callout { padding: 16px 22px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-callout > * + * { margin-block-start: 6px; }
+.g-callout-label { display: block; font-weight: 800; color: var(--accent-hot); }
+.g-callout.is-rule { color: var(--ink); font-weight: 700; font-size: var(--fs-body); }
+.g-callout.is-tip { background: var(--wash); border-inline-start-color: var(--line-strong); color: var(--faint); }
+.g-callout.is-update { background: var(--accent-soft); border-color: var(--accent-line); border-inline-start-color: var(--accent); color: var(--ink); }
+
+/* ── Tags, inline refs, chips ───────────────────────── */
+.g-tag {
+  display: inline-flex; align-items: center; gap: 6px; vertical-align: middle;
+  border-radius: var(--r-pill); padding: 2px 12px;
+  font-size: var(--fs-micro); font-weight: 800; line-height: 1.6;
+  background: var(--accent-soft); color: var(--accent-hot); max-width: 100%; overflow-wrap: anywhere;
+}
+.g-tag.is-lav { background: var(--lav-soft-bg); color: var(--lav); }
+.g-tag.is-neutral { background: var(--wash-2); color: var(--muted); }
+sup.g-ref { font-size: .68em; line-height: 0; }
+sup.g-ref + sup.g-ref::before { content: "،"; font-weight: 400; }
+sup.g-ref a { text-decoration: none; font-weight: 800; padding-inline: 2px; }
+.g-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.g-chip {
+  border: 1.5px solid var(--line-strong); border-radius: var(--r-pill); background: var(--wash);
+  padding: 5px 16px; font-size: var(--fs-sm); font-weight: 700; color: var(--muted); unicode-bidi: isolate;
+  max-width: 100%; overflow-wrap: anywhere;
+}
+.g-chip.is-on { background: var(--accent-soft); border-color: var(--accent-line); color: var(--ink); }
+
+/* ── Lists ──────────────────────────────────────────── */
+.g-list { list-style: none; display: grid; gap: 8px; }
+.g-list > li { position: relative; padding-inline-start: 20px; }
+.g-list > li::before {
+  content: ""; position: absolute; inset-inline-start: 2px; top: calc(.875em - 3px);
+  width: 6px; height: 6px; border-radius: 2px; background: var(--accent);
+}
+
+/* ── Cards + grids ──────────────────────────────────── */
+.g-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+.g-grid.is-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.g-card { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 20px 22px; }
+.g-card > * + * { margin-block-start: 8px; }
+.g-card p, .g-card li { font-size: var(--fs-sm); line-height: 1.85; }
+.g-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.g-card.is-pick {
+  border-color: var(--accent-line);
+  background: linear-gradient(180deg, var(--accent-soft), transparent 70%), var(--card);
+}
+
+/* ── Numbered cards ─────────────────────────────────── */
+.g-numlist { list-style: none; counter-reset: n; display: grid; gap: 12px; }
+.g-numlist > li {
+  counter-increment: n; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 20px 22px;
+}
+.g-numlist > li::before {
+  content: counter(n, arabic-indic); width: 52px; height: 52px; display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--accent-soft); color: var(--accent-hot);
+  font-family: var(--disp); font-weight: 700; font-size: 1.6rem; line-height: 1;
+}
+.g-numlist > li > div > * + * { margin-block-start: 6px; }
+.g-numlist p { font-size: var(--fs-sm); line-height: 1.85; }
+
+/* ── Tiles (label + value) ──────────────────────────── */
+.g-tiles { list-style: none; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr)); }
+.g-tiles > li {
+  background: var(--card); border: 1.5px solid var(--line); border-block-start: 2px solid var(--accent-line);
+  border-radius: var(--r-md); padding: 12px 14px; text-align: center;
+}
+.g-tiles.is-start > li { text-align: start; }
+.g-tiles .t-en { display: block; font-size: var(--fs-micro); font-weight: 700; color: var(--faint); unicode-bidi: isolate; }
+.g-tiles .t-val { display: block; color: var(--ink); font-weight: 700; font-size: var(--fs-sm); line-height: 1.6; }
+.g-tiles .t-desc { display: block; font-size: var(--fs-label); color: var(--faint); line-height: 1.7; margin-block-start: 2px; }
+
+/* ── Panel (head / body / foot) + spec grid ─────────── */
+.g-panel { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-xl); }
+.g-panel-head {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px;
+  padding: 16px 22px; background: var(--wash); border-block-end: 1.5px solid var(--line);
+  border-radius: calc(var(--r-xl) - 1.5px) calc(var(--r-xl) - 1.5px) 0 0;
+}
+.g-panel-body { padding: 18px 22px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-panel-body > * + * { margin-block-start: 12px; }
+.g-panel-foot { padding: 14px 22px 18px; border-block-start: 1.5px solid var(--line); }
+.g-spec { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); }
+.g-spec > div { background: var(--wash); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 10px 14px; }
+.g-spec dt { font-size: var(--fs-micro); font-weight: 700; color: var(--faint); }
+.g-spec dd { color: var(--ink); font-size: var(--fs-sm); font-weight: 600; line-height: 1.6; }
+
+/* ── Key rows (label column + body) ─────────────────── */
+.g-rows { list-style: none; display: grid; gap: 10px; }
+.g-rows > li {
+  display: grid; grid-template-columns: minmax(96px, 150px) 1fr;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg);
+}
+.g-rows .r-key {
+  display: flex; flex-direction: column; justify-content: center; gap: 2px;
+  padding: 14px 18px; background: var(--wash-2); border-inline-end: 1.5px solid var(--line);
+  border-start-start-radius: inherit; border-end-start-radius: inherit;
+}
+.g-rows .r-key b { color: var(--accent-hot); font-weight: 800; font-size: var(--fs-sm); unicode-bidi: isolate; }
+.g-rows .r-key small { font-size: var(--fs-micro); font-weight: 700; color: var(--faint); }
+.g-rows .r-body { padding: 14px 20px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-rows .r-body > * + * { margin-block-start: 6px; }
+.g-eg { padding-inline-start: 12px; border-inline-start: 2px solid var(--line-strong); color: var(--faint); font-size: var(--fs-label); }
+
+/* ── Steps (pipeline) ───────────────────────────────── */
+.g-steps { list-style: none; counter-reset: s; display: grid; gap: 12px; }
+.g-steps > li { counter-increment: s; position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 14px; }
+.g-steps > li::before {
+  content: counter(s, arabic-indic); position: relative; z-index: 1;
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--card); border: 1.5px solid var(--accent-line); color: var(--accent-hot);
+  font-family: var(--disp); font-weight: 700; font-size: 1.05rem;
+}
+.g-steps > li:not(:last-child)::after {
+  content: ""; position: absolute; inset-inline-start: 19px; top: 44px; bottom: -12px;
+  width: 2px; background: var(--line-strong);
+}
+
+/* ── Prompt block (LTR, tap selects all) ────────────── */
+.g-prompt { background: var(--media); border: 1.5px solid var(--line); border-radius: var(--r-lg); }
+.g-prompt figcaption {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px;
+  padding: 12px 18px; border-block-end: 1.5px solid var(--line);
+  font-size: var(--fs-label); font-weight: 700; color: var(--faint);
+}
+.g-prompt pre {
+  direction: ltr; text-align: start; white-space: pre-wrap; overflow-wrap: anywhere;
+  padding: 16px 18px; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: .84rem; line-height: 1.9; color: var(--ink);
+}
+.g-prompt code { font: inherit; -webkit-user-select: all; user-select: all; }
+.g-prompt .k { color: var(--accent-hot); }
+
+/* ── Quote box ──────────────────────────────────────── */
+.g-quote { background: var(--card); border: 1.5px solid var(--accent-line); border-radius: var(--r-lg); padding: 16px 22px; }
+.g-quote figcaption { font-size: var(--fs-label); font-weight: 700; color: var(--faint); margin-block-end: 6px; }
+.g-quote blockquote { color: var(--accent-hot); font-weight: 600; line-height: 1.9; }
+
+/* ── Data table ─────────────────────────────────────── */
+.g-table-wrap { overflow-x: auto; background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); }
+.g-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.g-table th, .g-table td { padding: 12px 16px; text-align: start; vertical-align: top; border-block-end: 1px solid var(--line); }
+.g-table thead th { background: var(--wash); font-size: var(--fs-label); font-weight: 800; color: var(--faint); }
+.g-table tbody th { color: var(--ink); font-weight: 700; }
+.g-table th small { display: block; font-size: var(--fs-micro); font-weight: 600; color: var(--faint); }
+.g-table .num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; unicode-bidi: isolate; }
+.g-table tbody tr:last-child > * { border-block-end: 0; }
+.g-table tfoot th, .g-table tfoot td {
+  border-block-end: 0; border-block-start: 1.5px solid var(--accent-line);
+  background: var(--accent-soft); color: var(--ink); font-weight: 800;
+}
+.g-footnote { font-size: var(--fs-label); color: var(--faint); }
+
+/* ── Voice: personal note, pull quote ───────────────── */
+.g-note { background: var(--lav-soft-bg); border: 1.5px solid var(--lav-line); border-radius: var(--r-xl); padding: 22px 24px; }
+.g-note > * + * { margin-block-start: 10px; }
+.g-note p { color: var(--ink); }
+.g-note-sign { font-family: var(--disp); font-weight: 700; color: var(--lav); }
+.g-pull { margin-block-start: var(--s-7); padding-block: var(--s-6); border-block: 1.5px solid var(--line); text-align: center; }
+.g-pull p {
+  max-width: 640px; margin-inline: auto; text-wrap: balance;
+  font-family: var(--disp); font-weight: 700; font-size: var(--fs-h3); line-height: 1.7; color: var(--ink);
+}
+
+/* ── Reflection (lavender section) ──────────────────── */
+.g-reflect .g-h2 { border-block-end-color: var(--lav-line); }
+.g-qs { list-style: none; counter-reset: q; display: grid; gap: 10px; }
+.g-qs > li {
+  counter-increment: q; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg);
+  padding-block: 12px; padding-inline: 12px 18px; color: var(--ink);
+}
+.g-qs > li::before {
+  content: counter(q, arabic-indic); width: 44px; height: 44px; display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--lav-soft-bg); color: var(--lav);
+  font-family: var(--disp); font-weight: 700; font-size: 1.2rem;
+}
+
+/* ── End: back to lesson (the page's one orange CTA) ── */
+.g-end {
+  margin-block-start: var(--s-7); padding: var(--s-6) var(--s-5); text-align: center;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-2xl);
+}
+.g-end p { margin-block-end: var(--s-4); }
+.g-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--grad-accent); color: var(--on-accent); box-shadow: var(--shadow-accent);
+  border-radius: var(--r-pill); padding: 14px 34px;
+  font-family: var(--body); font-weight: 800; font-size: 1rem; line-height: 1.4; text-decoration: none;
+  transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+}
+.g-btn:hover { transform: var(--lift); box-shadow: var(--shadow-accent-hover); color: var(--on-accent); }
+
+/* ── Sources ────────────────────────────────────────── */
+.g-sources { margin-block-start: var(--s-7); }
+.g-sources .g-h3 { font-size: 1rem; }
+.g-sources > p { margin-block-start: 4px; font-size: var(--fs-label); color: var(--faint); }
+.g-sources ol { list-style: none; counter-reset: src; display: grid; gap: 4px; margin-block-start: 12px; }
+.g-sources li {
+  counter-increment: src; position: relative; padding-block: 4px; padding-inline: 28px 8px;
+  font-size: var(--fs-label); line-height: 1.7; color: var(--faint);
+  overflow-wrap: anywhere; border-radius: var(--r-xs); scroll-margin-top: 24px;
+}
+.g-sources li::before { content: counter(src, arabic-indic); position: absolute; inset-inline-start: 6px; top: 4px; color: var(--accent-hot); font-weight: 800; }
+.g-sources li:target { background: var(--accent-soft); }
+
+/* ── Footer ─────────────────────────────────────────── */
+.g-foot {
+  margin-block-start: var(--s-7); padding-block: var(--s-5); border-block-start: 1.5px solid var(--line);
+  text-align: center; font-size: var(--fs-label); color: var(--faint);
+}
+.g-foot b { color: var(--muted); font-weight: 800; }
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (min-width: 720px) {
+  .g-sec { margin-block-start: var(--s-8); }
+}
+@media (max-width: 520px) {
+  .g-brand .g-brand-course { display: none; }
+  .g-eyebrow { flex-direction: column; gap: 8px; padding: 0; border: 0; background: none; border-radius: 0; text-align: center; }
+  .g-intro { padding: 18px 18px; }
+  .g-card, .g-numlist > li { padding: 18px; }
+  .g-numlist > li { gap: 14px; }
+  .g-numlist > li::before { width: 44px; height: 44px; font-size: 1.35rem; }
+  .g-panel-head, .g-panel-body, .g-panel-foot { padding-inline: 18px; }
+  .g-rows > li { grid-template-columns: 1fr; }
+  .g-rows .r-key {
+    flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: 4px 10px;
+    border-inline-end: 0; border-block-end: 1.5px solid var(--line);
+    border-end-start-radius: 0; border-start-end-radius: inherit;
+  }
+  .g-table th, .g-table td { padding: 10px 12px; }
+  .g-end { padding: var(--s-5) var(--s-4); }
+}
+
+/* ── Print: screen PDF stays poster-dark (V4 rule 6). Add class="paper" on <html> for physical print. ── */
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: var(--bg); }
+  body { padding-block: 12mm; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .g-top, .g-end { display: none; }
+  .g-hero { padding-block: 0 var(--s-5); }
+  .g-sec { margin-block-start: var(--s-6); }
+  .g-intro, .g-callout, .g-card, .g-panel, .g-note, .g-quote, .g-prompt, .g-pull,
+  .g-numlist > li, .g-rows > li, .g-steps > li, .g-qs > li, .g-tiles > li, .g-table tr { break-inside: avoid; }
+  .g-h2, .g-h3 { break-after: avoid; }
+  .g-table-wrap { overflow: visible; }
+  .g-sources a::after { content: " " attr(href); color: var(--faint); unicode-bidi: isolate; direction: ltr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ▸ HERO -->
+<header class="g-hero">
+  <div class="g-wrap">
+    <nav class="g-top" aria-label="تنقّل الدليل">
+      <a class="g-back-link" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}"><span aria-hidden="true">→</span> ارجع للدرس</a>
+      <span class="g-brand"><b class="en">MA Learn</b><span class="g-brand-course"> · مدخل إلى الذكاء الاصطناعي الإبداعي</span></span>
+    </nav>
+
+    <p class="g-eyebrow"><span class="num">الدرس الخامس من ١٧</span><span>الوحدة ٢ · منظومة الذكاء الاصطناعي للمبدعين</span></p>
+    <h1 class="g-title">الفئة الثالثة: أنظمة تصميم سير العمل</h1>
+    <ul class="g-chips" aria-label="محاور الدرس">
+      <li class="g-chip is-on">Workflow Systems</li>
+      <li class="g-chip">Node-Based Platforms</li>
+      <li class="g-chip">Figma Weave</li>
+      <li class="g-chip">Magnific Spaces</li>
+      <li class="g-chip">FLORA</li>
+    </ul>
+    <div class="g-meta-row">
+      <span class="g-stamp">آخر تحديث: <time datetime="2026-09-24">سبتمبر ٢٠٢٦</time></span>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="g-wrap">
+
+  <!-- ▸ INTRO -->
+  <p class="g-intro">الفئة الثالثة والأخيرة، الأعقد من الاثنتين اللي قبلها. لكن اللي تفهمها تحسّ إن كل شيء وقع في مكانه.</p>
+
+  <!-- ▸ UPDATE CALLOUT -->
+  <aside class="g-callout is-update">
+    <span class="g-callout-label"><span class="g-tag">تحديث سبتمبر ٢٠٢٦</span></span>
+    <p>الفكرة نفسها ما تغيّرت، لكن الأسماء تحرّكت: <span class="en">Weavy</span> انضمت لـ <span class="en">Figma</span> وصار اسمها <span class="en">Figma Weave</span><sup class="g-ref"><a href="#src-1" aria-label="المصدر ١">١</a></sup>، و <span class="en">Freepik</span> صار اسمها <span class="en">Magnific</span> وأداة النودز عندهم اسمها <span class="en">Spaces</span><sup class="g-ref"><a href="#src-2" aria-label="المصدر ٢">٢</a></sup>، و <span class="en">FLORA</span> انتقلت لموقع <span class="en">flora.ai</span><sup class="g-ref"><a href="#src-3" aria-label="المصدر ٣">٣</a></sup>.</p>
+    <p>والنماذج اللي تشتغل داخل النودز تطوّرت كمان: <span class="en">Nano Banana 2</span><sup class="g-ref"><a href="#src-4" aria-label="المصدر ٤">٤</a></sup> للصور، و <span class="en">Kling 3.0</span><sup class="g-ref"><a href="#src-5" aria-label="المصدر ٥">٥</a></sup> و <span class="en">Seedance 2.5</span><sup class="g-ref"><a href="#src-6" aria-label="المصدر ٦">٦</a></sup> للفيديو. التفاصيل تحت، كل وحدة في مكانها.</p>
+  </aside>
+
+  <!-- ▸ 01 · What are workflow systems -->
+  <section class="g-sec" aria-labelledby="s1">
+    <h2 class="g-h2" id="s1"><span class="g-idx">٠١</span>وش هي أنظمة سير العمل؟<span class="g-h2-sub">Workflow Systems</span></h2>
+    <div class="g-grid is-2">
+      <div class="g-card">
+        <p class="g-meta">الفئة الأولى والثانية</p>
+        <p>كل أداة تعمل على مهمة واحدة: <span class="en">Gemini</span> للتفكير، <span class="en">Nano Banana</span> للصور، <span class="en">Kling</span> للفيديو.</p>
+      </div>
+      <div class="g-card is-pick">
+        <p class="g-meta hl">الفئة الثالثة</p>
+        <p>تجمع كل الأدوات في بيئة عمل واحدة، من البريف للتسليم، بدون ما تطلع لمكان ثاني.</p>
+      </div>
+    </div>
+    <p class="g-callout is-rule">هي منصات <span class="en">Platform</span> بالمعنى الحقيقي، تجمعلك <span class="en">LLM</span>، توليد صور، فيديو، وتحرير في مظلة واحدة.</p>
+    <p class="g-callout is-tip"><span class="g-tag">محدّث</span> واليوم المظلة صارت أوسع: <span class="en">Figma Weave</span> مثلاً تجمع نماذج صور وفيديو وصوت و <span class="en">3D</span> في نفس اللوحة، مع أدوات تحرير زي الطبقات والماسك والـ <span class="en">relight</span>.<sup class="g-ref"><a href="#src-7" aria-label="المصدر ٧">٧</a></sup></p>
+  </section>
+
+  <!-- ▸ 02 · The node system -->
+  <section class="g-sec" aria-labelledby="s2">
+    <h2 class="g-h2" id="s2"><span class="g-idx">٠٢</span>نظام الـ <span class="en">Nodes</span>: كيف تفكّر هذي المنصات؟</h2>
+    <p>تخيّل خط إنتاج في مصنع. كل محطة تأخذ شيء، تعالجه، وتعطيه للمحطة الجاية. في نظام الـ <span class="en">Nodes</span>، كل "نود" هو محطة: مدخل، معالجة، مخرج.</p>
+    <ol class="g-steps">
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>وصف المشروع وأسلوب الصورة</h3><span class="g-tag is-neutral en">INPUT</span></div>
+        <p>تكتب فيه الفكرة، الـ <span class="en">mood</span>، والمرجع البصري. هذا هو مدخل كل شيء.</p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>توليد صورة مرجعية</h3><span class="g-tag is-neutral en">Nano Banana</span></div>
+        <p>يأخذ الوصف ويولّد صورة مرجعية للاتجاه البصري.</p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>تحويل الصورة لفيديو</h3><span class="g-tag is-neutral en">Kling / Seedance</span></div>
+        <p>يأخذ الصورة ويحوّلها لحركة بلقطات ناعمة.</p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>كتابة المحتوى المرافق</h3><span class="g-tag is-neutral en">Claude / LLM</span></div>
+        <p>يكتب الكابشن والنصوص بناءً على ما أُنتج، لا على وصف مبدئي.</p>
+        <p class="g-eg"><span class="g-tag">محدّث</span> داخل <span class="en">Figma Weave</span> هذي المحطة اسمها نود <span class="en">Any LLM</span>: تختار فيه نموذج النص اللي تبيه وتعطيه تعليماتك.<sup class="g-ref"><a href="#src-8" aria-label="المصدر ٨">٨</a></sup></p>
+      </div></li>
+    </ol>
+    <p class="g-callout is-rule">تبني مرة، وتشغّل في ثوانٍ. ما تفتح خمس تابات وتنسخ وتلصق بين الأدوات.</p>
+    <aside class="g-callout">
+      <span class="g-callout-label">وش الجديد في فكرة "تبني مرة"؟ <span class="g-tag">محدّث</span></span>
+      <p>في <span class="en">Figma Weave</span> تقدر تشارك سير العمل كواجهة مبسّطة، أي أحد في فريقك يحط المدخلات ويطلع النتيجة بدون ما يلمس النودز.<sup class="g-ref"><a href="#src-7" aria-label="المصدر ٧">٧</a></sup> ومن سبتمبر ٢٠٢٦ صار اللي عنده اشتراك <span class="en">Weave</span> مدفوع يقدر ينشر سير العمل كـ <span class="en">tool</span> في <span class="en">Figma Community</span>، واللي عنده مقعد كامل في <span class="en">Figma</span> يقدر يشغّله من داخل <span class="en">Figma Design</span>.<sup class="g-ref"><a href="#src-9" aria-label="المصدر ٩">٩</a></sup></p>
+    </aside>
+    <p class="g-callout is-tip">الأسماء في النودز فوق عامة، والنسخ تتحدّث باستمرار. وقت هذا التحديث: للصور <span class="en">Nano Banana 2</span><sup class="g-ref"><a href="#src-4" aria-label="المصدر ٤">٤</a></sup> و <span class="en">Nano Banana Pro</span><sup class="g-ref"><a href="#src-10" aria-label="المصدر ١٠">١٠</a></sup>، وللفيديو <span class="en">Kling 3.0</span> (لقطة لحد ١٥ ثانية مع صوت)<sup class="g-ref"><a href="#src-5" aria-label="المصدر ٥">٥</a></sup> و <span class="en">Seedance 2.5</span> (لقطة لحد ٣٠ ثانية مع صوت في توليدة وحدة).<sup class="g-ref"><a href="#src-6" aria-label="المصدر ٦">٦</a></sup></p>
+  </section>
+
+  <!-- ▸ 03 · Featured platforms -->
+  <section class="g-sec" aria-labelledby="s3">
+    <h2 class="g-h2" id="s3"><span class="g-idx">٠٣</span>المنصات المميزة</h2>
+    <div class="g-grid">
+      <article class="g-card is-pick">
+        <div class="g-card-head">
+          <h3><span class="en">Figma Weave</span></h3>
+          <span class="g-tag">الاختيار الشخصي</span>
+        </div>
+        <p class="g-meta">كانت <span class="en">Weavy</span> · <span class="en">weave.figma.com</span></p>
+        <p>الأقوى والأكثر مرونة. تبني فيها سير عمل معقدة بالكامل مع تحكم كامل في كل خطوة. الاختيار لمشاريع الإنتاج الإبداعي.</p>
+        <p><span class="g-tag">محدّث</span> استحوذت عليها <span class="en">Figma</span> في أكتوبر ٢٠٢٥ وصار اسمها <span class="en">Figma Weave</span>،<sup class="g-ref"><a href="#src-1" aria-label="المصدر ١">١</a></sup> وتفتحها كمنصة مستقلة من <span class="en">weave.figma.com</span> بحساب مجاني.<sup class="g-ref"><a href="#src-11" aria-label="المصدر ١١">١١</a></sup></p>
+      </article>
+      <article class="g-card">
+        <div class="g-card-head">
+          <h3><span class="en">Magnific Spaces</span></h3>
+          <span class="g-tag is-neutral">للبداية السريعة</span>
+        </div>
+        <p class="g-meta">كانت <span class="en">Freepik</span></p>
+        <p>أبسط وأسرع. مناسبة لمن يبي يبدأ بسير عمل بسيط بدون تعقيد تقني. عندها مكتبة ضخمة من الأصول البصرية.</p>
+        <p><span class="g-tag">محدّث</span> من ٢٨ أبريل ٢٠٢٦ صار اسم <span class="en">Freepik</span> هو <span class="en">Magnific</span>، والمكتبة باقية وفيها أكثر من ٢٠٠ مليون أصل.<sup class="g-ref"><a href="#src-2" aria-label="المصدر ٢">٢</a></sup> ولوحة النودز نفسها باقية باسم <span class="en">Spaces</span>.<sup class="g-ref"><a href="#src-12" aria-label="المصدر ١٢">١٢</a></sup></p>
+      </article>
+      <article class="g-card">
+        <div class="g-card-head">
+          <h3><span class="en">FLORA</span></h3>
+          <span class="g-tag is-neutral">للإنتاج البصري</span>
+        </div>
+        <p class="g-meta"><span class="en">flora.ai</span></p>
+        <p>متخصصة في الإنتاج البصري والتسلسل الإبداعي. قوية في ربط أدوات الصورة والفيديو مع بعض بسلاسة.</p>
+        <p><span class="g-tag">محدّث</span> موقعها صار <span class="en">flora.ai</span>، وعندها <span class="en">Techniques</span>: سير عمل جاهزة بناها فريق <span class="en">FLORA</span> ومبدعين، تعيد استخدامها على شغلك.<sup class="g-ref"><a href="#src-3" aria-label="المصدر ٣">٣</a></sup></p>
+      </article>
+    </div>
+    <p>الثلاثة تشتغل بنفس المبدأ، الفرق في مستوى التعقيد والمرونة. ابدأ بالأبسط وتطوّر.</p>
+  </section>
+
+  <!-- ▸ 04 · The hardest category -->
+  <section class="g-sec" aria-labelledby="s4">
+    <h2 class="g-h2" id="s4"><span class="g-idx">٠٤</span>هذي الفئة الأصعب، وهذا طبيعي</h2>
+    <p>هذي الفئة ما تتطلب منك إنك تكون خبير في الإنتاج فقط، تتطلب منك إنك تفكر كـ <strong><span class="en">System Designer</span></strong>. تصمم نظام عمل، مو بس تنفّذ مهمة.</p>
+    <div class="g-panel">
+      <div class="g-panel-head"><h3>أسئلة الـ <span class="en">System Designer</span></h3></div>
+      <div class="g-panel-body">
+        <ul class="g-list">
+          <li>وش المدخلات اللي أحتاجها؟</li>
+          <li>وش التسلسل المنطقي للخطوات؟</li>
+          <li>وين ممكن تصير الأخطاء؟</li>
+          <li>كيف أجعل هذا قابل للتكرار؟</li>
+        </ul>
+      </div>
+    </div>
+    <p class="g-callout is-rule">الموضوع أبسط مما يبان عليه. بعد ما تبني أول سير عمل كامل، الثاني يجي بنص الوقت.</p>
+  </section>
+
+  <!-- ▸ 05 · A real workflow -->
+  <section class="g-sec" aria-labelledby="s5">
+    <h2 class="g-h2" id="s5"><span class="g-idx">٠٥</span>سير عمل حقيقي: حملة مجوهرات من الفكرة للتسليم</h2>
+    <ol class="g-steps">
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>التوجيه الإبداعي</h3><span class="g-tag is-neutral en">Claude</span></div>
+        <p>وصف الحملة + الـ <span class="en">mood</span> + المرجع البصري للعميل ← <span class="en">Claude</span> يبني <span class="en">Brief</span> إبداعي منظّم جاهز للخطوة الجاية.</p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>المود بورد</h3><span class="g-tag is-neutral en">Nano Banana</span></div>
+        <p>البريف يدخل لـ <span class="en">Nano Banana</span>، يولّد أربع صور مرجعية للاتجاه البصري. تختار اللي يناسب.</p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>الإنتاج</h3><span class="g-tag is-neutral en">Image Generator</span></div>
+        <p>الصورة المرجعية + وصف تفصيلي للقطات ← مجموعة صور للمنتج بنفس الاتجاه البصري.</p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>الفيديو</h3><span class="g-tag is-neutral en">Seedance / Kling</span></div>
+        <p>أفضل الصور تدخل لنموذج الفيديو، وتتحوّل للقطات بحركة ناعمة.</p>
+      </div></li>
+      <li><div class="g-card">
+        <div class="g-card-head"><h3>المحتوى</h3><span class="g-tag is-neutral en">Claude</span></div>
+        <p>كل ما أُنتج يرجع لـ <span class="en">Claude</span>، يكتب الكابشن والنصوص المرافقة بناء على ما تم إنتاجه فعلاً.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <!-- ▸ 06 · The three categories -->
+  <section class="g-sec" aria-labelledby="s6">
+    <h2 class="g-h2" id="s6"><span class="g-idx">٠٦</span>الفئات الثلاث</h2>
+    <ol class="g-numlist">
+      <li><div>
+        <h3 class="g-h3">شريك التفكير</h3>
+        <p>يساعدك تفكّر وتكتب وتخطط.</p>
+      </div></li>
+      <li><div>
+        <h3 class="g-h3">الاستوديو</h3>
+        <p>يساعدك تنتج وتولّد وتحرّر.</p>
+      </div></li>
+      <li><div>
+        <h3 class="g-h3">سير العمل</h3>
+        <p>يجمع كل شيء في منظومة واحدة.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <!-- ▸ REFLECTION -->
+  <section class="g-sec g-reflect" aria-labelledby="reflect">
+    <h2 class="g-h2" id="reflect">تأمل قبل ما تكمل</h2>
+    <ol class="g-qs">
+      <li><p>لو صممت سير عمل لمشروعك الإبداعي، وش تكون المحطة الأولى والأخيرة؟</p></li>
+      <li><p>وين في شغلك الحالي تنسخ وتلصق بين أدوات مختلفة، وممكن تحلها بنود واحد؟</p></li>
+      <li><p>من الثلاث فئات، أيها تحس إنها الأكثر تأثيراً على أسلوب شغلك الإبداعي؟</p></li>
+    </ol>
+  </section>
+
+  <!-- ▸ END -->
+  <div class="g-end">
+    <p>خلصت الدليل؟ ارجع للدرس وكمّل من المكان اللي وقفت فيه.</p>
+    <a class="g-btn" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}">ارجع للدرس</a>
+  </div>
+
+  <!-- ▸ SOURCES -->
+  <section class="g-sources" aria-labelledby="sources">
+    <h2 class="g-h3" id="sources">المصادر</h2>
+    <p>المعلومات اللي تتغيّر بسرعة (الأسماء، النماذج، المزايا) راجعناها من مصادرها بتاريخ ٢٤ سبتمبر ٢٠٢٦.</p>
+    <ol>
+      <li id="src-1"><a href="https://www.figma.com/blog/welcome-weavy-to-figma/" target="_blank" rel="noopener">Introducing Figma Weave: The Next Generation of AI-Native Creation at Figma</a> · <span class="en">Figma Blog</span>، ٣٠ أكتوبر ٢٠٢٥</li>
+      <li id="src-2"><a href="https://www.prnewswire.com/news-releases/freepik-becomes-magnific-hits-230m-arr-and-introduces-the-no-collar-creative-economy-302755376.html" target="_blank" rel="noopener">Freepik becomes Magnific</a> · <span class="en">Magnific</span> عبر <span class="en">PR Newswire</span>، ٢٨ أبريل ٢٠٢٦</li>
+      <li id="src-3"><a href="https://flora.ai/" target="_blank" rel="noopener">FLORA: Generative AI Canvas for Creative Teams</a> · <span class="en">FLORA</span></li>
+      <li id="src-4"><a href="https://blog.google/innovation-and-ai/technology/ai/nano-banana-2/" target="_blank" rel="noopener">Nano Banana 2: Google's latest AI image generation model</a> · <span class="en">Google</span>، ٢٦ فبراير ٢٠٢٦</li>
+      <li id="src-5"><a href="https://www.globenewswire.com/news-release/2026/02/05/3232837/0/en/kling-ai-launches-3-0-model-ushering-in-an-era-where-everyone-can-be-a-director.html" target="_blank" rel="noopener">Kling AI Launches 3.0 Model</a> · <span class="en">Kuaishou</span>، ٥ فبراير ٢٠٢٦</li>
+      <li id="src-6"><a href="https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5" target="_blank" rel="noopener">Introducing Seedance 2.5</a> · <span class="en">ByteDance Seed</span>، ٣١ يوليو ٢٠٢٦</li>
+      <li id="src-7"><a href="https://www.figma.com/solutions/figma-ai-tool-weave/" target="_blank" rel="noopener">Figma Weave: AI tool for visual asset creation</a> · <span class="en">Figma</span></li>
+      <li id="src-8"><a href="https://www.figma.com/blog/five-figma-weave-workflows/" target="_blank" rel="noopener">Turning Prompts into Five Scalable Workflows with Figma Weave</a> · <span class="en">Figma Blog</span>، ٩ أبريل ٢٠٢٦</li>
+      <li id="src-9"><a href="https://www.figma.com/blog/try-these-5-weave-tools-and-share-your-own/" target="_blank" rel="noopener">Try These 5 Weave Tools, And Share Your Own</a> · <span class="en">Figma Blog</span>، ١٦ سبتمبر ٢٠٢٦</li>
+      <li id="src-10"><a href="https://blog.google/innovation-and-ai/products/nano-banana-pro/" target="_blank" rel="noopener">Nano Banana Pro: Gemini 3 Pro Image model</a> · <span class="en">Google</span>، ٢٠ نوفمبر ٢٠٢٥</li>
+      <li id="src-11"><a href="https://help.figma.com/hc/en-us/articles/35965787376919-Figma-Weave-FAQ" target="_blank" rel="noopener">Figma Weave FAQ</a> · <span class="en">Figma Help Center</span></li>
+      <li id="src-12"><a href="https://www.wireflow.ai/blog/freepik-spaces-is-now-magnific" target="_blank" rel="noopener">Freepik Spaces Is Now Magnific: What Changed</a> · <span class="en">Wireflow</span>، ١٤ يوليو ٢٠٢٦</li>
+    </ol>
+  </section>
+
+</main>
+
+<!-- ▸ FOOTER -->
+<footer class="g-foot">
+  <div class="g-wrap">
+    <p><b class="en">MA Learn</b> · صناعة الإلهام</p>
+    <p>الدرس الخامس · منظومة الذكاء الاصطناعي للمبدعين · الفئة الثالثة: أنظمة تصميم سير العمل</p>
+  </div>
+</footer>
+
+</body>
+</html>

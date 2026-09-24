@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<!--
+  ITCAI lesson guide · Design System V4 (poster-dark x chunky rounded)
+  Course: مدخل إلى الذكاء الاصطناعي الإبداعي · lesson 10 of 17 (t2-10) · Firefly Boards
+  Rebuilt from the April 2026 lesson PDF. Facts researched 2026-09-24; change log in MA EA projects/ma-learn-launch/cif/itcai-guides/changes/.
+  Tokens come ONLY from https://malearnsa.com/brand/tokens.css. Never redeclare a token here.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firefly Boards: مساحة التفكير الإبداعي · MA Learn</title>
+<meta name="description" content="دليل درس Firefly Boards: وش هي، كيف تشتغل عليها من البريف لحد الـ Brand Guideline، الـ Presets اللي تولّد بدون برومبت، ومكانها في منظومة التوجيه الإبداعي مع Photoshop.">
+<link rel="canonical" href="https://player.malearnsa.com/guides/itcai-10-firefly-boards.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:site_name" content="MA Learn">
+<meta property="og:title" content="Firefly Boards: مساحة التفكير الإبداعي">
+<meta property="og:description" content="دليل درس Firefly Boards: وش هي، كيف تشتغل عليها من البريف لحد الـ Brand Guideline، الـ Presets اللي تولّد بدون برومبت، ومكانها في منظومة التوجيه الإبداعي مع Photoshop.">
+<meta property="og:url" content="https://player.malearnsa.com/guides/itcai-10-firefly-boards.html">
+<meta name="theme-color" content="#151009">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://malearnsa.com/brand/tokens.css">
+<style>
+/* ITCAI guide components · V4. Tokens are linked above, never redeclared here.
+   Focus ring = var(--focus). Motion = var(--dur-*) + var(--lift); tokens.css zeroes both under reduced motion. */
+
+@font-face {
+  font-family: 'Gumela';
+  src: url('https://malearnsa.com/brand_assets/gumela-arabic-bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg); color: var(--muted);
+  font-family: var(--body); font-size: var(--fs-body); line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+::selection { background: var(--accent); color: var(--on-accent); }
+p, li, dd, td, th { text-wrap: pretty; }
+a {
+  color: var(--accent-hot); text-decoration-color: var(--accent-line);
+  text-decoration-thickness: 1.5px; text-underline-offset: 4px;
+  transition: color var(--dur-fast) var(--ease);
+}
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; box-shadow: var(--focus); border-radius: var(--r-xs); }
+strong, b { color: var(--ink); font-weight: 700; }
+.en { unicode-bidi: isolate; direction: ltr; }      /* Latin name inside Arabic copy */
+.hl, .g-meta.hl { color: var(--accent-hot); }
+
+/* ── Layout ─────────────────────────────────────────── */
+.g-wrap { max-width: 820px; margin-inline: auto; padding-inline: var(--page-x); }
+main.g-wrap { padding-block: var(--s-6) 0; }
+.g-sec { margin-block-start: var(--s-7); }
+.g-sec > * + * { margin-block-start: var(--s-4); }
+.g-sec > .g-h2 + * { margin-block-start: var(--s-5); }
+main > .g-callout, main > .g-note { margin-block-start: var(--s-6); }
+main > .g-intro + .g-callout { margin-block-start: var(--s-4); }
+
+/* ── Hero: top bar, eyebrow, title, chips, update stamp ── */
+.g-hero {
+  background-image: var(--glow-hero); background-repeat: no-repeat;
+  text-align: center; padding-block: var(--s-4) var(--s-7);
+  border-block-end: 1.5px solid var(--line);
+}
+.g-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-block-end: var(--s-7); text-align: start; }
+.g-brand { font-size: var(--fs-label); font-weight: 700; color: var(--faint); }
+.g-brand b { font-weight: 900; }
+.g-back-link {
+  display: inline-flex; align-items: center; gap: 8px; flex: none;
+  border: 1.5px solid var(--line-strong); background: var(--wash-2); color: var(--ink);
+  border-radius: var(--r-pill); padding: 7px 18px;
+  font-size: var(--fs-sm); font-weight: 700; text-decoration: none;
+  transition: transform var(--dur-med) var(--ease), background var(--dur-med) var(--ease);
+}
+.g-back-link:hover { transform: var(--lift); background: var(--card-2); color: var(--ink); }
+.g-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
+  padding-block: 6px; padding-inline: 6px 18px;
+  border: 1.5px solid var(--line-strong); border-radius: var(--r-pill); background: var(--wash);
+  font-size: var(--fs-label); font-weight: 800; color: var(--muted); text-align: start;
+}
+.g-eyebrow .num {
+  flex: none; background: var(--accent-soft); color: var(--accent-hot);
+  border-radius: var(--r-pill); padding: 2px 12px; font-weight: 900;
+}
+.g-title {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: var(--fs-h1); line-height: 1.35; margin-block: var(--s-5) var(--s-4);
+  text-wrap: balance;
+}
+.g-hero .g-chips { justify-content: center; }
+.g-meta-row {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 14px;
+  margin-block-start: var(--s-5); font-size: var(--fs-label); font-weight: 700; color: var(--faint);
+}
+.g-stamp {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: var(--r-pill);
+  border: 1.5px solid var(--line-strong); background: var(--wash-2); color: var(--muted);
+}
+.g-stamp::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); flex: none; }
+.g-stamp time { color: var(--ink); }
+
+/* ── Headings ───────────────────────────────────────── */
+.g-h2 {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: max(var(--fs-h3), 1.3rem); line-height: var(--lh-disp);
+  padding-block-end: 12px; border-block-end: 1.5px solid var(--line);
+}
+.g-idx { color: var(--accent); margin-inline-end: 10px; }
+.g-h2-sub { display: block; font-family: var(--body); font-size: var(--fs-label); font-weight: 700; color: var(--faint); margin-block-start: 2px; }
+.g-h3, .g-card h3, .g-panel-head h3 {
+  font-family: var(--disp); font-weight: 700; color: var(--ink);
+  font-size: 1.08rem; line-height: 1.5;
+}
+.g-meta { font-size: var(--fs-label); font-weight: 700; color: var(--faint); }
+
+/* ── Intro + callouts ───────────────────────────────── */
+.g-intro, .g-callout {
+  background: var(--card); border: 1.5px solid var(--line);
+  border-inline-start: 3px solid var(--accent); border-radius: var(--r-lg);
+}
+.g-intro {
+  margin-block-start: var(--s-6); padding: 20px 24px;
+  font-size: var(--fs-lead); line-height: 1.9; font-weight: 600; color: var(--ink);
+}
+.g-callout { padding: 16px 22px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-callout > * + * { margin-block-start: 6px; }
+.g-callout-label { display: block; font-weight: 800; color: var(--accent-hot); }
+.g-callout.is-rule { color: var(--ink); font-weight: 700; font-size: var(--fs-body); }
+.g-callout.is-tip { background: var(--wash); border-inline-start-color: var(--line-strong); color: var(--faint); }
+.g-callout.is-update { background: var(--accent-soft); border-color: var(--accent-line); border-inline-start-color: var(--accent); color: var(--ink); }
+
+/* ── Tags, inline refs, chips ───────────────────────── */
+.g-tag {
+  display: inline-flex; align-items: center; gap: 6px; vertical-align: middle;
+  border-radius: var(--r-pill); padding: 2px 12px;
+  font-size: var(--fs-micro); font-weight: 800; line-height: 1.6;
+  background: var(--accent-soft); color: var(--accent-hot); max-width: 100%; overflow-wrap: anywhere;
+}
+.g-tag.is-lav { background: var(--lav-soft-bg); color: var(--lav); }
+.g-tag.is-neutral { background: var(--wash-2); color: var(--muted); }
+sup.g-ref { font-size: .68em; line-height: 0; }
+sup.g-ref + sup.g-ref::before { content: "،"; font-weight: 400; }
+sup.g-ref a { text-decoration: none; font-weight: 800; padding-inline: 2px; }
+.g-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.g-chip {
+  border: 1.5px solid var(--line-strong); border-radius: var(--r-pill); background: var(--wash);
+  padding: 5px 16px; font-size: var(--fs-sm); font-weight: 700; color: var(--muted); unicode-bidi: isolate;
+  max-width: 100%; overflow-wrap: anywhere;
+}
+.g-chip.is-on { background: var(--accent-soft); border-color: var(--accent-line); color: var(--ink); }
+
+/* ── Lists ──────────────────────────────────────────── */
+.g-list { list-style: none; display: grid; gap: 8px; }
+.g-list > li { position: relative; padding-inline-start: 20px; }
+.g-list > li::before {
+  content: ""; position: absolute; inset-inline-start: 2px; top: calc(.875em - 3px);
+  width: 6px; height: 6px; border-radius: 2px; background: var(--accent);
+}
+
+/* ── Cards + grids ──────────────────────────────────── */
+.g-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+.g-grid.is-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.g-card { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 20px 22px; }
+.g-card > * + * { margin-block-start: 8px; }
+.g-card p, .g-card li { font-size: var(--fs-sm); line-height: 1.85; }
+.g-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.g-card.is-pick {
+  border-color: var(--accent-line);
+  background: linear-gradient(180deg, var(--accent-soft), transparent 70%), var(--card);
+}
+
+/* ── Numbered cards ─────────────────────────────────── */
+.g-numlist { list-style: none; counter-reset: n; display: grid; gap: 12px; }
+.g-numlist > li {
+  counter-increment: n; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); padding: 20px 22px;
+}
+.g-numlist > li::before {
+  content: counter(n, arabic-indic); width: 52px; height: 52px; display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--accent-soft); color: var(--accent-hot);
+  font-family: var(--disp); font-weight: 700; font-size: 1.6rem; line-height: 1;
+}
+.g-numlist > li > div > * + * { margin-block-start: 6px; }
+.g-numlist p { font-size: var(--fs-sm); line-height: 1.85; }
+
+/* ── Tiles (label + value) ──────────────────────────── */
+.g-tiles { list-style: none; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr)); }
+.g-tiles > li {
+  background: var(--card); border: 1.5px solid var(--line); border-block-start: 2px solid var(--accent-line);
+  border-radius: var(--r-md); padding: 12px 14px; text-align: center;
+}
+.g-tiles.is-start > li { text-align: start; }
+.g-tiles .t-en { display: block; font-size: var(--fs-micro); font-weight: 700; color: var(--faint); unicode-bidi: isolate; }
+.g-tiles .t-val { display: block; color: var(--ink); font-weight: 700; font-size: var(--fs-sm); line-height: 1.6; }
+.g-tiles .t-desc { display: block; font-size: var(--fs-label); color: var(--faint); line-height: 1.7; margin-block-start: 2px; }
+
+/* ── Panel (head / body / foot) + spec grid ─────────── */
+.g-panel { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-xl); }
+.g-panel-head {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px;
+  padding: 16px 22px; background: var(--wash); border-block-end: 1.5px solid var(--line);
+  border-radius: calc(var(--r-xl) - 1.5px) calc(var(--r-xl) - 1.5px) 0 0;
+}
+.g-panel-body { padding: 18px 22px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-panel-body > * + * { margin-block-start: 12px; }
+.g-panel-foot { padding: 14px 22px 18px; border-block-start: 1.5px solid var(--line); }
+.g-spec { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); }
+.g-spec > div { background: var(--wash); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 10px 14px; }
+.g-spec dt { font-size: var(--fs-micro); font-weight: 700; color: var(--faint); }
+.g-spec dd { color: var(--ink); font-size: var(--fs-sm); font-weight: 600; line-height: 1.6; }
+
+/* ── Key rows (label column + body) ─────────────────── */
+.g-rows { list-style: none; display: grid; gap: 10px; }
+.g-rows > li {
+  display: grid; grid-template-columns: minmax(96px, 150px) 1fr;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg);
+}
+.g-rows .r-key {
+  display: flex; flex-direction: column; justify-content: center; gap: 2px;
+  padding: 14px 18px; background: var(--wash-2); border-inline-end: 1.5px solid var(--line);
+  border-start-start-radius: inherit; border-end-start-radius: inherit;
+}
+.g-rows .r-key b { color: var(--accent-hot); font-weight: 800; font-size: var(--fs-sm); unicode-bidi: isolate; }
+.g-rows .r-key small { font-size: var(--fs-micro); font-weight: 700; color: var(--faint); }
+.g-rows .r-body { padding: 14px 20px; font-size: var(--fs-sm); line-height: 1.85; }
+.g-rows .r-body > * + * { margin-block-start: 6px; }
+.g-eg { padding-inline-start: 12px; border-inline-start: 2px solid var(--line-strong); color: var(--faint); font-size: var(--fs-label); }
+
+/* ── Steps (pipeline) ───────────────────────────────── */
+.g-steps { list-style: none; counter-reset: s; display: grid; gap: 12px; }
+.g-steps > li { counter-increment: s; position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 14px; }
+.g-steps > li::before {
+  content: counter(s, arabic-indic); position: relative; z-index: 1;
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--card); border: 1.5px solid var(--accent-line); color: var(--accent-hot);
+  font-family: var(--disp); font-weight: 700; font-size: 1.05rem;
+}
+.g-steps > li:not(:last-child)::after {
+  content: ""; position: absolute; inset-inline-start: 19px; top: 44px; bottom: -12px;
+  width: 2px; background: var(--line-strong);
+}
+
+/* ── Prompt block (LTR, tap selects all) ────────────── */
+.g-prompt { background: var(--media); border: 1.5px solid var(--line); border-radius: var(--r-lg); }
+.g-prompt figcaption {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px;
+  padding: 12px 18px; border-block-end: 1.5px solid var(--line);
+  font-size: var(--fs-label); font-weight: 700; color: var(--faint);
+}
+.g-prompt pre {
+  direction: ltr; text-align: start; white-space: pre-wrap; overflow-wrap: anywhere;
+  padding: 16px 18px; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: .84rem; line-height: 1.9; color: var(--ink);
+}
+.g-prompt code { font: inherit; -webkit-user-select: all; user-select: all; }
+.g-prompt .k { color: var(--accent-hot); }
+
+/* ── Quote box ──────────────────────────────────────── */
+.g-quote { background: var(--card); border: 1.5px solid var(--accent-line); border-radius: var(--r-lg); padding: 16px 22px; }
+.g-quote figcaption { font-size: var(--fs-label); font-weight: 700; color: var(--faint); margin-block-end: 6px; }
+.g-quote blockquote { color: var(--accent-hot); font-weight: 600; line-height: 1.9; }
+
+/* ── Data table ─────────────────────────────────────── */
+.g-table-wrap { overflow-x: auto; background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg); }
+.g-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.g-table th, .g-table td { padding: 12px 16px; text-align: start; vertical-align: top; border-block-end: 1px solid var(--line); }
+.g-table thead th { background: var(--wash); font-size: var(--fs-label); font-weight: 800; color: var(--faint); }
+.g-table tbody th { color: var(--ink); font-weight: 700; }
+.g-table th small { display: block; font-size: var(--fs-micro); font-weight: 600; color: var(--faint); }
+.g-table .num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; unicode-bidi: isolate; }
+.g-table tbody tr:last-child > * { border-block-end: 0; }
+.g-table tfoot th, .g-table tfoot td {
+  border-block-end: 0; border-block-start: 1.5px solid var(--accent-line);
+  background: var(--accent-soft); color: var(--ink); font-weight: 800;
+}
+.g-footnote { font-size: var(--fs-label); color: var(--faint); }
+
+/* ── Voice: personal note, pull quote ───────────────── */
+.g-note { background: var(--lav-soft-bg); border: 1.5px solid var(--lav-line); border-radius: var(--r-xl); padding: 22px 24px; }
+.g-note > * + * { margin-block-start: 10px; }
+.g-note p { color: var(--ink); }
+.g-note-sign { font-family: var(--disp); font-weight: 700; color: var(--lav); }
+.g-pull { margin-block-start: var(--s-7); padding-block: var(--s-6); border-block: 1.5px solid var(--line); text-align: center; }
+.g-pull p {
+  max-width: 640px; margin-inline: auto; text-wrap: balance;
+  font-family: var(--disp); font-weight: 700; font-size: var(--fs-h3); line-height: 1.7; color: var(--ink);
+}
+
+/* ── Reflection (lavender section) ──────────────────── */
+.g-reflect .g-h2 { border-block-end-color: var(--lav-line); }
+.g-qs { list-style: none; counter-reset: q; display: grid; gap: 10px; }
+.g-qs > li {
+  counter-increment: q; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-lg);
+  padding-block: 12px; padding-inline: 12px 18px; color: var(--ink);
+}
+.g-qs > li::before {
+  content: counter(q, arabic-indic); width: 44px; height: 44px; display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--lav-soft-bg); color: var(--lav);
+  font-family: var(--disp); font-weight: 700; font-size: 1.2rem;
+}
+
+/* ── End: back to lesson (the page's one orange CTA) ── */
+.g-end {
+  margin-block-start: var(--s-7); padding: var(--s-6) var(--s-5); text-align: center;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: var(--r-2xl);
+}
+.g-end p { margin-block-end: var(--s-4); }
+.g-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--grad-accent); color: var(--on-accent); box-shadow: var(--shadow-accent);
+  border-radius: var(--r-pill); padding: 14px 34px;
+  font-family: var(--body); font-weight: 800; font-size: 1rem; line-height: 1.4; text-decoration: none;
+  transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+}
+.g-btn:hover { transform: var(--lift); box-shadow: var(--shadow-accent-hover); color: var(--on-accent); }
+
+/* ── Sources ────────────────────────────────────────── */
+.g-sources { margin-block-start: var(--s-7); }
+.g-sources .g-h3 { font-size: 1rem; }
+.g-sources > p { margin-block-start: 4px; font-size: var(--fs-label); color: var(--faint); }
+.g-sources ol { list-style: none; counter-reset: src; display: grid; gap: 4px; margin-block-start: 12px; }
+.g-sources li {
+  counter-increment: src; position: relative; padding-block: 4px; padding-inline: 28px 8px;
+  font-size: var(--fs-label); line-height: 1.7; color: var(--faint);
+  overflow-wrap: anywhere; border-radius: var(--r-xs); scroll-margin-top: 24px;
+}
+.g-sources li::before { content: counter(src, arabic-indic); position: absolute; inset-inline-start: 6px; top: 4px; color: var(--accent-hot); font-weight: 800; }
+.g-sources li:target { background: var(--accent-soft); }
+
+/* ── Footer ─────────────────────────────────────────── */
+.g-foot {
+  margin-block-start: var(--s-7); padding-block: var(--s-5); border-block-start: 1.5px solid var(--line);
+  text-align: center; font-size: var(--fs-label); color: var(--faint);
+}
+.g-foot b { color: var(--muted); font-weight: 800; }
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (min-width: 720px) {
+  .g-sec { margin-block-start: var(--s-8); }
+}
+@media (max-width: 520px) {
+  .g-brand .g-brand-course { display: none; }
+  .g-eyebrow { flex-direction: column; gap: 8px; padding: 0; border: 0; background: none; border-radius: 0; text-align: center; }
+  .g-intro { padding: 18px 18px; }
+  .g-card, .g-numlist > li { padding: 18px; }
+  .g-numlist > li { gap: 14px; }
+  .g-numlist > li::before { width: 44px; height: 44px; font-size: 1.35rem; }
+  .g-panel-head, .g-panel-body, .g-panel-foot { padding-inline: 18px; }
+  .g-rows > li { grid-template-columns: 1fr; }
+  .g-rows .r-key {
+    flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: 4px 10px;
+    border-inline-end: 0; border-block-end: 1.5px solid var(--line);
+    border-end-start-radius: 0; border-start-end-radius: inherit;
+  }
+  .g-table th, .g-table td { padding: 10px 12px; }
+  .g-end { padding: var(--s-5) var(--s-4); }
+}
+
+/* ── Print: screen PDF stays poster-dark (V4 rule 6). Add class="paper" on <html> for physical print. ── */
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: var(--bg); }
+  body { padding-block: 12mm; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .g-top, .g-end { display: none; }
+  .g-hero { padding-block: 0 var(--s-5); }
+  .g-sec { margin-block-start: var(--s-6); }
+  .g-intro, .g-callout, .g-card, .g-panel, .g-note, .g-quote, .g-prompt, .g-pull,
+  .g-numlist > li, .g-rows > li, .g-steps > li, .g-qs > li, .g-tiles > li, .g-table tr { break-inside: avoid; }
+  .g-h2, .g-h3 { break-after: avoid; }
+  .g-table-wrap { overflow: visible; }
+  .g-sources a::after { content: " " attr(href); color: var(--faint); unicode-bidi: isolate; direction: ltr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ▸ HERO -->
+<header class="g-hero">
+  <div class="g-wrap">
+    <nav class="g-top" aria-label="تنقّل الدليل">
+      <a class="g-back-link" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}"><span aria-hidden="true">→</span> ارجع للدرس</a>
+      <span class="g-brand"><b class="en">MA Learn</b><span class="g-brand-course"> · مدخل إلى الذكاء الاصطناعي الإبداعي</span></span>
+    </nav>
+
+    <p class="g-eyebrow"><span class="num">الدرس العاشر من ١٧</span><span>الوحدة ٣ · الفئة الأولى: شريك التفكير</span></p>
+    <h1 class="g-title"><span class="en">Adobe Firefly Boards</span></h1>
+    <ul class="g-chips" aria-label="محاور الدرس">
+      <li class="g-chip">Creative Thinking</li>
+      <li class="g-chip">Moodboard</li>
+      <li class="g-chip">Experimentation</li>
+    </ul>
+    <div class="g-meta-row">
+      <span class="g-stamp">آخر تحديث: <time datetime="2026-09-24">سبتمبر ٢٠٢٦</time></span>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="g-wrap">
+
+  <!-- ▸ INTRO -->
+  <p class="g-intro"><span class="en">Firefly Boards</span> مو أداة توليد صور، هي مساحة تفكير إبداعي. تجمع المراجع والأفكار والتوليد في مكان واحد، وتخليك تشوف أفكارك على الواقع قبل ما تنفذها أو تطرحها على العميل.</p>
+
+  <!-- ▸ UPDATE CALLOUT -->
+  <aside class="g-callout is-update">
+    <span class="g-callout-label"><span class="g-tag">تحديث سبتمبر ٢٠٢٦</span></span>
+    <p>الملف الأصلي للدرس من أبريل ٢٠٢٦، ومن وقتها تغيّرت أشياء. أهمها إن Adobe وقّفت بعض الموديلات اللي كانت تشغّل الـ Presets، و&nbsp;Generative Fill في Photoshop صار فيه موديلات أحدث. وفي السعودية صار فيه موديل صور سعودي داخل Firefly، وعرض سنة مجانية معلن. التفاصيل تحت، كل وحدة في مكانها.</p>
+  </aside>
+
+  <!-- ▸ 01 · وش هي Firefly Boards؟ -->
+  <section class="g-sec" aria-labelledby="s1">
+    <h2 class="g-h2" id="s1"><span class="g-idx">٠١</span>وش هي <span class="en">Firefly Boards</span>؟</h2>
+    <div class="g-grid">
+      <article class="g-card">
+        <h3>مساحة عمل حرة</h3>
+        <p>بيئة مفتوحة تجمع فيها نماذج توليد الصور والفيديو في مكان واحد، للتجربة والتفكير والاستكشاف.</p>
+        <p>اليوم تلاقي فيها موديلات Adobe Firefly، ومعها موديلات شركاء زي Nano Banana من Google، و&nbsp;GPT Image من OpenAI، و&nbsp;FLUX، و&nbsp;Runway، و&nbsp;Kling، و&nbsp;Veo.<sup class="g-ref"><a href="#src-1" aria-label="المصدر ١">١</a></sup></p>
+      </article>
+      <article class="g-card">
+        <h3>بديل المود بورد التقليدي</h3>
+        <p>بدل Pinterest اللي تشوف فيه بس، هنا تجمع الإلهام والألوان والستايل والمواد، وتشتغل عليها مباشرة.</p>
+      </article>
+      <article class="g-card">
+        <h3>أداة تواصل مع العميل</h3>
+        <p>تعرض فيها الاتجاهات البصرية المختلفة (<span class="en">Direction&nbsp;1,&nbsp;2,&nbsp;3</span>) وتعرف وش اتجاه أعجبه قبل الإنتاج.</p>
+        <p>وفيها <span class="en">Presentation mode</span> تعرض منه البورد على العميل، وتقدر تشاركه مع فريقك ويعلّقون عليه وتشتغلون عليه مع بعض في نفس الوقت.<sup class="g-ref"><a href="#src-2" aria-label="المصدر ٢">٢</a></sup><sup class="g-ref"><a href="#src-3" aria-label="المصدر ٣">٣</a></sup></p>
+      </article>
+    </div>
+
+    <!-- ▸ ACCESS -->
+    <aside class="g-callout">
+      <span class="g-callout-label">كيف تدخل <span class="en">Boards</span>؟ <span class="g-tag">محدّث</span></span>
+      <p>أي حساب Adobe يقدر يفتح Boards، والحساب المجاني يعطيك لحد ٣ بوردات.<sup class="g-ref"><a href="#src-3" aria-label="المصدر ٣">٣</a></sup> وحتى بدون اشتراك، Adobe تعطيك توليدات مجانية محدودة تتجدد كل يوم، ومعها موديلات مشهورة زي Nano Banana و&nbsp;<span class="en">Luma Ray3.14</span>. الاشتراكات المدفوعة تبدأ من Firefly Standard: التوليد العادي بموديلات Firefly فيها بدون حد، والموديلات الشريكة (زي Nano Banana و&nbsp;FLUX و&nbsp;Veo) والفيديو تصرف generative credits من رصيدك الشهري.<sup class="g-ref"><a href="#src-4" aria-label="المصدر ٤">٤</a></sup></p>
+      <p>وفي السعودية، الموديل الافتراضي لتوليد الصور في Firefly هو <span class="en">HUMAIN Image 1</span>، موديل مبني على الثقافة السعودية ويفهم البرومبت بالعربي، وموجود كمان داخل Boards.<sup class="g-ref"><a href="#src-5" aria-label="المصدر ٥">٥</a></sup><sup class="g-ref"><a href="#src-1" aria-label="المصدر ١">١</a></sup> وأعلنت Adobe مع وزارة الاتصالات وتقنية المعلومات و&nbsp;HUMAIN في أغسطس ٢٠٢٦ عن سنة مجانية من Firefly Standard ومعها مزايا Adobe Express Premium، للمواطنين والمقيمين المؤهلين من عمر ١٣ وفوق، والتسجيل المسبق متاح، والتفعيل مخطط له قبل نهاية ٢٠٢٦.<sup class="g-ref"><a href="#src-6" aria-label="المصدر ٦">٦</a></sup></p>
+    </aside>
+  </section>
+
+  <!-- ▸ 02 · كيف تشتغل على Boards؟ -->
+  <section class="g-sec" aria-labelledby="s2">
+    <h2 class="g-h2" id="s2"><span class="g-idx">٠٢</span>كيف تشتغل على <span class="en">Boards</span>؟</h2>
+    <ol class="g-steps">
+      <li><div class="g-card">
+        <h3><span class="en">Client Brief</span></h3>
+        <p>تحط البريف وتراجعه مع فريقك: الهدف، الجمهور، المرجع البصري.</p>
+      </div></li>
+      <li><div class="g-card">
+        <h3><span class="en">Research &amp; Insights</span></h3>
+        <p>تجمع المراجع من Pinterest والمود والستايل والألوان في مكان واحد. ترفعها من جهازك، أو تدوّر في Adobe Stock من داخل البورد نفسه.<sup class="g-ref"><a href="#src-7" aria-label="المصدر ٧">٧</a></sup></p>
+      </div></li>
+      <li><div class="g-card">
+        <h3><span class="en">Explorations</span></h3>
+        <p>تجرب أكثر من اتجاه بصري: تولّد صور، تختبر Styles، تشوف كيف تبدو الأفكار فعلاً.</p>
+      </div></li>
+      <li><div class="g-card">
+        <h3>تجربة الفيديو</h3>
+        <p>تختبر إذا الصور المولّدة تتناسب مع الحركة، قبل ما تنقل العملية لـ Workflow builder كامل.</p>
+        <p>تقدر تولّد الفيديو داخل البورد بـ Firefly Video، أو بموديلات شركاء زي <span class="en">Veo 3.1</span> و&nbsp;<span class="en">Kling 3.0</span> و&nbsp;<span class="en">Runway Gen-4.5</span> و&nbsp;<span class="en">Luma Ray3</span>.<sup class="g-ref"><a href="#src-8" aria-label="المصدر ٨">٨</a></sup></p>
+      </div></li>
+      <li><div class="g-card">
+        <h3><span class="en">Brand Guidelines</span></h3>
+        <p>النتائج النهائية تصير Brand Guideline واضحة في مكان واحد، جاهزة للتسليم.</p>
+      </div></li>
+    </ol>
+    <p class="g-callout is-tip">الـ Workflow builder الكامل هو الفئة الثالثة في الكورس، زي Figma Weave اللي نشتغل عليه في الدرس السادس عشر. و&nbsp;Adobe طلّعت محرّر nodes خاص فيها اسمه Firefly Graph،<sup class="g-ref"><a href="#src-9" aria-label="المصدر ٩">٩</a></sup> بس لحد إعلان يونيو ٢٠٢٦ كان متاح لاشتراكات الشركات (Enterprise)، وتجريبي لاشتراكات الفرق (Teams).<sup class="g-ref"><a href="#src-10" aria-label="المصدر ١٠">١٠</a></sup></p>
+    <aside class="g-callout is-update">
+      <span class="g-callout-label"><span class="g-tag">جديد في Boards</span></span>
+      <p>فيه الحين Quick Guides داخل Boards: خطوات جاهزة ومرتبة لشغلات متكررة، تمشي عليها بدل ما تبدأ من كانفس فاضي. منها <span class="en">Make a fashion design moodboard</span> لبناء اتجاهات الأزياء، و&nbsp;<span class="en">Make a branded mockup</span> لتطبيق هوية البراند، و&nbsp;<span class="en">Virtual try on</span>.<sup class="g-ref"><a href="#src-11" aria-label="المصدر ١١">١١</a></sup></p>
+    </aside>
+  </section>
+
+  <!-- ▸ 03 · الـ Presets -->
+  <section class="g-sec" aria-labelledby="s3">
+    <h2 class="g-h2" id="s3"><span class="g-idx">٠٣</span>الـ <span class="en">Presets</span>: توليد بدون برومبت</h2>
+    <p>الـ Presets هي templates جاهزة تطبّق تحويلات بصرية على صورتك بدون ما تكتب أي برومبت. بس تختار الـ Preset وتعطيه الصورة.</p>
+    <div class="g-grid is-2">
+      <article class="g-card">
+        <h3><span class="en">Cinema</span></h3>
+        <p class="g-meta"><span class="en">Nano Banana (Gemini 2.5 Flash Image)</span></p>
+        <p>يحوّل البورتريه لصورة بإضاءة ذهبية دافية وإحساس فيلم قديم في جو مدينة.<sup class="g-ref"><a href="#src-12" aria-label="المصدر ١٢">١٢</a></sup></p>
+      </article>
+      <article class="g-card">
+        <div class="g-card-head"><h3><span class="en">Cartoonify</span></h3><span class="g-tag">محدّث</span></div>
+        <p class="g-meta"><span class="en">FLUX Kontext Max</span></p>
+        <p>يحوّل صورة الشخص لستايل كرتوني.<sup class="g-ref"><a href="#src-12" aria-label="المصدر ١٢">١٢</a></sup></p>
+      </article>
+      <article class="g-card">
+        <div class="g-card-head"><h3><span class="en">Outdoor Club</span></h3><span class="g-tag">محدّث</span></div>
+        <p class="g-meta"><span class="en">Nano Banana (Gemini 2.5 Flash Image)</span></p>
+        <p>يعطي البورتريه طاقة رياضية وخلفية وروح الطبيعة.<sup class="g-ref"><a href="#src-12" aria-label="المصدر ١٢">١٢</a></sup></p>
+      </article>
+      <article class="g-card">
+        <div class="g-card-head"><h3><span class="en">Logo maker</span></h3><span class="g-tag">محدّث</span></div>
+        <p class="g-meta"><span class="en">Ideogram 3.0</span></p>
+        <p>تعطيه صور مرجعية واسم البراند، ويطلع لك شعارات بنفس ألوان وتكوين وإحساس المرجع.<sup class="g-ref"><a href="#src-12" aria-label="المصدر ١٢">١٢</a></sup></p>
+      </article>
+    </div>
+    <p class="g-footnote">الموديل تحت كل Preset حسب صفحة Adobe للـ Presets (آخر تحديث لها أغسطس ٢٠٢٦). في الملف الأصلي كان مكتوب إن Outdoor Club و&nbsp;Ideate Logo على Firefly، و&nbsp;Preset الشعار اسمه الحين Logo maker. و&nbsp;Flux Context صحّتها FLUX Kontext.</p>
+    <p class="g-callout is-rule">من صورة مرجعية وحدة، تطلع سينمائية، كرتونية، و<span class="en">Outdoor</span> في ثواني. هذا اللي يعطيك أكثر من مود وأكثر من انطباع بجهد أقل.</p>
+    <aside class="g-callout is-update">
+      <span class="g-callout-label"><span class="g-tag">انتبه للموديلات</span></span>
+      <p>Adobe وقّفت Ideogram في تطبيقاتها من ٢٨ مايو ٢٠٢٦، وبدأت توقّف Nano Banana الأصلي (<span class="en">Gemini 2.5 Flash Image</span>) من ١٠ سبتمبر ٢٠٢٦، لأن Google بتوقفه ابتداءً من ٢ أكتوبر ٢٠٢٦.<sup class="g-ref"><a href="#src-13" aria-label="المصدر ١٣">١٣</a></sup> يعني ممكن تفتح Boards وتلاقي Preset منها صار على موديل أحدث، أو اختفى من القائمة. الفكرة نفسها ما تتغيّر: صورة وحدة، أكثر من اتجاه.</p>
+    </aside>
+  </section>
+
+  <!-- ▸ 04 · ليش Boards في منظومة التوجيه الإبداعي؟ -->
+  <section class="g-sec" aria-labelledby="s4">
+    <h2 class="g-h2" id="s4"><span class="g-idx">٠٤</span>ليش <span class="en">Boards</span> في منظومة التوجيه الإبداعي؟</h2>
+    <ul class="g-rows">
+      <li>
+        <div class="r-key"><b>قبل الجلسة</b></div>
+        <div class="r-body">
+          <p>تتحقق من الأفكار بصرياً قبل ما تنفذها. لو ما اقتنعت بالنتيجة، ما خسرت وقت التصوير.</p>
+        </div>
+      </li>
+      <li>
+        <div class="r-key"><b>مع العميل</b></div>
+        <div class="r-body">
+          <p>تعرض اتجاهات بصرية حقيقية، مو وصف نظري. العميل يختار وأنت تعرف وين تمشي.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ▸ 05 · الاندماج مع Photoshop -->
+  <section class="g-sec" aria-labelledby="s5">
+    <h2 class="g-h2" id="s5"><span class="g-idx">٠٥</span>الاندماج مع <span class="en">Photoshop</span></h2>
+    <p>Firefly مدمج أصلاً في Photoshop. تحدد أي منطقة في الصورة وتطلب التعديل مباشرة.</p>
+    <div class="g-panel">
+      <div class="g-panel-head">
+        <h3><span class="en">Generative Fill</span> داخل <span class="en">Photoshop</span></h3>
+      </div>
+      <div class="g-panel-body">
+        <ul class="g-list">
+          <li>تحديد منطقة + وصف = تعديل فوري بالذكاء الاصطناعي. ولو خليت الوصف فاضي، يعبّي التحديد من البكسلات اللي حوله.<sup class="g-ref"><a href="#src-14" aria-label="المصدر ١٤">١٤</a></sup></li>
+          <li>اختيار النموذج: <span class="en">Firefly Image 5</span> من Adobe، أو <span class="en">Nano Banana Pro</span> و&nbsp;<span class="en">Nano Banana 2</span> من Google، أو <span class="en">FLUX.2 pro</span> و&nbsp;<span class="en">FLUX Kontext pro</span>. <span class="g-tag">محدّث</span><sup class="g-ref"><a href="#src-14" aria-label="المصدر ١٤">١٤</a></sup></li>
+          <li>تغيير الألوان، الملابس، الخلفيات، والإضاءة.</li>
+          <li>جودة مدخلاتك هي اللي تحدد جودة ما تأخذه منه.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="g-callout is-tip">والربط صار من الجهتين: ترفع ملف PSD على البورد كـ linked document، وأي تعديل تسويه عليه في Photoshop تحدّثه على البورد بضغطة، وتقدر تكمّل شغلك من Boards في Photoshop أو Adobe Express.<sup class="g-ref"><a href="#src-15" aria-label="المصدر ١٥">١٥</a></sup><sup class="g-ref"><a href="#src-3" aria-label="المصدر ٣">٣</a></sup></p>
+  </section>
+
+  <!-- ▸ PULL QUOTE -->
+  <blockquote class="g-pull">
+    <p><span class="en">Firefly Boards</span> يخليك تشوف أفكارك على الواقع، قبل ما تنفذها.<br><span class="hl">مساحة التفكير الإبداعي قبل مساحة الإنتاج.</span></p>
+  </blockquote>
+
+  <!-- ▸ REFLECTION -->
+  <section class="g-sec g-reflect" aria-labelledby="reflect">
+    <h2 class="g-h2" id="reflect">تأمل قبل ما تكمل</h2>
+    <ol class="g-qs">
+      <li><p>كيف كنت تبني المود بورد قبل؟ وكيف ممكن تستبدل أو تدمج <span class="en">Firefly Boards</span> في طريقتك؟</p></li>
+      <li><p>وش مشروع حالي أو قادم تقدر تستخدم فيه Boards لتعرض اتجاهات بصرية للعميل قبل الإنتاج؟</p></li>
+      <li><p>جرّب Preset واحد على صورة مرجعية عندك. وش اكتشفت عن الفكرة بعد ما شفتها بصرياً؟</p></li>
+    </ol>
+  </section>
+
+  <!-- ▸ END -->
+  <div class="g-end">
+    <p>خلصت الدليل؟ ارجع للدرس وكمّل من المكان اللي وقفت فيه.</p>
+    <a class="g-btn" href="https://www.skool.com/ma-learn-4669/classroom" onclick="if(history.length>1){history.back();return false}">ارجع للدرس</a>
+  </div>
+
+  <!-- ▸ SOURCES -->
+  <section class="g-sources" aria-labelledby="sources">
+    <h2 class="g-h3" id="sources">المصادر</h2>
+    <p>المعلومات اللي تتغيّر بسرعة (الموديلات، المزايا، الخطط، العروض) راجعناها من مصادرها بتاريخ ٢٤ سبتمبر ٢٠٢٦.</p>
+    <ol>
+      <li id="src-1"><a href="https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/non-adobe-models-in-adobe-products.html" target="_blank" rel="noopener">Partner models in Adobe products</a> · Adobe Help</li>
+      <li id="src-2"><a href="https://www.adobe.com/products/firefly/features/boards.html" target="_blank" rel="noopener">Adobe Firefly Boards</a> · Adobe</li>
+      <li id="src-3"><a href="https://helpx.adobe.com/firefly/web/create-mood-boards/firefly-boards/about-firefly-boards.html" target="_blank" rel="noopener">About Firefly Boards</a> · Adobe Help</li>
+      <li id="src-4"><a href="https://www.adobe.com/products/firefly/plans.html" target="_blank" rel="noopener">Adobe Firefly plans</a> · Adobe</li>
+      <li id="src-5"><a href="https://www.adobe.com/sa_en/products/firefly/partner-models/humain.html" target="_blank" rel="noopener">HUMAIN Image 1 in Adobe Firefly</a> · Adobe</li>
+      <li id="src-6"><a href="https://news.adobe.com/news/2026/08/adobe-mcit-and-humain-expand-partnership" target="_blank" rel="noopener">Adobe, MCIT and HUMAIN Expand Partnership</a> · Adobe Newsroom</li>
+      <li id="src-7"><a href="https://helpx.adobe.com/firefly/web/create-mood-boards/firefly-boards/add-images.html" target="_blank" rel="noopener">Add images (Firefly Boards)</a> · Adobe Help</li>
+      <li id="src-8"><a href="https://helpx.adobe.com/firefly/web/create-mood-boards/firefly-boards/partner-models-to-generate-videos.html" target="_blank" rel="noopener">Partner models to generate videos</a> · Adobe Help</li>
+      <li id="src-9"><a href="https://helpx.adobe.com/firefly/web/firefly-graph/firefly-graph-overview.html" target="_blank" rel="noopener">Firefly Graph overview</a> · Adobe Help</li>
+      <li id="src-10"><a href="https://www.computerworld.com/article/4186410/adobe-new-firefly-graph-can-turn-creative-workflows-into-reusable-assets.html" target="_blank" rel="noopener">Adobe: New Firefly Graph can turn creative workflows into reusable assets</a> · Computerworld</li>
+      <li id="src-11"><a href="https://helpx.adobe.com/firefly/web/create-mood-boards/firefly-boards/quick-guides-overview.html" target="_blank" rel="noopener">Quick Guides overview</a> · Adobe Help</li>
+      <li id="src-12"><a href="https://helpx.adobe.com/firefly/web/create-mood-boards/firefly-boards/use-boards-presets-for-complex-workflows.html" target="_blank" rel="noopener">Use Boards Presets for complex workflows</a> · Adobe Help</li>
+      <li id="src-13"><a href="https://helpx.adobe.com/creative-cloud/apps/generative-ai/model-deprecation.html" target="_blank" rel="noopener">Generative AI model retirement</a> · Adobe Help</li>
+      <li id="src-14"><a href="https://helpx.adobe.com/photoshop/desktop/create-open-import-images/create-images/edit-images-with-generative-fill.html" target="_blank" rel="noopener">Edit images with Generative Fill</a> · Adobe Photoshop Help</li>
+      <li id="src-15"><a href="https://helpx.adobe.com/firefly/web/create-mood-boards/firefly-boards/linked-documents.html" target="_blank" rel="noopener">Work with linked documents</a> · Adobe Help</li>
+    </ol>
+  </section>
+
+</main>
+
+<!-- ▸ FOOTER -->
+<footer class="g-foot">
+  <div class="g-wrap">
+    <p><b class="en">MA Learn</b> · صناعة الإلهام</p>
+    <p>الدرس العاشر · الفئة الأولى: شريك التفكير · <span class="en">Adobe Firefly Boards</span></p>
+  </div>
+</footer>
+
+</body>
+</html>
